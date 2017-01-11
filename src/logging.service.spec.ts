@@ -377,4 +377,23 @@ describe("LoggingService", () => {
 		});
 	});
 
+	describe("ajaxAppenderFailed: EventEmitter<string>", () => {
+
+		it("error message emitted", (done: () => void) => {
+			const config: LoggingConfiguration = {
+				ajaxAppender: {
+					url: "badUrl"
+				}
+			};
+			loggingService.configure(config);
+
+			loggingService.ajaxAppenderFailed.subscribe((message: string) => {
+				expect(message).toBe("AjaxAppender.append: XMLHttpRequest request to URL badUrl returned status code 404");
+				done();
+			});
+
+			loggingService.getRootLogger().warn("test");
+		});
+	});
+
 });

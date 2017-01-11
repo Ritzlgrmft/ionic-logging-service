@@ -31,6 +31,7 @@ export class LoggingService {
 
 		// create event emitter
 		this.logMessagesChanged = new EventEmitter<LogMessage>();
+		this.ajaxAppenderFailed = new EventEmitter<string>();
 
 		// configure appender
 		const logger = log4javascript.getRootLogger();
@@ -52,7 +53,17 @@ export class LoggingService {
 		this.configure();
 	}
 
+	/**
+	 * Event triggered when new log message was added.
+	 * @param message new log message
+	 */
 	public logMessagesChanged: EventEmitter<LogMessage>;
+
+	/**
+	 * Event triggered when ajax appender could not send log messages to the server.
+	 * @param message error message
+	 */
+	public ajaxAppenderFailed: EventEmitter<string>;
 
 	private memoryAppender: MemoryAppender;
 
@@ -102,6 +113,9 @@ export class LoggingService {
 				ajaxAppender.setTimed(false);
 				ajaxAppender.setTimerInterval(0);
 			}
+			ajaxAppender.setFailCallback(message => {
+				this.ajaxAppenderFailed.emit(message);
+			});
 			log4javascript.getRootLogger().addAppender(ajaxAppender);
 		}
 
