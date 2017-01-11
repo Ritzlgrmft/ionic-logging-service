@@ -16,7 +16,8 @@ export class LocalStorageAppender extends log4javascript.Appender {
 		super();
 
 		this.localStorageKey = localStorageKey;
-		if (!localStorage.getItem(this.localStorageKey)) {
+		// tslint:disable-next-line:no-null-keyword
+		if (localStorage.getItem(this.localStorageKey) === null) {
 			this.logMessages = [];
 		} else {
 			this.logMessages = JSON.parse(localStorage.getItem(this.localStorageKey));
@@ -38,7 +39,7 @@ export class LocalStorageAppender extends log4javascript.Appender {
 		const message: LogMessage = {
 			timeStamp: loggingEvent.timeStamp,
 			level: LogLevel[LogLevelConverter.levelFromLog4Javascript(loggingEvent.level)],
-			logger: loggingEvent.logger ? loggingEvent.logger.name : undefined,
+			logger: typeof loggingEvent.logger !== "undefined" ? loggingEvent.logger.name : undefined,
 			methodName: loggingEvent.messages[0],
 			message: loggingEvent.messages.slice(1)
 		};

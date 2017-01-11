@@ -65,6 +65,7 @@ export class LoggingService {
 	 */
 	public ajaxAppenderFailed: EventEmitter<string>;
 
+	// tslint:disable-next-line:completed-docs
 	private memoryAppender: MemoryAppender;
 
 	/**
@@ -72,10 +73,15 @@ export class LoggingService {
 	 */
 	public configure(configuration?: LoggingConfiguration): void {
 
-		configuration = configuration || this.configurationService.getValue("logging") || {};
+		if (typeof configuration === "undefined") {
+			configuration = this.configurationService.getValue("logging");
+		}
+		if (typeof configuration === "undefined") {
+			configuration = {};
+		}
 
 		// set log levels
-		if (configuration.logLevels) {
+		if (typeof configuration.logLevels !== "undefined") {
 			for (const level of configuration.logLevels) {
 				let logger: log4javascript.Logger;
 				if (level.loggerName === "root") {
@@ -92,9 +98,9 @@ export class LoggingService {
 		}
 
 		// configure AjaxAppender
-		if (configuration.ajaxAppender) {
+		if (typeof configuration.ajaxAppender !== "undefined") {
 			const ajaxAppender = new log4javascript.AjaxAppender(configuration.ajaxAppender.url, false);
-			if (configuration.ajaxAppender.logLevel) {
+			if (typeof configuration.ajaxAppender.logLevel !== "undefined") {
 				try {
 					ajaxAppender.setThreshold(
 						LogLevelConverter.levelToLog4Javascript(
@@ -106,7 +112,7 @@ export class LoggingService {
 			ajaxAppender.setLayout(new log4javascript.JsonLayout(false, false));
 			ajaxAppender.addHeader("Content-Type", "application/json; charset=utf-8");
 			ajaxAppender.setSendAllOnUnload(true);
-			if (configuration.ajaxAppender.timerInterval && configuration.ajaxAppender.timerInterval > 0) {
+			if (configuration.ajaxAppender.timerInterval > 0) {
 				ajaxAppender.setTimed(true);
 				ajaxAppender.setTimerInterval(configuration.ajaxAppender.timerInterval);
 			} else {
@@ -120,9 +126,9 @@ export class LoggingService {
 		}
 
 		// configure LocalStorageAppender
-		if (configuration.localStorageAppender) {
+		if (typeof configuration.localStorageAppender !== "undefined") {
 			const localStorageAppender = new LocalStorageAppender(configuration.localStorageAppender.localStorageKey);
-			if (configuration.localStorageAppender.logLevel) {
+			if (typeof configuration.localStorageAppender.logLevel !== "undefined") {
 				try {
 					localStorageAppender.setThreshold(
 						LogLevelConverter.levelToLog4Javascript(
@@ -132,7 +138,7 @@ export class LoggingService {
 				}
 			}
 			localStorageAppender.setLayout(new log4javascript.PatternLayout("%d{HH:mm:ss,SSS} %c %m"));
-			if (configuration.localStorageAppender.maxMessages && configuration.localStorageAppender.maxMessages > 0) {
+			if (configuration.localStorageAppender.maxMessages > 0) {
 				localStorageAppender.maxLogMessagesLength = configuration.localStorageAppender.maxMessages;
 			}
 			log4javascript.getRootLogger().addAppender(localStorageAppender);
