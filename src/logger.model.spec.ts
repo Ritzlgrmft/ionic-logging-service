@@ -11,6 +11,33 @@ describe("Logger", () => {
 		log4javascript.getRootLogger().removeAllAppenders();
 	});
 
+	describe("ctor", () => {
+
+		it("no logger passed, then root logger is used", () => {
+
+			const logger = new Logger();
+			const internalLogger = logger.getInternalLogger();
+
+			expect(internalLogger.name).toBe("root");
+		});
+
+		it("logger name passed, then this logger is used", () => {
+
+			const logger = new Logger("myLogger");
+			const internalLogger = logger.getInternalLogger();
+
+			expect(internalLogger.name).toBe("myLogger");
+		});
+
+		it("logger instance passed, then this logger is used", () => {
+
+			const logger = new Logger({ name: "myLogger" });
+			const internalLogger = logger.getInternalLogger();
+
+			expect(internalLogger.name).toBe("myLogger");
+		});
+	});
+
 	describe("formatArgument(arg: any): string", () => {
 		it("string argument keeps unchanged", () => {
 

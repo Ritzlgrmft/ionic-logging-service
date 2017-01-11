@@ -7,26 +7,22 @@ import { LogMessage } from "./log-message.model";
 export class MemoryAppender extends log4javascript.Appender {
 
 	public maxLogMessagesLength: number;
-	public isInsertAtTop: boolean;
 
 	private logMessages: LogMessage[];
 	private onLogMessagesChangedCallback: (message: LogMessage) => void;
 
+	private static maxLogMessagesLengthDefault = 100;
+
 	constructor() {
 		super();
 		this.logMessages = [];
-		this.maxLogMessagesLength = 100;
-		this.isInsertAtTop = false;
+		this.maxLogMessagesLength = MemoryAppender.maxLogMessagesLengthDefault;
 	}
 
 	public append(loggingEvent: log4javascript.LoggingEvent): void {
 		// if logMessages is already full, remove oldest element
 		while (this.logMessages.length >= this.maxLogMessagesLength) {
-			if (this.isInsertAtTop) {
-				this.logMessages.pop();
-			} else {
-				this.logMessages.shift();
-			}
+			this.logMessages.shift();
 		}
 		// add event to logMessages
 		const message: LogMessage = {
@@ -36,11 +32,7 @@ export class MemoryAppender extends log4javascript.Appender {
 			methodName: loggingEvent.messages[0],
 			message: loggingEvent.messages.slice(1)
 		};
-		if (this.isInsertAtTop) {
-			this.logMessages.unshift(message);
-		} else {
-			this.logMessages.push(message);
-		}
+		this.logMessages.push(message);
 
 		// inform about new message
 		if (typeof this.onLogMessagesChangedCallback === "function") {

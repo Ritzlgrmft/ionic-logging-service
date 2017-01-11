@@ -6,7 +6,6 @@ import { LogMessage } from "./log-message.model";
 
 export class LocalStorageAppender extends log4javascript.Appender {
 	public maxLogMessagesLength: number;
-	public isInsertAtTop: boolean;
 
 	private localStorageKey: string;
 	private logMessages: LogMessage[];
@@ -21,20 +20,19 @@ export class LocalStorageAppender extends log4javascript.Appender {
 			this.logMessages = [];
 		} else {
 			this.logMessages = JSON.parse(localStorage.getItem(this.localStorageKey));
+			for (const logMessage of this.logMessages) {
+				// timestamps are serialized as strings
+				logMessage.timeStamp = new Date(logMessage.timeStamp);
+			}
 		}
 		this.setThreshold(log4javascript.Level.WARN);
 		this.maxLogMessagesLength = LocalStorageAppender.maxLogMessagesLengthDefault;
-		this.isInsertAtTop = false;
 	}
 
 	public append(loggingEvent: log4javascript.LoggingEvent): void {
 		// if logMessages is already full, remove oldest element
 		while (this.logMessages.length >= this.maxLogMessagesLength) {
-			if (this.isInsertAtTop) {
-				this.logMessages.pop();
-			} else {
-				this.logMessages.shift();
-			}
+			this.logMessages.shift();
 		}
 		// add event to logMessages
 		const message: LogMessage = {
@@ -44,11 +42,7 @@ export class LocalStorageAppender extends log4javascript.Appender {
 			methodName: loggingEvent.messages[0],
 			message: loggingEvent.messages.slice(1)
 		};
-		if (this.isInsertAtTop) {
-			this.logMessages.unshift(message);
-		} else {
-			this.logMessages.push(message);
-		}
+		this.logMessages.push(message);
 
 		// write values to localStorage
 		localStorage.setItem(this.localStorageKey, JSON.stringify(this.logMessages));

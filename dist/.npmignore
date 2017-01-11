@@ -1,0 +1,4 @@
+.npmignore
+base.spec.*
+*.map
+*.spec.*

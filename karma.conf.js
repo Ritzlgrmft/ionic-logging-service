@@ -4,7 +4,6 @@ module.exports = function (config) {
 		frameworks: ["jasmine", "karma-typescript", "es6-shim"],
 
 		files: [
-			{ pattern: "base.spec.ts" },
 			{ pattern: "src/**/*.+(ts|html)" },
 			"node_modules/reflect-metadata/Reflect.js"
 		],

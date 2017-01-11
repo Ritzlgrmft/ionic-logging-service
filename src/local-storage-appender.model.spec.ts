@@ -17,6 +17,21 @@ describe("LocalStorageAppender", () => {
 		appender = undefined;
 	});
 
+	describe("ctor", () => {
+
+		it("reads already stored messages", () => {
+
+			const event = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, []);
+			appender.append(event);
+
+			const appender2 = new LocalStorageAppender("MyLocalStorage");
+			const messages = appender2.getLogMessages();
+			expect(messages.length).toBe(1);
+			expect(messages[0].timeStamp).toEqual(event.timeStamp);
+			expect(messages[0].level).toBe(event.level.toString());
+		});
+	});
+
 	describe("append(loggingEvent: log4javascript.LoggingEvent): void", () => {
 
 		it("writes message to messages array", () => {
@@ -31,12 +46,11 @@ describe("LocalStorageAppender", () => {
 			expect(messages[0].level).toBe(event.level.toString());
 		});
 
-		it("writes message to end of messages array if isInsertAtTop===false", () => {
+		it("writes message to end of messages array", () => {
 
 			const event = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["1"]);
 			const event2 = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["2"]);
 
-			appender.isInsertAtTop = false;
 			appender.append(event);
 			appender.append(event2);
 
@@ -46,28 +60,12 @@ describe("LocalStorageAppender", () => {
 			expect(messages[1].methodName).toBe("2");
 		});
 
-		it("writes message to begin of messages array if isInsertAtTop===true", () => {
-
-			const event = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["1"]);
-			const event2 = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["2"]);
-
-			appender.isInsertAtTop = true;
-			appender.append(event);
-			appender.append(event2);
-
-			const messages = appender.getLogMessages();
-			expect(messages.length).toBe(2);
-			expect(messages[0].methodName).toBe("2");
-			expect(messages[1].methodName).toBe("1");
-		});
-
-		it("removes first message if isInsertAtTop===false and array contains already maxLogMessagesLength messages", () => {
+		it("removes first message if array contains already maxLogMessagesLength messages", () => {
 
 			const event = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["1"]);
 			const event2 = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["2"]);
 			const event3 = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["3"]);
 
-			appender.isInsertAtTop = false;
 			appender.maxLogMessagesLength = 2;
 			appender.append(event);
 			appender.append(event2);
@@ -79,22 +77,25 @@ describe("LocalStorageAppender", () => {
 			expect(messages[1].methodName).toBe("3");
 		});
 
-		it("removes last message if isInsertAtTop===true and array contains already maxLogMessagesLength messages", () => {
+		it("uses logger name from event if defined", () => {
 
-			const event = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["1"]);
-			const event2 = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["2"]);
-			const event3 = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["3"]);
+			const logger = log4javascript.getLogger("MyLogger");
+			const event = new log4javascript.LoggingEvent(logger, new Date(), log4javascript.Level.INFO, ["1"]);
 
-			appender.isInsertAtTop = true;
-			appender.maxLogMessagesLength = 2;
 			appender.append(event);
-			appender.append(event2);
-			appender.append(event3);
 
 			const messages = appender.getLogMessages();
-			expect(messages.length).toBe(2);
-			expect(messages[0].methodName).toBe("3");
-			expect(messages[1].methodName).toBe("2");
+			expect(messages[0].logger).toBe("MyLogger");
+		});
+
+		it("uses undefined as logger name if not defined in event", () => {
+
+			const event = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["1"]);
+
+			appender.append(event);
+
+			const messages = appender.getLogMessages();
+			expect(messages[0].logger).toBeUndefined();
 		});
 	});
 

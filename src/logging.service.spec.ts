@@ -1,5 +1,7 @@
 ﻿// tslint:disable:no-magic-numbers
 import { inject, TestBed } from "@angular/core/testing";
+import { BaseRequestOptions, Http, Response, ResponseOptions } from "@angular/http";
+import { MockBackend, MockConnection } from "@angular/http/testing";
 
 import * as log4javascript from "log4javascript";
 
@@ -13,16 +15,43 @@ import { LoggingService } from "./logging.service";
 
 describe("LoggingService", () => {
 
+	let configurationService: ConfigurationService;
 	let loggingService: LoggingService;
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
 			providers: [
 				ConfigurationService,
-				LoggingService
+				LoggingService,
+				BaseRequestOptions,
+				MockBackend,
+				{
+					provide: Http,
+					useFactory: (backend: MockBackend, defaultOptions: BaseRequestOptions) => {
+						return new Http(backend, defaultOptions);
+					},
+					deps: [MockBackend, BaseRequestOptions]
+				}
 			]
 		});
 	});
+
+	beforeEach(inject([MockBackend], (backend: MockBackend) => {
+		const emptyResponse = new Response(new ResponseOptions({
+			body: "{ }",
+			status: 200
+		}));
+		backend.connections.subscribe((c: MockConnection) => {
+			if (c.request.url.endsWith("empty.json")) {
+				c.mockRespond(emptyResponse);
+			}
+		});
+	}));
+
+	beforeEach(inject([ConfigurationService],
+		(_configurationService: ConfigurationService) => {
+			configurationService = _configurationService;
+		}));
 
 	beforeEach(inject([LoggingService],
 		(_loggingService: LoggingService) => {
@@ -34,40 +63,32 @@ describe("LoggingService", () => {
 		log4javascript.getRootLogger().removeAllAppenders();
 	});
 
-	describe("constructor()", () => {
+	describe("ctor()", () => {
 
-		it("root logger has log level WARN", () => {
+		it("root logger has log level WARN", done => {
 
-			loggingService.getRootLogger().info("test");
-			loggingService.getRootLogger().warn("test");
-			const messages = loggingService.getLogMessages();
+			configurationService.load("empty.json").then(() => {
+				loggingService.getRootLogger().info("test");
+				loggingService.getRootLogger().warn("test");
+				const messages = loggingService.getLogMessages();
 
-			expect(messages.length).toBe(1);
+				expect(messages.length).toBe(1);
+				done();
+			});
 		});
 	});
 
 	describe("configure(configuration: LoggingConfiguration): void", () => {
 
-		it("throws error if no configuration is provided", () => {
+		it("throws no error if no configuration is provided", () => {
 
-			try {
-				(<any>window).__configuration = {};
-				const myLoggingService = new LoggingService(new ConfigurationService(undefined));
-				myLoggingService.configure(undefined);
-				fail("no error thrown");
-			} catch (e) {
-				expect(e).toBe("no configuration provided");
-			}
+			loggingService.configure(undefined);
 		});
 
 		it("throws no error if configuration is empty", () => {
 
 			const config: LoggingConfiguration = {};
-			try {
-				loggingService.configure(config);
-			} catch (e) {
-				fail(e);
-			}
+			loggingService.configure(config);
 		});
 
 		describe("logLevels", () => {
@@ -78,11 +99,7 @@ describe("LoggingService", () => {
 					logLevels: logLevels
 				};
 
-				try {
-					loggingService.configure(config);
-				} catch (e) {
-					fail(e);
-				}
+				loggingService.configure(config);
 			});
 
 			it("change log level of root logger", () => {
@@ -118,12 +135,7 @@ describe("LoggingService", () => {
 					logLevels: logLevels
 				};
 
-				try {
-					loggingService.configure(config);
-					fail("no error thrown");
-				} catch (e) {
-					expect(e).toBe("invalid log level xxx");
-				}
+				expect(() => loggingService.configure(config)).toThrowError("invalid log level xxx");
 			});
 		});
 
@@ -168,12 +180,7 @@ describe("LoggingService", () => {
 					}
 				};
 
-				try {
-					loggingService.configure(config);
-					fail("no error thrown");
-				} catch (e) {
-					expect(e).toBe("invalid log level xxx");
-				}
+				expect(() => loggingService.configure(config)).toThrowError("invalid log level xxx");
 			});
 
 			it("ajaxAppender has default timer interval of 0", () => {
@@ -251,12 +258,7 @@ describe("LoggingService", () => {
 					}
 				};
 
-				try {
-					loggingService.configure(config);
-					fail("no error thrown");
-				} catch (e) {
-					expect(e).toBe("invalid log level xxx");
-				}
+				expect(() => loggingService.configure(config)).toThrowError("invalid log level xxx");
 			});
 
 			it("localStorageAppender has default log level of WARN", () => {

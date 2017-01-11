@@ -1,10 +1,9 @@
 coverage/
-dist/
+dist/**/*.d.ts
+dist/**/*.js
+dist/**/*.map
 node_modules/
 package/
-src/**/*.d.ts
-src/**/*.js
-src/**/*.map
 
 *.tgz
 npm-debug.log

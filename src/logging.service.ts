@@ -43,7 +43,6 @@ export class LoggingService {
 
 		// in-memory appender for display on log messages page
 		this.memoryAppender = new MemoryAppender();
-		this.memoryAppender.isInsertAtTop = true;
 		this.memoryAppender.setLayout(new log4javascript.PatternLayout("%d{HH:mm:ss,SSS} %c %m"));
 		this.memoryAppender.setOnLogMessagesChangedCallback(message => {
 			this.logMessagesChanged.emit(message);
@@ -62,13 +61,7 @@ export class LoggingService {
 	 */
 	public configure(configuration?: LoggingConfiguration): void {
 
-		if (!configuration) {
-			configuration = this.configurationService.getValue("logging");
-		}
-		// check configuration
-		if (!configuration) {
-			throw new Error("no configuration provided");
-		}
+		configuration = configuration || this.configurationService.getValue("logging") || {};
 
 		// set log levels
 		if (configuration.logLevels) {
@@ -109,10 +102,6 @@ export class LoggingService {
 				ajaxAppender.setTimed(false);
 				ajaxAppender.setTimerInterval(0);
 			}
-			ajaxAppender.setFailCallback(message => {
-				// istanbul ignore next 
-				console.error(message);
-			});
 			log4javascript.getRootLogger().addAppender(ajaxAppender);
 		}
 
@@ -128,7 +117,6 @@ export class LoggingService {
 					throw new Error(`invalid log level ${configuration.localStorageAppender.logLevel}`);
 				}
 			}
-			localStorageAppender.isInsertAtTop = true;
 			localStorageAppender.setLayout(new log4javascript.PatternLayout("%d{HH:mm:ss,SSS} %c %m"));
 			if (configuration.localStorageAppender.maxMessages && configuration.localStorageAppender.maxMessages > 0) {
 				localStorageAppender.maxLogMessagesLength = configuration.localStorageAppender.maxMessages;

@@ -11,15 +11,9 @@
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"declaration": true,
-		"sourceMap": false,
-		"outDir": "./dist/es5"
+		"sourceMap": true,
+		"outDir": "dist"
 	},
-	"include": [
-		"src/**/*.ts"
-	],
-	"exclude": [
-		"src/**/*.spec.ts"
-	],
 	"compileOnSave": false,
 	"atom": {
 		"rewriteTsconfig": false

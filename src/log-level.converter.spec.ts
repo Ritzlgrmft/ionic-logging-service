@@ -78,7 +78,8 @@ describe("LogLevelConverter", () => {
 				LogLevelConverter.levelFromLog4Javascript(value);
 				fail("no error thrown");
 			} catch (e) {
-				expect(e).toBe("invalid level: 42");
+				expect(e).toEqual(jasmine.any(Error));
+				expect((<Error>e).message).toBe("invalid level 42");
 			}
 		});
 	});
@@ -156,7 +157,8 @@ describe("LogLevelConverter", () => {
 				LogLevelConverter.levelFromString(value);
 				fail("no error thrown");
 			} catch (e) {
-				expect(e).toBe("invalid level: xxx");
+				expect(e).toEqual(jasmine.any(Error));
+				expect((<Error>e).message).toBe("invalid level xxx");
 			}
 		});
 	});
@@ -234,7 +236,8 @@ describe("LogLevelConverter", () => {
 				LogLevelConverter.levelToLog4Javascript(value);
 				fail("no error thrown");
 			} catch (e) {
-				expect(e).toBe("invalid level: 42");
+				expect(e).toEqual(jasmine.any(Error));
+				expect((<Error>e).message).toBe("invalid level 42");
 			}
 		});
 	});
