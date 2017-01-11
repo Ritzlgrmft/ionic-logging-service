@@ -1,5 +1,7 @@
 # ionic-logging-service
 
+**The dependencies used by the latest version are the same as needed for [Ionic 2.0.0-rc.5](https://github.com/driftyco/ionic/blob/master/CHANGELOG.md#200-rc5-2017-01-11).**
+
 [![Build](https://travis-ci.org/Ritzlgrmft/ionic-logging-service.svg?branch=master)](https://travis-ci.org/Ritzlgrmft/ionic-logging-service)
 [![Codecov](https://codecov.io/gh/Ritzlgrmft/ionic-logging-service/branch/master/graph/badge.svg)](https://codecov.io/gh/Ritzlgrmft/ionic-logging-service)
 [![Version](https://badge.fury.io/js/ionic-logging-service.svg)](https://www.npmjs.com/package/ionic-logging-service)
