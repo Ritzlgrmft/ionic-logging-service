@@ -1,0 +1,17 @@
+language: node_js
+cache:
+  directories:
+    - node_modules
+notifications:
+  email: 
+    on_success: always # default: change
+node_js:
+  - '6'
+before_script:
+  - npm prune
+after_success:
+  - npm run report-coverage
+  - npm run semantic-release
+branches:
+  except:
+    - /^v\d+\.\d+\.\d+$/
