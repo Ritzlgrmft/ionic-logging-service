@@ -7,6 +7,8 @@ import { LogLevelConverter } from "./log-level.converter";
  * Logger for writing log messages.
  */
 export class Logger {
+
+	// tslint:disable-next-line:completed-docs
 	private logger: log4javascript.Logger;
 
 	constructor(logger?: string | any) {

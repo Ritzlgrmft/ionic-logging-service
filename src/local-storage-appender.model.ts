@@ -4,6 +4,11 @@ import { LogLevel } from "./log-level.model";
 import { LogLevelConverter } from "./log-level.converter";
 import { LogMessage } from "./log-message.model";
 
+/**
+ * An appender which stores the log messages in the browser's local storage.
+ * The messages are saved JSON-serialized.
+ * You have to configure which key is used for storing the messages.
+ */
 export class LocalStorageAppender extends log4javascript.Appender {
 	public maxLogMessagesLength: number;
 
@@ -14,6 +19,11 @@ export class LocalStorageAppender extends log4javascript.Appender {
 
 	constructor(localStorageKey: string) {
 		super();
+
+		// tslint:disable-next-line:no-null-keyword
+		if (localStorageKey === undefined || localStorageKey === null || localStorageKey === "") {
+			throw new Error("localStorageKey may be not empty");
+		}
 
 		this.localStorageKey = localStorageKey;
 		// tslint:disable-next-line:no-null-keyword

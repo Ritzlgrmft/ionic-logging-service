@@ -28,7 +28,7 @@ export class MemoryAppender extends log4javascript.Appender {
 		const message: LogMessage = {
 			timeStamp: loggingEvent.timeStamp,
 			level: LogLevel[LogLevelConverter.levelFromLog4Javascript(loggingEvent.level)],
-			logger: loggingEvent.logger ? loggingEvent.logger.name : undefined,
+			logger: typeof loggingEvent.logger === "object" ? loggingEvent.logger.name : undefined,
 			methodName: loggingEvent.messages[0],
 			message: loggingEvent.messages.slice(1)
 		};

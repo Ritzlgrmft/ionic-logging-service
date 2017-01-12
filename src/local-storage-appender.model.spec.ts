@@ -30,6 +30,22 @@ describe("LocalStorageAppender", () => {
 			expect(messages[0].timeStamp).toEqual(event.timeStamp);
 			expect(messages[0].level).toBe(event.level.toString());
 		});
+
+		it("throws error if undefined is passed as localStorageKey", () => {
+
+			expect(() => new LocalStorageAppender(undefined)).toThrowError("localStorageKey may be not empty");
+		});
+
+		it("throws error if null is passed as localStorageKey", () => {
+
+			// tslint:disable-next-line:no-null-keyword
+			expect(() => new LocalStorageAppender(null)).toThrowError("localStorageKey may be not empty");
+		});
+
+		it("throws error if empty string is passed as localStorageKey", () => {
+
+			expect(() => new LocalStorageAppender("")).toThrowError("localStorageKey may be not empty");
+		});
 	});
 
 	describe("append(loggingEvent: log4javascript.LoggingEvent): void", () => {
