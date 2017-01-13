@@ -2,8 +2,16 @@
 
 import { LogLevel } from "./log-level.model";
 
+/**
+ * Helper class for converting log levels from and to different data type.
+ */
 export class LogLevelConverter {
 
+	/**
+	 * Converts log4javascript.Level to internal LogLevel.
+	 * @param level log4javascript's data type
+	 * @return internal data type.
+	 */
 	public static levelFromLog4Javascript(level: log4javascript.Level): LogLevel {
 		switch (level) {
 			case log4javascript.Level.ALL:
@@ -27,6 +35,11 @@ export class LogLevelConverter {
 		}
 	}
 
+	/**
+	 * Converts string representation to internal LogLevel.
+	 * @param level string representation
+	 * @return internal data type.
+	 */
 	public static levelFromString(level: string): LogLevel {
 		switch (level) {
 			case "ALL":
@@ -50,6 +63,11 @@ export class LogLevelConverter {
 		}
 	}
 
+	/**
+	 * Converts internal LogLevel to log4javascript.Level.
+	 * @param internal data type.
+	 * @return level log4javascript's data type
+	 */
 	public static levelToLog4Javascript(level: LogLevel): log4javascript.Level {
 		switch (level) {
 			case LogLevel.ALL:

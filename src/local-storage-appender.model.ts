@@ -10,13 +10,24 @@ import { LogMessage } from "./log-message.model";
  * You have to configure which key is used for storing the messages.
  */
 export class LocalStorageAppender extends log4javascript.Appender {
+
+	/**
+	 * Maximum number of messages which will be stored in local storage.
+	 */
 	public maxLogMessagesLength: number;
 
+	// tslint:disable-next-line:completed-docs
 	private localStorageKey: string;
+	// tslint:disable-next-line:completed-docs
 	private logMessages: LogMessage[];
 
+	// tslint:disable-next-line:completed-docs
 	private static maxLogMessagesLengthDefault = 250;
 
+	/**
+	 * Creates a new instance of the appender.
+	 * @param localStorageKey key used for storing the messages in local storage.
+	 */
 	constructor(localStorageKey: string) {
 		super();
 
@@ -40,6 +51,10 @@ export class LocalStorageAppender extends log4javascript.Appender {
 		this.maxLogMessagesLength = LocalStorageAppender.maxLogMessagesLengthDefault;
 	}
 
+	/**
+	 * Appender-specific method to append a log message.
+	 * @param loggingEvent event to be appended.
+	 */
 	public append(loggingEvent: log4javascript.LoggingEvent): void {
 		// if logMessages is already full, remove oldest element
 		while (this.logMessages.length >= this.maxLogMessagesLength) {
@@ -59,14 +74,28 @@ export class LocalStorageAppender extends log4javascript.Appender {
 		localStorage.setItem(this.localStorageKey, JSON.stringify(this.logMessages));
 	}
 
+	/**
+	 * Gets the appender's name.
+	 * Mainly for unit testing purposes.
+	 * @return appender's name
+	 */
 	public toString(): string {
 		return "Ionic.Logging.LocalStorageAppender";
 	}
 
+	/**
+	 * Gets all messages stored in local storage.
+	 * Mainly for unit testing purposes.
+	 * @return stored messages
+	 */
 	public getLogMessages(): LogMessage[] {
 		return this.logMessages;
 	}
 
+	/**
+	 * Removes all messages from local storage.
+	 * Mainly for unit testing purposes.
+	 */
 	public clearLog(): void {
 		this.logMessages = [];
 		localStorage.removeItem(this.localStorageKey);
