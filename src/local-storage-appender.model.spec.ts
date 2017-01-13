@@ -113,6 +113,23 @@ describe("LocalStorageAppender", () => {
 			const messages = appender.getLogMessages();
 			expect(messages[0].logger).toBeUndefined();
 		});
+
+		it("method not called if threshold is higher than log level", () => {
+
+			const event = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["1"]);
+
+			appender.setThreshold(log4javascript.Level.WARN);
+			appender.doAppend(event);
+
+			let messages = appender.getLogMessages();
+			expect(messages.length).toBe(0);
+
+			const event2 = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.WARN, ["1"]);
+			appender.doAppend(event2);
+
+			messages = appender.getLogMessages();
+			expect(messages.length).toBe(1);
+		});
 	});
 
 	describe("toString(): string", () => {

@@ -37,11 +37,11 @@ export interface LoggingConfiguration {
 		timerInterval?: number;
 
 		/**
-		 * Log level.
+		 * Threshold.
 		 * Valid values are: ALL, DEBUG, ERROR, FATAL, INFO, OFF, TRACE, WARN
 		 * Default: ALL.
 		 */
-		logLevel?: string;
+		threshold?: string;
 	};
 
 	/**
@@ -54,11 +54,11 @@ export interface LoggingConfiguration {
 		localStorageKey: string;
 
 		/**
-		 * Log level.
+		 * Threshold.
 		 * Valid values are: ALL, DEBUG, ERROR, FATAL, INFO, OFF, TRACE, WARN
 		 * Default: WARN.
 		 */
-		logLevel?: string;
+		threshold?: string;
 
 		/**
 		 * Maximum number of log messages stored by the appender.	

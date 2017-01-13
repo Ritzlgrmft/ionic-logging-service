@@ -70,6 +70,8 @@ export class LoggingService {
 
 	/**
 	 * Configures the logging depending on the given configuration.
+	 * @param configuration configuration data.
+	 * If the parameter is skipped, the configuration data will be taken from configuration service, key "logging"
 	 */
 	public configure(configuration?: LoggingConfiguration): void {
 
@@ -100,13 +102,13 @@ export class LoggingService {
 		// configure AjaxAppender
 		if (typeof configuration.ajaxAppender !== "undefined") {
 			const ajaxAppender = new log4javascript.AjaxAppender(configuration.ajaxAppender.url, false);
-			if (typeof configuration.ajaxAppender.logLevel !== "undefined") {
+			if (typeof configuration.ajaxAppender.threshold !== "undefined") {
 				try {
 					ajaxAppender.setThreshold(
 						LogLevelConverter.levelToLog4Javascript(
-							LogLevelConverter.levelFromString(configuration.ajaxAppender.logLevel)));
+							LogLevelConverter.levelFromString(configuration.ajaxAppender.threshold)));
 				} catch (e) {
-					throw new Error(`invalid log level ${configuration.ajaxAppender.logLevel}`);
+					throw new Error(`invalid threshold ${configuration.ajaxAppender.threshold}`);
 				}
 			}
 			ajaxAppender.setLayout(new log4javascript.JsonLayout(false, false));
@@ -128,13 +130,13 @@ export class LoggingService {
 		// configure LocalStorageAppender
 		if (typeof configuration.localStorageAppender !== "undefined") {
 			const localStorageAppender = new LocalStorageAppender(configuration.localStorageAppender.localStorageKey);
-			if (typeof configuration.localStorageAppender.logLevel !== "undefined") {
+			if (typeof configuration.localStorageAppender.threshold !== "undefined") {
 				try {
 					localStorageAppender.setThreshold(
 						LogLevelConverter.levelToLog4Javascript(
-							LogLevelConverter.levelFromString(configuration.localStorageAppender.logLevel)));
+							LogLevelConverter.levelFromString(configuration.localStorageAppender.threshold)));
 				} catch (e) {
-					throw new Error(`invalid log level ${configuration.localStorageAppender.logLevel}`);
+					throw new Error(`invalid threshold ${configuration.localStorageAppender.threshold}`);
 				}
 			}
 			localStorageAppender.setLayout(new log4javascript.PatternLayout("%d{HH:mm:ss,SSS} %c %m"));
@@ -146,21 +148,25 @@ export class LoggingService {
 	}
 
 	/**
-	 * Returns the root logger from which all other loggers derive.
+	 * Gets the root logger from which all other loggers derive.
+	 * @return root logger
 	 */
 	public getRootLogger(): Logger {
 		return new Logger();
 	}
 
 	/**
-	 * Returns a logger with the specified name, creating it if a logger with that name does not already exist. 
+	 * Gets a logger with the specified name, creating it if a logger with that name does not already exist.
+	 * @param loggerName name of the logger
+	 * @return logger
 	 */
 	public getLogger(loggerName: string): Logger {
 		return new Logger(loggerName);
 	}
 
 	/**
-	 * Returns the last log messages.
+	 * Gets the last log messages.
+	 * @return log messages
 	 */
 	public getLogMessages(): LogMessage[] {
 		return this.memoryAppender.getLogMessages();

@@ -171,16 +171,31 @@ describe("LoggingService", () => {
 				expect(newAppenderCount).toBe(oldAppenderCount + 1);
 			});
 
-			it("throws error if ajaxAppender has an invalid log level", () => {
+			it("throws error if ajaxAppender has an invalid threshold", () => {
 
 				const config: LoggingConfiguration = {
 					ajaxAppender: {
 						url: "myUrl",
-						logLevel: "xxx"
+						threshold: "xxx"
 					}
 				};
 
-				expect(() => loggingService.configure(config)).toThrowError("invalid log level xxx");
+				expect(() => loggingService.configure(config)).toThrowError("invalid threshold xxx");
+			});
+
+			it("ajaxAppender has default threshold of ALL", () => {
+
+				const config: LoggingConfiguration = {
+					ajaxAppender: {
+						url: "myUrl"
+					}
+				};
+
+				loggingService.configure(config);
+				const internalLogger = new Logger().getInternalLogger();
+				const ajaxAppender = <log4javascript.AjaxAppender>internalLogger.getEffectiveAppenders()[2];
+
+				expect(ajaxAppender.getThreshold()).toBe(log4javascript.Level.ALL);
 			});
 
 			it("ajaxAppender has default timer interval of 0", () => {
@@ -249,19 +264,19 @@ describe("LoggingService", () => {
 				expect(newAppenderCount).toBe(oldAppenderCount + 1);
 			});
 
-			it("throws error if localStorageAppender has an invalid log level", () => {
+			it("throws error if localStorageAppender has an invalid threshold", () => {
 
 				const config: LoggingConfiguration = {
 					localStorageAppender: {
 						localStorageKey: "myLocalStorage",
-						logLevel: "xxx"
+						threshold: "xxx"
 					}
 				};
 
-				expect(() => loggingService.configure(config)).toThrowError("invalid log level xxx");
+				expect(() => loggingService.configure(config)).toThrowError("invalid threshold xxx");
 			});
 
-			it("localStorageAppender has default log level of WARN", () => {
+			it("localStorageAppender has default threshold of WARN", () => {
 
 				const config: LoggingConfiguration = {
 					localStorageAppender: {
@@ -276,12 +291,12 @@ describe("LoggingService", () => {
 				expect(localStorageAppender.getThreshold()).toBe(log4javascript.Level.WARN);
 			});
 
-			it("localStorageAppender has given log level", () => {
+			it("localStorageAppender has given threshold", () => {
 
 				const config: LoggingConfiguration = {
 					localStorageAppender: {
 						localStorageKey: "myLocalStorage",
-						logLevel: "INFO"
+						threshold: "INFO"
 					}
 				};
 
