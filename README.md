@@ -7,6 +7,7 @@
 [![Version](https://badge.fury.io/js/ionic-logging-service.svg)](https://www.npmjs.com/package/ionic-logging-service)
 [![Downloads](https://img.shields.io/npm/dt/ionic-logging-service.svg)](https://www.npmjs.com/package/ionic-logging-service)
 [![Dependencies](https://david-dm.org/ritzlgrmft/ionic-logging-service/master/status.svg)](https://david-dm.org/ritzlgrmft/ionic-logging-service/master)
+[![Peer-Dependencies](https://david-dm.org/ritzlgrmft/ionic-logging-service/master/peer-status.svg)](https://david-dm.org/ritzlgrmft/ionic-logging-service/master?type=peer)
 [![Dev-Dependencies](https://david-dm.org/ritzlgrmft/ionic-logging-service/master/dev-status.svg)](https://david-dm.org/ritzlgrmft/ionic-logging-service/master?type=dev)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![License](https://img.shields.io/npm/l/ionic-logging-service.svg)](https://www.npmjs.com/package/ionic-logging-service)
