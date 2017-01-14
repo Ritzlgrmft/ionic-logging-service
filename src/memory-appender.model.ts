@@ -20,7 +20,7 @@ export class MemoryAppender extends log4javascript.Appender {
 	private onLogMessagesChangedCallback: (message: LogMessage) => void;
 
 	// tslint:disable-next-line:completed-docs
-	private static maxLogMessagesLengthDefault = 100;
+	private static maxLogMessagesLengthDefault = 250;
 
 	/**
 	 * Creates a new instance of the appender.

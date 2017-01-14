@@ -65,4 +65,14 @@ export interface LoggingConfiguration {
 		 */
 		maxMessages?: number;
 	};
+
+	/**
+	 * Settings for MemoryAppender.
+	 */
+	memoryAppender?: {
+		/**
+		 * Maximum number of log messages stored by the appender.	
+		 */
+		maxMessages?: number;
+	};
 }

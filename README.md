@@ -76,6 +76,15 @@ It has the following properties:
 - `threshold`: Threshold; valid values are: ALL, DEBUG, ERROR, FATAL, INFO, OFF, TRACE, WARN;
   default: WARN
 
+### memoryAppender
+
+With `memoryAppender`, it is possible to configure the `MemoryAppender`, which stores
+log messages in the memory.
+
+It has the following properties:
+
+- `maxMessages`: Maximum number of log messages stored by the appender; default: 250
+
 ## API
 
 ### logMessagesChanged: EventEmitter&lt;LogMessage>

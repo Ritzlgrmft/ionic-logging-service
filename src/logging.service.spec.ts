@@ -12,6 +12,7 @@ import { Logger } from "./logger.model";
 import { LoggingConfiguration } from "./logging-configuration.model";
 import { LogMessage } from "./log-message.model";
 import { LoggingService } from "./logging.service";
+import { MemoryAppender } from "./memory-appender.model";
 
 describe("LoggingService", () => {
 
@@ -338,6 +339,49 @@ describe("LoggingService", () => {
 				expect(localStorageAppender.maxLogMessagesLength).toBe(1234);
 			});
 		});
+
+		describe("memoryAppender", () => {
+			it("memoryAppender has default max messages of 250", () => {
+
+				const config: LoggingConfiguration = {
+				};
+
+				loggingService.configure(config);
+				const internalLogger = new Logger().getInternalLogger();
+				const memoryAppender = <MemoryAppender>internalLogger.getEffectiveAppenders()[1];
+
+				expect(memoryAppender.maxLogMessagesLength).toBe(250);
+			});
+
+			it("memoryAppender has default configuration id memoryAppender configuration is empty", () => {
+
+				const config: LoggingConfiguration = {
+					memoryAppender: {}
+				};
+
+				loggingService.configure(config);
+				const internalLogger = new Logger().getInternalLogger();
+				const memoryAppender = <MemoryAppender>internalLogger.getEffectiveAppenders()[1];
+
+				expect(memoryAppender.maxLogMessagesLength).toBe(250);
+			});
+
+			it("memoryAppender has given max messages", () => {
+
+				const config: LoggingConfiguration = {
+					memoryAppender: {
+						maxMessages: 1234
+					}
+				};
+
+				loggingService.configure(config);
+				const internalLogger = new Logger().getInternalLogger();
+				const memoryAppender = <MemoryAppender>internalLogger.getEffectiveAppenders()[1];
+
+				expect(memoryAppender.maxLogMessagesLength).toBe(1234);
+			});
+		});
+
 	});
 
 	describe("getLogger(loggerName: string): Logger", () => {

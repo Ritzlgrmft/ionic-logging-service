@@ -145,6 +145,13 @@ export class LoggingService {
 			}
 			log4javascript.getRootLogger().addAppender(localStorageAppender);
 		}
+
+		// configure MemoryAppender
+		if (typeof configuration.memoryAppender !== "undefined") {
+			if (configuration.memoryAppender.maxMessages > 0) {
+				this.memoryAppender.maxLogMessagesLength = configuration.memoryAppender.maxMessages;
+			}
+		}
 	}
 
 	/**
