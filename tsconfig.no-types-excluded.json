@@ -1,13 +1,6 @@
 {
 	"compilerOptions": {
 		"target": "es5",
-		"lib": [
-			"dom",
-			"es2015"
-		],
-		"types": [
-			"jasmine"
-		],
 		"module": "commonjs",
 		"moduleResolution": "node",
 		"emitDecoratorMetadata": true,

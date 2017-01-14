@@ -34,6 +34,21 @@ module.exports = function (config) {
 					"filename": "lcovonly/lcov.info"
 				},
 				"text-summary": ""
+			},
+			compilerOptions: {
+				"target": "es5",
+				"module": "commonjs",
+				"moduleResolution": "node",
+				"emitDecoratorMetadata": true,
+				"experimentalDecorators": true,
+				"noFallthroughCasesInSwitch": true,
+				"noImplicitAny": true,
+				"noImplicitReturns": true,
+				"noUnusedLocals": true,
+				"noUnusedParameters": true,
+				"declaration": true,
+				"sourceMap": true,
+				"outDir": "dist"
 			}
 		},
 

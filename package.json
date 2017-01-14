@@ -22,7 +22,7 @@
 		"report-coverage": "codecov",
 		"karma": "karma start karma.conf.js --browsers Chrome",
 		"karma-once": "karma start karma.conf.js --browsers PhantomJS --single-run",
-		"lint": "tslint --project tsconfig.json --format verbose --type-check --exclude \"**/*.spec.ts\"",
+		"lint": "tslint --project tsconfig.no-types-excluded.json --format verbose --type-check --exclude \"**/*.spec.ts\"",
 		"test": "npm run tsc && npm run lint && npm run karma-once",
 		"tsc": "tsc",
 		"validate": "npm run karma-once && npm run lint",
@@ -39,7 +39,7 @@
 		"zone.js": "^0.6.26"
 	},
 	"dependencies": {
-		"ionic-configuration-service": "^3.0.0",
+		"ionic-configuration-service": "^3.0.1",
 		"log4javascript": "^1.4.15"
 	},
 	"devDependencies": {
