@@ -16,20 +16,21 @@
 		"log4javascript"
 	],
 	"scripts": {
-		"build": "npm run clean && npm run tsc",
+		"build": "npm run clean && npm run compile",
 		"clean": "cd dist && ls | grep -v .npmignore | xargs rm && cd ..",
 		"commit": "git-cz",
+		"compile": "ngc",
 		"report-coverage": "codecov",
 		"karma": "karma start karma.conf.js --browsers Chrome",
 		"karma-once": "karma start karma.conf.js --browsers PhantomJS --single-run",
 		"lint": "tslint --project tsconfig.no-types-excluded.json --format verbose --type-check --exclude \"**/*.spec.ts\"",
-		"test": "npm run tsc && npm run lint && npm run karma-once",
-		"tsc": "tsc",
-		"validate": "npm run karma-once && npm run lint",
-		"semantic-release": "semantic-release pre && npm publish && semantic-release post"
+		"semantic-release": "semantic-release pre && npm publish && semantic-release post",
+		"test": "npm run compile && npm run lint && npm run karma-once",
+		"validate": "npm run karma-once && npm run lint"
 	},
 	"files": [
-		"dist"
+		"dist",
+		"src"
 	],
 	"main": "dist/index.js",
 	"typings": "dist/index.d.ts",
@@ -45,6 +46,7 @@
 	"devDependencies": {
 		"@angular/common": "2.2.1",
 		"@angular/compiler": "2.2.1",
+		"@angular/compiler-cli": "2.2.1",
 		"@angular/core": "2.2.1",
 		"@angular/http": "2.2.1",
 		"@angular/platform-browser": "2.2.1",
