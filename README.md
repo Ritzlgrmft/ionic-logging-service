@@ -91,7 +91,7 @@ It has the following properties:
 
 Event triggered when new log message was added.
 
-Paraneters
+Parameters
 
 - *message*: new log message
 
