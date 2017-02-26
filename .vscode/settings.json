@@ -1,4 +1,3 @@
 {
-	"typescript.tsdk": "./node_modules/typescript/lib",
-	"tslint.configFile": "tslint-no-type-check.json"
+	"typescript.tsdk": "./node_modules/typescript/lib"
 }

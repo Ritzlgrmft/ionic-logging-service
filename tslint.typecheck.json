@@ -18,13 +18,13 @@
 		"comment-format": [
 			false
 		],
-		// "completed-docs": [
-		// 	true,
-		// 	"classes",
-		// 	"functions",
-		// 	"methods",
-		// 	"properties"
-		// ],
+		"completed-docs": [
+			true,
+			"classes",
+			"functions",
+			"methods",
+			"properties"
+		],
 		"curly": true,
 		"eofline": false,
 		"forin": true,
@@ -83,7 +83,7 @@
 		"no-use-before-declare": true,
 		"no-var-keyword": true,
 		"no-var-requires": true,
-		// "no-void-expression": true,
+		"no-void-expression": true,
 		"prefer-for-of": true,
 		"one-line": [
 			true,
@@ -106,7 +106,7 @@
 			true,
 			"never"
 		],
-		// "strict-boolean-expressions": true,
+		"strict-boolean-expressions": true,
 		"switch-default": true,
 		"trailing-comma": [
 			true,
