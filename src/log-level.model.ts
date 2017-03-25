@@ -1,5 +1,5 @@
 ﻿/**
- * Logging levels. 
+ * Logging levels.
  */
 export enum LogLevel {
 	ALL,
@@ -9,5 +9,5 @@ export enum LogLevel {
 	WARN,
 	ERROR,
 	FATAL,
-	OFF
+	OFF,
 }

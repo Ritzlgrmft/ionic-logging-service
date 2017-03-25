@@ -1,7 +1,7 @@
 ﻿import * as log4javascript from "log4javascript";
 
-import { LogLevel } from "./log-level.model";
 import { LogLevelConverter } from "./log-level.converter";
+import { LogLevel } from "./log-level.model";
 
 /**
  * Logger for writing log messages.
@@ -31,7 +31,7 @@ export class Logger {
 	/**
 	 * Logs a message at level DEBUG.
 	 *
-	 * @param methodName name of the method 
+	 * @param methodName name of the method
 	 * @param params optional parameters to be logged; objects will be formatted as JSON
 	 */
 	public debug(methodName: string, ...params: any[]): void {
@@ -47,7 +47,7 @@ export class Logger {
 	/**
 	 * Logs a message at level INFO.
 	 *
-	 * @param methodName name of the method 
+	 * @param methodName name of the method
 	 * @param params optional parameters to be logged; objects will be formatted as JSON
 	 */
 	public info(methodName: string, ...params: any[]): void {
@@ -63,7 +63,7 @@ export class Logger {
 	/**
 	 * Logs a message at level WARN.
 	 *
-	 * @param methodName name of the method 
+	 * @param methodName name of the method
 	 * @param params optional parameters to be logged; objects will be formatted as JSON
 	 */
 	public warn(methodName: string, ...params: any[]): void {
@@ -79,7 +79,7 @@ export class Logger {
 	/**
 	 * Logs a message at level ERROR.
 	 *
-	 * @param methodName name of the method 
+	 * @param methodName name of the method
 	 * @param params optional parameters to be logged; objects will be formatted as JSON
 	 */
 	public error(methodName: string, ...params: any[]): void {
@@ -96,7 +96,7 @@ export class Logger {
 	 * Logs the entry into a method.
 	 * The method name will be logged at level INFO, the parameters at level DEBUG.
 	 *
-	 * @param methodName name of the method 
+	 * @param methodName name of the method
 	 * @param params optional parameters to be logged; objects will be formatted as JSON
 	 */
 	public entry(methodName: string, ...params: any[]): void {
@@ -115,7 +115,7 @@ export class Logger {
 	 * Logs the exit of a method.
 	 * The method name will be logged at level INFO, the parameters at level DEBUG.
 	 *
-	 * @param methodName name of the method 
+	 * @param methodName name of the method
 	 * @param params optional parameters to be logged; objects will be formatted as JSON
 	 */
 	public exit(methodName: string, ...params: any[]): void {
@@ -157,4 +157,3 @@ export class Logger {
 		return this.logger;
 	}
 }
-

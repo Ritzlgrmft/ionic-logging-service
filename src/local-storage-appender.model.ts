@@ -1,7 +1,7 @@
 import * as log4javascript from "log4javascript";
 
-import { LogLevel } from "./log-level.model";
 import { LogLevelConverter } from "./log-level.converter";
+import { LogLevel } from "./log-level.model";
 import { LogMessage } from "./log-message.model";
 
 /**
@@ -10,6 +10,8 @@ import { LogMessage } from "./log-message.model";
  * You have to configure which key is used for storing the messages.
  */
 export class LocalStorageAppender extends log4javascript.Appender {
+
+	private static maxLogMessagesLengthDefault = 250;
 
 	/**
 	 * Maximum number of messages which will be stored in local storage.
@@ -20,9 +22,6 @@ export class LocalStorageAppender extends log4javascript.Appender {
 	private localStorageKey: string;
 	// tslint:disable-next-line:completed-docs
 	private logMessages: LogMessage[];
-
-	// tslint:disable-next-line:completed-docs
-	private static maxLogMessagesLengthDefault = 250;
 
 	/**
 	 * Creates a new instance of the appender.
@@ -62,11 +61,11 @@ export class LocalStorageAppender extends log4javascript.Appender {
 		}
 		// add event to logMessages
 		const message: LogMessage = {
-			timeStamp: loggingEvent.timeStamp,
 			level: LogLevel[LogLevelConverter.levelFromLog4Javascript(loggingEvent.level)],
 			logger: typeof loggingEvent.logger !== "undefined" ? loggingEvent.logger.name : undefined,
+			message: loggingEvent.messages.slice(1),
 			methodName: loggingEvent.messages[0],
-			message: loggingEvent.messages.slice(1)
+			timeStamp: loggingEvent.timeStamp,
 		};
 		this.logMessages.push(message);
 

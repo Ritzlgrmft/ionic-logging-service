@@ -7,7 +7,7 @@ export interface LoggingConfiguration {
 	 * Log levels for different loggers.
 	 * Default: root: WARN
 	 */
-	logLevels?: {
+	logLevels?: Array<{
 		/**
 		 * Logger name or "root" for root logger.
 		 */
@@ -18,7 +18,7 @@ export interface LoggingConfiguration {
 		 * Valid values are: ALL, DEBUG, ERROR, FATAL, INFO, OFF, TRACE, WARN
 		 */
 		logLevel: string;
-	}[];
+	}>;
 
 	/**
 	 * Settings for AjaxAppender.
@@ -61,7 +61,7 @@ export interface LoggingConfiguration {
 		threshold?: string;
 
 		/**
-		 * Maximum number of log messages stored by the appender.	
+		 * Maximum number of log messages stored by the appender.
 		 */
 		maxMessages?: number;
 	};
@@ -71,7 +71,7 @@ export interface LoggingConfiguration {
 	 */
 	memoryAppender?: {
 		/**
-		 * Maximum number of log messages stored by the appender.	
+		 * Maximum number of log messages stored by the appender.
 		 */
 		maxMessages?: number;
 	};

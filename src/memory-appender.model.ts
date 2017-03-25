@@ -1,13 +1,15 @@
 ﻿import * as log4javascript from "log4javascript";
 
-import { LogLevel } from "./log-level.model";
 import { LogLevelConverter } from "./log-level.converter";
+import { LogLevel } from "./log-level.model";
 import { LogMessage } from "./log-message.model";
 
 /**
  * An appender which stores the log messages in the browser's memory.
  */
 export class MemoryAppender extends log4javascript.Appender {
+
+	private static maxLogMessagesLengthDefault = 250;
 
 	/**
 	 * Maximum number of messages which will be stored in memory.
@@ -18,9 +20,6 @@ export class MemoryAppender extends log4javascript.Appender {
 	private logMessages: LogMessage[];
 	// tslint:disable-next-line:completed-docs
 	private onLogMessagesChangedCallback: (message: LogMessage) => void;
-
-	// tslint:disable-next-line:completed-docs
-	private static maxLogMessagesLengthDefault = 250;
 
 	/**
 	 * Creates a new instance of the appender.
@@ -42,11 +41,11 @@ export class MemoryAppender extends log4javascript.Appender {
 		}
 		// add event to logMessages
 		const message: LogMessage = {
-			timeStamp: loggingEvent.timeStamp,
 			level: LogLevel[LogLevelConverter.levelFromLog4Javascript(loggingEvent.level)],
 			logger: typeof loggingEvent.logger === "object" ? loggingEvent.logger.name : undefined,
+			message: loggingEvent.messages.slice(1),
 			methodName: loggingEvent.messages[0],
-			message: loggingEvent.messages.slice(1)
+			timeStamp: loggingEvent.timeStamp,
 		};
 		this.logMessages.push(message);
 

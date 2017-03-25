@@ -4,12 +4,12 @@ import { ConfigurationService } from "ionic-configuration-service";
 
 import * as log4javascript from "log4javascript";
 
-import { Logger } from "./logger.model";
-import { LoggingConfiguration } from "./logging-configuration.model";
+import { LocalStorageAppender } from "./local-storage-appender.model";
 import { LogLevelConverter } from "./log-level.converter";
 import { LogMessage } from "./log-message.model";
+import { Logger } from "./logger.model";
+import { LoggingConfiguration } from "./logging-configuration.model";
 import { MemoryAppender } from "./memory-appender.model";
-import { LocalStorageAppender } from "./local-storage-appender.model";
 
 /**
  * Service for logging functionality.
@@ -18,10 +18,25 @@ import { LocalStorageAppender } from "./local-storage-appender.model";
  *  - log level: WARN
  *  - appender: BrowserConsoleAppender and MemoryAppender
  *
- * Via configure(), it is possible to amend these settings. 
+ * Via configure(), it is possible to amend these settings.
  */
 @Injectable()
 export class LoggingService {
+
+	/**
+	 * Event triggered when new log message was added.
+	 * @param message new log message
+	 */
+	public logMessagesChanged: EventEmitter<LogMessage>;
+
+	/**
+	 * Event triggered when ajax appender could not send log messages to the server.
+	 * @param message error message
+	 */
+	public ajaxAppenderFailed: EventEmitter<string>;
+
+	// tslint:disable-next-line:completed-docs
+	private memoryAppender: MemoryAppender;
 
 	constructor(
 		private configurationService: ConfigurationService) {
@@ -45,28 +60,13 @@ export class LoggingService {
 		// in-memory appender for display on log messages page
 		this.memoryAppender = new MemoryAppender();
 		this.memoryAppender.setLayout(new log4javascript.PatternLayout("%d{HH:mm:ss,SSS} %c %m"));
-		this.memoryAppender.setOnLogMessagesChangedCallback(message => {
+		this.memoryAppender.setOnLogMessagesChangedCallback((message) => {
 			this.logMessagesChanged.emit(message);
 		});
 		logger.addAppender(this.memoryAppender);
 
 		this.configure();
 	}
-
-	/**
-	 * Event triggered when new log message was added.
-	 * @param message new log message
-	 */
-	public logMessagesChanged: EventEmitter<LogMessage>;
-
-	/**
-	 * Event triggered when ajax appender could not send log messages to the server.
-	 * @param message error message
-	 */
-	public ajaxAppenderFailed: EventEmitter<string>;
-
-	// tslint:disable-next-line:completed-docs
-	private memoryAppender: MemoryAppender;
 
 	/**
 	 * Configures the logging depending on the given configuration.
@@ -121,7 +121,7 @@ export class LoggingService {
 				ajaxAppender.setTimed(false);
 				ajaxAppender.setTimerInterval(0);
 			}
-			ajaxAppender.setFailCallback(message => {
+			ajaxAppender.setFailCallback((message) => {
 				this.ajaxAppenderFailed.emit(message);
 			});
 			log4javascript.getRootLogger().addAppender(ajaxAppender);
