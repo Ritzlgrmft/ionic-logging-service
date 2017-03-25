@@ -1,0 +1,34 @@
+{
+	"compilerOptions": {
+		"target": "es5",
+		"lib": [
+			"dom",
+			"es2015"
+		],
+		"types": [
+			"jasmine"
+		],
+		"module": "es2015",
+		"moduleResolution": "node",
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"noFallthroughCasesInSwitch": true,
+		"noImplicitAny": true,
+		"noImplicitReturns": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"declaration": true,
+		"sourceMap": true,
+		"outDir": "dist"
+	},
+	"compileOnSave": false,
+	"atom": {
+		"rewriteTsconfig": false
+	},
+	"files": [
+		"src/index.ts"
+	],
+	"angularCompilerOptions": {
+		"genDir": "aot"
+	}
+}

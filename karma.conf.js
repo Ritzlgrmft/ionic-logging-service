@@ -49,6 +49,11 @@ module.exports = function (config) {
 				"declaration": true,
 				"sourceMap": true,
 				"outDir": "dist"
+			},
+			bundlerOptions: {
+				transforms: [
+					require("karma-typescript-es6-transform")()
+				]
 			}
 		},
 
