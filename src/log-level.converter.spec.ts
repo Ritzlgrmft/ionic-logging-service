@@ -1,7 +1,7 @@
 import * as log4javascript from "log4javascript";
 
-import { LogLevel } from "./log-level.model";
 import { LogLevelConverter } from "./log-level.converter";
+import { LogLevel } from "./log-level.model";
 
 describe("LogLevelConverter", () => {
 

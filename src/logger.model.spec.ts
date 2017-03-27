@@ -1,8 +1,8 @@
 // tslint:disable:no-magic-numbers
 import * as log4javascript from "log4javascript";
 
-import { Logger } from "./logger.model";
 import { LogLevel } from "./log-level.model";
+import { Logger } from "./logger.model";
 
 describe("Logger", () => {
 
@@ -110,8 +110,8 @@ describe("Logger", () => {
 		it("writes log with arguments", () => {
 
 			const log4javascriptLogger = {
+				info: jasmine.createSpy("info"),
 				isInfoEnabled: jasmine.createSpy("isInfoEnabled").and.returnValue(true),
-				info: jasmine.createSpy("info")
 			};
 			const logger = new Logger(log4javascriptLogger);
 
@@ -123,8 +123,8 @@ describe("Logger", () => {
 		it("writes no log if logging is disabled", () => {
 
 			const log4javascriptLogger = {
+				info: jasmine.createSpy("info"),
 				isInfoEnabled: jasmine.createSpy("isInfoEnabled").and.returnValue(false),
-				info: jasmine.createSpy("info")
 			};
 			const logger = new Logger(log4javascriptLogger);
 
@@ -139,8 +139,8 @@ describe("Logger", () => {
 		it("writes log with arguments", () => {
 
 			const log4javascriptLogger = {
+				debug: jasmine.createSpy("debug"),
 				isDebugEnabled: jasmine.createSpy("isDebugEnabled").and.returnValue(true),
-				debug: jasmine.createSpy("debug")
 			};
 			const logger = new Logger(log4javascriptLogger);
 
@@ -152,8 +152,8 @@ describe("Logger", () => {
 		it("writes no log if logging is disabled", () => {
 
 			const log4javascriptLogger = {
+				debug: jasmine.createSpy("debug"),
 				isDebugEnabled: jasmine.createSpy("isDebugEnabled").and.returnValue(false),
-				debug: jasmine.createSpy("debug")
 			};
 			const logger = new Logger(log4javascriptLogger);
 
@@ -169,7 +169,7 @@ describe("Logger", () => {
 
 			const log4javascriptLogger = {
 				isWarnEnabled: jasmine.createSpy("isWarnEnabled").and.returnValue(true),
-				warn: jasmine.createSpy("warn")
+				warn: jasmine.createSpy("warn"),
 			};
 			const logger = new Logger(log4javascriptLogger);
 
@@ -182,7 +182,7 @@ describe("Logger", () => {
 
 			const log4javascriptLogger = {
 				isWarnEnabled: jasmine.createSpy("isWarnEnabled").and.returnValue(false),
-				warn: jasmine.createSpy("warn")
+				warn: jasmine.createSpy("warn"),
 			};
 			const logger = new Logger(log4javascriptLogger);
 
@@ -197,8 +197,8 @@ describe("Logger", () => {
 		it("writes log with arguments", () => {
 
 			const log4javascriptLogger = {
+				error: jasmine.createSpy("error"),
 				isErrorEnabled: jasmine.createSpy("isErrorEnabled").and.returnValue(true),
-				error: jasmine.createSpy("error")
 			};
 			const logger = new Logger(log4javascriptLogger);
 
@@ -210,8 +210,8 @@ describe("Logger", () => {
 		it("writes no log if logging is disabled", () => {
 
 			const log4javascriptLogger = {
+				error: jasmine.createSpy("error"),
 				isErrorEnabled: jasmine.createSpy("isErrorEnabled").and.returnValue(false),
-				error: jasmine.createSpy("error")
 			};
 			const logger = new Logger(log4javascriptLogger);
 
@@ -226,9 +226,9 @@ describe("Logger", () => {
 		it("writes log with arguments", () => {
 
 			const log4javascriptLogger = {
-				isInfoEnabled: jasmine.createSpy("isInfoEnabled").and.returnValue(true),
+				info: jasmine.createSpy("info"),
 				isDebugEnabled: jasmine.createSpy("isDebugEnabled").and.returnValue(true),
-				info: jasmine.createSpy("info")
+				isInfoEnabled: jasmine.createSpy("isInfoEnabled").and.returnValue(true),
 			};
 			const logger = new Logger(log4javascriptLogger);
 
@@ -240,9 +240,9 @@ describe("Logger", () => {
 		it("writes no log if info logging is disabled", () => {
 
 			const log4javascriptLogger = {
-				isInfoEnabled: jasmine.createSpy("isInfoEnabled").and.returnValue(false),
+				info: jasmine.createSpy("info"),
 				isDebugEnabled: jasmine.createSpy("isDebugEnabled").and.returnValue(false),
-				info: jasmine.createSpy("info")
+				isInfoEnabled: jasmine.createSpy("isInfoEnabled").and.returnValue(false),
 			};
 			const logger = new Logger(log4javascriptLogger);
 
@@ -254,9 +254,9 @@ describe("Logger", () => {
 		it("writes no arguments if debug logging is disabled", () => {
 
 			const log4javascriptLogger = {
-				isInfoEnabled: jasmine.createSpy("isInfoEnabled").and.returnValue(true),
+				info: jasmine.createSpy("info"),
 				isDebugEnabled: jasmine.createSpy("isDebugEnabled").and.returnValue(false),
-				info: jasmine.createSpy("info")
+				isInfoEnabled: jasmine.createSpy("isInfoEnabled").and.returnValue(true),
 			};
 			const logger = new Logger(log4javascriptLogger);
 
@@ -272,9 +272,9 @@ describe("Logger", () => {
 		it("writes log with arguments", () => {
 
 			const log4javascriptLogger = {
-				isInfoEnabled: jasmine.createSpy("isInfoEnabled").and.returnValue(true),
+				info: jasmine.createSpy("info"),
 				isDebugEnabled: jasmine.createSpy("isDebugEnabled").and.returnValue(true),
-				info: jasmine.createSpy("info")
+				isInfoEnabled: jasmine.createSpy("isInfoEnabled").and.returnValue(true),
 			};
 			const logger = new Logger(log4javascriptLogger);
 
@@ -286,9 +286,9 @@ describe("Logger", () => {
 		it("writes no log if info logging is disabled", () => {
 
 			const log4javascriptLogger = {
-				isInfoEnabled: jasmine.createSpy("isInfoEnabled").and.returnValue(false),
+				info: jasmine.createSpy("info"),
 				isDebugEnabled: jasmine.createSpy("isDebugEnabled").and.returnValue(false),
-				info: jasmine.createSpy("info")
+				isInfoEnabled: jasmine.createSpy("isInfoEnabled").and.returnValue(false),
 			};
 			const logger = new Logger(log4javascriptLogger);
 
@@ -300,9 +300,9 @@ describe("Logger", () => {
 		it("writes no arguments if debug logging is disabled", () => {
 
 			const log4javascriptLogger = {
-				isInfoEnabled: jasmine.createSpy("isInfoEnabled").and.returnValue(true),
+				info: jasmine.createSpy("info"),
 				isDebugEnabled: jasmine.createSpy("isDebugEnabled").and.returnValue(false),
-				info: jasmine.createSpy("info")
+				isInfoEnabled: jasmine.createSpy("isInfoEnabled").and.returnValue(true),
 			};
 			const logger = new Logger(log4javascriptLogger);
 
