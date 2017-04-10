@@ -1,7 +1,9 @@
 # ionic-logging-service
 
-**The dependencies used by the latest version are the same as needed for [Ionic 2.2.0](https://github.com/driftyco/ionic/blob/master/CHANGELOG.md).  
-For Ionic 2.0.0, use version 1.2.1.**
+**The dependencies used by the latest version are the same as needed for [Ionic 3.0.0](https://github.com/driftyco/ionic/blob/master/CHANGELOG.md). For older versions use:**
+
+- **Ionic 2.0.0: version 1.2.1.**
+- **Ionic 2.2.0: use version 2.0.0.**
 
 [![Build](https://travis-ci.org/Ritzlgrmft/ionic-logging-service.svg?branch=master)](https://travis-ci.org/Ritzlgrmft/ionic-logging-service)
 [![Codecov](https://codecov.io/gh/Ritzlgrmft/ionic-logging-service/branch/master/graph/badge.svg)](https://codecov.io/gh/Ritzlgrmft/ionic-logging-service)
