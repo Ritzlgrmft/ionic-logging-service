@@ -17,7 +17,7 @@
 	],
 	"scripts": {
 		"build": "npm run clean && npm run compile",
-		"clean": "cd dist && ls | grep -v .npmignore | xargs rm && cd ..",
+		"clean": "cd dist && ls | grep -v .npmignore | xargs rm && cd .. && rm -r aot",
 		"commit": "git-cz",
 		"compile": "ngc -p tsconfig.aot.json",
 		"report-coverage": "codecov",
@@ -25,7 +25,7 @@
 		"karma-once": "karma start karma.conf.js --browsers PhantomJS --single-run",
 		"lint": "tslint --project tsconfig.json --format verbose --type-check",
 		"semantic-release": "semantic-release pre && npm publish && semantic-release post",
-		"test": "npm run compile && npm run lint"
+		"test": "npm run compile && npm run lint && npm run karma-once"
 	},
 	"files": [
 		"dist",
@@ -52,7 +52,6 @@
 		"@angular/platform-browser-dynamic": "4.0.0",
 		"rxjs": "5.1.1",
 		"zone.js": "0.8.4",
-		"@types/es6-shim": "0.31.32",
 		"@types/jasmine": "2.5.41",
 		"codecov": "2.1.0",
 		"codelyzer": "2.1.1",
