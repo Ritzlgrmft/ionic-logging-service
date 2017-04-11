@@ -68,16 +68,15 @@ describe("LoggingService", () => {
 
 	describe("ctor()", () => {
 
-		it("root logger has log level WARN", (done) => {
+		it("root logger has log level WARN", async (done) => {
 
-			configurationService.load("empty.json").then(() => {
-				loggingService.getRootLogger().info("test");
-				loggingService.getRootLogger().warn("test");
-				const messages = loggingService.getLogMessages();
+			await configurationService.load("empty.json");
+			loggingService.getRootLogger().info("test");
+			loggingService.getRootLogger().warn("test");
+			const messages = loggingService.getLogMessages();
 
-				expect(messages.length).toBe(1);
-				done();
-			});
+			expect(messages.length).toBe(1);
+			done();
 		});
 	});
 
