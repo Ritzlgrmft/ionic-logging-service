@@ -195,7 +195,7 @@ describe("LoggingService", () => {
 
 				loggingService.configure(config);
 				const internalLogger = new Logger().getInternalLogger();
-				const ajaxAppender = <log4javascript.AjaxAppender>internalLogger.getEffectiveAppenders()[2];
+				const ajaxAppender = internalLogger.getEffectiveAppenders()[2];
 
 				expect(ajaxAppender.getThreshold()).toBe(log4javascript.Level.ALL);
 			});
@@ -210,7 +210,7 @@ describe("LoggingService", () => {
 
 				loggingService.configure(config);
 				const internalLogger = new Logger().getInternalLogger();
-				const ajaxAppender = <log4javascript.AjaxAppender>internalLogger.getEffectiveAppenders()[2];
+				const ajaxAppender = internalLogger.getEffectiveAppenders()[2] as log4javascript.AjaxAppender;
 
 				expect(ajaxAppender.isTimed()).toBeFalsy();
 				expect(ajaxAppender.getTimerInterval()).toBe(0);
@@ -227,7 +227,7 @@ describe("LoggingService", () => {
 
 				loggingService.configure(config);
 				const internalLogger = new Logger().getInternalLogger();
-				const ajaxAppender = <log4javascript.AjaxAppender>internalLogger.getEffectiveAppenders()[2];
+				const ajaxAppender = internalLogger.getEffectiveAppenders()[2] as log4javascript.AjaxAppender;
 
 				expect(ajaxAppender.isTimed()).toBeTruthy();
 				expect(ajaxAppender.getTimerInterval()).toBe(1234);
@@ -288,7 +288,7 @@ describe("LoggingService", () => {
 
 				loggingService.configure(config);
 				const internalLogger = new Logger().getInternalLogger();
-				const localStorageAppender = <LocalStorageAppender>internalLogger.getEffectiveAppenders()[2];
+				const localStorageAppender = internalLogger.getEffectiveAppenders()[2] as LocalStorageAppender;
 
 				expect(localStorageAppender.getThreshold()).toBe(log4javascript.Level.WARN);
 			});
@@ -304,7 +304,7 @@ describe("LoggingService", () => {
 
 				loggingService.configure(config);
 				const internalLogger = new Logger().getInternalLogger();
-				const localStorageAppender = <LocalStorageAppender>internalLogger.getEffectiveAppenders()[2];
+				const localStorageAppender = internalLogger.getEffectiveAppenders()[2] as LocalStorageAppender;
 
 				expect(localStorageAppender.getThreshold()).toBe(log4javascript.Level.INFO);
 			});
@@ -319,7 +319,7 @@ describe("LoggingService", () => {
 
 				loggingService.configure(config);
 				const internalLogger = new Logger().getInternalLogger();
-				const localStorageAppender = <LocalStorageAppender>internalLogger.getEffectiveAppenders()[2];
+				const localStorageAppender = internalLogger.getEffectiveAppenders()[2] as LocalStorageAppender;
 
 				expect(localStorageAppender.maxLogMessagesLength).toBe(250);
 			});
@@ -335,7 +335,7 @@ describe("LoggingService", () => {
 
 				loggingService.configure(config);
 				const internalLogger = new Logger().getInternalLogger();
-				const localStorageAppender = <LocalStorageAppender>internalLogger.getEffectiveAppenders()[2];
+				const localStorageAppender = internalLogger.getEffectiveAppenders()[2] as LocalStorageAppender;
 
 				expect(localStorageAppender.maxLogMessagesLength).toBe(1234);
 			});
@@ -349,7 +349,7 @@ describe("LoggingService", () => {
 
 				loggingService.configure(config);
 				const internalLogger = new Logger().getInternalLogger();
-				const memoryAppender = <MemoryAppender>internalLogger.getEffectiveAppenders()[1];
+				const memoryAppender = internalLogger.getEffectiveAppenders()[1] as MemoryAppender;
 
 				expect(memoryAppender.maxLogMessagesLength).toBe(250);
 			});
@@ -362,7 +362,7 @@ describe("LoggingService", () => {
 
 				loggingService.configure(config);
 				const internalLogger = new Logger().getInternalLogger();
-				const memoryAppender = <MemoryAppender>internalLogger.getEffectiveAppenders()[1];
+				const memoryAppender = internalLogger.getEffectiveAppenders()[1] as MemoryAppender;
 
 				expect(memoryAppender.maxLogMessagesLength).toBe(250);
 			});
@@ -377,7 +377,7 @@ describe("LoggingService", () => {
 
 				loggingService.configure(config);
 				const internalLogger = new Logger().getInternalLogger();
-				const memoryAppender = <MemoryAppender>internalLogger.getEffectiveAppenders()[1];
+				const memoryAppender = internalLogger.getEffectiveAppenders()[1] as MemoryAppender;
 
 				expect(memoryAppender.maxLogMessagesLength).toBe(1234);
 			});

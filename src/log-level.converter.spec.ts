@@ -79,7 +79,7 @@ describe("LogLevelConverter", () => {
 				fail("no error thrown");
 			} catch (e) {
 				expect(e).toEqual(jasmine.any(Error));
-				expect((<Error>e).message).toBe("invalid level 42");
+				expect((e as Error).message).toBe("invalid level 42");
 			}
 		});
 	});
@@ -158,7 +158,7 @@ describe("LogLevelConverter", () => {
 				fail("no error thrown");
 			} catch (e) {
 				expect(e).toEqual(jasmine.any(Error));
-				expect((<Error>e).message).toBe("invalid level xxx");
+				expect((e as Error).message).toBe("invalid level xxx");
 			}
 		});
 	});
@@ -237,7 +237,7 @@ describe("LogLevelConverter", () => {
 				fail("no error thrown");
 			} catch (e) {
 				expect(e).toEqual(jasmine.any(Error));
-				expect((<Error>e).message).toBe("invalid level 42");
+				expect((e as Error).message).toBe("invalid level 42");
 			}
 		});
 	});
