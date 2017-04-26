@@ -121,7 +121,10 @@ export class LoggingService {
 				ajaxAppender.setTimed(false);
 				ajaxAppender.setTimerInterval(0);
 			}
-			ajaxAppender.setFailCallback((message) => {
+			if (typeof configuration.ajaxAppender.batchSize !== "undefined") {
+				ajaxAppender.setBatchSize(configuration.ajaxAppender.batchSize);
+			}
+			ajaxAppender.setFailCallback((message: any) => {
 				this.ajaxAppenderFailed.emit(message);
 			});
 			log4javascript.getRootLogger().addAppender(ajaxAppender);

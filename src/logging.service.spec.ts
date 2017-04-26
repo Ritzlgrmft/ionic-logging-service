@@ -232,6 +232,37 @@ describe("LoggingService", () => {
 				expect(ajaxAppender.isTimed()).toBeTruthy();
 				expect(ajaxAppender.getTimerInterval()).toBe(1234);
 			});
+
+			it("ajaxAppender has default batch size of 1", () => {
+
+				const config: LoggingConfiguration = {
+					ajaxAppender: {
+						url: "myUrl",
+					},
+				};
+
+				loggingService.configure(config);
+				const internalLogger = new Logger().getInternalLogger();
+				const ajaxAppender = internalLogger.getEffectiveAppenders()[2] as log4javascript.AjaxAppender;
+
+				expect(ajaxAppender.getBatchSize()).toBe(1);
+			});
+
+			it("ajaxAppender has given timer interval", () => {
+
+				const config: LoggingConfiguration = {
+					ajaxAppender: {
+						batchSize: 1234,
+						url: "myUrl",
+					},
+				};
+
+				loggingService.configure(config);
+				const internalLogger = new Logger().getInternalLogger();
+				const ajaxAppender = internalLogger.getEffectiveAppenders()[2] as log4javascript.AjaxAppender;
+
+				expect(ajaxAppender.getBatchSize()).toBe(1234);
+			});
 		});
 
 		describe("localStorageAppender", () => {

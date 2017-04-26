@@ -65,6 +65,7 @@ It has the following properties:
 - `url`: Url to send JavaScript logs
 - `timerInterval`: Interval for sending log messages; if set to 0, every
   message will be sent immediatedly; default: 0
+- `batchSize`: Number of log messages sent in each request; default: 1
 - `threshold`: Threshold; valid values are: ALL, DEBUG, ERROR, FATAL, INFO, OFF, TRACE, WARN;
   default: ALL
 
