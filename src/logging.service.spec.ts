@@ -1,7 +1,6 @@
 ﻿// tslint:disable:no-magic-numbers
-import { inject, TestBed } from "@angular/core/testing";
-import { BaseRequestOptions, Http, Response, ResponseOptions } from "@angular/http";
-import { MockBackend, MockConnection } from "@angular/http/testing";
+import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
+import { getTestBed, TestBed } from "@angular/core/testing";
 
 import * as log4javascript from "log4javascript";
 
@@ -16,52 +15,27 @@ import { MemoryAppender } from "./memory-appender.model";
 
 describe("LoggingService", () => {
 
+	let injector: TestBed;
 	let configurationService: ConfigurationService;
 	let loggingService: LoggingService;
+	let httpMock: HttpTestingController;
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
+			imports: [HttpClientTestingModule],
 			providers: [
 				ConfigurationService,
 				LoggingService,
-				BaseRequestOptions,
-				MockBackend,
-				{
-					deps: [MockBackend, BaseRequestOptions],
-					provide: Http,
-					useFactory: (backend: MockBackend, defaultOptions: BaseRequestOptions) => {
-						return new Http(backend, defaultOptions);
-					},
-				},
 			],
 		});
+		injector = getTestBed();
+		configurationService = injector.get(ConfigurationService);
+		loggingService = injector.get(LoggingService);
+		httpMock = injector.get(HttpTestingController);
 	});
 
-	beforeEach(inject([MockBackend], (backend: MockBackend) => {
-		const emptyResponse = new Response(new ResponseOptions({
-			body: "{ }",
-			status: 200,
-		}));
-		backend.connections.subscribe((c: MockConnection) => {
-			if (c.request.url.endsWith("empty.json")) {
-				c.mockRespond(emptyResponse);
-			}
-		});
-	}));
-
-	beforeEach(inject([ConfigurationService],
-		// tslint:disable-next-line:variable-name
-		(_configurationService: ConfigurationService) => {
-			configurationService = _configurationService;
-		}));
-
-	beforeEach(inject([LoggingService],
-		// tslint:disable-next-line:variable-name
-		(_loggingService: LoggingService) => {
-			loggingService = _loggingService;
-		}));
-
 	afterEach(() => {
+		httpMock.verify();
 		log4javascript.resetConfiguration();
 		log4javascript.getRootLogger().removeAllAppenders();
 	});
@@ -70,13 +44,17 @@ describe("LoggingService", () => {
 
 		it("root logger has log level WARN", async (done) => {
 
-			await configurationService.load("empty.json");
-			loggingService.getRootLogger().info("test");
-			loggingService.getRootLogger().warn("test");
-			const messages = loggingService.getLogMessages();
+			configurationService.load("empty.json").then(() => {
+				loggingService.getRootLogger().info("test");
+				loggingService.getRootLogger().warn("test");
+				const messages = loggingService.getLogMessages();
 
-			expect(messages.length).toBe(1);
-			done();
+				expect(messages.length).toBe(1);
+				done();
+			});
+
+			const req = httpMock.expectOne("empty.json");
+			req.flush({});
 		});
 	});
 

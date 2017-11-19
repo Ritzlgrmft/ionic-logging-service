@@ -19,6 +19,7 @@
 		"noUnusedParameters": true,
 		"declaration": true,
 		"sourceMap": true,
+		"rootDir": "src",
 		"outDir": "dist"
 	},
 	"compileOnSave": false,
@@ -27,8 +28,5 @@
 	},
 	"files": [
 		"src/index.ts"
-	],
-	"angularCompilerOptions": {
-		"genDir": "aot"
-	}
+	]
 }

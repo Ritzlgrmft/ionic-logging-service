@@ -1,6 +1,13 @@
 # ionic-logging-service
 
-**The dependencies used by the latest version are the same as needed for [Ionic 3.0.0](https://github.com/driftyco/ionic/blob/master/CHANGELOG.md). For older versions use:**
+**The dependencies used by the latest version are the same as needed for [Ionic 3.9.0](https://github.com/ionic-team/ionic/blob/master/CHANGELOG.md). For older versions use:**
+
+| ionic-logging-service | Ionic | Angular
+| ----- | -------- | ------
+| 4.0.0 | >= 3.9.0 | ^5.0.0
+| 3.1.0 | >= 3.0.0 | ^4.0.0
+| 2.0.0 | >= 2.2.0 | ^2.4.8
+| 1.2.1 | >= 2.0.0 | ^2.2.1
 
 - **Ionic 2.0.0: version 1.2.1.**
 - **Ionic 2.2.0: version 2.0.0.**
@@ -53,7 +60,7 @@ Its structure is defined in the interface [LoggingConfiguration](src/logging-con
     }
   ]
 };
-````
+```
 
 ### ajaxAppender
 

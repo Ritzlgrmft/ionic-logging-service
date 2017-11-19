@@ -1,9 +1,8 @@
-aot/
 coverage/
 dist/**/*.d.ts
 dist/**/*.js
 dist/**/*.map
-dist/**/*.metadata.json
+dist/**/*.json
 node_modules/
 package/
 
