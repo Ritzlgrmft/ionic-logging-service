@@ -30,6 +30,12 @@ export interface LoggingConfiguration {
 		url: string;
 
 		/**
+		 * Number of log messages sent in each request.
+		 * Default: 1.
+		 */
+		batchSize?: number;
+
+		/**
 		 * Interval for sending log messages.
 		 * If set to 0, every message will be sent immediatedly.
 		 * Default: 0.
