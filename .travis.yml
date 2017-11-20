@@ -6,7 +6,7 @@ notifications:
   email: 
     on_success: always # default: change
 node_js:
-  - '6'
+  - '8'
 before_script:
   - npm prune
 after_success:

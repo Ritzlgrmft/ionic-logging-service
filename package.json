@@ -39,7 +39,7 @@
 		"zone.js": "^0.8.18"
 	},
 	"dependencies": {
-		"ionic-configuration-service": "../ionic-configuration-service/ionic-configuration-service-0.0.0-development.tgz",
+		"ionic-configuration-service": "6.0.0",
 		"log4javascript": "^1.4.15"
 	},
 	"devDependencies": {
