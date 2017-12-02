@@ -2,9 +2,6 @@ language: node_js
 cache:
   directories:
     - node_modules
-notifications:
-  email: 
-    on_success: always # default: change
 node_js:
   - '8'
 before_script:
