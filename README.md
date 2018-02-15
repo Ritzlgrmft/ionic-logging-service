@@ -27,6 +27,69 @@ This service encapsulates [log4javascript](http://log4javascript.org/)'s functio
 
 The logging service is based on [log4javascript](http://log4javascript.org/), usings its appender and logger infrastructure.
 
+## Usage
+
+```TypeScript
+import { Logger, LoggingService } from "ionic-logging-service";
+
+export class MyComponent {
+
+  private logger: Logger;
+
+  constructor(
+    loggingService: LoggingService) {
+
+    this.logger = loggingService.getLogger("MyApp.MyComponent");
+    const methodName = "ctor";
+    this.logger.entry(methodName);
+
+    ...
+
+    this.logger.exit(methodName);
+  }
+
+  public myMethod(index: number, message: string): number[] {
+    const methodName = "myMethod";
+    this.logger.entry(methodName, index, number);
+
+    try {
+      ...
+    } catch (e) {
+      this.logger.error(methodName, "some error", e);
+    }
+
+    this.logger.exit(methodName);
+    return result;
+  }
+}
+
+```
+
+Depending how the code is called, this could produce the following output in the browser's console:
+
+```text
+I  18:49:43.794  MyApp.MyComponent  ctor  entry
+I  18:49:43.797  MyApp.MyComponent  ctor  exit
+I  18:49:43.801  MyApp.MyComponent  myMethod  entry  42  Hello
+E  18:49:43.814  MyApp.MyComponent  myMethod  some error
+I  18:49:43.801  MyApp.MyComponent  myMethod  exit  [2, 5, 99]
+```
+
+Log output in the browser's console is quite useful during development, either in console or using `ionic serve --consolelogs`. But later, you will need other logs. Here come the so-called appenders in the game:
+
+- `AjaxAppender`: sends the log messages to a backend server
+- `MemoryAppender`: keeps the log messages in memory
+- `LocalStorageAppender`: stores the log messages in local storage
+
+If you want to see a complete example, have a look at [ionic-feedback-sample](https://github.com/Ritzlgrmft/ionic-feedback-sample).
+
+## Configuration
+
+The configuration is done with the [ionic-configuration-service](https://github.com/Ritzlgrmft/ionic-configuration-service).
+
+The specific configuration for the `ionic-logging-service` is taken from the key `logging`.
+Its structure is defined in the interface [LoggingConfiguration](src/logging-configuration.model.ts).
+
 By default, the following configuration is used:
 
 - Logger:
@@ -35,13 +98,6 @@ By default, the following configuration is used:
 - Appender:
   - `BrowserConsoleAppender`
   - `MemoryAppender`
-
-## Configuration
-
-The configuration is done with the [ionic-configuration-service](https://github.com/Ritzlgrmft/ionic-configuration-service).
-
-The specific configuration for the `ionic-logging-service` is taken from the key `logging`.
-Its structure is defined in the interface [LoggingConfiguration](src/logging-configuration.model.ts).
 
 ### logLevels
 
@@ -61,6 +117,8 @@ Its structure is defined in the interface [LoggingConfiguration](src/logging-con
   ]
 };
 ```
+
+That means, instead of the default log level `WARN`, you want to log all messages with level `DEBUG` and higher. Only for `MyApp.MyNamespace.MyLogger`, you want to restrict the level to `INFO`.
 
 ### ajaxAppender
 
@@ -99,7 +157,9 @@ It has the following properties:
 
 ## API
 
-### logMessagesChanged: EventEmitter&lt;LogMessage>
+### LoggingService
+
+#### logMessagesChanged: EventEmitter&lt;LogMessage>
 
 Event triggered when new log message was added.
 
@@ -107,7 +167,7 @@ Parameters
 
 - *message*: new log message
 
-### ajaxAppenderFailed: EventEmitter&lt;string>
+#### ajaxAppenderFailed: EventEmitter&lt;string>
 
 Event triggered when ajax appender could not send log messages to the server.
 
@@ -115,7 +175,7 @@ Parameters
 
 - *message*: error message
 
-### configure(configuration?: LoggingConfiguration): void
+#### configure(configuration?: LoggingConfiguration): void
 
 Configures the logging depending on the given configuration.
 
@@ -124,7 +184,7 @@ Parameters
 - *configuration*: configuration data.
   If the parameter is skipped, the configuration data will be taken from configuration service, key `logging`
 
-### getRootLogger(): Logger
+#### getRootLogger(): Logger
 
 Gets the root logger from which all other loggers derive.
 
@@ -132,7 +192,7 @@ Returns
 
 - root logger
 
-### getLogger(loggerName: string): Logger
+#### getLogger(loggerName: string): Logger
 
 Gets a logger with the specified name, creating it if a logger with that name does not already exist.
 
@@ -144,10 +204,100 @@ Returns
 
 - logger
 
-### getLogMessages(): LogMessage[]
+#### getLogMessages(): LogMessage[]
 
 Gets the last log messages.
 
 Returns
 
 - log messages
+
+### Logger
+
+#### setLogLevel(level: LogLevel): void
+
+Sets the log level.
+
+Parameters:
+
+- *level*: the new log level
+
+#### debug(methodName: string, ...params: any[]): void
+
+Logs a message at level DEBUG.
+
+Parameters:
+
+- *methodName*: name of the method
+- *params*: optional parameters to be logged; objects will be formatted as JSON
+
+#### info(methodName: string, ...params: any[]): void
+
+Logs a message at level INFO.
+
+Parameters:
+
+- *methodName*: name of the method
+- *params*: optional parameters to be logged; objects will be formatted as JSON
+
+#### warn(methodName: string, ...params: any[]): void
+
+Logs a message at level WARN.
+
+Parameters:
+
+- *methodName*: name of the method
+- *params*: optional parameters to be logged; objects will be formatted as JSON
+
+#### error(methodName: string, ...params: any[]): void
+
+Logs a message at level ERROR.
+
+Parameters:
+
+- *methodName*: name of the method
+- *params*: optional parameters to be logged; objects will be formatted as JSON
+
+#### entry(methodName: string, ...params: any[]): void
+
+Logs the entry into a method.
+The method name will be logged at level INFO, the parameters at level DEBUG.
+
+Parameters:
+
+- *methodName*: name of the method
+- *params*: optional parameters to be logged; objects will be formatted as JSON
+
+#### exit(methodName: string, ...params: any[]): void
+
+Logs the exit of a method.
+The method name will be logged at level INFO, the parameters at level DEBUG.
+
+Parameters:
+
+- *methodName*: name of the method
+- *params*: optional parameters to be logged; objects will be formatted as JSON
+
+#### formatArgument(arg: any): string
+
+Formats the given argument as a string:
+
+- `string`: keep unchanged
+- `number`, `Error`: formatted using `toString()``
+- others: formatted as JSON
+
+Parameters:
+
+- *arg*: argument to be formnatted
+
+Returns
+
+- formatted argument
+
+#### getInternalLogger(): log4javascript.Logger
+
+Returns the internal Logger (for unit tests only).
+
+Returns
+
+- internally used log4javascript logger

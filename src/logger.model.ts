@@ -23,6 +23,8 @@ export class Logger {
 
 	/**
 	 * Sets the log level.
+	 *
+	 * @param level the new log level
 	 */
 	public setLogLevel(level: LogLevel): void {
 		this.logger.setLevel(LogLevelConverter.levelToLog4Javascript(level));
