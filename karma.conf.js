@@ -57,7 +57,11 @@ module.exports = function (config) {
 			},
 			bundlerOptions: {
 				transforms: [
-					require("karma-typescript-es6-transform")()
+					require("karma-typescript-es6-transform")({
+						presets: [
+							["env"]
+						]
+					})
 				]
 			}
 		},
