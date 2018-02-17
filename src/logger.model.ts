@@ -31,6 +31,22 @@ export class Logger {
 	}
 
 	/**
+	 * Logs a message at level TRACE.
+	 *
+	 * @param methodName name of the method
+	 * @param params optional parameters to be logged; objects will be formatted as JSON
+	 */
+	public trace(methodName: string, ...params: any[]): void {
+		if (this.logger.isTraceEnabled()) {
+			const args = [methodName];
+			for (const param of params) {
+				args.push(this.formatArgument(param));
+			}
+			this.logger.trace.apply(this.logger, args);
+		}
+	}
+
+	/**
 	 * Logs a message at level DEBUG.
 	 *
 	 * @param methodName name of the method
@@ -91,6 +107,22 @@ export class Logger {
 				args.push(this.formatArgument(param));
 			}
 			this.logger.error.apply(this.logger, args);
+		}
+	}
+
+	/**
+	 * Logs a message at level FATAL.
+	 *
+	 * @param methodName name of the method
+	 * @param params optional parameters to be logged; objects will be formatted as JSON
+	 */
+	public fatal(methodName: string, ...params: any[]): void {
+		if (this.logger.isFatalEnabled()) {
+			const args = [methodName];
+			for (const param of params) {
+				args.push(this.formatArgument(param));
+			}
+			this.logger.fatal.apply(this.logger, args);
 		}
 	}
 

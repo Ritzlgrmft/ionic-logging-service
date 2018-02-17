@@ -105,32 +105,32 @@ describe("Logger", () => {
 		});
 	});
 
-	describe("info(methodName: string, ...params: any[]): void", () => {
+	describe("trace(methodName: string, ...params: any[]): void", () => {
 
 		it("writes log with arguments", () => {
 
 			const log4javascriptLogger = {
-				info: jasmine.createSpy("info"),
-				isInfoEnabled: jasmine.createSpy("isInfoEnabled").and.returnValue(true),
+				isTraceEnabled: jasmine.createSpy("isTraceEnabled").and.returnValue(true),
+				trace: jasmine.createSpy("trace"),
 			};
 			const logger = new Logger(log4javascriptLogger);
 
-			logger.info("myMethod", "test", 42.3);
+			logger.trace("myMethod", "test", 42.3);
 
-			expect(log4javascriptLogger.info).toHaveBeenCalledWith("myMethod", "test", "42.3");
+			expect(log4javascriptLogger.trace).toHaveBeenCalledWith("myMethod", "test", "42.3");
 		});
 
 		it("writes no log if logging is disabled", () => {
 
 			const log4javascriptLogger = {
-				info: jasmine.createSpy("info"),
-				isInfoEnabled: jasmine.createSpy("isInfoEnabled").and.returnValue(false),
+				isTraceEnabled: jasmine.createSpy("isTraceEnabled").and.returnValue(false),
+				trace: jasmine.createSpy("trace"),
 			};
 			const logger = new Logger(log4javascriptLogger);
 
-			logger.info("myMethod", "test", 42.3);
+			logger.trace("myMethod", "test", 42.3);
 
-			expect(log4javascriptLogger.info.calls.count()).toBe(0);
+			expect(log4javascriptLogger.trace.calls.count()).toBe(0);
 		});
 	});
 
@@ -160,6 +160,35 @@ describe("Logger", () => {
 			logger.debug("myMethod", "test", 42.3);
 
 			expect(log4javascriptLogger.debug.calls.count()).toBe(0);
+		});
+	});
+
+	describe("info(methodName: string, ...params: any[]): void", () => {
+
+		it("writes log with arguments", () => {
+
+			const log4javascriptLogger = {
+				info: jasmine.createSpy("info"),
+				isInfoEnabled: jasmine.createSpy("isInfoEnabled").and.returnValue(true),
+			};
+			const logger = new Logger(log4javascriptLogger);
+
+			logger.info("myMethod", "test", 42.3);
+
+			expect(log4javascriptLogger.info).toHaveBeenCalledWith("myMethod", "test", "42.3");
+		});
+
+		it("writes no log if logging is disabled", () => {
+
+			const log4javascriptLogger = {
+				info: jasmine.createSpy("info"),
+				isInfoEnabled: jasmine.createSpy("isInfoEnabled").and.returnValue(false),
+			};
+			const logger = new Logger(log4javascriptLogger);
+
+			logger.info("myMethod", "test", 42.3);
+
+			expect(log4javascriptLogger.info.calls.count()).toBe(0);
 		});
 	});
 
@@ -218,6 +247,35 @@ describe("Logger", () => {
 			logger.error("myMethod", "test", 42.3);
 
 			expect(log4javascriptLogger.error.calls.count()).toBe(0);
+		});
+	});
+
+	describe("fatal(methodName: string, ...params: any[]): void", () => {
+
+		it("writes log with arguments", () => {
+
+			const log4javascriptLogger = {
+				fatal: jasmine.createSpy("fatal"),
+				isFatalEnabled: jasmine.createSpy("isFatalEnabled").and.returnValue(true),
+			};
+			const logger = new Logger(log4javascriptLogger);
+
+			logger.fatal("myMethod", "test", 42.3);
+
+			expect(log4javascriptLogger.fatal).toHaveBeenCalledWith("myMethod", "test", "42.3");
+		});
+
+		it("writes no log if logging is disabled", () => {
+
+			const log4javascriptLogger = {
+				fatal: jasmine.createSpy("fatal"),
+				isFatalEnabled: jasmine.createSpy("isFatalEnabled").and.returnValue(false),
+			};
+			const logger = new Logger(log4javascriptLogger);
+
+			logger.fatal("myMethod", "test", 42.3);
+
+			expect(log4javascriptLogger.fatal.calls.count()).toBe(0);
 		});
 	});
 
