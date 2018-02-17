@@ -25,7 +25,8 @@
 		"karma-once": "karma start karma.conf.js --browsers PhantomJS --single-run",
 		"lint": "tslint --project tsconfig.json --format verbose",
 		"semantic-release": "semantic-release pre && npm publish && semantic-release post",
-		"test": "npm run compile && npm run lint && npm run karma-once"
+		"test": "npm run compile && npm run lint && npm run karma-once",
+		"typedoc": "typedoc src --out typedoc --exclude \"**/*.spec.ts\" --mode file --readme none"
 	},
 	"files": [
 		"dist",
@@ -68,6 +69,7 @@
 		"reflect-metadata": "0.1.12",
 		"requirejs": "2.3.5",
 		"tslint": "5.9.1",
+		"typedoc": "0.10.0",
 		"typescript": "2.4.2",
 		"semantic-release": "12.4.1"
 	},
