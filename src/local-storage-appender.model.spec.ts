@@ -76,13 +76,13 @@ describe("LocalStorageAppender", () => {
 			expect(messages[1].methodName).toBe("2");
 		});
 
-		it("removes first message if array contains already maxLogMessagesLength messages", () => {
+		it("removes first message if array contains already maxMessages messages", () => {
 
 			const event = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["1"]);
 			const event2 = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["2"]);
 			const event3 = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["3"]);
 
-			appender.maxLogMessagesLength = 2;
+			appender.setMaxMessages(2);
 			appender.append(event);
 			appender.append(event2);
 			appender.append(event3);
@@ -142,4 +142,37 @@ describe("LocalStorageAppender", () => {
 		});
 	});
 
+	describe("getMaxMessages(): number", () => {
+
+		it("return set value", () => {
+
+			appender.setMaxMessages(42);
+			const maxMessages = appender.getMaxMessages();
+
+			expect(maxMessages).toBe(42);
+		});
+	});
+
+	describe("setMaxMessages(value: number): void", () => {
+
+		it("remove spare messages", () => {
+
+			const event = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["1"]);
+			const event2 = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["2"]);
+			const event3 = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["3"]);
+
+			appender.append(event);
+			appender.append(event2);
+			appender.append(event3);
+
+			let messages = appender.getLogMessages();
+			expect(messages.length).toBe(3);
+
+			appender.setMaxMessages(1);
+
+			messages = appender.getLogMessages();
+			expect(messages.length).toBe(1);
+			expect(messages[0].methodName).toBe("3");
+		});
+	});
 });

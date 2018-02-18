@@ -11,12 +11,9 @@ import { LogMessage } from "./log-message.model";
  */
 export class LocalStorageAppender extends log4javascript.Appender {
 
-	private static maxLogMessagesLengthDefault = 250;
+	private static maxMessagesDefault = 250;
 
-	/**
-	 * Maximum number of messages which will be stored in local storage.
-	 */
-	public maxLogMessagesLength: number;
+	private maxMessages: number;
 
 	// tslint:disable-next-line:completed-docs
 	private localStorageKey: string;
@@ -47,7 +44,7 @@ export class LocalStorageAppender extends log4javascript.Appender {
 			}
 		}
 		this.setThreshold(log4javascript.Level.WARN);
-		this.maxLogMessagesLength = LocalStorageAppender.maxLogMessagesLengthDefault;
+		this.maxMessages = LocalStorageAppender.maxMessagesDefault;
 	}
 
 	/**
@@ -56,7 +53,7 @@ export class LocalStorageAppender extends log4javascript.Appender {
 	 */
 	public append(loggingEvent: log4javascript.LoggingEvent): void {
 		// if logMessages is already full, remove oldest element
-		while (this.logMessages.length >= this.maxLogMessagesLength) {
+		while (this.logMessages.length >= this.maxMessages) {
 			this.logMessages.shift();
 		}
 		// add event to logMessages
@@ -80,6 +77,33 @@ export class LocalStorageAppender extends log4javascript.Appender {
 	 */
 	public toString(): string {
 		return "Ionic.Logging.LocalStorageAppender";
+	}
+
+	/**
+	 * Get the maximum number of messages which will be stored in memory.
+	 */
+	public getMaxMessages(): number {
+		return this.maxMessages;
+	}
+
+	/**
+	 * Set the maximum number of messages which will be stored in memory.
+	 *
+	 * If the appender stores currently more messages than the new value allows, the oldest messages get removed.
+	 * @param value new maximum number
+	 */
+	public setMaxMessages(value: number): void {
+		if (this.maxMessages !== value) {
+			this.maxMessages = value;
+
+			// if there are too much logMessages for the new value, remove oldest messages
+			while (this.logMessages.length > this.maxMessages) {
+				this.logMessages.shift();
+			}
+
+			// write values to localStorage
+			localStorage.setItem(this.localStorageKey, JSON.stringify(this.logMessages));
+		}
 	}
 
 	/**

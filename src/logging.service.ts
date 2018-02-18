@@ -144,7 +144,7 @@ export class LoggingService {
 			}
 			localStorageAppender.setLayout(new log4javascript.PatternLayout("%d{HH:mm:ss,SSS} %c %m"));
 			if (configuration.localStorageAppender.maxMessages > 0) {
-				localStorageAppender.maxLogMessagesLength = configuration.localStorageAppender.maxMessages;
+				localStorageAppender.setMaxMessages(configuration.localStorageAppender.maxMessages);
 			}
 			log4javascript.getRootLogger().addAppender(localStorageAppender);
 		}
@@ -152,7 +152,7 @@ export class LoggingService {
 		// configure MemoryAppender
 		if (typeof configuration.memoryAppender !== "undefined") {
 			if (configuration.memoryAppender.maxMessages > 0) {
-				this.memoryAppender.maxLogMessagesLength = configuration.memoryAppender.maxMessages;
+				this.memoryAppender.setMaxMessages(configuration.memoryAppender.maxMessages);
 			}
 		}
 	}
@@ -176,6 +176,10 @@ export class LoggingService {
 
 	/**
 	 * Gets the last log messages.
+	 *
+	 * The log messages are retrieved from the internal [MemoryAppender](../memoryappender.html).
+	 * That means you will get only the most current messages. The number of the messages is limited
+	 * by its maxMessages value.
 	 * @return log messages
 	 */
 	public getLogMessages(): LogMessage[] {

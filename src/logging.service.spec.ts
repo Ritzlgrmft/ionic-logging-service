@@ -330,7 +330,7 @@ describe("LoggingService", () => {
 				const internalLogger = new Logger().getInternalLogger();
 				const localStorageAppender = internalLogger.getEffectiveAppenders()[2] as LocalStorageAppender;
 
-				expect(localStorageAppender.maxLogMessagesLength).toBe(250);
+				expect(localStorageAppender.getMaxMessages()).toBe(250);
 			});
 
 			it("localStorageAppender has given max messages", () => {
@@ -346,7 +346,7 @@ describe("LoggingService", () => {
 				const internalLogger = new Logger().getInternalLogger();
 				const localStorageAppender = internalLogger.getEffectiveAppenders()[2] as LocalStorageAppender;
 
-				expect(localStorageAppender.maxLogMessagesLength).toBe(1234);
+				expect(localStorageAppender.getMaxMessages()).toBe(1234);
 			});
 		});
 
@@ -360,7 +360,7 @@ describe("LoggingService", () => {
 				const internalLogger = new Logger().getInternalLogger();
 				const memoryAppender = internalLogger.getEffectiveAppenders()[1] as MemoryAppender;
 
-				expect(memoryAppender.maxLogMessagesLength).toBe(250);
+				expect(memoryAppender.getMaxMessages()).toBe(250);
 			});
 
 			it("memoryAppender has default configuration id memoryAppender configuration is empty", () => {
@@ -373,7 +373,7 @@ describe("LoggingService", () => {
 				const internalLogger = new Logger().getInternalLogger();
 				const memoryAppender = internalLogger.getEffectiveAppenders()[1] as MemoryAppender;
 
-				expect(memoryAppender.maxLogMessagesLength).toBe(250);
+				expect(memoryAppender.getMaxMessages()).toBe(250);
 			});
 
 			it("memoryAppender has given max messages", () => {
@@ -388,7 +388,7 @@ describe("LoggingService", () => {
 				const internalLogger = new Logger().getInternalLogger();
 				const memoryAppender = internalLogger.getEffectiveAppenders()[1] as MemoryAppender;
 
-				expect(memoryAppender.maxLogMessagesLength).toBe(1234);
+				expect(memoryAppender.getMaxMessages()).toBe(1234);
 			});
 		});
 
