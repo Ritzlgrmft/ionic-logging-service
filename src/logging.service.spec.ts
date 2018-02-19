@@ -9,7 +9,7 @@ import { ConfigurationService } from "ionic-configuration-service";
 import { LocalStorageAppender } from "./local-storage-appender.model";
 import { LogMessage } from "./log-message.model";
 import { Logger } from "./logger.model";
-import { LoggingConfiguration } from "./logging-configuration.model";
+import { LoggingServiceConfiguration } from "./logging-service.configuration";
 import { LoggingService } from "./logging.service";
 import { MemoryAppender } from "./memory-appender.model";
 
@@ -58,7 +58,7 @@ describe("LoggingService", () => {
 		});
 	});
 
-	describe("configure(configuration: LoggingConfiguration): void", () => {
+	describe("configure(configuration: LoggingServiceConfiguration): void", () => {
 
 		it("throws no error if no configuration is provided", () => {
 
@@ -67,7 +67,7 @@ describe("LoggingService", () => {
 
 		it("throws no error if configuration is empty", () => {
 
-			const config: LoggingConfiguration = {};
+			const config: LoggingServiceConfiguration = {};
 			loggingService.configure(config);
 		});
 
@@ -75,7 +75,7 @@ describe("LoggingService", () => {
 			it("throws no error if logLevels is empty", () => {
 
 				const logLevels: Array<{ loggerName: string; logLevel: string; }> = [];
-				const config: LoggingConfiguration = {
+				const config: LoggingServiceConfiguration = {
 					logLevels,
 				};
 
@@ -85,7 +85,7 @@ describe("LoggingService", () => {
 			it("change log level of root logger", () => {
 
 				const logLevels = [{ loggerName: "root", logLevel: "INFO" }];
-				const config: LoggingConfiguration = {
+				const config: LoggingServiceConfiguration = {
 					logLevels,
 				};
 
@@ -97,7 +97,7 @@ describe("LoggingService", () => {
 			it("change log level of custom logger, root logger remains unchanged", () => {
 
 				const logLevels = [{ loggerName: "me", logLevel: "INFO" }];
-				const config: LoggingConfiguration = {
+				const config: LoggingServiceConfiguration = {
 					logLevels,
 				};
 
@@ -111,7 +111,7 @@ describe("LoggingService", () => {
 			it("throws error if custom logger has an invalid log level", () => {
 
 				const logLevels = [{ loggerName: "me", logLevel: "xxx" }];
-				const config: LoggingConfiguration = {
+				const config: LoggingServiceConfiguration = {
 					logLevels,
 				};
 
@@ -122,7 +122,7 @@ describe("LoggingService", () => {
 		describe("ajaxAppender", () => {
 			it("adds no ajaxAppender if not configured", () => {
 
-				const config: LoggingConfiguration = {
+				const config: LoggingServiceConfiguration = {
 				};
 
 				const internalLogger = new Logger().getInternalLogger();
@@ -136,7 +136,7 @@ describe("LoggingService", () => {
 
 			it("adds ajaxAppender if configured", () => {
 
-				const config: LoggingConfiguration = {
+				const config: LoggingServiceConfiguration = {
 					ajaxAppender: {
 						url: "myUrl",
 					},
@@ -153,7 +153,7 @@ describe("LoggingService", () => {
 
 			it("throws error if ajaxAppender has an invalid threshold", () => {
 
-				const config: LoggingConfiguration = {
+				const config: LoggingServiceConfiguration = {
 					ajaxAppender: {
 						threshold: "xxx",
 						url: "myUrl",
@@ -165,7 +165,7 @@ describe("LoggingService", () => {
 
 			it("ajaxAppender has default threshold of ALL", () => {
 
-				const config: LoggingConfiguration = {
+				const config: LoggingServiceConfiguration = {
 					ajaxAppender: {
 						url: "myUrl",
 					},
@@ -180,7 +180,7 @@ describe("LoggingService", () => {
 
 			it("ajaxAppender has default timer interval of 0", () => {
 
-				const config: LoggingConfiguration = {
+				const config: LoggingServiceConfiguration = {
 					ajaxAppender: {
 						url: "myUrl",
 					},
@@ -196,7 +196,7 @@ describe("LoggingService", () => {
 
 			it("ajaxAppender has given timer interval", () => {
 
-				const config: LoggingConfiguration = {
+				const config: LoggingServiceConfiguration = {
 					ajaxAppender: {
 						timerInterval: 1234,
 						url: "myUrl",
@@ -213,7 +213,7 @@ describe("LoggingService", () => {
 
 			it("ajaxAppender has default batch size of 1", () => {
 
-				const config: LoggingConfiguration = {
+				const config: LoggingServiceConfiguration = {
 					ajaxAppender: {
 						url: "myUrl",
 					},
@@ -228,7 +228,7 @@ describe("LoggingService", () => {
 
 			it("ajaxAppender has given timer interval", () => {
 
-				const config: LoggingConfiguration = {
+				const config: LoggingServiceConfiguration = {
 					ajaxAppender: {
 						batchSize: 1234,
 						url: "myUrl",
@@ -246,7 +246,7 @@ describe("LoggingService", () => {
 		describe("localStorageAppender", () => {
 			it("adds no localStorageAppender if not configured", () => {
 
-				const config: LoggingConfiguration = {
+				const config: LoggingServiceConfiguration = {
 				};
 
 				const internalLogger = new Logger().getInternalLogger();
@@ -260,7 +260,7 @@ describe("LoggingService", () => {
 
 			it("adds localStorageAppender if configured", () => {
 
-				const config: LoggingConfiguration = {
+				const config: LoggingServiceConfiguration = {
 					localStorageAppender: {
 						localStorageKey: "myLocalStorage",
 					},
@@ -277,7 +277,7 @@ describe("LoggingService", () => {
 
 			it("throws error if localStorageAppender has an invalid threshold", () => {
 
-				const config: LoggingConfiguration = {
+				const config: LoggingServiceConfiguration = {
 					localStorageAppender: {
 						localStorageKey: "myLocalStorage",
 						threshold: "xxx",
@@ -289,7 +289,7 @@ describe("LoggingService", () => {
 
 			it("localStorageAppender has default threshold of WARN", () => {
 
-				const config: LoggingConfiguration = {
+				const config: LoggingServiceConfiguration = {
 					localStorageAppender: {
 						localStorageKey: "myLocalStorage",
 					},
@@ -304,7 +304,7 @@ describe("LoggingService", () => {
 
 			it("localStorageAppender has given threshold", () => {
 
-				const config: LoggingConfiguration = {
+				const config: LoggingServiceConfiguration = {
 					localStorageAppender: {
 						localStorageKey: "myLocalStorage",
 						threshold: "INFO",
@@ -320,7 +320,7 @@ describe("LoggingService", () => {
 
 			it("localStorageAppender has default max messages of 250", () => {
 
-				const config: LoggingConfiguration = {
+				const config: LoggingServiceConfiguration = {
 					localStorageAppender: {
 						localStorageKey: "myLocalStorage",
 					},
@@ -335,7 +335,7 @@ describe("LoggingService", () => {
 
 			it("localStorageAppender has given max messages", () => {
 
-				const config: LoggingConfiguration = {
+				const config: LoggingServiceConfiguration = {
 					localStorageAppender: {
 						localStorageKey: "myLocalStorage",
 						maxMessages: 1234,
@@ -353,7 +353,7 @@ describe("LoggingService", () => {
 		describe("memoryAppender", () => {
 			it("memoryAppender has default max messages of 250", () => {
 
-				const config: LoggingConfiguration = {
+				const config: LoggingServiceConfiguration = {
 				};
 
 				loggingService.configure(config);
@@ -365,7 +365,7 @@ describe("LoggingService", () => {
 
 			it("memoryAppender has default configuration id memoryAppender configuration is empty", () => {
 
-				const config: LoggingConfiguration = {
+				const config: LoggingServiceConfiguration = {
 					memoryAppender: {},
 				};
 
@@ -378,7 +378,7 @@ describe("LoggingService", () => {
 
 			it("memoryAppender has given max messages", () => {
 
-				const config: LoggingConfiguration = {
+				const config: LoggingServiceConfiguration = {
 					memoryAppender: {
 						maxMessages: 1234,
 					},
@@ -449,7 +449,7 @@ describe("LoggingService", () => {
 	describe("ajaxAppenderFailed: EventEmitter<string>", () => {
 
 		it("error message emitted", (done: () => void) => {
-			const config: LoggingConfiguration = {
+			const config: LoggingServiceConfiguration = {
 				ajaxAppender: {
 					url: "badUrl",
 				},

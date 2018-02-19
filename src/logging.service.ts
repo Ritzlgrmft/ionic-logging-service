@@ -8,7 +8,7 @@ import { LocalStorageAppender } from "./local-storage-appender.model";
 import { LogLevelConverter } from "./log-level.converter";
 import { LogMessage } from "./log-message.model";
 import { Logger } from "./logger.model";
-import { LoggingConfiguration } from "./logging-configuration.model";
+import { LoggingServiceConfiguration } from "./logging-service.configuration";
 import { MemoryAppender } from "./memory-appender.model";
 
 /**
@@ -73,7 +73,7 @@ export class LoggingService {
 	 * @param configuration configuration data.
 	 * If the parameter is skipped, the configuration data will be taken from configuration service, key "logging"
 	 */
-	public configure(configuration?: LoggingConfiguration): void {
+	public configure(configuration?: LoggingServiceConfiguration): void {
 
 		if (typeof configuration === "undefined") {
 			configuration = this.configurationService.getValue("logging");
@@ -150,10 +150,8 @@ export class LoggingService {
 		}
 
 		// configure MemoryAppender
-		if (typeof configuration.memoryAppender !== "undefined") {
-			if (configuration.memoryAppender.maxMessages > 0) {
-				this.memoryAppender.setMaxMessages(configuration.memoryAppender.maxMessages);
-			}
+		if (configuration.memoryAppender) {
+			this.memoryAppender.configure(configuration.memoryAppender);
 		}
 	}
 

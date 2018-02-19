@@ -1,7 +1,9 @@
-﻿/**
+﻿import { MemoryAppenderConfiguration } from "./memory-appender.configuration";
+
+/**
  * Partial configuration definition for LoggingService
  */
-export interface LoggingConfiguration {
+export interface LoggingServiceConfiguration {
 
 	/**
 	 * Log levels for different loggers.
@@ -75,10 +77,5 @@ export interface LoggingConfiguration {
 	/**
 	 * Settings for MemoryAppender.
 	 */
-	memoryAppender?: {
-		/**
-		 * Maximum number of log messages stored by the appender.
-		 */
-		maxMessages?: number;
-	};
+	memoryAppender?: MemoryAppenderConfiguration;
 }
