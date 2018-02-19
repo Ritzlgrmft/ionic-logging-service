@@ -71,6 +71,16 @@
 					<div class="lead">
 						<p>An appender which stores the log messages in the browser&#39;s memory.</p>
 					</div>
+					<p>The MemoryAppender is enabled by default.
+					If you do not specify anything else, it is using this configuration:</p>
+					<pre><code class="lang-JSON">{
+  <span class="hljs-attr">"memoryAppender"</span>: [
+    {
+      <span class="hljs-attr">"maxMessages"</span>: <span class="hljs-number">250</span>,
+      <span class="hljs-attr">"threshold"</span>: <span class="hljs-string">"ALL"</span>
+    }
+}
+</code></pre>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
@@ -100,6 +110,7 @@
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="memoryappender.html#append" class="tsd-kind-icon">append</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="memoryappender.html#configure" class="tsd-kind-icon">configure</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="memoryappender.html#doappend" class="tsd-kind-icon">do<wbr>Append</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="memoryappender.html#getlayout" class="tsd-kind-icon">get<wbr>Layout</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="memoryappender.html#getlogmessages" class="tsd-kind-icon">get<wbr>Log<wbr>Messages</a></li>
@@ -127,7 +138,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/2d5ae09/src/memory-appender.model.ts#L19">memory-appender.model.ts:19</a></li>
+									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/4228534/src/memory-appender.model.ts#L33">memory-appender.model.ts:33</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -153,7 +164,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides Appender.append</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/2d5ae09/src/memory-appender.model.ts#L34">memory-appender.model.ts:34</a></li>
+									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/4228534/src/memory-appender.model.ts#L67">memory-appender.model.ts:67</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -167,6 +178,38 @@
 									<h5>loggingEvent: <span class="tsd-signature-type">LoggingEvent</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>event to be appended.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="configure" class="tsd-anchor"></a>
+					<h3>configure</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">configure<span class="tsd-signature-symbol">(</span>configuration<span class="tsd-signature-symbol">: </span><a href="../interfaces/memoryappenderconfiguration.html" class="tsd-signature-type">MemoryAppenderConfiguration</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/4228534/src/memory-appender.model.ts#L50">memory-appender.model.ts:50</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Configures the logging depending on the given configuration.
+									Only the defined properties get overwritten.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>configuration: <a href="../interfaces/memoryappenderconfiguration.html" class="tsd-signature-type">MemoryAppenderConfiguration</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>configuration data.</p>
 									</div>
 								</li>
 							</ul>
@@ -237,13 +280,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/2d5ae09/src/memory-appender.model.ts#L91">memory-appender.model.ts:91</a></li>
+									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/4228534/src/memory-appender.model.ts#L123">memory-appender.model.ts:123</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Gets all messages stored in local storage.
-									Mainly for unit testing purposes.</p>
+									<p>Gets all messages stored in memory.</p>
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <a href="../interfaces/logmessage.html" class="tsd-signature-type">LogMessage</a><span class="tsd-signature-symbol">[]</span></h4>
@@ -261,7 +303,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/2d5ae09/src/memory-appender.model.ts#L67">memory-appender.model.ts:67</a></li>
+									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/4228534/src/memory-appender.model.ts#L100">memory-appender.model.ts:100</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -335,7 +377,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/2d5ae09/src/memory-appender.model.ts#L77">memory-appender.model.ts:77</a></li>
+									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/4228534/src/memory-appender.model.ts#L110">memory-appender.model.ts:110</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -367,12 +409,13 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/2d5ae09/src/memory-appender.model.ts#L99">memory-appender.model.ts:99</a></li>
+									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/4228534/src/memory-appender.model.ts#L132">memory-appender.model.ts:132</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Registers a callback which will be called every time a new message is appended.</p>
+									<p>Registers a callback which will be called every time a new message is appended.
+									This could be useful if you want to show new messages in realtime.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -446,7 +489,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides Appender.toString</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/2d5ae09/src/memory-appender.model.ts#L60">memory-appender.model.ts:60</a></li>
+									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/4228534/src/memory-appender.model.ts#L93">memory-appender.model.ts:93</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -498,6 +541,9 @@
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
 								<a href="memoryappender.html#append" class="tsd-kind-icon">append</a>
 							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="memoryappender.html#configure" class="tsd-kind-icon">configure</a>
+							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 								<a href="memoryappender.html#doappend" class="tsd-kind-icon">do<wbr>Append</a>
 							</li>
@@ -536,7 +582,10 @@
 						<a href="../interfaces/logmessage.html" class="tsd-kind-icon">Log<wbr>Message</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="../interfaces/loggingconfiguration.html" class="tsd-kind-icon">Logging<wbr>Configuration</a>
+						<a href="../interfaces/loggingserviceconfiguration.html" class="tsd-kind-icon">Logging<wbr>Service<wbr>Configuration</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/memoryappenderconfiguration.html" class="tsd-kind-icon">Memory<wbr>Appender<wbr>Configuration</a>
 					</li>
 				</ul>
 			</nav>

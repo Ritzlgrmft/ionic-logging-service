@@ -3,9 +3,23 @@
 import { LogLevelConverter } from "./log-level.converter";
 import { LogLevel } from "./log-level.model";
 import { LogMessage } from "./log-message.model";
+import { MemoryAppenderConfiguration } from "./memory-appender.configuration";
 
 /**
  * An appender which stores the log messages in the browser's memory.
+ *
+ * The MemoryAppender is enabled by default.
+ * If you do not specify anything else, it is using this configuration:
+ *
+ * ```JSON
+ * {
+ *   "memoryAppender": [
+ *     {
+ *       "maxMessages": 250,
+ *       "threshold": "ALL"
+ *     }
+ * }
+ * ```
  */
 export class MemoryAppender extends log4javascript.Appender {
 
@@ -25,6 +39,25 @@ export class MemoryAppender extends log4javascript.Appender {
 		super();
 		this.logMessages = [];
 		this.maxMessages = MemoryAppender.maxMessagesDefault;
+	}
+
+	/**
+	 * Configures the logging depending on the given configuration.
+	 * Only the defined properties get overwritten.
+	 *
+	 * @param configuration configuration data.
+	 */
+	public configure(configuration: MemoryAppenderConfiguration): void {
+		if (configuration) {
+			if (configuration.maxMessages) {
+				this.setMaxMessages(configuration.maxMessages);
+			}
+			if (configuration.threshold) {
+				const convertedThreshold = LogLevelConverter.levelToLog4Javascript(
+					LogLevelConverter.levelFromString(configuration.threshold));
+				this.setThreshold(convertedThreshold);
+			}
+		}
 	}
 
 	/**
@@ -84,8 +117,7 @@ export class MemoryAppender extends log4javascript.Appender {
 	}
 
 	/**
-	 * Gets all messages stored in local storage.
-	 * Mainly for unit testing purposes.
+	 * Gets all messages stored in memory.
 	 * @return stored messages
 	 */
 	public getLogMessages(): LogMessage[] {
@@ -94,6 +126,7 @@ export class MemoryAppender extends log4javascript.Appender {
 
 	/**
 	 * Registers a callback which will be called every time a new message is appended.
+	 * This could be useful if you want to show new messages in realtime.
 	 * @param callback callback to be called
 	 */
 	public setOnLogMessagesChangedCallback(callback: (message: LogMessage) => void): void {
