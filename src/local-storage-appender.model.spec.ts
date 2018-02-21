@@ -135,12 +135,10 @@ describe("LocalStorageAppender", () => {
 			it("throws error if modified", () => {
 
 				const config: LocalStorageAppenderConfiguration = {
-					localStorageKey: "MyLocalStorage",
+					localStorageKey: "MyLocalStorage2",
 				};
 
-				appender.configure(config);
-
-				expect(appender.getLocalStorageKey()).toBe("MyLocalStorage");
+				expect(() => appender.configure(config)).toThrowError("localStorageKey must not be changed");
 			});
 		});
 
@@ -340,6 +338,26 @@ describe("LocalStorageAppender", () => {
 			messages = appender.getLogMessages();
 			expect(messages.length).toBe(1);
 			expect(messages[0].methodName).toBe("3");
+		});
+
+		it("same value does not change anything", () => {
+
+			const event = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["1"]);
+			const event2 = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["2"]);
+			const event3 = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["3"]);
+
+			appender.append(event);
+			appender.append(event2);
+			appender.append(event3);
+
+			let messages = appender.getLogMessages();
+			expect(messages.length).toBe(3);
+
+			appender.setMaxMessages(250);
+
+			messages = appender.getLogMessages();
+			expect(messages.length).toBe(3);
+			expect(appender.getMaxMessages()).toBe(250);
 		});
 	});
 });
