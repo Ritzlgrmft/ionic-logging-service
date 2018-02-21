@@ -22,7 +22,14 @@ export class Logger {
 	}
 
 	/**
-	 * Sets the log level.
+	 * Get the log level.
+	 */
+	public getLogLevel(): LogLevel {
+		return LogLevelConverter.levelFromLog4Javascript(this.logger.getLevel());
+	}
+
+	/**
+	 * Set the log level.
 	 *
 	 * @param level the new log level
 	 */

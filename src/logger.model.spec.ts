@@ -371,6 +371,19 @@ describe("Logger", () => {
 
 	});
 
+	describe("getLogLevel(): LogLevel", () => {
+
+		it("return log level of internal logger", () => {
+
+			const logger = new Logger();
+			expect(logger.getInternalLogger().getLevel()).toBe(log4javascript.Level.DEBUG);
+
+			const level = logger.getLogLevel();
+			expect(level).toBe(LogLevel.DEBUG);
+
+		});
+	});
+
 	describe("setLogLevel(level: LogLevel): void", () => {
 
 		it("changes log level of internal logger", () => {
