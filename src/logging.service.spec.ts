@@ -284,7 +284,7 @@ describe("LoggingService", () => {
 					},
 				};
 
-				expect(() => loggingService.configure(config)).toThrowError("invalid threshold xxx");
+				expect(() => loggingService.configure(config)).toThrowError("invalid level xxx");
 			});
 
 			it("localStorageAppender has default threshold of WARN", () => {

@@ -1,6 +1,7 @@
 // tslint:disable:no-magic-numbers
 import * as log4javascript from "log4javascript";
 
+import { LocalStorageAppenderConfiguration } from "./local-storage-appender.configuration";
 import { LocalStorageAppender } from "./local-storage-appender.model";
 
 describe("LocalStorageAppender", () => {
@@ -8,7 +9,7 @@ describe("LocalStorageAppender", () => {
 	let appender: LocalStorageAppender;
 
 	beforeEach(() => {
-		appender = new LocalStorageAppender("MyLocalStorage");
+		appender = new LocalStorageAppender({ localStorageKey: "MyLocalStorage" });
 		appender.clearLog();
 	});
 
@@ -24,27 +25,183 @@ describe("LocalStorageAppender", () => {
 			const event = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, []);
 			appender.append(event);
 
-			const appender2 = new LocalStorageAppender("MyLocalStorage");
+			const appender2 = new LocalStorageAppender({ localStorageKey: "MyLocalStorage" });
 			const messages = appender2.getLogMessages();
 			expect(messages.length).toBe(1);
 			expect(messages[0].timeStamp).toEqual(event.timeStamp);
 			expect(messages[0].level).toBe(event.level.toString());
 		});
 
-		it("throws error if undefined is passed as localStorageKey", () => {
+		it("throws error if no configuration is passed", () => {
 
-			expect(() => new LocalStorageAppender(undefined)).toThrowError("localStorageKey may be not empty");
+			expect(() => new LocalStorageAppender(undefined)).
+				toThrowError("configuration must be not empty");
 		});
 
-		it("throws error if null is passed as localStorageKey", () => {
+		describe("localStorageKey", () => {
+			it("throws error if configuration contains no localStorageKey", () => {
 
-			// tslint:disable-next-line:no-null-keyword
-			expect(() => new LocalStorageAppender(null)).toThrowError("localStorageKey may be not empty");
+				expect(() => new LocalStorageAppender({} as LocalStorageAppenderConfiguration)).
+					toThrowError("localStorageKey must be not empty");
+			});
+
+			it("throws error if configuration contains empty localStorageKey", () => {
+
+				expect(() => new LocalStorageAppender({ localStorageKey: "" })).
+					toThrowError("localStorageKey must be not empty");
+			});
+
+			it("uses value from configuration", () => {
+				const config: LocalStorageAppenderConfiguration = {
+					localStorageKey: "MyLocalStorage2",
+				};
+
+				const appender2 = new LocalStorageAppender(config);
+
+				expect(appender2.getLocalStorageKey()).toBe("MyLocalStorage2");
+			});
 		});
 
-		it("throws error if empty string is passed as localStorageKey", () => {
+		describe("maxMessages", () => {
+			it("uses default value if not specified", () => {
 
-			expect(() => new LocalStorageAppender("")).toThrowError("localStorageKey may be not empty");
+				const config: LocalStorageAppenderConfiguration = {
+					localStorageKey: "MyLocalStorage",
+				};
+
+				const appender2 = new LocalStorageAppender(config);
+
+				expect(appender2.getMaxMessages()).toBe(250);
+			});
+
+			it("uses value from configuration", () => {
+
+				const config: LocalStorageAppenderConfiguration = {
+					localStorageKey: "MyLocalStorage",
+					maxMessages: 42,
+				};
+
+				const appender2 = new LocalStorageAppender(config);
+
+				expect(appender2.getMaxMessages()).toBe(42);
+			});
+		});
+
+		describe("threshold", () => {
+			it("uses default value if not specified", () => {
+
+				const config: LocalStorageAppenderConfiguration = {
+					localStorageKey: "MyLocalStorage",
+				};
+
+				const appender2 = new LocalStorageAppender(config);
+
+				expect(appender2.getThreshold()).toBe(log4javascript.Level.WARN);
+			});
+
+			it("uses value from configuration", () => {
+
+				const config: LocalStorageAppenderConfiguration = {
+					localStorageKey: "MyLocalStorage",
+					threshold: "INFO",
+				};
+
+				const appender2 = new LocalStorageAppender(config);
+
+				expect(appender2.getThreshold()).toBe(log4javascript.Level.INFO);
+			});
+
+			it("throws an error if value from configuration is invalid", () => {
+
+				const config: LocalStorageAppenderConfiguration = {
+					localStorageKey: "MyLocalStorage",
+					threshold: "abc",
+				};
+
+				expect(() => new LocalStorageAppender(config)).toThrowError("invalid level abc");
+			});
+		});
+	});
+
+	describe("configure(configuration: LocalStorageAppenderConfiguration): void", () => {
+
+		it("throws no error if no configuration is provided", () => {
+
+			const config: LocalStorageAppenderConfiguration = undefined;
+			appender.configure(config);
+		});
+
+		describe("localStorageKey", () => {
+			it("throws error if modified", () => {
+
+				const config: LocalStorageAppenderConfiguration = {
+					localStorageKey: "MyLocalStorage",
+				};
+
+				appender.configure(config);
+
+				expect(appender.getLocalStorageKey()).toBe("MyLocalStorage");
+			});
+		});
+
+		describe("maxMessages", () => {
+			it("uses default value if undefined", () => {
+
+				const config: LocalStorageAppenderConfiguration = {
+					localStorageKey: "MyLocalStorage",
+				};
+
+				appender.configure(config);
+
+				expect(appender.getMaxMessages()).toBe(250);
+			});
+
+			it("uses given value if defined", () => {
+
+				const config: LocalStorageAppenderConfiguration = {
+					localStorageKey: "MyLocalStorage",
+					maxMessages: 42,
+				};
+
+				appender.configure(config);
+
+				expect(appender.getMaxMessages()).toBe(42);
+			});
+		});
+
+		describe("threshold", () => {
+			it("uses default value if undefined", () => {
+
+				const config: LocalStorageAppenderConfiguration = {
+					localStorageKey: "MyLocalStorage",
+				};
+
+				appender.configure(config);
+
+				expect(appender.getThreshold()).toBe(log4javascript.Level.WARN);
+			});
+
+			it("uses given value if defined", () => {
+
+				const config: LocalStorageAppenderConfiguration = {
+					localStorageKey: "MyLocalStorage",
+					threshold: "INFO",
+				};
+
+				appender.configure(config);
+
+				expect(appender.getThreshold()).toBe(log4javascript.Level.INFO);
+			});
+
+			it("throws error if given value is undefined", () => {
+
+				const config: LocalStorageAppenderConfiguration = {
+					localStorageKey: "MyLocalStorage",
+					threshold: "abc",
+				};
+
+				expect(() => appender.configure(config)).toThrowError("invalid level abc");
+			});
 		});
 	});
 
@@ -139,6 +296,16 @@ describe("LocalStorageAppender", () => {
 			const text = appender.toString();
 
 			expect(text).toBe("Ionic.Logging.LocalStorageAppender");
+		});
+	});
+
+	describe("getLocalStorageKey(): string", () => {
+
+		it("return set value", () => {
+
+			const localStorageKey = appender.getLocalStorageKey();
+
+			expect(localStorageKey).toBe("MyLocalStorage");
 		});
 	});
 

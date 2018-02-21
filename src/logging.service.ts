@@ -132,20 +132,7 @@ export class LoggingService {
 
 		// configure LocalStorageAppender
 		if (typeof configuration.localStorageAppender !== "undefined") {
-			const localStorageAppender = new LocalStorageAppender(configuration.localStorageAppender.localStorageKey);
-			if (typeof configuration.localStorageAppender.threshold !== "undefined") {
-				try {
-					localStorageAppender.setThreshold(
-						LogLevelConverter.levelToLog4Javascript(
-							LogLevelConverter.levelFromString(configuration.localStorageAppender.threshold)));
-				} catch (e) {
-					throw new Error(`invalid threshold ${configuration.localStorageAppender.threshold}`);
-				}
-			}
-			localStorageAppender.setLayout(new log4javascript.PatternLayout("%d{HH:mm:ss,SSS} %c %m"));
-			if (configuration.localStorageAppender.maxMessages > 0) {
-				localStorageAppender.setMaxMessages(configuration.localStorageAppender.maxMessages);
-			}
+			const localStorageAppender = new LocalStorageAppender(configuration.localStorageAppender);
 			log4javascript.getRootLogger().addAppender(localStorageAppender);
 		}
 

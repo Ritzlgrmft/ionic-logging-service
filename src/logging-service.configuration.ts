@@ -1,4 +1,5 @@
-﻿import { MemoryAppenderConfiguration } from "./memory-appender.configuration";
+﻿import { LocalStorageAppenderConfiguration } from "./local-storage-appender.configuration";
+import { MemoryAppenderConfiguration } from "./memory-appender.configuration";
 
 /**
  * Partial configuration definition for LoggingService
@@ -55,24 +56,7 @@ export interface LoggingServiceConfiguration {
 	/**
 	 * Settings for LocalStorageAppender.
 	 */
-	localStorageAppender?: {
-		/**
-		 * Key which is used to store the messages in the local storage.
-		 */
-		localStorageKey: string;
-
-		/**
-		 * Threshold.
-		 * Valid values are: ALL, DEBUG, ERROR, FATAL, INFO, OFF, TRACE, WARN
-		 * Default: WARN.
-		 */
-		threshold?: string;
-
-		/**
-		 * Maximum number of log messages stored by the appender.
-		 */
-		maxMessages?: number;
-	};
+	localStorageAppender?: LocalStorageAppenderConfiguration;
 
 	/**
 	 * Settings for MemoryAppender.

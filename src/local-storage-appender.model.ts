@@ -1,5 +1,6 @@
 import * as log4javascript from "log4javascript";
 
+import { LocalStorageAppenderConfiguration } from "./local-storage-appender.configuration";
 import { LogLevelConverter } from "./log-level.converter";
 import { LogLevel } from "./log-level.model";
 import { LogMessage } from "./log-message.model";
@@ -12,6 +13,7 @@ import { LogMessage } from "./log-message.model";
 export class LocalStorageAppender extends log4javascript.Appender {
 
 	private static maxMessagesDefault = 250;
+	private static thresholdDefault = "WARN";
 
 	private maxMessages: number;
 
@@ -22,17 +24,21 @@ export class LocalStorageAppender extends log4javascript.Appender {
 
 	/**
 	 * Creates a new instance of the appender.
-	 * @param localStorageKey key used for storing the messages in local storage.
+	 * @param configuration configuration for the appender.
 	 */
-	constructor(localStorageKey: string) {
+	constructor(configuration: LocalStorageAppenderConfiguration) {
 		super();
 
-		// tslint:disable-next-line:no-null-keyword
-		if (localStorageKey === undefined || localStorageKey === null || localStorageKey === "") {
-			throw new Error("localStorageKey may be not empty");
+		if (!configuration) {
+			throw new Error("configuration must be not empty");
 		}
+		// tslint:disable-next-line:no-null-keyword
+		if (!configuration.localStorageKey || configuration.localStorageKey === "") {
+			throw new Error("localStorageKey must be not empty");
+		}
+		this.localStorageKey = configuration.localStorageKey;
 
-		this.localStorageKey = localStorageKey;
+		// read existing logMessages
 		// tslint:disable-next-line:no-null-keyword
 		if (localStorage.getItem(this.localStorageKey) === null) {
 			this.logMessages = [];
@@ -43,8 +49,35 @@ export class LocalStorageAppender extends log4javascript.Appender {
 				logMessage.timeStamp = new Date(logMessage.timeStamp);
 			}
 		}
-		this.setThreshold(log4javascript.Level.WARN);
-		this.maxMessages = LocalStorageAppender.maxMessagesDefault;
+
+		// process remaining configuration
+		this.configure({
+			localStorageKey: configuration.localStorageKey,
+			maxMessages: configuration.maxMessages || LocalStorageAppender.maxMessagesDefault,
+			threshold: configuration.threshold || LocalStorageAppender.thresholdDefault,
+		});
+	}
+
+	/**
+	 * Configures the logging depending on the given configuration.
+	 * Only the defined properties get overwritten.
+	 *
+	 * @param configuration configuration data.
+	 */
+	public configure(configuration: LocalStorageAppenderConfiguration): void {
+		if (configuration) {
+			if (configuration.localStorageKey && configuration.localStorageKey !== this.localStorageKey) {
+				throw new Error("localStorageKey must not be changed");
+			}
+			if (configuration.maxMessages) {
+				this.setMaxMessages(configuration.maxMessages);
+			}
+			if (configuration.threshold) {
+				const convertedThreshold = LogLevelConverter.levelToLog4Javascript(
+					LogLevelConverter.levelFromString(configuration.threshold));
+				this.setThreshold(convertedThreshold);
+			}
+		}
 	}
 
 	/**
@@ -80,14 +113,21 @@ export class LocalStorageAppender extends log4javascript.Appender {
 	}
 
 	/**
-	 * Get the maximum number of messages which will be stored in memory.
+	 * Get the key which is used to store the messages in the local storage.
+	 */
+	public getLocalStorageKey(): string {
+		return this.localStorageKey;
+	}
+
+	/**
+	 * Get the maximum number of messages which will be stored in local storage.
 	 */
 	public getMaxMessages(): number {
 		return this.maxMessages;
 	}
 
 	/**
-	 * Set the maximum number of messages which will be stored in memory.
+	 * Set the maximum number of messages which will be stored in local storage.
 	 *
 	 * If the appender stores currently more messages than the new value allows, the oldest messages get removed.
 	 * @param value new maximum number
@@ -96,13 +136,15 @@ export class LocalStorageAppender extends log4javascript.Appender {
 		if (this.maxMessages !== value) {
 			this.maxMessages = value;
 
-			// if there are too much logMessages for the new value, remove oldest messages
-			while (this.logMessages.length > this.maxMessages) {
-				this.logMessages.shift();
-			}
+			if (this.logMessages.length > this.maxMessages) {
+				// there are too much logMessages for the new value, therefore remove oldest messages
+				while (this.logMessages.length > this.maxMessages) {
+					this.logMessages.shift();
+				}
 
-			// write values to localStorage
-			localStorage.setItem(this.localStorageKey, JSON.stringify(this.logMessages));
+				// write values to localStorage
+				localStorage.setItem(this.localStorageKey, JSON.stringify(this.logMessages));
+			}
 		}
 	}
 
