@@ -24,6 +24,7 @@ import { MemoryAppenderConfiguration } from "./memory-appender.configuration";
 export class MemoryAppender extends log4javascript.Appender {
 
 	private static maxMessagesDefault = 250;
+	private static thresholdDefault = "ALL";
 
 	private maxMessages: number;
 
@@ -34,10 +35,20 @@ export class MemoryAppender extends log4javascript.Appender {
 
 	/**
 	 * Creates a new instance of the appender.
+	 * @param configuration configuration for the appender.
 	 */
-	constructor() {
+	constructor(configuration?: MemoryAppenderConfiguration) {
 		super();
+
 		this.logMessages = [];
+
+		// process configuration
+		configuration = configuration || {};
+		this.configure({
+			maxMessages: configuration.maxMessages || MemoryAppender.maxMessagesDefault,
+			threshold: configuration.threshold || MemoryAppender.thresholdDefault,
+		});
+
 		this.maxMessages = MemoryAppender.maxMessagesDefault;
 	}
 
