@@ -13,6 +13,7 @@ export interface MemoryAppenderConfiguration {
 	 * Threshold.
 	 *
 	 * Valid values are: ALL, DEBUG, ERROR, FATAL, INFO, OFF, TRACE, WARN.
+	 *
 	 * Default: ALL.
 	 */
 	threshold?: string;

@@ -103,8 +103,10 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="localstorageappender.html#append" class="tsd-kind-icon">append</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="localstorageappender.html#clearlog" class="tsd-kind-icon">clear<wbr>Log</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="localstorageappender.html#configure" class="tsd-kind-icon">configure</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="localstorageappender.html#doappend" class="tsd-kind-icon">do<wbr>Append</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="localstorageappender.html#getlayout" class="tsd-kind-icon">get<wbr>Layout</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="localstorageappender.html#getlocalstoragekey" class="tsd-kind-icon">get<wbr>Local<wbr>Storage<wbr>Key</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="localstorageappender.html#getlogmessages" class="tsd-kind-icon">get<wbr>Log<wbr>Messages</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="localstorageappender.html#getmaxmessages" class="tsd-kind-icon">get<wbr>Max<wbr>Messages</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="localstorageappender.html#getthreshold" class="tsd-kind-icon">get<wbr>Threshold</a></li>
@@ -123,13 +125,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Local<wbr>Storage<wbr>Appender<span class="tsd-signature-symbol">(</span>localStorageKey<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="localstorageappender.html" class="tsd-signature-type">LocalStorageAppender</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Local<wbr>Storage<wbr>Appender<span class="tsd-signature-symbol">(</span>configuration<span class="tsd-signature-symbol">: </span><a href="../interfaces/localstorageappenderconfiguration.html" class="tsd-signature-type">LocalStorageAppenderConfiguration</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="localstorageappender.html" class="tsd-signature-type">LocalStorageAppender</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/4228534/src/local-storage-appender.model.ts#L21">local-storage-appender.model.ts:21</a></li>
+									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/25731f7/src/local-storage-appender.model.ts#L23">local-storage-appender.model.ts:23</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -140,10 +142,10 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>localStorageKey: <span class="tsd-signature-type">string</span></h5>
+									<h5>configuration: <a href="../interfaces/localstorageappenderconfiguration.html" class="tsd-signature-type">LocalStorageAppenderConfiguration</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
-											<p>key used for storing the messages in local storage.</p>
+											<p>configuration for the appender.</p>
 										</div>
 									</div>
 								</li>
@@ -166,7 +168,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides Appender.append</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/4228534/src/local-storage-appender.model.ts#L54">local-storage-appender.model.ts:54</a></li>
+									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/25731f7/src/local-storage-appender.model.ts#L87">local-storage-appender.model.ts:87</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -197,7 +199,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/4228534/src/local-storage-appender.model.ts#L122">local-storage-appender.model.ts:122</a></li>
+									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/25731f7/src/local-storage-appender.model.ts#L164">local-storage-appender.model.ts:164</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -206,6 +208,38 @@
 									Mainly for unit testing purposes.</p>
 								</div>
 							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="configure" class="tsd-anchor"></a>
+					<h3>configure</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">configure<span class="tsd-signature-symbol">(</span>configuration<span class="tsd-signature-symbol">: </span><a href="../interfaces/localstorageappenderconfiguration.html" class="tsd-signature-type">LocalStorageAppenderConfiguration</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/25731f7/src/local-storage-appender.model.ts#L67">local-storage-appender.model.ts:67</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Configures the logging depending on the given configuration.
+									Only the defined properties get overwritten.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>configuration: <a href="../interfaces/localstorageappenderconfiguration.html" class="tsd-signature-type">LocalStorageAppenderConfiguration</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>configuration data.</p>
+									</div>
+								</li>
+							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
@@ -264,6 +298,28 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getlocalstoragekey" class="tsd-anchor"></a>
+					<h3>get<wbr>Local<wbr>Storage<wbr>Key</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Local<wbr>Storage<wbr>Key<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/25731f7/src/local-storage-appender.model.ts#L118">local-storage-appender.model.ts:118</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get the key which is used to store the messages in the local storage.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="getlogmessages" class="tsd-anchor"></a>
 					<h3>get<wbr>Log<wbr>Messages</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -273,7 +329,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/4228534/src/local-storage-appender.model.ts#L114">local-storage-appender.model.ts:114</a></li>
+									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/25731f7/src/local-storage-appender.model.ts#L156">local-storage-appender.model.ts:156</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -297,12 +353,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/4228534/src/local-storage-appender.model.ts#L85">local-storage-appender.model.ts:85</a></li>
+									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/25731f7/src/local-storage-appender.model.ts#L125">local-storage-appender.model.ts:125</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Get the maximum number of messages which will be stored in memory.</p>
+									<p>Get the maximum number of messages which will be stored in local storage.</p>
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -371,12 +427,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/4228534/src/local-storage-appender.model.ts#L95">local-storage-appender.model.ts:95</a></li>
+									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/25731f7/src/local-storage-appender.model.ts#L135">local-storage-appender.model.ts:135</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Set the maximum number of messages which will be stored in memory.</p>
+									<p>Set the maximum number of messages which will be stored in local storage.</p>
 								</div>
 								<p>If the appender stores currently more messages than the new value allows, the oldest messages get removed.</p>
 							</div>
@@ -433,7 +489,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides Appender.toString</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/4228534/src/local-storage-appender.model.ts#L78">local-storage-appender.model.ts:78</a></li>
+									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/25731f7/src/local-storage-appender.model.ts#L111">local-storage-appender.model.ts:111</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -476,11 +532,17 @@
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="localstorageappender.html#clearlog" class="tsd-kind-icon">clear<wbr>Log</a>
 							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="localstorageappender.html#configure" class="tsd-kind-icon">configure</a>
+							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 								<a href="localstorageappender.html#doappend" class="tsd-kind-icon">do<wbr>Append</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 								<a href="localstorageappender.html#getlayout" class="tsd-kind-icon">get<wbr>Layout</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="localstorageappender.html#getlocalstoragekey" class="tsd-kind-icon">get<wbr>Local<wbr>Storage<wbr>Key</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="localstorageappender.html#getlogmessages" class="tsd-kind-icon">get<wbr>Log<wbr>Messages</a>
@@ -518,6 +580,9 @@
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="memoryappender.html" class="tsd-kind-icon">Memory<wbr>Appender</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/localstorageappenderconfiguration.html" class="tsd-kind-icon">Local<wbr>Storage<wbr>Appender<wbr>Configuration</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="../interfaces/logmessage.html" class="tsd-kind-icon">Log<wbr>Message</a>

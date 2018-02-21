@@ -18,6 +18,7 @@ export interface LocalStorageAppenderConfiguration {
 	 * Threshold.
 	 *
 	 * Valid values are: ALL, DEBUG, ERROR, FATAL, INFO, OFF, TRACE, WARN
+	 *
 	 * Default: WARN.
 	 */
 	threshold?: string;
