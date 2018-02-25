@@ -1,3 +1,5 @@
 # ToDos
 
-- description Logger hierarchy
+- backend sample
+- remove dependency to configuration-service
+- make additivity configurable

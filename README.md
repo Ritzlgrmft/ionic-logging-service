@@ -75,7 +75,23 @@ E  18:49:43.814  MyApp.MyComponent  myMethod  some error
 I  18:49:43.801  MyApp.MyComponent  myMethod  exit  [2, 5, 99]
 ```
 
-Log output in the browser's console is quite useful during development, either in console or using `ionic serve --consolelogs`. But later, you will need other logs. Here come the so-called appenders in the game:
+## Logger
+
+A logger is the component responsible for logging. Typically, you have one logger per every class. The logger name describe the place where in your app the class is placed. The single parts are separated by dots ('.'). This is quite the same as with namespaces in dotnet or packages in Java.
+
+This builds some kind of hierarchy. E.g., if you have a logger named `A.B.C.D`, you get automatically also loggers for `A.B.C`, `A.B` and `A`. Additionally, there is the so-called root logger, which is the parent of all other loggers.
+
+The hierarchy is important, since the loggers inherit the log level from there parent - if there is no other level defined. That means, you can define just one log level for the complete app (by setting the root logger's level), and you can par example define, you do not want to see logs written for logger `A.B.C` (this includes also `A.B.C.D`).
+
+## Level
+
+Every log message has a level. This is the severity of the message. Available levels are `TRACE`, `DEBUG`, `INFO`, `WARN`, `ERROR` and `FATAL` - these correspond to the logging methods `trace`, `debug`, `info`, `warn`, `error` and `fatal` of `Logger`. Levels are ordered as follows: `TRACE` < `DEBUG` < `INFO` < `WARN` < `ERROR` < `FATAL`. This means the `FATAL` is the most severe and `TRACE` the least. Also included are levels called `ALL` and `OFF` intended to enable or disable all logging respectively.
+
+Setting a level to a logger disables log messages of severity lower than that level. For instance, if a level of `INFO` is set on a logger then only log messages of severity `INFO` or greater will be logged, meaning `DEBUG` and `TRACE` messages will not be logged.
+
+## Appender
+
+Appenders make the logs visible, e.g. by writing tehm to the browser's console. This is quite useful during development, either in console or using `ionic serve --consolelogs`. But later, you will need other logs:
 
 - `AjaxAppender`: sends the log messages to a backend server
 - `MemoryAppender`: keeps the log messages in memory
@@ -101,7 +117,7 @@ By default, the following configuration is used:
 
 ### logLevels
 
-`logLevels` gets an array of log level definitions, e.g.
+`logLevels` gets an array of log level definitions for different loggers, e.g.
 
 ```JavaScript
 {
@@ -122,182 +138,20 @@ That means, instead of the default log level `WARN`, you want to log all message
 
 ### ajaxAppender
 
-With `ajaxAppender`, it is possible to configure the `AjaxAppender`, which sends
-log messages to a backend.
+With [ajaxAppender](typedoc/interfaces/ajaxappenderconfiguration.html), you add an additional appender of type [AjaxAppender](typedoc/classes/ajaxappender.html), which sends the log messages to a backend server.
 
-It has the following properties:
+### browserConsoleAppender
 
-- `url`: Url to send JavaScript logs
-- `timerInterval`: Interval for sending log messages; if set to 0, every
-  message will be sent immediatedly; default: 0
-- `batchSize`: Number of log messages sent in each request; default: 1
-- `threshold`: Threshold; valid values are: ALL, DEBUG, ERROR, FATAL, INFO, OFF, TRACE, WARN;
-  default: ALL
+With [browserConsoleAppender](typedoc/interfaces/browserconsoleappenderconfiguration.html), it is possible to configure the `BrowserConsoleAppender`, which writes the log to the browser's console.
 
 ### localStorageAppender
 
-With `localStorageAppender`, it is possible to configure the `LocalStorageAppender`, which stores
-log messages in the local storage.
-
-It has the following properties:
-
-- `localStorageKey`: Key used to store the messages in the local storage.
-- `maxMessages`: Maximum number of log messages stored by the appender; default: 250
-- `threshold`: Threshold; valid values are: ALL, DEBUG, ERROR, FATAL, INFO, OFF, TRACE, WARN;
-  default: WARN
+With [localStorageAppender](typedoc/interfaces/localstorageappenderconfiguration.html), you add an additional appender of type [AjaxAppender](typedoc/classes/localstorageappender.html), which stores log messages in the local storage.
 
 ### memoryAppender
 
-With `memoryAppender`, it is possible to configure the `MemoryAppender`, which stores
-log messages in the memory.
-
-It has the following properties:
-
-- `maxMessages`: Maximum number of log messages stored by the appender; default: 250
+With [memoryAppender](typedoc/interfaces/memoryappenderconfiguration.html), it is possible to configure the [MemoryAppender](typedoc/classes/memoryappender.html), which keeps log messages in the memory.
 
 ## API
 
-### LoggingService
-
-#### logMessagesChanged: EventEmitter&lt;LogMessage>
-
-Event triggered when new log message was added.
-
-Parameters
-
-- *message*: new log message
-
-#### ajaxAppenderFailed: EventEmitter&lt;string>
-
-Event triggered when ajax appender could not send log messages to the server.
-
-Parameters
-
-- *message*: error message
-
-#### configure(configuration?: LoggingConfiguration): void
-
-Configures the logging depending on the given configuration.
-
-Parameters
-
-- *configuration*: configuration data.
-  If the parameter is skipped, the configuration data will be taken from configuration service, key `logging`
-
-#### getRootLogger(): Logger
-
-Gets the root logger from which all other loggers derive.
-
-Returns
-
-- root logger
-
-#### getLogger(loggerName: string): Logger
-
-Gets a logger with the specified name, creating it if a logger with that name does not already exist.
-
-Parameters
-
-- *loggerName*: name of the logger
-
-Returns
-
-- logger
-
-#### getLogMessages(): LogMessage[]
-
-Gets the last log messages.
-
-Returns
-
-- log messages
-
-### Logger
-
-#### setLogLevel(level: LogLevel): void
-
-Sets the log level.
-
-Parameters:
-
-- *level*: the new log level
-
-#### debug(methodName: string, ...params: any[]): void
-
-Logs a message at level DEBUG.
-
-Parameters:
-
-- *methodName*: name of the method
-- *params*: optional parameters to be logged; objects will be formatted as JSON
-
-#### info(methodName: string, ...params: any[]): void
-
-Logs a message at level INFO.
-
-Parameters:
-
-- *methodName*: name of the method
-- *params*: optional parameters to be logged; objects will be formatted as JSON
-
-#### warn(methodName: string, ...params: any[]): void
-
-Logs a message at level WARN.
-
-Parameters:
-
-- *methodName*: name of the method
-- *params*: optional parameters to be logged; objects will be formatted as JSON
-
-#### error(methodName: string, ...params: any[]): void
-
-Logs a message at level ERROR.
-
-Parameters:
-
-- *methodName*: name of the method
-- *params*: optional parameters to be logged; objects will be formatted as JSON
-
-#### entry(methodName: string, ...params: any[]): void
-
-Logs the entry into a method.
-The method name will be logged at level INFO, the parameters at level DEBUG.
-
-Parameters:
-
-- *methodName*: name of the method
-- *params*: optional parameters to be logged; objects will be formatted as JSON
-
-#### exit(methodName: string, ...params: any[]): void
-
-Logs the exit of a method.
-The method name will be logged at level INFO, the parameters at level DEBUG.
-
-Parameters:
-
-- *methodName*: name of the method
-- *params*: optional parameters to be logged; objects will be formatted as JSON
-
-#### formatArgument(arg: any): string
-
-Formats the given argument as a string:
-
-- `string`: keep unchanged
-- `number`, `Error`: formatted using `toString()``
-- others: formatted as JSON
-
-Parameters:
-
-- *arg*: argument to be formnatted
-
-Returns
-
-- formatted argument
-
-#### getInternalLogger(): log4javascript.Logger
-
-Returns the internal Logger (for unit tests only).
-
-Returns
-
-- internally used log4javascript logger
+see [API documentation](typedoc/index.html).
