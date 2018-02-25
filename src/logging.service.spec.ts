@@ -45,6 +45,10 @@ describe("LoggingService", () => {
 
 		it("root logger has log level WARN", async (done) => {
 
+			const appenders = new Logger().getInternalLogger().getEffectiveAppenders();
+			const browserConsoleAppender = appenders.find((a) => a.toString() === "BrowserConsoleAppender");
+			browserConsoleAppender.setThreshold(log4javascript.Level.OFF);
+
 			configurationService.load("empty.json").then(() => {
 				loggingService.getRootLogger().info("test");
 				loggingService.getRootLogger().warn("test");
@@ -473,6 +477,10 @@ describe("LoggingService", () => {
 
 		it("returns array with written log message", () => {
 
+			const appenders = new Logger().getInternalLogger().getEffectiveAppenders();
+			const browserConsoleAppender = appenders.find((a) => a.toString() === "BrowserConsoleAppender");
+			browserConsoleAppender.setThreshold(log4javascript.Level.OFF);
+
 			loggingService.getRootLogger().warn("test");
 			const messages = loggingService.getLogMessages();
 
@@ -483,6 +491,10 @@ describe("LoggingService", () => {
 	describe("logMessagesChanged: EventEmitter<LogMessage>", () => {
 
 		it("logged messages are emitted", (done: () => void) => {
+			const appenders = new Logger().getInternalLogger().getEffectiveAppenders();
+			const browserConsoleAppender = appenders.find((a) => a.toString() === "BrowserConsoleAppender");
+			browserConsoleAppender.setThreshold(log4javascript.Level.OFF);
+
 			loggingService.logMessagesChanged.subscribe((message: LogMessage) => {
 				expect(message).toBe(loggingService.getLogMessages()[0]);
 				done();
@@ -498,6 +510,9 @@ describe("LoggingService", () => {
 			const config: LoggingServiceConfiguration = {
 				ajaxAppender: {
 					url: "badUrl",
+				},
+				browserConsoleAppender: {
+					threshold: "OFF",
 				},
 			};
 			loggingService.configure(config);

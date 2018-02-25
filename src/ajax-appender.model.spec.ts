@@ -132,12 +132,15 @@ describe("AjaxAppender", () => {
 	describe("appenderFailed: EventEmitter<string>", () => {
 
 		it("event gets triggered with invalid url", (done) => {
+			log4javascript.logLog.setQuietMode(true);
 			const logger = log4javascript.getLogger("test");
 			const event = new log4javascript.LoggingEvent(logger, new Date(), log4javascript.Level.INFO, ["1"]);
+
 			appender.appenderFailed.subscribe((message: string) => {
 				expect(message).toBe("AjaxAppender.append: XMLHttpRequest request to URL MyUrl returned status code 404");
 				done();
 			});
+
 			appender.append(event);
 		});
 
