@@ -1,4 +1,5 @@
 ﻿import { AjaxAppenderConfiguration } from "./ajax-appender.configuration";
+import { BrowserConsoleAppenderConfiguration } from "./browser-console-appender.configuration";
 import { LocalStorageAppenderConfiguration } from "./local-storage-appender.configuration";
 import { MemoryAppenderConfiguration } from "./memory-appender.configuration";
 
@@ -38,4 +39,9 @@ export interface LoggingServiceConfiguration {
 	 * Settings for MemoryAppender.
 	 */
 	memoryAppender?: MemoryAppenderConfiguration;
+
+	/**
+	 * Settings for BrowserConsoleAppender.
+	 */
+	browserConsoleAppender?: BrowserConsoleAppenderConfiguration;
 }

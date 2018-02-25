@@ -16,10 +16,10 @@ import { MemoryAppender } from "./memory-appender.model";
  * Service for logging functionality.
  *
  * By default, the following settings are used:
- *  - log level: WARN
- *  - appender: BrowserConsoleAppender and MemoryAppender
+ *  - logger: root with level WARN
+ *  - appender: BrowserConsoleAppender with threshold DEBUG and MemoryAppender with threshold ALL
  *
- * Via configure(), it is possible to amend these settings.
+ * Via [configure](#configure), it is possible to amend these settings.
  */
 @Injectable()
 export class LoggingService {
@@ -38,6 +38,7 @@ export class LoggingService {
 
 	// tslint:disable-next-line:completed-docs
 	private memoryAppender: MemoryAppender;
+	private browserConsoleAppender: log4javascript.BrowserConsoleAppender;
 
 	constructor(
 		private configurationService: ConfigurationService) {
@@ -54,9 +55,9 @@ export class LoggingService {
 		logger.setLevel(log4javascript.Level.WARN);
 
 		// browser console appender for debugger
-		const browserConsoleAppender = new log4javascript.BrowserConsoleAppender();
-		browserConsoleAppender.setLayout(new log4javascript.PatternLayout("%d{HH:mm:ss,SSS} %c %m"));
-		logger.addAppender(browserConsoleAppender);
+		this.browserConsoleAppender = new log4javascript.BrowserConsoleAppender();
+		this.browserConsoleAppender.setLayout(new log4javascript.PatternLayout("%d{HH:mm:ss,SSS} %c %m"));
+		logger.addAppender(this.browserConsoleAppender);
 
 		// in-memory appender for display on log messages page
 		this.memoryAppender = new MemoryAppender();
@@ -119,6 +120,16 @@ export class LoggingService {
 		if (configuration.memoryAppender) {
 			this.memoryAppender.configure(configuration.memoryAppender);
 		}
+
+		// configure BrowserConsoleAppender
+		if (configuration.browserConsoleAppender) {
+			if (configuration.browserConsoleAppender.threshold) {
+				const convertedThreshold = LogLevelConverter.levelToLog4Javascript(
+					LogLevelConverter.levelFromString(configuration.browserConsoleAppender.threshold));
+				this.browserConsoleAppender.setThreshold(convertedThreshold);
+			}
+		}
+
 	}
 
 	/**

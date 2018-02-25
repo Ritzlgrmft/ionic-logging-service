@@ -397,6 +397,47 @@ describe("LoggingService", () => {
 			});
 		});
 
+		describe("browserConsoleAppender", () => {
+			it("browserConsoleAppender has default threshold", () => {
+
+				const config: LoggingServiceConfiguration = {
+				};
+
+				loggingService.configure(config);
+				const appenders = new Logger().getInternalLogger().getEffectiveAppenders();
+				const browserConsoleAppender = appenders.find((a) => a.toString() === "BrowserConsoleAppender");
+
+				expect(browserConsoleAppender.getThreshold()).toBe(log4javascript.Level.DEBUG);
+			});
+
+			it("empty configuration for browserConsoleAppender", () => {
+
+				const config: LoggingServiceConfiguration = {
+					browserConsoleAppender: {},
+				};
+
+				loggingService.configure(config);
+				const appenders = new Logger().getInternalLogger().getEffectiveAppenders();
+				const browserConsoleAppender = appenders.find((a) => a.toString() === "BrowserConsoleAppender");
+
+				expect(browserConsoleAppender.getThreshold()).toBe(log4javascript.Level.DEBUG);
+			});
+
+			it("browserConsoleAppender has given threshold", () => {
+
+				const config: LoggingServiceConfiguration = {
+					browserConsoleAppender: {
+						threshold: "OFF",
+					},
+				};
+
+				loggingService.configure(config);
+				const appenders = new Logger().getInternalLogger().getEffectiveAppenders();
+				const browserConsoleAppender = appenders.find((a) => a.toString() === "BrowserConsoleAppender");
+
+				expect(browserConsoleAppender.getThreshold()).toBe(log4javascript.Level.OFF);
+			});
+		});
 	});
 
 	describe("getLogger(loggerName: string): Logger", () => {

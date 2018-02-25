@@ -73,10 +73,10 @@
 					</div>
 					<p>By default, the following settings are used:</p>
 					<ul>
-						<li>log level: WARN</li>
-						<li>appender: BrowserConsoleAppender and MemoryAppender</li>
+						<li>logger: root with level WARN</li>
+						<li>appender: BrowserConsoleAppender with threshold DEBUG and MemoryAppender with threshold ALL</li>
 					</ul>
-					<p>Via configure(), it is possible to amend these settings.</p>
+					<p>Via <a href="#configure">configure</a>, it is possible to amend these settings.</p>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
@@ -128,7 +128,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/fa8c371/src/logging.service.ts#L40">logging.service.ts:40</a></li>
+									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/b33cb16/src/logging.service.ts#L41">logging.service.ts:41</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -150,7 +150,7 @@
 					<div class="tsd-signature tsd-kind-icon">ajax<wbr>Appender<wbr>Failed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/fa8c371/src/logging.service.ts#L37">logging.service.ts:37</a></li>
+							<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/b33cb16/src/logging.service.ts#L37">logging.service.ts:37</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -170,7 +170,7 @@
 					<div class="tsd-signature tsd-kind-icon">log<wbr>Messages<wbr>Changed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/logmessage.html" class="tsd-signature-type">LogMessage</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/fa8c371/src/logging.service.ts#L31">logging.service.ts:31</a></li>
+							<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/b33cb16/src/logging.service.ts#L31">logging.service.ts:31</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -197,7 +197,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/fa8c371/src/logging.service.ts#L77">logging.service.ts:77</a></li>
+									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/b33cb16/src/logging.service.ts#L78">logging.service.ts:78</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -229,7 +229,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/fa8c371/src/logging.service.ts#L149">logging.service.ts:149</a></li>
+									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/b33cb16/src/logging.service.ts#L160">logging.service.ts:160</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -255,7 +255,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/fa8c371/src/logging.service.ts#L137">logging.service.ts:137</a></li>
+									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/b33cb16/src/logging.service.ts#L148">logging.service.ts:148</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -287,7 +287,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/fa8c371/src/logging.service.ts#L128">logging.service.ts:128</a></li>
+									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/b33cb16/src/logging.service.ts#L139">logging.service.ts:139</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -362,6 +362,9 @@
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="../interfaces/ajaxappenderconfiguration.html" class="tsd-kind-icon">Ajax<wbr>Appender<wbr>Configuration</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/browserconsoleappenderconfiguration.html" class="tsd-kind-icon">Browser<wbr>Console<wbr>Appender<wbr>Configuration</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="../interfaces/localstorageappenderconfiguration.html" class="tsd-kind-icon">Local<wbr>Storage<wbr>Appender<wbr>Configuration</a>

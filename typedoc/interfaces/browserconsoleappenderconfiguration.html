@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>MemoryAppenderConfiguration | ionic-logging-service</title>
+	<title>BrowserConsoleAppenderConfiguration | ionic-logging-service</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../index.html">Globals</a>
 				</li>
 				<li>
-					<a href="memoryappenderconfiguration.html">MemoryAppenderConfiguration</a>
+					<a href="browserconsoleappenderconfiguration.html">BrowserConsoleAppenderConfiguration</a>
 				</li>
 			</ul>
-			<h1>Interface MemoryAppenderConfiguration</h1>
+			<h1>Interface BrowserConsoleAppenderConfiguration</h1>
 		</div>
 	</div>
 </header>
@@ -69,7 +69,7 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Configuration for MemoryAppender.</p>
+						<p>Configuration for BrowserConsoleAppender.</p>
 					</div>
 				</div>
 			</section>
@@ -77,7 +77,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">MemoryAppenderConfiguration</span>
+						<span class="target">BrowserConsoleAppenderConfiguration</span>
 					</li>
 				</ul>
 			</section>
@@ -88,8 +88,7 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="memoryappenderconfiguration.html#maxmessages" class="tsd-kind-icon">max<wbr>Messages</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="memoryappenderconfiguration.html#threshold" class="tsd-kind-icon">threshold</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="browserconsoleappenderconfiguration.html#threshold" class="tsd-kind-icon">threshold</a></li>
 							</ul>
 						</section>
 					</div>
@@ -98,36 +97,20 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="maxmessages" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> max<wbr>Messages</h3>
-					<div class="tsd-signature tsd-kind-icon">max<wbr>Messages<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/b33cb16/src/memory-appender.configuration.ts#L10">memory-appender.configuration.ts:10</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Maximum number of log messages stored by the appender.</p>
-						</div>
-						<p>Default: 250.</p>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="threshold" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> threshold</h3>
 					<div class="tsd-signature tsd-kind-icon">threshold<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/b33cb16/src/memory-appender.configuration.ts#L19">memory-appender.configuration.ts:19</a></li>
+							<li>Defined in browser-console-appender.configuration.ts:12</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>Threshold.</p>
 						</div>
-						<p>Valid values are: ALL, DEBUG, ERROR, FATAL, INFO, OFF, TRACE, WARN.</p>
-						<p>Default: ALL.</p>
+						<p>Valid values are: ALL, DEBUG, ERROR, FATAL, INFO, OFF, TRACE, WARN</p>
+						<p>Default: DEBUG.</p>
 					</div>
 				</section>
 			</section>
@@ -166,9 +149,18 @@
 					<li class=" tsd-kind-interface">
 						<a href="ajaxappenderconfiguration.html" class="tsd-kind-icon">Ajax<wbr>Appender<wbr>Configuration</a>
 					</li>
-					<li class=" tsd-kind-interface">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface">
 						<a href="browserconsoleappenderconfiguration.html" class="tsd-kind-icon">Browser<wbr>Console<wbr>Appender<wbr>Configuration</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="browserconsoleappenderconfiguration.html#threshold" class="tsd-kind-icon">threshold</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-interface">
 						<a href="localstorageappenderconfiguration.html" class="tsd-kind-icon">Local<wbr>Storage<wbr>Appender<wbr>Configuration</a>
 					</li>
@@ -178,21 +170,9 @@
 					<li class=" tsd-kind-interface">
 						<a href="loggingserviceconfiguration.html" class="tsd-kind-icon">Logging<wbr>Service<wbr>Configuration</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-interface">
+					<li class=" tsd-kind-interface">
 						<a href="memoryappenderconfiguration.html" class="tsd-kind-icon">Memory<wbr>Appender<wbr>Configuration</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="memoryappenderconfiguration.html#maxmessages" class="tsd-kind-icon">max<wbr>Messages</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="memoryappenderconfiguration.html#threshold" class="tsd-kind-icon">threshold</a>
-							</li>
-						</ul>
 					</li>
-				</ul>
-				<ul class="after-current">
 				</ul>
 			</nav>
 		</div>
