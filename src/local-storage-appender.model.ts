@@ -7,8 +7,19 @@ import { LogMessage } from "./log-message.model";
 
 /**
  * An appender which stores the log messages in the browser's local storage.
+ *
  * The messages are saved JSON-serialized.
  * You have to configure which key is used for storing the messages.
+ *
+ * A typical configuration could be:
+ *
+ * ```json
+ * {
+ *   "localStorageKey": "myLogs",
+ *   "maxMessages": 500,
+ *   "threshold": "INFO"
+ * }
+ * ```
  */
 export class LocalStorageAppender extends log4javascript.Appender {
 
@@ -60,7 +71,9 @@ export class LocalStorageAppender extends log4javascript.Appender {
 
 	/**
 	 * Configures the logging depending on the given configuration.
+	 *
 	 * Only the defined properties get overwritten.
+	 * The localStorageKey cannot be modified.
 	 *
 	 * @param configuration configuration data.
 	 */

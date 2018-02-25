@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>LoggingServiceConfiguration | ionic-logging-service</title>
+	<title>AjaxAppenderConfiguration | ionic-logging-service</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../index.html">Globals</a>
 				</li>
 				<li>
-					<a href="loggingserviceconfiguration.html">LoggingServiceConfiguration</a>
+					<a href="ajaxappenderconfiguration.html">AjaxAppenderConfiguration</a>
 				</li>
 			</ul>
-			<h1>Interface LoggingServiceConfiguration</h1>
+			<h1>Interface AjaxAppenderConfiguration</h1>
 		</div>
 	</div>
 </header>
@@ -69,7 +69,7 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Partial configuration definition for LoggingService</p>
+						<p>Configuration for AjaxAppender.</p>
 					</div>
 				</div>
 			</section>
@@ -77,7 +77,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">LoggingServiceConfiguration</span>
+						<span class="target">AjaxAppenderConfiguration</span>
 					</li>
 				</ul>
 			</section>
@@ -88,10 +88,10 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="loggingserviceconfiguration.html#ajaxappender" class="tsd-kind-icon">ajax<wbr>Appender</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="loggingserviceconfiguration.html#localstorageappender" class="tsd-kind-icon">local<wbr>Storage<wbr>Appender</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="loggingserviceconfiguration.html#loglevels" class="tsd-kind-icon">log<wbr>Levels</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="loggingserviceconfiguration.html#memoryappender" class="tsd-kind-icon">memory<wbr>Appender</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ajaxappenderconfiguration.html#batchsize" class="tsd-kind-icon">batch<wbr>Size</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ajaxappenderconfiguration.html#threshold" class="tsd-kind-icon">threshold</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ajaxappenderconfiguration.html#timerinterval" class="tsd-kind-icon">timer<wbr>Interval</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ajaxappenderconfiguration.html#url" class="tsd-kind-icon">url</a></li>
 							</ul>
 						</section>
 					</div>
@@ -100,63 +100,67 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="ajaxappender" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> ajax<wbr>Appender</h3>
-					<div class="tsd-signature tsd-kind-icon">ajax<wbr>Appender<span class="tsd-signature-symbol">:</span> <a href="ajaxappenderconfiguration.html" class="tsd-signature-type">AjaxAppenderConfiguration</a></div>
+					<a name="batchsize" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> batch<wbr>Size</h3>
+					<div class="tsd-signature tsd-kind-icon">batch<wbr>Size<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/fa8c371/src/logging-service.configuration.ts#L30">logging-service.configuration.ts:30</a></li>
+							<li>Defined in ajax-appender.configuration.ts:16</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Settings for AjaxAppender.</p>
+							<p>Number of log messages sent in each request.</p>
 						</div>
+						<p>Default: 1.</p>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="localstorageappender" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> local<wbr>Storage<wbr>Appender</h3>
-					<div class="tsd-signature tsd-kind-icon">local<wbr>Storage<wbr>Appender<span class="tsd-signature-symbol">:</span> <a href="localstorageappenderconfiguration.html" class="tsd-signature-type">LocalStorageAppenderConfiguration</a></div>
+					<a name="threshold" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> threshold</h3>
+					<div class="tsd-signature tsd-kind-icon">threshold<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/fa8c371/src/logging-service.configuration.ts#L35">logging-service.configuration.ts:35</a></li>
+							<li>Defined in ajax-appender.configuration.ts:34</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Settings for LocalStorageAppender.</p>
+							<p>Threshold.</p>
 						</div>
+						<p>Valid values are: ALL, DEBUG, ERROR, FATAL, INFO, OFF, TRACE, WARN</p>
+						<p>Default: WARN.</p>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="loglevels" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> log<wbr>Levels</h3>
-					<div class="tsd-signature tsd-kind-icon">log<wbr>Levels<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<a name="timerinterval" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> timer<wbr>Interval</h3>
+					<div class="tsd-signature tsd-kind-icon">timer<wbr>Interval<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/fa8c371/src/logging-service.configuration.ts#L14">logging-service.configuration.ts:14</a></li>
+							<li>Defined in ajax-appender.configuration.ts:25</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Log levels for different loggers.
-							Default: root: WARN</p>
+							<p>Interval for sending log messages (in milliseconds).</p>
 						</div>
+						<p>If set to 0, every message will be sent immediatedly.</p>
+						<p>Default: 0.</p>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="memoryappender" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> memory<wbr>Appender</h3>
-					<div class="tsd-signature tsd-kind-icon">memory<wbr>Appender<span class="tsd-signature-symbol">:</span> <a href="memoryappenderconfiguration.html" class="tsd-signature-type">MemoryAppenderConfiguration</a></div>
+					<a name="url" class="tsd-anchor"></a>
+					<h3>url</h3>
+					<div class="tsd-signature tsd-kind-icon">url<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/fa8c371/src/logging-service.configuration.ts#L40">logging-service.configuration.ts:40</a></li>
+							<li>Defined in ajax-appender.configuration.ts:9</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Settings for MemoryAppender.</p>
+							<p>Url to send JavaScript logs</p>
 						</div>
 					</div>
 				</section>
@@ -193,36 +197,36 @@
 					<li class=" tsd-kind-class">
 						<a href="../classes/memoryappender.html" class="tsd-kind-icon">Memory<wbr>Appender</a>
 					</li>
-					<li class=" tsd-kind-interface">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface">
 						<a href="ajaxappenderconfiguration.html" class="tsd-kind-icon">Ajax<wbr>Appender<wbr>Configuration</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="ajaxappenderconfiguration.html#batchsize" class="tsd-kind-icon">batch<wbr>Size</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="ajaxappenderconfiguration.html#threshold" class="tsd-kind-icon">threshold</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="ajaxappenderconfiguration.html#timerinterval" class="tsd-kind-icon">timer<wbr>Interval</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="ajaxappenderconfiguration.html#url" class="tsd-kind-icon">url</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-interface">
 						<a href="localstorageappenderconfiguration.html" class="tsd-kind-icon">Local<wbr>Storage<wbr>Appender<wbr>Configuration</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="logmessage.html" class="tsd-kind-icon">Log<wbr>Message</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-interface">
+					<li class=" tsd-kind-interface">
 						<a href="loggingserviceconfiguration.html" class="tsd-kind-icon">Logging<wbr>Service<wbr>Configuration</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="loggingserviceconfiguration.html#ajaxappender" class="tsd-kind-icon">ajax<wbr>Appender</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="loggingserviceconfiguration.html#localstorageappender" class="tsd-kind-icon">local<wbr>Storage<wbr>Appender</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="loggingserviceconfiguration.html#loglevels" class="tsd-kind-icon">log<wbr>Levels</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="loggingserviceconfiguration.html#memoryappender" class="tsd-kind-icon">memory<wbr>Appender</a>
-							</li>
-						</ul>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-interface">
 						<a href="memoryappenderconfiguration.html" class="tsd-kind-icon">Memory<wbr>Appender<wbr>Configuration</a>
 					</li>

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>MemoryAppender | ionic-logging-service</title>
+	<title>AjaxAppender | ionic-logging-service</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../index.html">Globals</a>
 				</li>
 				<li>
-					<a href="memoryappender.html">MemoryAppender</a>
+					<a href="ajaxappender.html">AjaxAppender</a>
 				</li>
 			</ul>
-			<h1>Class MemoryAppender</h1>
+			<h1>Class AjaxAppender</h1>
 		</div>
 	</div>
 </header>
@@ -69,16 +69,14 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>An appender which stores the log messages in the browser&#39;s memory.</p>
+						<p>An appender which sends the log messages to a server via HTTP.</p>
 					</div>
-					<p>The MemoryAppender is enabled by default.
-					If you do not specify anything else, it is using this configuration:</p>
-					<pre><code class="lang-JSON">{
-  <span class="hljs-attr">"memoryAppender"</span>: [
-    {
-      <span class="hljs-attr">"maxMessages"</span>: <span class="hljs-number">250</span>,
-      <span class="hljs-attr">"threshold"</span>: <span class="hljs-string">"ALL"</span>
-    }
+					<p>A typical configuration could be:</p>
+					<pre><code class="lang-json">{
+  <span class="hljs-attr">"url"</span>: <span class="hljs-string">"https://my.backend.xy/LoggingBackend"</span>,
+  <span class="hljs-attr">"batchSize"</span>: <span class="hljs-number">10</span>,
+  <span class="hljs-attr">"timerInterval"</span>: <span class="hljs-number">60000</span>,
+  <span class="hljs-attr">"threshold"</span>: <span class="hljs-string">"INFO"</span>
 }
 </code></pre>
 				</div>
@@ -90,7 +88,7 @@
 						<span class="tsd-signature-type">Appender</span>
 						<ul class="tsd-hierarchy">
 							<li>
-								<span class="target">MemoryAppender</span>
+								<span class="target">AjaxAppender</span>
 							</li>
 						</ul>
 					</li>
@@ -103,24 +101,31 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="memoryappender.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="ajaxappender.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="ajaxappender.html#appenderfailed" class="tsd-kind-icon">appender<wbr>Failed</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="memoryappender.html#append" class="tsd-kind-icon">append</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="memoryappender.html#configure" class="tsd-kind-icon">configure</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="memoryappender.html#doappend" class="tsd-kind-icon">do<wbr>Append</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="memoryappender.html#getlayout" class="tsd-kind-icon">get<wbr>Layout</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="memoryappender.html#getlogmessages" class="tsd-kind-icon">get<wbr>Log<wbr>Messages</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="memoryappender.html#getmaxmessages" class="tsd-kind-icon">get<wbr>Max<wbr>Messages</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="memoryappender.html#getthreshold" class="tsd-kind-icon">get<wbr>Threshold</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="memoryappender.html#setlayout" class="tsd-kind-icon">set<wbr>Layout</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="memoryappender.html#setmaxmessages" class="tsd-kind-icon">set<wbr>Max<wbr>Messages</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="memoryappender.html#setonlogmessageschangedcallback" class="tsd-kind-icon">set<wbr>OnLog<wbr>Messages<wbr>Changed<wbr>Callback</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="memoryappender.html#setthreshold" class="tsd-kind-icon">set<wbr>Threshold</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="memoryappender.html#tostring" class="tsd-kind-icon">to<wbr>String</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="ajaxappender.html#append" class="tsd-kind-icon">append</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="ajaxappender.html#configure" class="tsd-kind-icon">configure</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="ajaxappender.html#doappend" class="tsd-kind-icon">do<wbr>Append</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="ajaxappender.html#getbatchsize" class="tsd-kind-icon">get<wbr>Batch<wbr>Size</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="ajaxappender.html#getinternalappender" class="tsd-kind-icon">get<wbr>Internal<wbr>Appender</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="ajaxappender.html#getlayout" class="tsd-kind-icon">get<wbr>Layout</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="ajaxappender.html#getthreshold" class="tsd-kind-icon">get<wbr>Threshold</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="ajaxappender.html#gettimerinterval" class="tsd-kind-icon">get<wbr>Timer<wbr>Interval</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="ajaxappender.html#setbatchsize" class="tsd-kind-icon">set<wbr>Batch<wbr>Size</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="ajaxappender.html#setlayout" class="tsd-kind-icon">set<wbr>Layout</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="ajaxappender.html#setthreshold" class="tsd-kind-icon">set<wbr>Threshold</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="ajaxappender.html#settimerinterval" class="tsd-kind-icon">set<wbr>Timer<wbr>Interval</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="ajaxappender.html#tostring" class="tsd-kind-icon">to<wbr>String</a></li>
 							</ul>
 						</section>
 					</div>
@@ -132,13 +137,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Memory<wbr>Appender<span class="tsd-signature-symbol">(</span>configuration<span class="tsd-signature-symbol">?: </span><a href="../interfaces/memoryappenderconfiguration.html" class="tsd-signature-type">MemoryAppenderConfiguration</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="memoryappender.html" class="tsd-signature-type">MemoryAppender</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Ajax<wbr>Appender<span class="tsd-signature-symbol">(</span>configuration<span class="tsd-signature-symbol">: </span><a href="../interfaces/ajaxappenderconfiguration.html" class="tsd-signature-type">AjaxAppenderConfiguration</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ajaxappender.html" class="tsd-signature-type">AjaxAppender</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/fa8c371/src/memory-appender.model.ts#L34">memory-appender.model.ts:34</a></li>
+									<li>Defined in ajax-appender.model.ts:35</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -149,7 +154,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> configuration: <a href="../interfaces/memoryappenderconfiguration.html" class="tsd-signature-type">MemoryAppenderConfiguration</a></h5>
+									<h5>configuration: <a href="../interfaces/ajaxappenderconfiguration.html" class="tsd-signature-type">AjaxAppenderConfiguration</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
 											<p>configuration for the appender.</p>
@@ -157,9 +162,32 @@
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="memoryappender.html" class="tsd-signature-type">MemoryAppender</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="ajaxappender.html" class="tsd-signature-type">AjaxAppender</a></h4>
 						</li>
 					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="appenderfailed" class="tsd-anchor"></a>
+					<h3>appender<wbr>Failed</h3>
+					<div class="tsd-signature tsd-kind-icon">appender<wbr>Failed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in ajax-appender.model.ts:32</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Event triggered when the appender could not send log messages to the server.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>error message</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -175,7 +203,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides Appender.append</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/fa8c371/src/memory-appender.model.ts#L78">memory-appender.model.ts:78</a></li>
+									<li>Defined in ajax-appender.model.ts:103</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -200,25 +228,26 @@
 					<a name="configure" class="tsd-anchor"></a>
 					<h3>configure</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">configure<span class="tsd-signature-symbol">(</span>configuration<span class="tsd-signature-symbol">: </span><a href="../interfaces/memoryappenderconfiguration.html" class="tsd-signature-type">MemoryAppenderConfiguration</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">configure<span class="tsd-signature-symbol">(</span>configuration<span class="tsd-signature-symbol">: </span><a href="../interfaces/ajaxappenderconfiguration.html" class="tsd-signature-type">AjaxAppenderConfiguration</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/fa8c371/src/memory-appender.model.ts#L61">memory-appender.model.ts:61</a></li>
+									<li>Defined in ajax-appender.model.ts:80</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Configures the logging depending on the given configuration.
-									Only the defined properties get overwritten.</p>
+									<p>Configures the logging depending on the given configuration.</p>
 								</div>
+								<p>Only the defined properties get overwritten.
+								The url cannot be modified.</p>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>configuration: <a href="../interfaces/memoryappenderconfiguration.html" class="tsd-signature-type">MemoryAppenderConfiguration</a></h5>
+									<h5>configuration: <a href="../interfaces/ajaxappenderconfiguration.html" class="tsd-signature-type">AjaxAppenderConfiguration</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>configuration data.</p>
 									</div>
@@ -258,18 +287,63 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getbatchsize" class="tsd-anchor"></a>
+					<h3>get<wbr>Batch<wbr>Size</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Batch<wbr>Size<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in ajax-appender.model.ts:127</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the number of log messages sent in each request.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getinternalappender" class="tsd-anchor"></a>
+					<h3>get<wbr>Internal<wbr>Appender</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Internal<wbr>Appender<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AjaxAppender</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in ajax-appender.model.ts:120</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get the internally used appender.
+									Mainly for unit testing purposes.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">AjaxAppender</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
 					<a name="getlayout" class="tsd-anchor"></a>
 					<h3>get<wbr>Layout</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
 						<li class="tsd-signature tsd-kind-icon">get<wbr>Layout<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Layout</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from Appender.getLayout</p>
+								<p>Overrides Appender.getLayout</p>
 								<ul>
-									<li>Defined in /Users/markus/Development/Ritzlgrmft/ionic-logging-service/node_modules/log4javascript/log4javascript.d.ts:311</li>
+									<li>Defined in ajax-appender.model.ts:142</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -278,51 +352,6 @@
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Layout</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="getlogmessages" class="tsd-anchor"></a>
-					<h3>get<wbr>Log<wbr>Messages</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Log<wbr>Messages<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/logmessage.html" class="tsd-signature-type">LogMessage</a><span class="tsd-signature-symbol">[]</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/fa8c371/src/memory-appender.model.ts#L134">memory-appender.model.ts:134</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Gets all messages stored in memory.</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <a href="../interfaces/logmessage.html" class="tsd-signature-type">LogMessage</a><span class="tsd-signature-symbol">[]</span></h4>
-							<p>stored messages</p>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="getmaxmessages" class="tsd-anchor"></a>
-					<h3>get<wbr>Max<wbr>Messages</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Max<wbr>Messages<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/fa8c371/src/memory-appender.model.ts#L111">memory-appender.model.ts:111</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Get the maximum number of messages which will be stored in memory.</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -349,18 +378,71 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="gettimerinterval" class="tsd-anchor"></a>
+					<h3>get<wbr>Timer<wbr>Interval</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Timer<wbr>Interval<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in ajax-appender.model.ts:156</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the length of time in milliseconds between each sending of queued log messages.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setbatchsize" class="tsd-anchor"></a>
+					<h3>set<wbr>Batch<wbr>Size</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Batch<wbr>Size<span class="tsd-signature-symbol">(</span>batchSize<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in ajax-appender.model.ts:135</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the number of log messages to send in each request.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>batchSize: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>new batch size</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
 					<a name="setlayout" class="tsd-anchor"></a>
 					<h3>set<wbr>Layout</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
 						<li class="tsd-signature tsd-kind-icon">set<wbr>Layout<span class="tsd-signature-symbol">(</span>layout<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Layout</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from Appender.setLayout</p>
+								<p>Overrides Appender.setLayout</p>
 								<ul>
-									<li>Defined in /Users/markus/Development/Ritzlgrmft/ionic-logging-service/node_modules/log4javascript/log4javascript.d.ts:306</li>
+									<li>Defined in ajax-appender.model.ts:149</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -372,88 +454,6 @@
 							<ul class="tsd-parameters">
 								<li>
 									<h5>layout: <span class="tsd-signature-type">Layout</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="setmaxmessages" class="tsd-anchor"></a>
-					<h3>set<wbr>Max<wbr>Messages</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Max<wbr>Messages<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/fa8c371/src/memory-appender.model.ts#L121">memory-appender.model.ts:121</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Set the maximum number of messages which will be stored in memory.</p>
-								</div>
-								<p>If the appender stores currently more messages than the new value allows, the oldest messages get removed.</p>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>value: <span class="tsd-signature-type">number</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>new maximum number</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="setonlogmessageschangedcallback" class="tsd-anchor"></a>
-					<h3>set<wbr>OnLog<wbr>Messages<wbr>Changed<wbr>Callback</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>OnLog<wbr>Messages<wbr>Changed<wbr>Callback<span class="tsd-signature-symbol">(</span>callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/fa8c371/src/memory-appender.model.ts#L143">memory-appender.model.ts:143</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Registers a callback which will be called every time a new message is appended.
-									This could be useful if you want to show new messages in realtime.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>callback: <span class="tsd-signature-type">function</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>callback to be called</p>
-									</div>
-									<ul class="tsd-parameters">
-										<li class="tsd-parameter-siganture">
-											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><a href="../interfaces/logmessage.html" class="tsd-signature-type">LogMessage</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-											</ul>
-											<ul class="tsd-descriptions">
-												<li class="tsd-description">
-													<h4 class="tsd-parameters-title">Parameters</h4>
-													<ul class="tsd-parameters">
-														<li>
-															<h5>message: <a href="../interfaces/logmessage.html" class="tsd-signature-type">LogMessage</a></h5>
-														</li>
-													</ul>
-													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-												</li>
-											</ul>
-										</li>
-									</ul>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -489,6 +489,37 @@
 						</li>
 					</ul>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="settimerinterval" class="tsd-anchor"></a>
+					<h3>set<wbr>Timer<wbr>Interval</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Timer<wbr>Interval<span class="tsd-signature-symbol">(</span>timerInterval<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in ajax-appender.model.ts:164</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the length of time in milliseconds between each sending of queued log messages.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>timerInterval: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>new timer interval</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
 					<a name="tostring" class="tsd-anchor"></a>
 					<h3>to<wbr>String</h3>
@@ -500,7 +531,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides Appender.toString</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/fa8c371/src/memory-appender.model.ts#L104">memory-appender.model.ts:104</a></li>
+									<li>Defined in ajax-appender.model.ts:112</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -529,9 +560,60 @@
 					<li class=" tsd-kind-enum">
 						<a href="../enums/loglevel.html" class="tsd-kind-icon">Log<wbr>Level</a>
 					</li>
-					<li class=" tsd-kind-class">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class">
 						<a href="ajaxappender.html" class="tsd-kind-icon">Ajax<wbr>Appender</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="ajaxappender.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="ajaxappender.html#appenderfailed" class="tsd-kind-icon">appender<wbr>Failed</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+								<a href="ajaxappender.html#append" class="tsd-kind-icon">append</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="ajaxappender.html#configure" class="tsd-kind-icon">configure</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="ajaxappender.html#doappend" class="tsd-kind-icon">do<wbr>Append</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="ajaxappender.html#getbatchsize" class="tsd-kind-icon">get<wbr>Batch<wbr>Size</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="ajaxappender.html#getinternalappender" class="tsd-kind-icon">get<wbr>Internal<wbr>Appender</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+								<a href="ajaxappender.html#getlayout" class="tsd-kind-icon">get<wbr>Layout</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="ajaxappender.html#getthreshold" class="tsd-kind-icon">get<wbr>Threshold</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="ajaxappender.html#gettimerinterval" class="tsd-kind-icon">get<wbr>Timer<wbr>Interval</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="ajaxappender.html#setbatchsize" class="tsd-kind-icon">set<wbr>Batch<wbr>Size</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+								<a href="ajaxappender.html#setlayout" class="tsd-kind-icon">set<wbr>Layout</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="ajaxappender.html#setthreshold" class="tsd-kind-icon">set<wbr>Threshold</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="ajaxappender.html#settimerinterval" class="tsd-kind-icon">set<wbr>Timer<wbr>Interval</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+								<a href="ajaxappender.html#tostring" class="tsd-kind-icon">to<wbr>String</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-class">
 						<a href="localstorageappender.html" class="tsd-kind-icon">Local<wbr>Storage<wbr>Appender</a>
 					</li>
@@ -544,54 +626,9 @@
 					<li class=" tsd-kind-class">
 						<a href="loggingservice.html" class="tsd-kind-icon">Logging<wbr>Service</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-class">
+					<li class=" tsd-kind-class">
 						<a href="memoryappender.html" class="tsd-kind-icon">Memory<wbr>Appender</a>
-						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="memoryappender.html#constructor" class="tsd-kind-icon">constructor</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-								<a href="memoryappender.html#append" class="tsd-kind-icon">append</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="memoryappender.html#configure" class="tsd-kind-icon">configure</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="memoryappender.html#doappend" class="tsd-kind-icon">do<wbr>Append</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="memoryappender.html#getlayout" class="tsd-kind-icon">get<wbr>Layout</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="memoryappender.html#getlogmessages" class="tsd-kind-icon">get<wbr>Log<wbr>Messages</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="memoryappender.html#getmaxmessages" class="tsd-kind-icon">get<wbr>Max<wbr>Messages</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="memoryappender.html#getthreshold" class="tsd-kind-icon">get<wbr>Threshold</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="memoryappender.html#setlayout" class="tsd-kind-icon">set<wbr>Layout</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="memoryappender.html#setmaxmessages" class="tsd-kind-icon">set<wbr>Max<wbr>Messages</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="memoryappender.html#setonlogmessageschangedcallback" class="tsd-kind-icon">set<wbr>OnLog<wbr>Messages<wbr>Changed<wbr>Callback</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="memoryappender.html#setthreshold" class="tsd-kind-icon">set<wbr>Threshold</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-								<a href="memoryappender.html#tostring" class="tsd-kind-icon">to<wbr>String</a>
-							</li>
-						</ul>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-interface">
 						<a href="../interfaces/ajaxappenderconfiguration.html" class="tsd-kind-icon">Ajax<wbr>Appender<wbr>Configuration</a>
 					</li>

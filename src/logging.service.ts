@@ -4,6 +4,7 @@ import { ConfigurationService } from "ionic-configuration-service";
 
 import * as log4javascript from "log4javascript";
 
+import { AjaxAppender } from "./ajax-appender.model";
 import { LocalStorageAppender } from "./local-storage-appender.model";
 import { LogLevelConverter } from "./log-level.converter";
 import { LogMessage } from "./log-message.model";
@@ -101,30 +102,8 @@ export class LoggingService {
 
 		// configure AjaxAppender
 		if (typeof configuration.ajaxAppender !== "undefined") {
-			const ajaxAppender = new log4javascript.AjaxAppender(configuration.ajaxAppender.url, false);
-			if (typeof configuration.ajaxAppender.threshold !== "undefined") {
-				try {
-					ajaxAppender.setThreshold(
-						LogLevelConverter.levelToLog4Javascript(
-							LogLevelConverter.levelFromString(configuration.ajaxAppender.threshold)));
-				} catch (e) {
-					throw new Error(`invalid threshold ${configuration.ajaxAppender.threshold}`);
-				}
-			}
-			ajaxAppender.setLayout(new log4javascript.JsonLayout(false, false));
-			ajaxAppender.addHeader("Content-Type", "application/json; charset=utf-8");
-			ajaxAppender.setSendAllOnUnload(true);
-			if (configuration.ajaxAppender.timerInterval > 0) {
-				ajaxAppender.setTimed(true);
-				ajaxAppender.setTimerInterval(configuration.ajaxAppender.timerInterval);
-			} else {
-				ajaxAppender.setTimed(false);
-				ajaxAppender.setTimerInterval(0);
-			}
-			if (typeof configuration.ajaxAppender.batchSize !== "undefined") {
-				ajaxAppender.setBatchSize(configuration.ajaxAppender.batchSize);
-			}
-			ajaxAppender.setFailCallback((message: any) => {
+			const ajaxAppender = new AjaxAppender(configuration.ajaxAppender);
+			ajaxAppender.appenderFailed.subscribe((message: string) => {
 				this.ajaxAppenderFailed.emit(message);
 			});
 			log4javascript.getRootLogger().addAppender(ajaxAppender);

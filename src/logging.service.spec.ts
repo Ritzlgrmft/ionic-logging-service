@@ -6,6 +6,7 @@ import * as log4javascript from "log4javascript";
 
 import { ConfigurationService } from "ionic-configuration-service";
 
+import { AjaxAppender } from "./ajax-appender.model";
 import { LocalStorageAppender } from "./local-storage-appender.model";
 import { LogMessage } from "./log-message.model";
 import { Logger } from "./logger.model";
@@ -160,10 +161,10 @@ describe("LoggingService", () => {
 					},
 				};
 
-				expect(() => loggingService.configure(config)).toThrowError("invalid threshold xxx");
+				expect(() => loggingService.configure(config)).toThrowError("invalid level xxx");
 			});
 
-			it("ajaxAppender has default threshold of ALL", () => {
+			it("ajaxAppender has default threshold of WARN", () => {
 
 				const config: LoggingServiceConfiguration = {
 					ajaxAppender: {
@@ -172,10 +173,10 @@ describe("LoggingService", () => {
 				};
 
 				loggingService.configure(config);
-				const internalLogger = new Logger().getInternalLogger();
-				const ajaxAppender = internalLogger.getEffectiveAppenders()[2];
+				const appenders = new Logger().getInternalLogger().getEffectiveAppenders();
+				const ajaxAppender = appenders.find((a) => a.toString() === "Ionic.Logging.AjaxAppender") as AjaxAppender;
 
-				expect(ajaxAppender.getThreshold()).toBe(log4javascript.Level.ALL);
+				expect(ajaxAppender.getThreshold()).toBe(log4javascript.Level.WARN);
 			});
 
 			it("ajaxAppender has default timer interval of 0", () => {
@@ -187,10 +188,10 @@ describe("LoggingService", () => {
 				};
 
 				loggingService.configure(config);
-				const internalLogger = new Logger().getInternalLogger();
-				const ajaxAppender = internalLogger.getEffectiveAppenders()[2] as log4javascript.AjaxAppender;
+				const appenders = new Logger().getInternalLogger().getEffectiveAppenders();
+				const ajaxAppender = appenders.find((a) => a.toString() === "Ionic.Logging.AjaxAppender") as AjaxAppender;
 
-				expect(ajaxAppender.isTimed()).toBeFalsy();
+				expect(ajaxAppender.getInternalAppender().isTimed()).toBeFalsy();
 				expect(ajaxAppender.getTimerInterval()).toBe(0);
 			});
 
@@ -204,10 +205,10 @@ describe("LoggingService", () => {
 				};
 
 				loggingService.configure(config);
-				const internalLogger = new Logger().getInternalLogger();
-				const ajaxAppender = internalLogger.getEffectiveAppenders()[2] as log4javascript.AjaxAppender;
+				const appenders = new Logger().getInternalLogger().getEffectiveAppenders();
+				const ajaxAppender = appenders.find((a) => a.toString() === "Ionic.Logging.AjaxAppender") as AjaxAppender;
 
-				expect(ajaxAppender.isTimed()).toBeTruthy();
+				expect(ajaxAppender.getInternalAppender().isTimed()).toBeTruthy();
 				expect(ajaxAppender.getTimerInterval()).toBe(1234);
 			});
 
@@ -220,8 +221,8 @@ describe("LoggingService", () => {
 				};
 
 				loggingService.configure(config);
-				const internalLogger = new Logger().getInternalLogger();
-				const ajaxAppender = internalLogger.getEffectiveAppenders()[2] as log4javascript.AjaxAppender;
+				const appenders = new Logger().getInternalLogger().getEffectiveAppenders();
+				const ajaxAppender = appenders.find((a) => a.toString() === "Ionic.Logging.AjaxAppender") as AjaxAppender;
 
 				expect(ajaxAppender.getBatchSize()).toBe(1);
 			});
@@ -236,8 +237,8 @@ describe("LoggingService", () => {
 				};
 
 				loggingService.configure(config);
-				const internalLogger = new Logger().getInternalLogger();
-				const ajaxAppender = internalLogger.getEffectiveAppenders()[2] as log4javascript.AjaxAppender;
+				const appenders = new Logger().getInternalLogger().getEffectiveAppenders();
+				const ajaxAppender = appenders.find((a) => a.toString() === "Ionic.Logging.AjaxAppender") as AjaxAppender;
 
 				expect(ajaxAppender.getBatchSize()).toBe(1234);
 			});
@@ -296,8 +297,9 @@ describe("LoggingService", () => {
 				};
 
 				loggingService.configure(config);
-				const internalLogger = new Logger().getInternalLogger();
-				const localStorageAppender = internalLogger.getEffectiveAppenders()[2] as LocalStorageAppender;
+				const appenders = new Logger().getInternalLogger().getEffectiveAppenders();
+				const localStorageAppender = appenders.find(
+					(a) => a.toString() === "Ionic.Logging.LocalStorageAppender") as LocalStorageAppender;
 
 				expect(localStorageAppender.getThreshold()).toBe(log4javascript.Level.WARN);
 			});
@@ -312,8 +314,9 @@ describe("LoggingService", () => {
 				};
 
 				loggingService.configure(config);
-				const internalLogger = new Logger().getInternalLogger();
-				const localStorageAppender = internalLogger.getEffectiveAppenders()[2] as LocalStorageAppender;
+				const appenders = new Logger().getInternalLogger().getEffectiveAppenders();
+				const localStorageAppender = appenders.find(
+					(a) => a.toString() === "Ionic.Logging.LocalStorageAppender") as LocalStorageAppender;
 
 				expect(localStorageAppender.getThreshold()).toBe(log4javascript.Level.INFO);
 			});
@@ -327,8 +330,9 @@ describe("LoggingService", () => {
 				};
 
 				loggingService.configure(config);
-				const internalLogger = new Logger().getInternalLogger();
-				const localStorageAppender = internalLogger.getEffectiveAppenders()[2] as LocalStorageAppender;
+				const appenders = new Logger().getInternalLogger().getEffectiveAppenders();
+				const localStorageAppender = appenders.find(
+					(a) => a.toString() === "Ionic.Logging.LocalStorageAppender") as LocalStorageAppender;
 
 				expect(localStorageAppender.getMaxMessages()).toBe(250);
 			});
@@ -343,8 +347,9 @@ describe("LoggingService", () => {
 				};
 
 				loggingService.configure(config);
-				const internalLogger = new Logger().getInternalLogger();
-				const localStorageAppender = internalLogger.getEffectiveAppenders()[2] as LocalStorageAppender;
+				const appenders = new Logger().getInternalLogger().getEffectiveAppenders();
+				const localStorageAppender = appenders.find(
+					(a) => a.toString() === "Ionic.Logging.LocalStorageAppender") as LocalStorageAppender;
 
 				expect(localStorageAppender.getMaxMessages()).toBe(1234);
 			});
@@ -357,8 +362,8 @@ describe("LoggingService", () => {
 				};
 
 				loggingService.configure(config);
-				const internalLogger = new Logger().getInternalLogger();
-				const memoryAppender = internalLogger.getEffectiveAppenders()[1] as MemoryAppender;
+				const appenders = new Logger().getInternalLogger().getEffectiveAppenders();
+				const memoryAppender = appenders.find((a) => a.toString() === "Ionic.Logging.MemoryAppender") as MemoryAppender;
 
 				expect(memoryAppender.getMaxMessages()).toBe(250);
 			});
@@ -370,8 +375,8 @@ describe("LoggingService", () => {
 				};
 
 				loggingService.configure(config);
-				const internalLogger = new Logger().getInternalLogger();
-				const memoryAppender = internalLogger.getEffectiveAppenders()[1] as MemoryAppender;
+				const appenders = new Logger().getInternalLogger().getEffectiveAppenders();
+				const memoryAppender = appenders.find((a) => a.toString() === "Ionic.Logging.MemoryAppender") as MemoryAppender;
 
 				expect(memoryAppender.getMaxMessages()).toBe(250);
 			});
@@ -385,8 +390,8 @@ describe("LoggingService", () => {
 				};
 
 				loggingService.configure(config);
-				const internalLogger = new Logger().getInternalLogger();
-				const memoryAppender = internalLogger.getEffectiveAppenders()[1] as MemoryAppender;
+				const appenders = new Logger().getInternalLogger().getEffectiveAppenders();
+				const memoryAppender = appenders.find((a) => a.toString() === "Ionic.Logging.MemoryAppender") as MemoryAppender;
 
 				expect(memoryAppender.getMaxMessages()).toBe(1234);
 			});

@@ -1,4 +1,5 @@
-﻿import { LocalStorageAppenderConfiguration } from "./local-storage-appender.configuration";
+﻿import { AjaxAppenderConfiguration } from "./ajax-appender.configuration";
+import { LocalStorageAppenderConfiguration } from "./local-storage-appender.configuration";
 import { MemoryAppenderConfiguration } from "./memory-appender.configuration";
 
 /**
@@ -26,32 +27,7 @@ export interface LoggingServiceConfiguration {
 	/**
 	 * Settings for AjaxAppender.
 	 */
-	ajaxAppender?: {
-		/**
-		 * Url to send JavaScript logs
-		 */
-		url: string;
-
-		/**
-		 * Number of log messages sent in each request.
-		 * Default: 1.
-		 */
-		batchSize?: number;
-
-		/**
-		 * Interval for sending log messages.
-		 * If set to 0, every message will be sent immediatedly.
-		 * Default: 0.
-		 */
-		timerInterval?: number;
-
-		/**
-		 * Threshold.
-		 * Valid values are: ALL, DEBUG, ERROR, FATAL, INFO, OFF, TRACE, WARN
-		 * Default: ALL.
-		 */
-		threshold?: string;
-	};
+	ajaxAppender?: AjaxAppenderConfiguration;
 
 	/**
 	 * Settings for LocalStorageAppender.

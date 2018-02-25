@@ -69,10 +69,17 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>An appender which stores the log messages in the browser&#39;s local storage.
-							The messages are saved JSON-serialized.
-						You have to configure which key is used for storing the messages.</p>
+						<p>An appender which stores the log messages in the browser&#39;s local storage.</p>
 					</div>
+					<p>The messages are saved JSON-serialized.
+					You have to configure which key is used for storing the messages.</p>
+					<p>A typical configuration could be:</p>
+					<pre><code class="lang-json">{
+  <span class="hljs-attr">"localStorageKey"</span>: <span class="hljs-string">"myLogs"</span>,
+  <span class="hljs-attr">"maxMessages"</span>: <span class="hljs-number">500</span>,
+  <span class="hljs-attr">"threshold"</span>: <span class="hljs-string">"INFO"</span>
+}
+</code></pre>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
@@ -131,7 +138,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/25731f7/src/local-storage-appender.model.ts#L23">local-storage-appender.model.ts:23</a></li>
+									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/fa8c371/src/local-storage-appender.model.ts#L34">local-storage-appender.model.ts:34</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -168,7 +175,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides Appender.append</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/25731f7/src/local-storage-appender.model.ts#L87">local-storage-appender.model.ts:87</a></li>
+									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/fa8c371/src/local-storage-appender.model.ts#L100">local-storage-appender.model.ts:100</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -199,7 +206,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/25731f7/src/local-storage-appender.model.ts#L164">local-storage-appender.model.ts:164</a></li>
+									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/fa8c371/src/local-storage-appender.model.ts#L177">local-storage-appender.model.ts:177</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -222,14 +229,15 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/25731f7/src/local-storage-appender.model.ts#L67">local-storage-appender.model.ts:67</a></li>
+									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/fa8c371/src/local-storage-appender.model.ts#L80">local-storage-appender.model.ts:80</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Configures the logging depending on the given configuration.
-									Only the defined properties get overwritten.</p>
+									<p>Configures the logging depending on the given configuration.</p>
 								</div>
+								<p>Only the defined properties get overwritten.
+								The localStorageKey cannot be modified.</p>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -307,7 +315,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/25731f7/src/local-storage-appender.model.ts#L118">local-storage-appender.model.ts:118</a></li>
+									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/fa8c371/src/local-storage-appender.model.ts#L131">local-storage-appender.model.ts:131</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -329,7 +337,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/25731f7/src/local-storage-appender.model.ts#L156">local-storage-appender.model.ts:156</a></li>
+									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/fa8c371/src/local-storage-appender.model.ts#L169">local-storage-appender.model.ts:169</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -353,7 +361,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/25731f7/src/local-storage-appender.model.ts#L125">local-storage-appender.model.ts:125</a></li>
+									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/fa8c371/src/local-storage-appender.model.ts#L138">local-storage-appender.model.ts:138</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -427,7 +435,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/25731f7/src/local-storage-appender.model.ts#L135">local-storage-appender.model.ts:135</a></li>
+									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/fa8c371/src/local-storage-appender.model.ts#L148">local-storage-appender.model.ts:148</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -489,7 +497,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides Appender.toString</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/25731f7/src/local-storage-appender.model.ts#L111">local-storage-appender.model.ts:111</a></li>
+									<li>Defined in <a href="https://github.com/Ritzlgrmft/ionic-logging-service/blob/fa8c371/src/local-storage-appender.model.ts#L124">local-storage-appender.model.ts:124</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -517,6 +525,9 @@
 				<ul class="before-current">
 					<li class=" tsd-kind-enum">
 						<a href="../enums/loglevel.html" class="tsd-kind-icon">Log<wbr>Level</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="ajaxappender.html" class="tsd-kind-icon">Ajax<wbr>Appender</a>
 					</li>
 				</ul>
 				<ul class="current">
@@ -580,6 +591,9 @@
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="memoryappender.html" class="tsd-kind-icon">Memory<wbr>Appender</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/ajaxappenderconfiguration.html" class="tsd-kind-icon">Ajax<wbr>Appender<wbr>Configuration</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="../interfaces/localstorageappenderconfiguration.html" class="tsd-kind-icon">Local<wbr>Storage<wbr>Appender<wbr>Configuration</a>
