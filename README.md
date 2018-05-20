@@ -25,7 +25,7 @@
 
 This service encapsulates [log4javascript](http://log4javascript.org/)'s functionalities for apps built with [Ionic framework](http://ionicframework.com).
 
-The logging service is based on [log4javascript](http://log4javascript.org/), usings its appender and logger infrastructure.
+For a sample, just have a look at [ionic-logging-sample](https://github.com/Ritzlgrmft/ionic-logging-sample).
 
 ## Usage
 
