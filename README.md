@@ -101,10 +101,10 @@ If you want to see a complete example, have a look at [ionic-feedback-sample](ht
 
 ## Configuration
 
-The configuration is done with the [ionic-configuration-service](https://github.com/Ritzlgrmft/ionic-configuration-service).
-
-The specific configuration for the `ionic-logging-service` is taken from the key `logging`.
+If you use the [ionic-configuration-service](https://github.com/Ritzlgrmft/ionic-configuration-service), the specific configuration is taken from the key `logging`.
 Its structure is defined in the interface [LoggingConfiguration](src/logging-configuration.model.ts).
+
+Alternatively, you can call `configure()` manually. This methods takes an object of type [LoggingConfiguration](src/logging-configuration.model.ts) as well.
 
 By default, the following configuration is used:
 

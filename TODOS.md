@@ -1,7 +1,6 @@
 # ToDos
 
 - backend sample
-- remove dependency to configuration-service
 - make additivity configurable
 - ajaxAppender: add device info (#8)
 - ajaxAppender: Batch log statements until either the batch size is exceeded or a timeout threshold is exceeded (#7)

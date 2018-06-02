@@ -41,8 +41,10 @@
 		"zone.js": "^0.8.18"
 	},
 	"dependencies": {
-		"ionic-configuration-service": "6.0.0",
 		"log4javascript": "^1.4.15"
+	},
+	"optionalDependencies": {
+		"ionic-configuration-service": "^6.0.0"
 	},
 	"devDependencies": {
 		"@angular/common": "5.0.0",

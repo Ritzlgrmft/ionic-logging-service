@@ -1,4 +1,4 @@
-﻿import { EventEmitter, Injectable } from "@angular/core";
+﻿import { EventEmitter, Injectable, Optional } from "@angular/core";
 
 import { ConfigurationService } from "ionic-configuration-service";
 
@@ -41,7 +41,7 @@ export class LoggingService {
 	private browserConsoleAppender: log4javascript.BrowserConsoleAppender;
 
 	constructor(
-		private configurationService: ConfigurationService) {
+		@Optional() private configurationService?: ConfigurationService) {
 
 		// prevent log4javascript to show alerts on case of errors
 		log4javascript.logLog.setQuietMode(true);
@@ -77,7 +77,7 @@ export class LoggingService {
 	 */
 	public configure(configuration?: LoggingServiceConfiguration): void {
 
-		if (typeof configuration === "undefined") {
+		if (typeof configuration === "undefined" && this.configurationService) {
 			configuration = this.configurationService.getValue("logging");
 		}
 		if (typeof configuration === "undefined") {
