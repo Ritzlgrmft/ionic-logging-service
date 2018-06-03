@@ -56,11 +56,11 @@
 		"@angular/platform-browser-dynamic": "5.0.0",
 		"rxjs": "5.5.2",
 		"zone.js": "0.8.18",
-		"@types/jasmine": "2.8.7",
+		"@types/jasmine": "2.8.8",
 		"babel-polyfill": "6.26.0",
 		"codecov": "3.0.2",
 		"codelyzer": "4.3.0",
-		"commitizen": "2.9.6",
+		"commitizen": "2.10.1",
 		"cz-conventional-changelog": "2.1.0",
 		"jasmine-core": "2.99.1",
 		"karma": "2.0.2",
@@ -74,7 +74,7 @@
 		"tslint": "5.10.0",
 		"typedoc": "0.11.1",
 		"typescript": "2.4.2",
-		"semantic-release": "15.4.1",
+		"semantic-release": "15.5.0",
 		"travis-deploy-once": "5.0.0"
 	},
 	"config": {
