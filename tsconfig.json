@@ -1,25 +1,35 @@
 {
-	"compilerOptions": {
-		"target": "es5",
-		"lib": [
-			"dom",
-			"es2015"
-		],
-		"module": "commonjs",
-		"moduleResolution": "node",
-		"emitDecoratorMetadata": true,
-		"experimentalDecorators": true,
-		"noFallthroughCasesInSwitch": true,
-		"noImplicitAny": true,
-		"noImplicitReturns": true,
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
-		"declaration": true,
-		"sourceMap": true,
-		"outDir": "dist"
-	},
-	"compileOnSave": false,
-	"atom": {
-		"rewriteTsconfig": false
-	}
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "module": "es2015",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "paths": {
+      "ionic-logging-service": [
+        "dist/ionic-logging-service"
+      ],
+      "ionic-logging-service/*": [
+        "dist/ionic-logging-service/*"
+      ],
+      "logging-service": [
+        "dist/logging-service"
+      ],
+      "logging-service/*": [
+        "dist/logging-service/*"
+      ]
+    }
+  }
 }
