@@ -1,10 +1,11 @@
 import { NgModule } from "@angular/core";
-import { LoggingServiceComponent } from "./logging-service.component";
 
 @NgModule({
 	imports: [
 	],
-	declarations: [LoggingServiceComponent],
-	exports: [LoggingServiceComponent]
+	declarations: [
+	],
+	exports: [
+	]
 })
 export class LoggingServiceModule { }
