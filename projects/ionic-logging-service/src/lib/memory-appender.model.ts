@@ -122,8 +122,8 @@ export class MemoryAppender extends log4javascript.Appender {
 		this.maxMessages = value;
 
 		// if there are too much logMessages for the new value, remove oldest messages
-		while (this.logMessages.length > this.maxMessages) {
-			this.logMessages.shift();
+		if (this.logMessages.length > this.maxMessages) {
+			this.logMessages.splice(0, this.logMessages.length - this.maxMessages);
 		}
 	}
 
