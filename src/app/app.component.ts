@@ -1,10 +1,24 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
+
+import { LoggingService, Logger } from "ionic-logging-service";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+	selector: "app-root",
+	templateUrl: "./app.component.html",
+	styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-  title = 'ionic-logging-service';
+	public title = "ionic-logging-service";
+
+	private logger: Logger;
+
+	constructor(
+		private loggingService: LoggingService
+	) {
+
+	}
+
+	public writeLog(): void {
+		console.info("writeLog");
+	}
 }

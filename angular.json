@@ -3,7 +3,7 @@
 	"version": 1,
 	"newProjectRoot": "projects",
 	"projects": {
-		"logging-service-app": {
+		"ionic-logging-service-app": {
 			"root": "",
 			"sourceRoot": "src",
 			"projectType": "application",
@@ -13,7 +13,7 @@
 				"build": {
 					"builder": "@angular-devkit/build-angular:browser",
 					"options": {
-						"outputPath": "dist/logging-service-app",
+						"outputPath": "dist/ionic-logging-service-app",
 						"index": "src/index.html",
 						"main": "src/main.ts",
 						"polyfills": "src/polyfills.ts",
@@ -50,11 +50,11 @@
 				"serve": {
 					"builder": "@angular-devkit/build-angular:dev-server",
 					"options": {
-						"browserTarget": "logging-service-app:build"
+						"browserTarget": "ionic-logging-service-app:build"
 					},
 					"configurations": {
 						"production": {
-							"browserTarget": "logging-service-app:build:production"
+							"browserTarget": "ionic-logging-service-app:build:production"
 						}
 					}
 				},
@@ -95,38 +95,38 @@
 				}
 			}
 		},
-		"logging-service": {
-			"root": "projects/logging-service",
-			"sourceRoot": "projects/logging-service/src",
+		"ionic-logging-service": {
+			"root": "projects/ionic-logging-service",
+			"sourceRoot": "projects/ionic-logging-service/src",
 			"projectType": "library",
 			"prefix": "lib",
 			"architect": {
 				"build": {
 					"builder": "@angular-devkit/build-ng-packagr:build",
 					"options": {
-						"tsConfig": "projects/logging-service/tsconfig.lib.json",
-						"project": "projects/logging-service/ng-package.json"
+						"tsConfig": "projects/ionic-logging-service/tsconfig.lib.json",
+						"project": "projects/ionic-logging-service/ng-package.json"
 					},
 					"configurations": {
 						"production": {
-							"project": "projects/logging-service/ng-package.prod.json"
+							"project": "projects/ionic-logging-service/ng-package.prod.json"
 						}
 					}
 				},
 				"test": {
 					"builder": "@angular-devkit/build-angular:karma",
 					"options": {
-						"main": "projects/logging-service/src/test.ts",
-						"tsConfig": "projects/logging-service/tsconfig.spec.json",
-						"karmaConfig": "projects/logging-service/karma.conf.js"
+						"main": "projects/ionic-logging-service/src/test.ts",
+						"tsConfig": "projects/ionic-logging-service/tsconfig.spec.json",
+						"karmaConfig": "projects/ionic-logging-service/karma.conf.js"
 					}
 				},
 				"lint": {
 					"builder": "@angular-devkit/build-angular:tslint",
 					"options": {
 						"tsConfig": [
-							"projects/logging-service/tsconfig.lib.json",
-							"projects/logging-service/tsconfig.spec.json"
+							"projects/ionic-logging-service/tsconfig.lib.json",
+							"projects/ionic-logging-service/tsconfig.spec.json"
 						],
 						"exclude": [
 							"**/node_modules/**"

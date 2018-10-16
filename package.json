@@ -5,8 +5,8 @@
 		"ng": "ng",
 		"start": "ng serve",
 		"build": "ng build",
-		"test": "ng test logging-service --code-coverage --watch false",
-		"test-watch": "ng test logging-service --code-coverage",
+		"test": "ng test ionic-logging-service --code-coverage --watch false",
+		"test-watch": "ng test ionic-logging-service --code-coverage",
 		"lint": "ng lint"
 	},
 	"private": true,
