@@ -2,6 +2,12 @@
 	"$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
 	"dest": "../../dist/ionic-logging-service",
 	"lib": {
-		"entryFile": "src/public_api.ts"
-	}
+		"entryFile": "src/public_api.ts",
+		"umdModuleIds": {
+			"log4javascript": "log4javascript"
+		}
+	},
+	"whitelistedNonPeerDependencies": [
+		"log4javascript"
+	]
 }

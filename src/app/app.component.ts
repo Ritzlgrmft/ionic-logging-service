@@ -9,10 +9,11 @@ import { LoggingService, Logger, LogMessage } from "ionic-logging-service";
 	styleUrls: ["./app.component.css"]
 })
 export class AppComponent implements OnInit, OnDestroy {
+
 	public title = "ionic-logging-service";
+	public logMessages: LogMessage[];
 
 	private logger: Logger;
-	private logMessages: LogMessage[];
 	private logMessagesChangedSubscription: Subscription;
 
 	constructor(
