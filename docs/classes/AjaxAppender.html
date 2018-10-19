@@ -1,0 +1,1140 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>ionic-logging-service</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">ionic-logging-service</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content class">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Classes</li>
+  <li>AjaxAppender</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>projects/ionic-logging-service/src/lib/ajax-appender.model.ts</code>
+        </p>
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>An appender which sends the log messages to a server via HTTP.</p>
+<p>A typical configuration could be:</p>
+<div><pre class="line-numbers"><code class="language-json"> * {
+ *   &quot;url&quot;: &quot;https://my.backend.xy/LoggingBackend&quot;,
+ *   &quot;batchSize&quot;: 10,
+ *   &quot;timerInterval&quot;: 60000,
+ *   &quot;threshold&quot;: &quot;INFO&quot;
+ * }
+ *</code></pre></div>
+            </p>
+
+
+
+
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#appenderFailed">appenderFailed</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#append">append</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#configure">configure</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getBatchSize">getBatchSize</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getInternalAppender">getInternalAppender</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getLayout">getLayout</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getTimerInterval">getTimerInterval</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#setBatchSize">setBatchSize</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#setLayout">setLayout</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#setTimerInterval">setTimerInterval</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#toString">toString</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(configuration: <a href="../interfaces/AjaxAppenderConfiguration.html">AjaxAppenderConfiguration</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">projects/ionic-logging-service/src/lib/ajax-appender.model.ts:35</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Creates a new instance of the appender.</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>configuration</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../interfaces/AjaxAppenderConfiguration.html" target="_self" >AjaxAppenderConfiguration</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><p>configuration for the appender.</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="appenderFailed"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            appenderFailed
+                            </b>
+                            <a href="#appenderFailed"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>appenderFailed:     <code>EventEmitter&lt;string&gt;</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>EventEmitter&lt;string&gt;</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">projects/ionic-logging-service/src/lib/ajax-appender.model.ts:32</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Event triggered when the appender could not send log messages to the server.</p>
+</div>
+                    </td>
+                </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                          <div class="io-description">
+                                  <b>Parameters :</b>
+                                  <table class="params">
+                                      <thead>
+                                          <tr>
+                                                <td>Name</td>
+                                                    <td>Description</td>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                                <tr>
+                                                        <td>message</td>
+                                                        <td>
+                                                                <code><p>error message</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                      </tbody>
+                                  </table>
+                          </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+        <h3 id="methods">
+            Methods
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="append"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            append
+                            </b>
+                            <a href="#append"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>append(loggingEvent: log4javascript.LoggingEvent)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="103" class="link-to-prism">projects/ionic-logging-service/src/lib/ajax-appender.model.ts:103</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Appender-specific method to append a log message.</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>loggingEvent</td>
+                                                        <td>
+                                                                    <code>log4javascript.LoggingEvent</code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <code><p>event to be appended.</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="configure"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            configure
+                            </b>
+                            <a href="#configure"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>configure(configuration: <a href="../interfaces/AjaxAppenderConfiguration.html">AjaxAppenderConfiguration</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">projects/ionic-logging-service/src/lib/ajax-appender.model.ts:80</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Configures the logging depending on the given configuration.</p>
+<p>Only the defined properties get overwritten.
+The url cannot be modified.</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>configuration</td>
+                                                        <td>
+                                                                    <code><a href="../interfaces/AjaxAppenderConfiguration.html" target="_self" >AjaxAppenderConfiguration</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <code><p>configuration data.</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getBatchSize"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            getBatchSize
+                            </b>
+                            <a href="#getBatchSize"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>getBatchSize()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="127" class="link-to-prism">projects/ionic-logging-service/src/lib/ajax-appender.model.ts:127</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Returns the number of log messages sent in each request.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getInternalAppender"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            getInternalAppender
+                            </b>
+                            <a href="#getInternalAppender"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>getInternalAppender()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="120" class="link-to-prism">projects/ionic-logging-service/src/lib/ajax-appender.model.ts:120</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Get the internally used appender.
+Mainly for unit testing purposes.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="../classes/AjaxAppender.html" target="_self" >log4javascript.AjaxAppender</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getLayout"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            getLayout
+                            </b>
+                            <a href="#getLayout"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>getLayout()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="142" class="link-to-prism">projects/ionic-logging-service/src/lib/ajax-appender.model.ts:142</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Returns the appender&#39;s layout.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code>log4javascript.Layout</code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getTimerInterval"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            getTimerInterval
+                            </b>
+                            <a href="#getTimerInterval"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>getTimerInterval()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="156" class="link-to-prism">projects/ionic-logging-service/src/lib/ajax-appender.model.ts:156</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Returns the length of time in milliseconds between each sending of queued log messages.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="setBatchSize"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            setBatchSize
+                            </b>
+                            <a href="#setBatchSize"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>setBatchSize(batchSize: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="135" class="link-to-prism">projects/ionic-logging-service/src/lib/ajax-appender.model.ts:135</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Sets the number of log messages to send in each request.</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>batchSize</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <code><p>new batch size</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="setLayout"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            setLayout
+                            </b>
+                            <a href="#setLayout"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>setLayout(layout: log4javascript.Layout)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="149" class="link-to-prism">projects/ionic-logging-service/src/lib/ajax-appender.model.ts:149</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Sets the appender&#39;s layout.</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>layout</td>
+                                                        <td>
+                                                                    <code>log4javascript.Layout</code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="setTimerInterval"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            setTimerInterval
+                            </b>
+                            <a href="#setTimerInterval"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>setTimerInterval(timerInterval: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="164" class="link-to-prism">projects/ionic-logging-service/src/lib/ajax-appender.model.ts:164</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Sets the length of time in milliseconds between each sending of queued log messages.</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>timerInterval</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <code><p>new timer interval</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="toString"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            toString
+                            </b>
+                            <a href="#toString"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>toString()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="112" class="link-to-prism">projects/ionic-logging-service/src/lib/ajax-appender.model.ts:112</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Gets the appender&#39;s name.
+Mainly for unit testing purposes.</p>
+</div>
+
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    <p>appender&#39;s name</p>
+
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { EventEmitter } from &quot;@angular/core&quot;;
+
+import * as log4javascript from &quot;log4javascript&quot;;
+
+import { AjaxAppenderConfiguration } from &quot;./ajax-appender.configuration&quot;;
+import { LogLevelConverter } from &quot;./log-level.converter&quot;;
+
+/**
+ * An appender which sends the log messages to a server via HTTP.
+ *
+ * A typical configuration could be:
+ *
+ * &#x60;&#x60;&#x60;json
+ * {
+ *   &quot;url&quot;: &quot;https://my.backend.xy/LoggingBackend&quot;,
+ *   &quot;batchSize&quot;: 10,
+ *   &quot;timerInterval&quot;: 60000,
+ *   &quot;threshold&quot;: &quot;INFO&quot;
+ * }
+ * &#x60;&#x60;&#x60;
+ */
+export class AjaxAppender extends log4javascript.Appender {
+
+	private static batchSizeDefault &#x3D; 1;
+	private static timerIntervalDefault &#x3D; 0;
+	private static thresholdDefault &#x3D; &quot;WARN&quot;;
+
+	/**
+	 * Event triggered when the appender could not send log messages to the server.
+	 * @param message error message
+	 */
+	public appenderFailed: EventEmitter&lt;string&gt;;
+
+	private ajaxAppender: log4javascript.AjaxAppender;
+	private url: string;
+
+	/**
+	 * Creates a new instance of the appender.
+	 * @param configuration configuration for the appender.
+	 */
+	constructor(configuration: AjaxAppenderConfiguration) {
+		super();
+
+		if (!configuration) {
+			throw new Error(&quot;configuration must be not empty&quot;);
+		}
+		if (!configuration.url) {
+			throw new Error(&quot;url must be not empty&quot;);
+		}
+		this.ajaxAppender &#x3D; new log4javascript.AjaxAppender(configuration.url);
+		this.url &#x3D; configuration.url;
+
+		this.ajaxAppender.setLayout(new log4javascript.JsonLayout(false, false));
+		this.ajaxAppender.addHeader(&quot;Content-Type&quot;, &quot;application/json; charset&#x3D;utf-8&quot;);
+		this.ajaxAppender.setSendAllOnUnload(true);
+
+		this.appenderFailed &#x3D; new EventEmitter&lt;string&gt;();
+		this.ajaxAppender.setFailCallback((message: any) &#x3D;&gt; {
+			this.appenderFailed.emit(message);
+		});
+
+		// process remaining configuration
+		this.configure({
+			batchSize: configuration.batchSize || AjaxAppender.batchSizeDefault,
+			threshold: configuration.threshold || AjaxAppender.thresholdDefault,
+			timerInterval: configuration.timerInterval || AjaxAppender.timerIntervalDefault,
+			url: configuration.url,
+		});
+
+	}
+
+	/**
+	 * Configures the logging depending on the given configuration.
+	 *
+	 * Only the defined properties get overwritten.
+	 * The url cannot be modified.
+	 *
+	 * @param configuration configuration data.
+	 */
+	public configure(configuration: AjaxAppenderConfiguration): void {
+		if (configuration) {
+			if (configuration.url &amp;&amp; configuration.url !&#x3D;&#x3D; this.url) {
+				throw new Error(&quot;url must not be changed&quot;);
+			}
+			if (configuration.batchSize) {
+				this.setBatchSize(configuration.batchSize);
+			}
+			if (typeof configuration.timerInterval &#x3D;&#x3D;&#x3D; &quot;number&quot;) {
+				this.setTimerInterval(configuration.timerInterval);
+			}
+			if (configuration.threshold) {
+				const convertedThreshold &#x3D; LogLevelConverter.levelToLog4Javascript(
+					LogLevelConverter.levelFromString(configuration.threshold));
+				this.setThreshold(convertedThreshold);
+			}
+		}
+	}
+
+	/**
+	 * Appender-specific method to append a log message.
+	 * @param loggingEvent event to be appended.
+	 */
+	public append(loggingEvent: log4javascript.LoggingEvent): void {
+		this.ajaxAppender.append(loggingEvent);
+	}
+
+	/**
+	 * Gets the appender&#x27;s name.
+	 * Mainly for unit testing purposes.
+	 * @return appender&#x27;s name
+	 */
+	public toString(): string {
+		return &quot;Ionic.Logging.AjaxAppender&quot;;
+	}
+
+	/**
+	 * Get the internally used appender.
+	 * Mainly for unit testing purposes.
+	 */
+	public getInternalAppender(): log4javascript.AjaxAppender {
+		return this.ajaxAppender;
+	}
+
+	/**
+	 * Returns the number of log messages sent in each request.
+	 */
+	public getBatchSize(): number {
+		return this.ajaxAppender.getBatchSize();
+	}
+
+	/**
+	 * Sets the number of log messages to send in each request.
+	 * @param batchSize new batch size
+	 */
+	public setBatchSize(batchSize: number): void {
+		this.ajaxAppender.setBatchSize(batchSize);
+	}
+
+	/**
+	 * Returns the appender&#x27;s layout.
+	 */
+	public getLayout(): log4javascript.Layout {
+		return this.ajaxAppender.getLayout();
+	}
+
+	/**
+	 * Sets the appender&#x27;s layout.
+	 */
+	public setLayout(layout: log4javascript.Layout): void {
+		this.ajaxAppender.setLayout(layout);
+	}
+
+	/**
+	 * Returns the length of time in milliseconds between each sending of queued log messages.
+	 */
+	public getTimerInterval(): number {
+		return this.ajaxAppender.getTimerInterval();
+	}
+
+	/**
+	 * Sets the length of time in milliseconds between each sending of queued log messages.
+	 * @param timerInterval new timer interval
+	 */
+	public setTimerInterval(timerInterval: number): void {
+		this.ajaxAppender.setTimed(timerInterval &gt; 0);
+		this.ajaxAppender.setTimerInterval(timerInterval);
+	}
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
+            var COMPODOC_CURRENT_PAGE_URL = 'AjaxAppender.html';
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <script src="../js/menu-wc.js"></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

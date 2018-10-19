@@ -1,0 +1,25 @@
+{
+	"name": "ionic-logging-service",
+	"version": "0.0.0-development",
+	"description": "Logging functionalities for apps built with Ionic framework",
+	"author": {
+		"name": "Markus Wagner",
+		"email": "markus.wagner02@web.de"
+	},
+	"repository": "https://github.com/Ritzlgrmft/ionic-logging-service.git",
+	"license": "MIT",
+	"private": false,
+	"keywords": [
+		"ionic",
+		"mobile",
+		"logging",
+		"log4javascript"
+	],
+	"peerDependencies": {
+		"@angular/common": "^6.0.0-rc.0 || ^6.0.0",
+		"@angular/core": "^6.0.0-rc.0 || ^6.0.0"
+	},
+	"dependencies": {
+		"log4javascript": "^1.4.15"
+	}
+}
