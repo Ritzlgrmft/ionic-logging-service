@@ -169,20 +169,20 @@ That means, instead of the default log level `WARN`, you want to log all message
 
 ### ajaxAppender
 
-With [ajaxAppender](typedoc/interfaces/ajaxappenderconfiguration.html), you add an additional appender of type [AjaxAppender](typedoc/classes/ajaxappender.html), which sends the log messages to a backend server.
+With `ajaxAppender`, you add an additional appender of type `AjaxAppender`, which sends the log messages to a backend server.
 
 ### browserConsoleAppender
 
-With [browserConsoleAppender](typedoc/interfaces/browserconsoleappenderconfiguration.html), it is possible to configure the `BrowserConsoleAppender`, which writes the log to the browser's console.
+With `browserConsoleAppender`, it is possible to configure the `BrowserConsoleAppender`, which writes the log to the browser's console.
 
 ### localStorageAppender
 
-With [localStorageAppender](typedoc/interfaces/localstorageappenderconfiguration.html), you add an additional appender of type [AjaxAppender](typedoc/classes/localstorageappender.html), which stores log messages in the local storage.
+With `localStorageAppender`, you add an additional appender of type `AjaxAppender`, which stores log messages in the local storage.
 
 ### memoryAppender
 
-With [memoryAppender](typedoc/interfaces/memoryappenderconfiguration.html), it is possible to configure the [MemoryAppender](typedoc/classes/memoryappender.html), which keeps log messages in the memory.
+With `memoryAppender`, it is possible to configure the `MemoryAppender`, which keeps log messages in the memory.
 
 ## API
 
-see [API documentation](typedoc/index.html).
+see [API documentation](https://ritzlgrmft.github.io/ionic-logging-service/index.html).
