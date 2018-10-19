@@ -17,9 +17,10 @@
 	],
 	"scripts": {
 		"build": "ng build ionic-logging-service --prod && cpx '{BREAKING,README}.md' dist/ionic-logging-service --verbose",
-		"test": "ng test ionic-logging-service --code-coverage --watch false --browsers ChromeHeadless",
+		"test": "ng test ionic-logging-service --code-coverage --watch false --browsers ChromeHeadless && compodoc --coverageTest 100 && ng lint",
 		"test-watch": "ng test ionic-logging-service --code-coverage",
-		"lint": "ng lint"
+		"lint": "ng lint",
+		"compodoc": "compodoc"
 	},
 	"dependencies": {
 		"@angular/animations": "^6.1.0",
@@ -42,6 +43,7 @@
 		"@angular/cli": "^7.0.0-rc.3",
 		"@angular/compiler-cli": "^6.1.0",
 		"@angular/language-service": "^6.1.0",
+		"@compodoc/compodoc": "1.1.5",
 		"@types/jasmine": "~2.8.8",
 		"@types/jasminewd2": "~2.0.3",
 		"@types/node": "~8.9.4",

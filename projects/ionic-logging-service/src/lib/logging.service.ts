@@ -40,6 +40,9 @@ export class LoggingService {
 	private memoryAppender: MemoryAppender;
 	private browserConsoleAppender: log4javascript.BrowserConsoleAppender;
 
+	/**
+	 * Creates a new instance of the service.
+	 */
 	constructor() {
 
 		// prevent log4javascript to show alerts on case of errors

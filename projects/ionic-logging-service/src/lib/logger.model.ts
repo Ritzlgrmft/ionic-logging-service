@@ -8,9 +8,11 @@ import { LogLevel } from "./log-level.model";
  */
 export class Logger {
 
-	// tslint:disable-next-line:completed-docs
 	private logger: log4javascript.Logger;
 
+	/**
+	 * Creates a new instance of a logger.
+	 */
 	constructor(logger?: string | any) {
 		if (typeof logger === "undefined") {
 			this.logger = log4javascript.getRootLogger();
