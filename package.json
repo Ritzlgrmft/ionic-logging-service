@@ -22,7 +22,7 @@
 		"lint": "ng lint",
 		"codecov": "codecov",
 		"compodoc": "compodoc",
-		"semantic-release": "semantic-release --dry-run",
+		"semantic-release": "semantic-release",
 		"travis-deploy-once": "travis-deploy-once"
 	},
 	"dependencies": {
