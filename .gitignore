@@ -1,8 +1,5 @@
 coverage/
-dist/**/*.d.ts
-dist/**/*.js
-dist/**/*.map
-dist/**/*.json
+dist/
 node_modules/
 package/
 
