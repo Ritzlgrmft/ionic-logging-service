@@ -1,16 +1,14 @@
 # ionic-logging-service
 
-**The dependencies used by the latest version are the same as needed for [Ionic 3.9.0](https://github.com/ionic-team/ionic/blob/master/CHANGELOG.md). For older versions use:**
+**The dependencies used by the latest version are the same as needed for [Ionic 4.0.0](https://github.com/ionic-team/ionic/blob/master/CHANGELOG.md). For older versions use:**
 
 | ionic-logging-service | Ionic | Angular
 | ----- | -------- | ------
-| 4.0.0 | >= 3.9.0 | ^5.0.0
+| 6.0.0 | >= 4.0.0 | ^6.0.0
+| 5.1.0 | >= 3.9.0 | ^5.0.0
 | 3.1.0 | >= 3.0.0 | ^4.0.0
 | 2.0.0 | >= 2.2.0 | ^2.4.8
 | 1.2.1 | >= 2.0.0 | ^2.2.1
-
-- **Ionic 2.0.0: version 1.2.1.**
-- **Ionic 2.2.0: version 2.0.0.**
 
 [![Build](https://travis-ci.org/Ritzlgrmft/ionic-logging-service.svg?branch=master)](https://travis-ci.org/Ritzlgrmft/ionic-logging-service)
 [![Codecov](https://codecov.io/gh/Ritzlgrmft/ionic-logging-service/branch/master/graph/badge.svg)](https://codecov.io/gh/Ritzlgrmft/ionic-logging-service)
@@ -28,6 +26,8 @@ This service encapsulates [log4javascript](http://log4javascript.org/)'s functio
 For a sample, just have a look at [ionic-logging-sample](https://github.com/Ritzlgrmft/ionic-logging-sample).
 
 ## Usage
+
+First, you need to import the `LoggingServiceModule` in your `AppModule`. The next step is typically the configuration (see below). And then, finally, you can use the `LoggingService` in your code, e.g.:
 
 ```TypeScript
 import { Logger, LoggingService } from "ionic-logging-service";
@@ -62,7 +62,6 @@ export class MyComponent {
     return result;
   }
 }
-
 ```
 
 Depending how the code is called, this could produce the following output in the browser's console:
@@ -101,11 +100,6 @@ If you want to see a complete example, have a look at [ionic-feedback-sample](ht
 
 ## Configuration
 
-If you use the [ionic-configuration-service](https://github.com/Ritzlgrmft/ionic-configuration-service), the specific configuration is taken from the key `logging`.
-Its structure is defined in the interface [LoggingConfiguration](src/logging-configuration.model.ts).
-
-Alternatively, you can call `configure()` manually. This methods takes an object of type [LoggingConfiguration](src/logging-configuration.model.ts) as well.
-
 By default, the following configuration is used:
 
 - Logger:
@@ -114,6 +108,43 @@ By default, the following configuration is used:
 - Appender:
   - `BrowserConsoleAppender`
   - `MemoryAppender`
+
+To change it, just call `configure()`. This method takes an object of type `LoggingConfiguration`.
+
+The recommended way is to place the configuration in `environment.ts`:
+
+```TypeScript
+export const environment = {
+  logging: {
+    ...
+  }
+};
+```
+
+Call `configure()` in your `app.module.ts`:
+
+```TypeScript
+export function configureLogging(loggingService: LoggingService): () => void {
+  return () => loggingService.configure(environment.logging);
+}
+
+@NgModule({
+  ...
+  imports: [
+    ...
+    LoggingServiceModule
+  ],
+  providers: [
+    {
+      deps: [LoggingService],
+      multi: true,
+      provide: APP_INITIALIZER,
+      useFactory: configureLogging
+    }
+  ]
+})
+export class AppModule { }
+```
 
 ### logLevels
 
