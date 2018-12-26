@@ -90,7 +90,7 @@ Setting a level to a logger disables log messages of severity lower than that le
 
 ## Appender
 
-Appenders make the logs visible, e.g. by writing tehm to the browser's console. This is quite useful during development, either in console or using `ionic serve --consolelogs`. But later, you will need other logs:
+Appenders make the logs visible, e.g. by writing them to the browser's console. This is quite useful during development, either in console or using `ionic serve --consolelogs`. But later, you will need other logs:
 
 - `AjaxAppender`: sends the log messages to a backend server
 - `MemoryAppender`: keeps the log messages in memory
