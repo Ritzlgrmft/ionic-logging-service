@@ -11,12 +11,13 @@
 	"private": false,
 	"keywords": [
 		"ionic",
+		"angular",
 		"mobile",
 		"logging",
 		"log4javascript"
 	],
 	"scripts": {
-		"build": "ng build ionic-logging-service --prod && cpx '{BREAKING,README}.md' dist/ionic-logging-service --verbose",
+		"build": "ng build ionic-logging-service --prod && cpx 'projects/ionic-logging-service/README.md' dist/ionic-logging-service --verbose",
 		"test": "ng test ionic-logging-service --code-coverage --watch false --browsers ChromeHeadless && compodoc --coverageTest 100 && ng lint",
 		"test-watch": "ng test ionic-logging-service --code-coverage",
 		"lint": "ng lint",
