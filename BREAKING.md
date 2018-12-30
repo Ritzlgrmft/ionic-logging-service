@@ -1,5 +1,9 @@
 # Breaking Changes
 
+## Version 7
+
+- update to Angular 7
+
 ## Version 6
 
 With version 6, these breaking changes were introduced:
