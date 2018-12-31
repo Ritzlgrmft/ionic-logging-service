@@ -17,7 +17,7 @@ The workspace contains these projects:
 
 ## ionic-logging-service
 
-The main service. For further info have a look at the [service's readme](projects/ionic-logging-service/README.MD).
+The main service. For further info have a look at the [service's readme](https://github.com/Ritzlgrmft/ionic-logging-service/blob/master/projects/ionic-logging-service/README.md).
 
 Useful commands:
 
