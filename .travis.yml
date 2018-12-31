@@ -8,8 +8,12 @@ script:
   - npm test
   - npm run build
 after_success:
-  - npm run travis-deploy-once "npm run semantic-release"
   - npm run codecov
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
+jobs:
+  include:
+    - stage: npm release
+      if: branch = master
+      script: npm run semantic-release
