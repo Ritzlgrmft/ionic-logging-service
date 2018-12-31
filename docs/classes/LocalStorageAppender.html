@@ -18,10 +18,7 @@
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search">
-</div>
-            <compodoc-menu></compodoc-menu>
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
@@ -63,7 +60,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>projects/ionic-logging-service/src/lib/local-storage-appender.model.ts</code>
+            <code>src/lib/local-storage-appender.model.ts</code>
         </p>
 
             <p class="comment">
@@ -153,7 +150,7 @@ You have to configure which key is used for storing the messages.</p>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">projects/ionic-logging-service/src/lib/local-storage-appender.model.ts:34</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/lib/local-storage-appender.model.ts:34</a></div>
                             </td>
                         </tr>
 
@@ -228,7 +225,7 @@ You have to configure which key is used for storing the messages.</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="100" class="link-to-prism">projects/ionic-logging-service/src/lib/local-storage-appender.model.ts:100</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="100" class="link-to-prism">src/lib/local-storage-appender.model.ts:100</a></div>
                             </td>
                         </tr>
 
@@ -306,7 +303,7 @@ You have to configure which key is used for storing the messages.</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="177" class="link-to-prism">projects/ionic-logging-service/src/lib/local-storage-appender.model.ts:177</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="177" class="link-to-prism">src/lib/local-storage-appender.model.ts:177</a></div>
                             </td>
                         </tr>
 
@@ -349,7 +346,7 @@ Mainly for unit testing purposes.</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">projects/ionic-logging-service/src/lib/local-storage-appender.model.ts:80</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/lib/local-storage-appender.model.ts:80</a></div>
                             </td>
                         </tr>
 
@@ -429,7 +426,7 @@ The localStorageKey cannot be modified.</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="131" class="link-to-prism">projects/ionic-logging-service/src/lib/local-storage-appender.model.ts:131</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="131" class="link-to-prism">src/lib/local-storage-appender.model.ts:131</a></div>
                             </td>
                         </tr>
 
@@ -471,7 +468,7 @@ The localStorageKey cannot be modified.</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="169" class="link-to-prism">projects/ionic-logging-service/src/lib/local-storage-appender.model.ts:169</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="169" class="link-to-prism">src/lib/local-storage-appender.model.ts:169</a></div>
                             </td>
                         </tr>
 
@@ -520,7 +517,7 @@ Mainly for unit testing purposes.</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="138" class="link-to-prism">projects/ionic-logging-service/src/lib/local-storage-appender.model.ts:138</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="138" class="link-to-prism">src/lib/local-storage-appender.model.ts:138</a></div>
                             </td>
                         </tr>
 
@@ -562,7 +559,7 @@ Mainly for unit testing purposes.</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="148" class="link-to-prism">projects/ionic-logging-service/src/lib/local-storage-appender.model.ts:148</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="148" class="link-to-prism">src/lib/local-storage-appender.model.ts:148</a></div>
                             </td>
                         </tr>
 
@@ -641,7 +638,7 @@ Mainly for unit testing purposes.</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="124" class="link-to-prism">projects/ionic-logging-service/src/lib/local-storage-appender.model.ts:124</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="124" class="link-to-prism">src/lib/local-storage-appender.model.ts:124</a></div>
                             </td>
                         </tr>
 
@@ -890,7 +887,9 @@ export class LocalStorageAppender extends log4javascript.Appender {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <script src="../js/menu-wc.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

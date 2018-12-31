@@ -18,10 +18,7 @@
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search">
-</div>
-            <compodoc-menu></compodoc-menu>
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
@@ -69,7 +66,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/AjaxAppenderConfiguration.html">projects/ionic-logging-service/src/lib/ajax-appender.configuration.ts</a>
+                <a href="./interfaces/AjaxAppenderConfiguration.html">src/lib/ajax-appender.configuration.ts</a>
             </td>
             <td>
                 interface
@@ -85,7 +82,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./classes/AjaxAppender.html">projects/ionic-logging-service/src/lib/ajax-appender.model.ts</a>
+                <a href="./classes/AjaxAppender.html">src/lib/ajax-appender.model.ts</a>
             </td>
             <td>
                 class
@@ -101,7 +98,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/BrowserConsoleAppenderConfiguration.html">projects/ionic-logging-service/src/lib/browser-console-appender.configuration.ts</a>
+                <a href="./interfaces/BrowserConsoleAppenderConfiguration.html">src/lib/browser-console-appender.configuration.ts</a>
             </td>
             <td>
                 interface
@@ -117,7 +114,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/LocalStorageAppenderConfiguration.html">projects/ionic-logging-service/src/lib/local-storage-appender.configuration.ts</a>
+                <a href="./interfaces/LocalStorageAppenderConfiguration.html">src/lib/local-storage-appender.configuration.ts</a>
             </td>
             <td>
                 interface
@@ -133,7 +130,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./classes/LocalStorageAppender.html">projects/ionic-logging-service/src/lib/local-storage-appender.model.ts</a>
+                <a href="./classes/LocalStorageAppender.html">src/lib/local-storage-appender.model.ts</a>
             </td>
             <td>
                 class
@@ -149,7 +146,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./classes/LogLevelConverter.html">projects/ionic-logging-service/src/lib/log-level.converter.ts</a>
+                <a href="./classes/LogLevelConverter.html">src/lib/log-level.converter.ts</a>
             </td>
             <td>
                 class
@@ -165,7 +162,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/LogMessage.html">projects/ionic-logging-service/src/lib/log-message.model.ts</a>
+                <a href="./interfaces/LogMessage.html">src/lib/log-message.model.ts</a>
             </td>
             <td>
                 interface
@@ -181,7 +178,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./classes/Logger.html">projects/ionic-logging-service/src/lib/logger.model.ts</a>
+                <a href="./classes/Logger.html">src/lib/logger.model.ts</a>
             </td>
             <td>
                 class
@@ -197,7 +194,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/LoggingServiceConfiguration.html">projects/ionic-logging-service/src/lib/logging-service.configuration.ts</a>
+                <a href="./interfaces/LoggingServiceConfiguration.html">src/lib/logging-service.configuration.ts</a>
             </td>
             <td>
                 interface
@@ -213,7 +210,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./injectables/LoggingService.html">projects/ionic-logging-service/src/lib/logging.service.ts</a>
+                <a href="./injectables/LoggingService.html">src/lib/logging.service.ts</a>
             </td>
             <td>
                 injectable
@@ -229,7 +226,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/MemoryAppenderConfiguration.html">projects/ionic-logging-service/src/lib/memory-appender.configuration.ts</a>
+                <a href="./interfaces/MemoryAppenderConfiguration.html">src/lib/memory-appender.configuration.ts</a>
             </td>
             <td>
                 interface
@@ -245,7 +242,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./classes/MemoryAppender.html">projects/ionic-logging-service/src/lib/memory-appender.model.ts</a>
+                <a href="./classes/MemoryAppender.html">src/lib/memory-appender.model.ts</a>
             </td>
             <td>
                 class
@@ -289,7 +286,9 @@
 
        <script src="./js/libs/custom-elements.min.js"></script>
        <script src="./js/libs/lit-html.js"></script>
-       <script src="./js/menu-wc.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="./js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="./js/menu-wc.js" defer></script>
 
        <script src="./js/libs/bootstrap-native.js"></script>
 

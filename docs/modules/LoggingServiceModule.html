@@ -18,10 +18,7 @@
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search">
-</div>
-            <compodoc-menu></compodoc-menu>
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
@@ -36,18 +33,18 @@
 
 
 <ol class="breadcrumb">
-  <li>Modules</li>
-  <li>LoggingServiceModule</li>
+    <li>Modules</li>
+    <li>LoggingServiceModule</li>
 </ol>
 
 
 <ul class="nav nav-tabs" role="tablist">
-        <li class="active">
-            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
-        </li>
-        <li >
-            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
-        </li>
+    <li  class="active" >
+        <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+    </li>
+    <li >
+        <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+    </li>
 </ul>
 
 <div class="tab-content">
@@ -57,16 +54,18 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>projects/ionic-logging-service/src/lib/logging-service.module.ts</code>
+            <code>src/lib/logging-service.module.ts</code>
         </p>
 
 
-        
+
 
         <div class="container-fluid module">
             <div class="row">
             </div>
         </div>
+
+
     </div>
 
 
@@ -85,7 +84,6 @@ export class LoggingServiceModule { }
 </code></pre>
     </div>
 </div>
-
 
 
 
@@ -122,7 +120,9 @@ export class LoggingServiceModule { }
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <script src="../js/menu-wc.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

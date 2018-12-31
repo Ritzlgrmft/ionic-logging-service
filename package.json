@@ -1,80 +1,80 @@
 {
-  "name": "ionic-logging-service-app",
-  "version": "0.0.0-development",
-  "description": "Test app for ionic-logging-service",
-  "author": {
-    "name": "Markus Wagner",
-    "email": "markus.wagner02@web.de"
-  },
-  "repository": "https://github.com/Ritzlgrmft/ionic-logging-service.git",
-  "license": "MIT",
-  "private": false,
-  "keywords": [
-    "ionic",
-    "angular",
-    "mobile",
-    "logging",
-    "log4javascript"
-  ],
-  "scripts": {
-    "build": "ng build ionic-logging-service --prod && cpx 'projects/ionic-logging-service/README.md' dist/ionic-logging-service --verbose",
-    "test": "ng test ionic-logging-service --code-coverage --watch false --browsers ChromeHeadless && compodoc --coverageTest 100 && ng lint",
-    "test-watch": "ng test ionic-logging-service --code-coverage",
-    "lint": "ng lint",
-    "compodoc": "compodoc",
-    "test-and-codecov": "npm run test && codecov",
-	"build-and-release": "npm run build && semantic-release"
-  },
-  "dependencies": {
-    "@angular/animations": "^7.1.4",
-    "@angular/common": "^7.1.4",
-    "@angular/compiler": "^7.1.4",
-    "@angular/core": "^7.1.4",
-    "@angular/forms": "^7.1.4",
-    "@angular/http": "^7.1.4",
-    "@angular/platform-browser": "^7.1.4",
-    "@angular/platform-browser-dynamic": "^7.1.4",
-    "@angular/router": "^7.1.4",
-    "core-js": "^2.5.4",
-    "log4javascript": "^1.4.15",
-    "rxjs": "~6.2.0",
-    "zone.js": "~0.8.26"
-  },
-  "devDependencies": {
-    "@angular-devkit/build-angular": "~0.11.4",
-    "@angular-devkit/build-ng-packagr": "~0.11.4",
-    "@angular/cli": "^7.1.4",
-    "@angular/compiler-cli": "^7.1.4",
-    "@angular/language-service": "^7.1.4",
-    "@compodoc/compodoc": "1.1.5",
-    "@types/jasmine": "~2.8.14",
-    "@types/jasminewd2": "~2.0.6",
-    "@types/node": "~10.12.18",
-    "codecov": "3.1.0",
-    "codelyzer": "~4.5.0",
-    "cpx": "1.5.0",
-    "jasmine-core": "~2.99.1",
-    "jasmine-spec-reporter": "~4.2.1",
-    "karma": "~3.1.4",
-    "karma-chrome-launcher": "~2.2.0",
-    "karma-coverage-istanbul-reporter": "~2.0.4",
-    "karma-jasmine": "~1.1.2",
-    "karma-jasmine-html-reporter": "^0.2.2",
-    "ng-packagr": "^4.4.5",
-    "protractor": "~5.4.2",
-    "semantic-release": "^15.13.2",
-    "ts-node": "~7.0.1",
-    "tsickle": ">=0.34.0",
-    "tslib": "^1.9.3",
-    "tslint": "5.12.0",
-    "typescript": "3.1.6"
-  },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
-    }
-  },
-  "release": {
-    "pkgRoot": "dist/ionic-logging-service"
-  }
+	"name": "ionic-logging-service-app",
+	"version": "0.0.0-development",
+	"description": "Test app for ionic-logging-service",
+	"author": {
+		"name": "Markus Wagner",
+		"email": "markus.wagner02@web.de"
+	},
+	"repository": "https://github.com/Ritzlgrmft/ionic-logging-service.git",
+	"license": "MIT",
+	"private": false,
+	"keywords": [
+		"ionic",
+		"angular",
+		"mobile",
+		"logging",
+		"log4javascript"
+	],
+	"scripts": {
+		"build": "ng build ionic-logging-service --prod && cpx 'projects/ionic-logging-service/README.md' dist/ionic-logging-service --verbose",
+		"test": "ng test ionic-logging-service --code-coverage --watch false --browsers ChromeHeadless && compodoc --coverageTest 100 && ng lint",
+		"test-watch": "ng test ionic-logging-service --code-coverage",
+		"lint": "ng lint",
+		"compodoc": "cd projects/ionic-logging-service && compodoc & cd ../..",
+		"test-and-codecov": "npm run test && codecov",
+		"build-and-release": "npm run build && semantic-release"
+	},
+	"dependencies": {
+		"@angular/animations": "^7.1.4",
+		"@angular/common": "^7.1.4",
+		"@angular/compiler": "^7.1.4",
+		"@angular/core": "^7.1.4",
+		"@angular/forms": "^7.1.4",
+		"@angular/http": "^7.1.4",
+		"@angular/platform-browser": "^7.1.4",
+		"@angular/platform-browser-dynamic": "^7.1.4",
+		"@angular/router": "^7.1.4",
+		"core-js": "^2.5.4",
+		"log4javascript": "^1.4.15",
+		"rxjs": "~6.2.0",
+		"zone.js": "~0.8.26"
+	},
+	"devDependencies": {
+		"@angular-devkit/build-angular": "~0.11.4",
+		"@angular-devkit/build-ng-packagr": "~0.11.4",
+		"@angular/cli": "^7.1.4",
+		"@angular/compiler-cli": "^7.1.4",
+		"@angular/language-service": "^7.1.4",
+		"@compodoc/compodoc": "1.1.7",
+		"@types/jasmine": "~2.8.14",
+		"@types/jasminewd2": "~2.0.6",
+		"@types/node": "~10.12.18",
+		"codecov": "3.1.0",
+		"codelyzer": "~4.5.0",
+		"cpx": "1.5.0",
+		"jasmine-core": "~2.99.1",
+		"jasmine-spec-reporter": "~4.2.1",
+		"karma": "~3.1.4",
+		"karma-chrome-launcher": "~2.2.0",
+		"karma-coverage-istanbul-reporter": "~2.0.4",
+		"karma-jasmine": "~1.1.2",
+		"karma-jasmine-html-reporter": "^0.2.2",
+		"ng-packagr": "^4.4.5",
+		"protractor": "~5.4.2",
+		"semantic-release": "^15.13.2",
+		"ts-node": "~7.0.1",
+		"tsickle": ">=0.34.0",
+		"tslib": "^1.9.3",
+		"tslint": "5.12.0",
+		"typescript": "3.1.6"
+	},
+	"config": {
+		"commitizen": {
+			"path": "cz-conventional-changelog"
+		}
+	},
+	"release": {
+		"pkgRoot": "dist/ionic-logging-service"
+	}
 }

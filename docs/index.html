@@ -18,10 +18,7 @@
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search">
-</div>
-            <compodoc-menu></compodoc-menu>
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
@@ -45,8 +42,13 @@
 </thead>
 <tbody>
 <tr>
+<td>7.0.0</td>
+<td>&gt;= 4.0.0-rc</td>
+<td>^7.0.0</td>
+</tr>
+<tr>
 <td>6.0.0</td>
-<td>&gt;= 4.0.0</td>
+<td>&gt;= 4.0.0-beta</td>
 <td>^6.0.0</td>
 </tr>
 <tr>
@@ -71,16 +73,6 @@
 </tr>
 </tbody>
 </table>
-<p><a href="https://travis-ci.org/Ritzlgrmft/ionic-logging-service"><img src="https://travis-ci.org/Ritzlgrmft/ionic-logging-service.svg?branch=master" alt="Build" class="img-responsive"></a>
-<a href="https://codecov.io/gh/Ritzlgrmft/ionic-logging-service"><img src="https://codecov.io/gh/Ritzlgrmft/ionic-logging-service/branch/master/graph/badge.svg" alt="Codecov" class="img-responsive"></a>
-<a href="https://www.npmjs.com/package/ionic-logging-service"><img src="https://badge.fury.io/js/ionic-logging-service.svg" alt="Version" class="img-responsive"></a>
-<a href="https://www.npmjs.com/package/ionic-logging-service"><img src="https://img.shields.io/npm/dt/ionic-logging-service.svg" alt="Downloads" class="img-responsive"></a>
-<a href="https://david-dm.org/ritzlgrmft/ionic-logging-service/master"><img src="https://david-dm.org/ritzlgrmft/ionic-logging-service/master/status.svg" alt="Dependencies" class="img-responsive"></a>
-<a href="https://david-dm.org/ritzlgrmft/ionic-logging-service/master?type=peer"><img src="https://david-dm.org/ritzlgrmft/ionic-logging-service/master/peer-status.svg" alt="Peer-Dependencies" class="img-responsive"></a>
-<a href="https://david-dm.org/ritzlgrmft/ionic-logging-service/master?type=dev"><img src="https://david-dm.org/ritzlgrmft/ionic-logging-service/master/dev-status.svg" alt="Dev-Dependencies" class="img-responsive"></a>
-<a href="http://commitizen.github.io/cz-cli/"><img src="https://img.shields.io/badge/commitizen-friendly-brightgreen.svg" alt="Commitizen friendly" class="img-responsive"></a>
-<a href="https://snyk.io/test/github/ritzlgrmft/ionic-logging-service"><img src="https://snyk.io/test/github/ritzlgrmft/ionic-logging-service/badge.svg" alt="Known Vulnerabilities" class="img-responsive"></a>
-<a href="https://www.npmjs.com/package/ionic-logging-service"><img src="https://img.shields.io/npm/l/ionic-logging-service.svg" alt="License" class="img-responsive"></a></p>
 <p>This service encapsulates <a href="http://log4javascript.org/">log4javascript</a>&#39;s functionalities for apps built with <a href="http://ionicframework.com">Ionic framework</a>.</p>
 <p>For a sample, just have a look at <a href="https://github.com/Ritzlgrmft/ionic-logging-sample">ionic-logging-sample</a>.</p>
 <h2 id="usage">Usage</h2>
@@ -129,7 +121,7 @@ I  18:49:43.801  MyApp.MyComponent  myMethod  exit  [2, 5, 99]</code></pre></div
 <p>Every log message has a level. This is the severity of the message. Available levels are <code>TRACE</code>, <code>DEBUG</code>, <code>INFO</code>, <code>WARN</code>, <code>ERROR</code> and <code>FATAL</code> - these correspond to the logging methods <code>trace</code>, <code>debug</code>, <code>info</code>, <code>warn</code>, <code>error</code> and <code>fatal</code> of <code>Logger</code>. Levels are ordered as follows: <code>TRACE</code> &lt; <code>DEBUG</code> &lt; <code>INFO</code> &lt; <code>WARN</code> &lt; <code>ERROR</code> &lt; <code>FATAL</code>. This means the <code>FATAL</code> is the most severe and <code>TRACE</code> the least. Also included are levels called <code>ALL</code> and <code>OFF</code> intended to enable or disable all logging respectively.</p>
 <p>Setting a level to a logger disables log messages of severity lower than that level. For instance, if a level of <code>INFO</code> is set on a logger then only log messages of severity <code>INFO</code> or greater will be logged, meaning <code>DEBUG</code> and <code>TRACE</code> messages will not be logged.</p>
 <h2 id="appender">Appender</h2>
-<p>Appenders make the logs visible, e.g. by writing tehm to the browser&#39;s console. This is quite useful during development, either in console or using <code>ionic serve --consolelogs</code>. But later, you will need other logs:</p>
+<p>Appenders make the logs visible, e.g. by writing them to the browser&#39;s console. This is quite useful during development, either in console or using <code>ionic serve --consolelogs</code>. But later, you will need other logs:</p>
 <ul>
 <li><code>AjaxAppender</code>: sends the log messages to a backend server</li>
 <li><code>MemoryAppender</code>: keeps the log messages in memory</li>
@@ -192,15 +184,15 @@ export class AppModule { }</code></pre></div><h3 id="loglevels">logLevels</h3>
   ]
 };</code></pre></div><p>That means, instead of the default log level <code>WARN</code>, you want to log all messages with level <code>DEBUG</code> and higher. Only for <code>MyApp.MyNamespace.MyLogger</code>, you want to restrict the level to <code>INFO</code>.</p>
 <h3 id="ajaxappender">ajaxAppender</h3>
-<p>With <a href="typedoc/interfaces/ajaxappenderconfiguration.html">ajaxAppender</a>, you add an additional appender of type <a href="typedoc/classes/ajaxappender.html">AjaxAppender</a>, which sends the log messages to a backend server.</p>
+<p>With <code>ajaxAppender</code>, you add an additional appender of type <code>AjaxAppender</code>, which sends the log messages to a backend server.</p>
 <h3 id="browserconsoleappender">browserConsoleAppender</h3>
-<p>With <a href="typedoc/interfaces/browserconsoleappenderconfiguration.html">browserConsoleAppender</a>, it is possible to configure the <code>BrowserConsoleAppender</code>, which writes the log to the browser&#39;s console.</p>
+<p>With <code>browserConsoleAppender</code>, it is possible to configure the <code>BrowserConsoleAppender</code>, which writes the log to the browser&#39;s console.</p>
 <h3 id="localstorageappender">localStorageAppender</h3>
-<p>With <a href="typedoc/interfaces/localstorageappenderconfiguration.html">localStorageAppender</a>, you add an additional appender of type <a href="typedoc/classes/localstorageappender.html">AjaxAppender</a>, which stores log messages in the local storage.</p>
+<p>With <code>localStorageAppender</code>, you add an additional appender of type <code>AjaxAppender</code>, which stores log messages in the local storage.</p>
 <h3 id="memoryappender">memoryAppender</h3>
-<p>With <a href="typedoc/interfaces/memoryappenderconfiguration.html">memoryAppender</a>, it is possible to configure the <a href="typedoc/classes/memoryappender.html">MemoryAppender</a>, which keeps log messages in the memory.</p>
+<p>With <code>memoryAppender</code>, it is possible to configure the <code>MemoryAppender</code>, which keeps log messages in the memory.</p>
 <h2 id="api">API</h2>
-<p>see <a href="typedoc/index.html">API documentation</a>.</p>
+<p>see <a href="https://ritzlgrmft.github.io/ionic-logging-service/index.html">API documentation</a>.</p>
 
 
 
@@ -241,7 +233,9 @@ export class AppModule { }</code></pre></div><h3 id="loglevels">logLevels</h3>
 
        <script src="./js/libs/custom-elements.min.js"></script>
        <script src="./js/libs/lit-html.js"></script>
-       <script src="./js/menu-wc.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="./js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="./js/menu-wc.js" defer></script>
 
        <script src="./js/libs/bootstrap-native.js"></script>
 

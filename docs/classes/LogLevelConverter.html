@@ -18,10 +18,7 @@
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search">
-</div>
-            <compodoc-menu></compodoc-menu>
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
@@ -63,7 +60,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>projects/ionic-logging-service/src/lib/log-level.converter.ts</code>
+            <code>src/lib/log-level.converter.ts</code>
         </p>
 
             <p class="comment">
@@ -145,7 +142,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">projects/ionic-logging-service/src/lib/log-level.converter.ts:15</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/lib/log-level.converter.ts:15</a></div>
                             </td>
                         </tr>
 
@@ -224,7 +221,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">projects/ionic-logging-service/src/lib/log-level.converter.ts:43</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/lib/log-level.converter.ts:43</a></div>
                             </td>
                         </tr>
 
@@ -303,7 +300,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">projects/ionic-logging-service/src/lib/log-level.converter.ts:71</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/lib/log-level.converter.ts:71</a></div>
                             </td>
                         </tr>
 
@@ -489,7 +486,9 @@ export class LogLevelConverter {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <script src="../js/menu-wc.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

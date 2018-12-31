@@ -18,10 +18,7 @@
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search">
-</div>
-            <compodoc-menu></compodoc-menu>
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
@@ -59,7 +56,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>projects/ionic-logging-service/src/lib/logging.service.ts</code>
+            <code>src/lib/logging.service.ts</code>
         </p>
 
             <p class="comment">
@@ -148,7 +145,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">projects/ionic-logging-service/src/lib/logging.service.ts:41</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/lib/logging.service.ts:41</a></div>
                             </td>
                         </tr>
 
@@ -191,7 +188,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">projects/ionic-logging-service/src/lib/logging.service.ts:80</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/lib/logging.service.ts:80</a></div>
                             </td>
                         </tr>
 
@@ -269,7 +266,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="147" class="link-to-prism">projects/ionic-logging-service/src/lib/logging.service.ts:147</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="147" class="link-to-prism">src/lib/logging.service.ts:147</a></div>
                             </td>
                         </tr>
 
@@ -348,7 +345,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="159" class="link-to-prism">projects/ionic-logging-service/src/lib/logging.service.ts:159</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="159" class="link-to-prism">src/lib/logging.service.ts:159</a></div>
                             </td>
                         </tr>
 
@@ -399,7 +396,7 @@ by its maxMessages value.</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="138" class="link-to-prism">projects/ionic-logging-service/src/lib/logging.service.ts:138</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="138" class="link-to-prism">src/lib/logging.service.ts:138</a></div>
                             </td>
                         </tr>
 
@@ -458,7 +455,7 @@ by its maxMessages value.</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">projects/ionic-logging-service/src/lib/logging.service.ts:37</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/lib/logging.service.ts:37</a></div>
                             </td>
                         </tr>
 
@@ -523,7 +520,7 @@ by its maxMessages value.</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">projects/ionic-logging-service/src/lib/logging.service.ts:31</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/lib/logging.service.ts:31</a></div>
                             </td>
                         </tr>
 
@@ -765,7 +762,9 @@ export class LoggingService {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <script src="../js/menu-wc.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 
