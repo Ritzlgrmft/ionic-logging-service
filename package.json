@@ -21,10 +21,9 @@
     "test": "ng test ionic-logging-service --code-coverage --watch false --browsers ChromeHeadless && compodoc --coverageTest 100 && ng lint",
     "test-watch": "ng test ionic-logging-service --code-coverage",
     "lint": "ng lint",
-    "codecov": "codecov",
     "compodoc": "compodoc",
-    "semantic-release": "semantic-release",
-    "travis-deploy-once": "travis-deploy-once"
+    "test-and-codecov": "npm run test && codecov",
+	"build-and-release": "npm run build && semantic-release"
   },
   "dependencies": {
     "@angular/animations": "^7.1.4",
