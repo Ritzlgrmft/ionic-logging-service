@@ -4,16 +4,19 @@ cache:
     - ~/.npm
 node_js:
   - '8'
-script:
-  - npm test
-  - npm run build
-after_success:
-  - npm run codecov
-branches:
-  except:
-    - /^v\d+\.\d+\.\d+$/
 jobs:
+  stages:
+    - test
+    - codecov
+    - build
+    - release
   include:
-    - stage: npm release
+    - stage: test
+      script: npm test
+    - stage: codecov
+      script: npm run codecov
+    - stage: build
+      script: npm run build
+    - stage: release
       if: branch = master
       script: npm run semantic-release
