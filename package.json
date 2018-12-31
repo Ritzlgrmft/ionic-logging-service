@@ -18,7 +18,7 @@
 	],
 	"scripts": {
 		"build": "ng build ionic-logging-service --prod && cpx 'projects/ionic-logging-service/README.md' dist/ionic-logging-service --verbose",
-		"test": "ng test ionic-logging-service --code-coverage --watch false --browsers ChromeHeadless && compodoc --coverageTest 100 && ng lint",
+		"test": "ng test ionic-logging-service --code-coverage --watch false --browsers ChromeHeadless && cd projects/ionic-logging-service && compodoc --coverageTest 100 && cd ../.. && ng lint",
 		"test-watch": "ng test ionic-logging-service --code-coverage",
 		"lint": "ng lint",
 		"compodoc": "cd projects/ionic-logging-service && compodoc & cd ../..",
