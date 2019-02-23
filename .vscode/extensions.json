@@ -5,7 +5,7 @@
 	"recommendations": [
 		"Angular.ng-template",
 		"DavidAnson.vscode-markdownlint",
-		"eg2.tslint",
+		"ms-vscode.vscode-typescript-tslint-plugin",
 		"KnisterPeter.vscode-commitizen",
 		"pflannery.vscode-versionlens"
 	],
