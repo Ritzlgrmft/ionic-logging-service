@@ -1,6 +1,6 @@
 # ionic-logging-service workspace
 
-[![Build](https://travis-ci.org/Ritzlgrmft/ionic-logging-service.svg?branch=master)](https://travis-ci.org/Ritzlgrmft/ionic-logging-service)
+[![Build](https://markus.visualstudio.com/ionic-logging/_apis/build/status/ionic-logging-service?branchName=master)](https://markus.visualstudio.com/ionic-logging/_build/latest?definitionId=24&branchName=master)
 [![Codecov](https://codecov.io/gh/Ritzlgrmft/ionic-logging-service/branch/master/graph/badge.svg)](https://codecov.io/gh/Ritzlgrmft/ionic-logging-service)
 [![Version](https://badge.fury.io/js/ionic-logging-service.svg)](https://www.npmjs.com/package/ionic-logging-service)
 [![Downloads](https://img.shields.io/npm/dt/ionic-logging-service.svg)](https://www.npmjs.com/package/ionic-logging-service)
