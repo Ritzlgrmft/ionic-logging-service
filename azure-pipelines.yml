@@ -1,3 +1,5 @@
+name: ionic-logging-service
+
 trigger:
 - master
 
@@ -6,9 +8,9 @@ pool:
   
 steps:
 - task: NodeTool@0
-  displayName: 'Use Node 10.x'
+  displayName: 'Use Node 11.x'
   inputs:
-    versionSpec: 10.x
+    versionSpec: 11.x
 
 - task: Npm@1
   displayName: 'npm install'
@@ -29,7 +31,6 @@ steps:
     command: custom
     verbose: false
     customCommand: 'run codecov'
-  continueOnError: true
 
 - task: Npm@1
   displayName: 'npm run test-compodoc'
@@ -37,7 +38,6 @@ steps:
     command: custom
     verbose: false
     customCommand: 'run test-compodoc'
-  continueOnError: true
 
 - task: Npm@1
   displayName: 'npm run lint'
@@ -45,15 +45,6 @@ steps:
     command: custom
     verbose: false
     customCommand: 'run lint'
-  continueOnError: true
-
-- task: Npm@1
-  displayName: 'npm run test-e2e'
-  inputs:
-    command: custom
-    verbose: false
-    customCommand: 'run test-e2e'
-  continueOnError: true
 
 - task: Npm@1
   displayName: 'npm run build'
