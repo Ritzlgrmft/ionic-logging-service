@@ -21,7 +21,6 @@ steps:
     command: custom
     verbose: false
     customCommand: 'run test-coverage'
-  continueOnError: true
 
 - task: Npm@1
   displayName: 'npm run codecov'
@@ -32,6 +31,7 @@ steps:
 
 - task: Npm@1
   displayName: 'npm run test-compodoc'
+  condition: succeededOrFailed()
   inputs:
     command: custom
     verbose: false
@@ -39,6 +39,7 @@ steps:
 
 - task: Npm@1
   displayName: 'npm run lint'
+  condition: succeededOrFailed()
   inputs:
     command: custom
     verbose: false
