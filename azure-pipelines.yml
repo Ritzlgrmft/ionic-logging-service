@@ -15,12 +15,27 @@ steps:
   inputs:
     verbose: false
 
+- task: DeleteFiles@1
+  displayName: 'delete unit test results'
+  inputs:
+    SourceFolder: projects/ionic-logging-service/junit
+    Contents: 'TESTS*.xml'
+
 - task: Npm@1
   displayName: 'npm run test-coverage'
   inputs:
     command: custom
     verbose: false
     customCommand: 'run test-coverage'
+
+- task: PublishTestResults@2
+  displayName: 'publish unit test results'
+  condition: succeededOrFailed()
+  inputs:
+    searchFolder: $(System.DefaultWorkingDirectory)/projects/ionic-logging-service/junit
+    testRunTitle: Unit Tests
+    testResultsFormat: JUnit
+    testResultsFiles: "**/TESTS*.xml"
 
 - task: Npm@1
   displayName: 'npm run codecov'
