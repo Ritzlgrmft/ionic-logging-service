@@ -1,6 +1,14 @@
 trigger:
 - master
 
+schedules:
+- cron: "0 6 * * Sat"
+  displayName: Recurring weekend build
+  branches:
+    include:
+    - master
+  always: true
+
 pool:
   name: Hosted
   
