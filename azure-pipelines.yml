@@ -16,7 +16,7 @@ steps:
     verbose: false
 
 - task: DeleteFiles@1
-  displayName: 'Delete unit test results (ionic-logging-service)
+  displayName: 'Delete unit test results (ionic-logging-service)'
   inputs:
     SourceFolder: projects/ionic-logging-service/junit
     Contents: 'TESTS*.xml'
