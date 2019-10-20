@@ -1,0 +1,7 @@
+{
+	"name": "ionic-logging-viewer-app",
+	"integrations": {
+		"cordova": {}
+	},
+	"type": "angular"
+}

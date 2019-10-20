@@ -1,0 +1,10 @@
+{
+	"extends": "../../tslint.json",
+	"rules": {
+		"component-class-suffix": [
+			true,
+			"Component",
+			"Page"
+		]
+	}
+}

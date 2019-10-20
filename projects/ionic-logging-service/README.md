@@ -175,4 +175,4 @@ With `memoryAppender`, it is possible to configure the `MemoryAppender`, which k
 
 ## API
 
-see [API documentation](https://ritzlgrmft.github.io/ionic-logging-service/index.html).
+see [API documentation](https://ritzlgrmft.github.io/ionic-logging-service//service/index.html).

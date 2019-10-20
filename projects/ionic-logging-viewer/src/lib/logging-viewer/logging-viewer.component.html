@@ -1,0 +1,12 @@
+<ion-list>
+	<ion-item *ngFor="let logMessage of logMessagesForDisplay">
+		<ion-label>
+			<p>{{ logMessage.timeStamp | date:'dd.MM.yyyy HH:mm:ss' }} {{ logMessage.level }}</p>
+			<p>{{ logMessage.logger }}</p>
+			<p>
+				{{ logMessage.methodName }}
+				<span *ngFor="let messagePart of logMessage.message"> {{ messagePart }} </span>
+			</p>
+		</ion-label>
+	</ion-item>
+</ion-list>

@@ -20,6 +20,9 @@
 		"paths": {
 			"ionic-logging-service": [
 				"dist/ionic-logging-service"
+			],
+			"ionic-logging-viewer": [
+				"dist/ionic-logging-viewer"
 			]
 		}
 	}

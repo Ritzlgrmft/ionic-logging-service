@@ -21,14 +21,32 @@ The main service. For further info have a look at the [service's readme](https:/
 
 Useful commands:
 
-* `npm run build`
-* `npm test`
-* `npm run compodoc`
+* `npm run build-service`
+* `npm run test-service`
+* `npm run compodoc-service`
 
-## ionic-logging-service-app
+## ionic-logging-viewer
 
-A very simple test app for the service. For a more complete sample have a look at [ionic-logging-viewer](https://github.com/Ritzlgrmft/ionic-logging-viewer).
+The viewer component. For further info have a look at the [component's readme](https://github.com/Ritzlgrmft/ionic-logging-service/blob/master/projects/ionic-logging-viewer/README.md).
 
 Useful commands:
 
-* `ng serve ionic-logging-service-app`
+* `npm run build-viewer`
+* `npm run test-viewer`
+* `npm run compodoc-viewer`
+
+## ionic-logging-viewer-app
+
+A test app for the `ionic-logging-viewer` as well as a sample app for `ionic-logging-service`.
+
+Useful commands:
+
+* `ionic serve --project ionic-logging-viewer-app`
+
+## ionic-logging-viewer-app-e2e
+
+E2E tests for `ionic-logging-viewer-app`.
+
+Useful commands:
+
+* `ng e2e --project ionic-logging-viewer-app-e2e`

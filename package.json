@@ -1,7 +1,7 @@
 {
-	"name": "ionic-logging-service-app",
+	"name": "ionic-logging",
 	"version": "0.0.0-development",
-	"description": "Test app for ionic-logging-service",
+	"description": "Components for Ionic logging",
 	"author": {
 		"name": "Markus Wagner",
 		"email": "markus.wagner02@web.de"
@@ -17,15 +17,28 @@
 		"log4javascript"
 	],
 	"scripts": {
-		"build": "ng build ionic-logging-service --prod && cpx 'projects/ionic-logging-service/README.md' dist/ionic-logging-service --verbose",
-		"test": "npm run test-coverage && npm run test-compodoc && ng lint",
-		"test-coverage": "ng test ionic-logging-service --code-coverage --watch false --browsers ChromeHeadless",
-		"test-compodoc": "cd projects/ionic-logging-service && compodoc --coverageTest 100 && cd ../..",
-		"test-watch": "ng test ionic-logging-service --code-coverage",
+		"build": "npm run build-service && npm run build-viewer && npm run build-viewer-app",
+		"build-service": "ng build ionic-logging-service --prod && cpx 'projects/ionic-logging-service/README.md' dist/ionic-logging-service --verbose",
+		"build-viewer": "ng build ionic-logging-viewer --prod && cpx 'projects/ionic-logging-viewer/README.md' dist/ionic-logging-viewer --verbose",
+		"build-viewer-app": "ng build ionic-logging-viewer-app --prod",
+		"test": "npm run test-service && npm run test-viewer && ng lint && npm run e2e",
+		"test-service": "npm run test-coverage-service && npm run test-compodoc-service",
+		"test-viewer": "npm run test-coverage-viewer && npm run test-compodoc-viewer",
+		"test-coverage-service": "ng test ionic-logging-service --code-coverage --watch false --browsers ChromeHeadless",
+		"test-coverage-viewer": "ng test ionic-logging-viewer --code-coverage --watch false --browsers ChromeHeadless",
+		"test-compodoc-service": "cd projects/ionic-logging-service && compodoc --coverageTest 100 && cd ../..",
+		"test-compodoc-viewer": "cd projects/ionic-logging-viewer && compodoc --coverageTest 100 && cd ../..",
+		"test-watch-service": "ng test ionic-logging-service --code-coverage",
+		"test-watch-viewer": "ng test ionic-logging-viewer --code-coverage",
 		"lint": "ng lint",
+		"e2e": "ng e2e --project ionic-logging-viewer-app-e2e",
 		"codecov": "codecov",
-		"compodoc": "cd projects/ionic-logging-service && compodoc && cd ../..",
-		"semantic-release": "semantic-release"
+		"compodoc": "npm run compodoc-service && npm run compodoc-viewer",
+		"compodoc-service": "cd projects/ionic-logging-service && compodoc && cd ../..",
+		"compodoc-viewer": "cd projects/ionic-logging-viewer && compodoc && cd ../..",
+		"semantic-release": "npm run semantic-release-service && npm run semantic-release-viewer",
+		"semantic-release-service": "semantic-release --pkgRoot dist/ionic-logging-service",
+		"semantic-release-viewer": "semantic-release --pkgRoot dist/ionic-logging-viewer"
 	},
 	"dependencies": {
 		"@angular/animations": "^7.2.15",
@@ -37,7 +50,9 @@
 		"@angular/platform-browser": "^7.2.15",
 		"@angular/platform-browser-dynamic": "^7.2.15",
 		"@angular/router": "^7.2.15",
+		"@ionic/angular": "^4.0.0",
 		"core-js": "^2.5.4",
+		"ionicons": "^4.0.0",
 		"log4javascript": "^1.4.15",
 		"rxjs": "~6.2.0",
 		"zone.js": "~0.8.26"
@@ -56,6 +71,7 @@
 		"codelyzer": "5.1.0",
 		"cpx": "1.5.0",
 		"jasmine-core": "2.99.1",
+		"jasmine-reporters": "2.3.2",
 		"jasmine-spec-reporter": "4.2.1",
 		"karma": "~3.1.4",
 		"karma-chrome-launcher": "2.2.0",
@@ -78,8 +94,5 @@
 		"commitizen": {
 			"path": "cz-conventional-changelog"
 		}
-	},
-	"release": {
-		"pkgRoot": "dist/ionic-logging-service"
 	}
 }

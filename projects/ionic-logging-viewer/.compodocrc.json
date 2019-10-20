@@ -1,0 +1,8 @@
+{
+	"$schema": "../../node_modules/@compodoc/compodoc/src/config/schema.json",
+	"name": "ionic-logging-viewer",
+	"tsconfig": "tsconfig.lib.json",
+	"output": "../../docs/viewer",
+	"disablePrivate": true,
+	"disableGraph": true
+}

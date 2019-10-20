@@ -1,0 +1,186 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>ionic-logging-viewer</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+	      <link rel="stylesheet" href="./styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="./" class="navbar-brand">ionic-logging-viewer</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content getting-started">
+                   <div class="content-data">
+
+<h1 id="ionic-logging-viewer">ionic-logging-viewer</h1>
+<p><strong>The dependencies used by the latest version are the same as needed for <a href="https://github.com/ionic-team/ionic/blob/master/CHANGELOG.md">Ionic 4.0.0</a>. For older versions use:</strong></p>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th>ionic-logging-viewer</th>
+<th>Ionic</th>
+<th>Angular</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2.0.0</td>
+<td>&gt;= 4.0.0</td>
+<td>^7.0.0</td>
+</tr>
+<tr>
+<td>1.0.1</td>
+<td>&gt;= 3.9.0</td>
+<td>^5.0.0</td>
+</tr>
+</tbody>
+</table>
+<p>The logging viewer is a small component which can be used in your <a href="http://ionicframework.com">Ionic app</a>
+for displaying the current logs, written by <a href="https://github.com/Ritzlgrmft/ionic-logging-service">ionic-logging-service</a>.
+The viewer is meant for development and testing purposes, not for production.</p>
+<p>It provides two components:</p>
+<ul>
+<li><code>LoggingViewerComponent</code>:  
+can be embedded in any web page using the directive</li>
+<li><code>LoggingViewerModalComponent</code>:  
+a complete implemented modal containing the <code>LoggingViewerComponent</code></li>
+</ul>
+<p>Additionally, there are two components for filtering the data:</p>
+<ul>
+<li><code>LoggingViewerLevelsComponent</code>:
+allows filtering by log level</li>
+<li><code>LoggingViewerSearchComponent</code>:
+allows filtering by an arbitrary expression</li>
+</ul>
+<p>A sample app using these components is <a href="https://github.com/Ritzlgrmft/ionic-logging-viewer">ionic-logging-viewer-app</a>.</p>
+<h2 id="screenshots">Screenshots</h2>
+<p><img src="https://github.com/Ritzlgrmft/ionic-logging-viewer/images/logging-modal.png" alt="Logging Modal" class="img-responsive"></p>
+<h2 id="usage">Usage</h2>
+<h3 id="npm-package">npm package</h3>
+<div><pre class="line-numbers"><code class="language-bash">npm install ionic-logging-viewer --save</code></pre></div><h3 id="import-module">import module</h3>
+<p>Import the <code>LoggingViewerModule</code> in to your <code>app.module.ts</code>:</p>
+<div><pre class="line-numbers"><code class="language-typescript">import { LoggingViewerModule } from &quot;ionic-logging-viewer&quot;;
+...
+&#64;NgModule({
+  imports: [
+    IonicModule.forRoot(AppComponent),
+    LoggingViewerModule
+  ],
+  ...
+})</code></pre></div><h3 id="loggingviewercomponent-directive">LoggingViewerComponent directive</h3>
+<p>If you want to use the directive in one of your pages, just add</p>
+<div><pre class="line-numbers"><code class="language-html">&lt;ionic-logging-viewer&gt;&lt;/ionic-logging-viewer&gt;</code></pre></div><h3 id="loggingviewerlevelscomponent-and-loggingviewersearchcomponent-directives">LoggingViewerLevelsComponent and LoggingViewerSearchComponent directives</h3>
+<p>For filtering the log messages, you can add also these directives to your page.
+It is recommended to include them in <code>ion-toolbar</code>, but it is not necessary:</p>
+<div><pre class="line-numbers"><code class="language-html">&lt;ion-toolbar&gt;
+  &lt;ionic-logging-viewer-search&gt;&lt;/ionic-logging-viewer-search&gt;
+&lt;/ion-toolbar&gt;
+&lt;ion-toolbar&gt;
+  &lt;ionic-logging-viewer-levels&gt;&lt;/ionic-logging-viewer-levels&gt;
+&lt;/ion-toolbar&gt;</code></pre></div><h3 id="loggingviewermodalcomponent-modal">LoggingViewerModalComponent modal</h3>
+<div><pre class="line-numbers"><code class="language-typescript">public async openModal(): Promise&lt;void&gt; {
+  let componentProps = { language: this.selectedLanguage };
+  const modal = await this.modalController.create({
+    component: LoggingViewerModalComponent,
+    componentProps: componentProps
+  });
+  await modal.present();
+}</code></pre></div><h3 id="multi-language-support">multi language support</h3>
+<p>The <code>LoggingViewerComponent</code> does not need multi language support, since it just
+displays the logged data. The same applies to <code>LoggingViewerLevelsComponent</code>
+and <code>LoggingViewerSearchComponent</code>.</p>
+<p>But for the <code>LoggingViewerModalComponent</code>, multi language support is needed,
+since the modal contains some translatable texts. Therefore,
+<code>loggingViewerModalManager.openModal()</code> has a <code>language</code> parameter, which you can
+use to select the language. Currently <code>en</code> and <code>de</code> are supported.</p>
+<p>If you need another language, either open an issue, or just use the <code>translation</code> parameter.
+This parameter you can use to pass your completely own texts.
+Just fill the <code>LoggingViewerTranslation</code> object.</p>
+<h2 id="api">API</h2>
+<p>see <a href="https://ritzlgrmft.github.io/ionic-logging-service//viewer/index.html">API documentation</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 0;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'getting-started';
+            var COMPODOC_CURRENT_PAGE_URL = 'index.html';
+       </script>
+
+       <script src="./js/libs/custom-elements.min.js"></script>
+       <script src="./js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="./js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="./js/menu-wc.js" defer></script>
+
+       <script src="./js/libs/bootstrap-native.js"></script>
+
+       <script src="./js/libs/es6-shim.min.js"></script>
+       <script src="./js/libs/EventDispatcher.js"></script>
+       <script src="./js/libs/promise.min.js"></script>
+       <script src="./js/libs/zepto.min.js"></script>
+
+       <script src="./js/compodoc.js"></script>
+
+       <script src="./js/tabs.js"></script>
+       <script src="./js/menu.js"></script>
+       <script src="./js/libs/clipboard.min.js"></script>
+       <script src="./js/libs/prism.js"></script>
+       <script src="./js/sourceCode.js"></script>
+          <script src="./js/search/search.js"></script>
+          <script src="./js/search/lunr.min.js"></script>
+          <script src="./js/search/search-lunr.js"></script>
+          <script src="./js/search/search_index.js"></script>
+       <script src="./js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

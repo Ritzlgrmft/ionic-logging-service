@@ -2,7 +2,7 @@
 	"$schema": "../../node_modules/@compodoc/compodoc/src/config/schema.json",
 	"name": "ionic-logging-service",
 	"tsconfig": "tsconfig.lib.json",
-	"output": "../../docs",
+	"output": "../../docs/service",
 	"disablePrivate": true,
 	"disableGraph": true
 }
