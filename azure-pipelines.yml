@@ -3,79 +3,90 @@ trigger:
 
 pool:
   name: Hosted
-  
-steps:
-- task: NodeTool@0
-  displayName: 'Use Node 11.x'
-  inputs:
-    versionSpec: 11.x
 
-- task: Npm@1
-  displayName: 'npm install'
-  inputs:
-    verbose: false
+jobs:
+- job: Prepare
+  steps:
 
-- task: DeleteFiles@1
-  displayName: 'Delete unit test results (ionic-logging-service)'
-  inputs:
-    SourceFolder: projects/ionic-logging-service/junit
-    Contents: 'TESTS*.xml'
+  - task: NodeTool@0
+    displayName: 'Use Node 11.x'
+    inputs:
+      versionSpec: 11.x
 
-- task: DeleteFiles@1
-  displayName: 'Delete unit test results (ionic-logging-viewer)'
-  inputs:
-    SourceFolder: projects/ionic-logging-viewer/junit
-    Contents: 'TESTS*.xml'
+  - task: Npm@1
+    displayName: 'npm install'
+    inputs:
+      verbose: false
 
-- task: Npm@1
-  displayName: 'Run tests'
-  inputs:
-    command: custom
-    verbose: false
-    customCommand: 'test'
+- job: Build
+  dependsOn: Prepare
+  steps:
 
-- task: PublishTestResults@2
-  displayName: 'Publish unit test results (ionic-logging-service)'
-  condition: succeededOrFailed()
-  inputs:
-    searchFolder: $(System.DefaultWorkingDirectory)/projects/ionic-logging-service/junit
-    testRunTitle: Unit Tests ionic-logging-service
-    testResultsFormat: JUnit
-    testResultsFiles: "**/TESTS*.xml"
+  - task: Npm@1
+    displayName: 'Build'
+    inputs:
+      command: custom
+      verbose: false
+      customCommand: 'run build'
 
-- task: PublishTestResults@2
-  displayName: 'Publish unit test results (ionic-logging-viewer)'
-  condition: succeededOrFailed()
-  inputs:
-    searchFolder: $(System.DefaultWorkingDirectory)/projects/ionic-logging-viewer/junit
-    testRunTitle: Unit Tests ionic-logging-viewer
-    testResultsFormat: JUnit
-    testResultsFiles: "**/TESTS*.xml"
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish ionic-logging-service'
+    inputs:
+      PathtoPublish: 'dist/ionic-logging-service'
+      ArtifactName: 'ionic-logging-service'
+      publishLocation: 'Container'
 
-- task: Npm@1
-  displayName: 'Publish codecov'
-  inputs:
-    command: custom
-    verbose: false
-    customCommand: 'run codecov'
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish ionic-logging-viewer'
+    inputs:
+      PathtoPublish: 'dist/ionic-logging-viewer'
+      ArtifactName: 'ionic-logging-viewer'
+      publishLocation: 'Container'
 
-- task: Npm@1
-  displayName: 'Build'
-  inputs:
-    command: custom
-    verbose: false
-    customCommand: 'run build'
+- job: Test
+  dependsOn: Build
+  steps:
 
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish ionic-logging-service'
-  inputs:
-    PathtoPublish: 'dist/ionic-logging-service'
-    ArtifactName: 'ionic-logging-service'
-    publishLocation: 'Container'
+  - task: DeleteFiles@1
+    displayName: 'Delete unit test results (ionic-logging-service)'
+    inputs:
+      SourceFolder: projects/ionic-logging-service/junit
+      Contents: 'TESTS*.xml'
 
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish ionic-logging-viewer'
-  inputs:
-    PathtoPublish: 'dist/ionic-logging-viewer'
-    ArtifactName: 'ionic-logging-viewer'
-    publishLocation: 'Container'
+  - task: DeleteFiles@1
+    displayName: 'Delete unit test results (ionic-logging-viewer)'
+    inputs:
+      SourceFolder: projects/ionic-logging-viewer/junit
+      Contents: 'TESTS*.xml'
+
+  - task: Npm@1
+    displayName: 'Run tests'
+    inputs:
+      command: custom
+      verbose: false
+      customCommand: 'test'
+
+  - task: PublishTestResults@2
+    displayName: 'Publish unit test results (ionic-logging-service)'
+    condition: succeededOrFailed()
+    inputs:
+      searchFolder: $(System.DefaultWorkingDirectory)/projects/ionic-logging-service/junit
+      testRunTitle: Unit Tests ionic-logging-service
+      testResultsFormat: JUnit
+      testResultsFiles: "**/TESTS*.xml"
+
+  - task: PublishTestResults@2
+    displayName: 'Publish unit test results (ionic-logging-viewer)'
+    condition: succeededOrFailed()
+    inputs:
+      searchFolder: $(System.DefaultWorkingDirectory)/projects/ionic-logging-viewer/junit
+      testRunTitle: Unit Tests ionic-logging-viewer
+      testResultsFormat: JUnit
+      testResultsFiles: "**/TESTS*.xml"
+
+  - task: Npm@1
+    displayName: 'Publish codecov'
+    inputs:
+      command: custom
+      verbose: false
+      customCommand: 'run codecov'
