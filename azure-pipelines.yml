@@ -5,7 +5,7 @@ pool:
   name: Hosted
 
 jobs:
-- job: Build and Test
+- job: Build_Test
   steps:
 
   - task: NodeTool@0
