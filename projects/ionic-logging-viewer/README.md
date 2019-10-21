@@ -29,7 +29,7 @@ A sample app using these components is [ionic-logging-viewer-app](https://github
 
 ## Screenshots
 
-![Logging Modal](https://github.com/Ritzlgrmft/ionic-logging-viewer/images/logging-modal.png)
+![Logging Modal](https://raw.githubusercontent.com/Ritzlgrmft/ionic-logging-service/master/images/logging-modal.png)
 
 ## Usage
 
