@@ -82,3 +82,8 @@ jobs:
       command: custom
       verbose: false
       customCommand: 'run codecov'
+
+  - task: Bash@3
+    displayName: 'Publish to npm'
+    inputs:
+      filePath: './publish.sh'
