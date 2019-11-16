@@ -88,7 +88,7 @@ steps:
       semantic-release
   displayName: 'Calculate next version'
 
-- script: echo "Next Release: $(nextRelease)"
+- script: echo "Next Release: $nextRelease"
   displayName: 'Show next version'
       
 - task: Npm@1
