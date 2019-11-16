@@ -81,20 +81,15 @@ steps:
     verbose: false
     customCommand: 'run codecov'
 
-- task: Npm@1
+- script: >
+      npx -p semantic-release
+      -p @semantic-release/git
+      -p semantic-release-ado
+      semantic-release
   displayName: 'Calculate next version'
-  inputs:
-    command: custom
-    verbose: false
-    customCommand: 'run semantic-release-version'
 
-- task: Bash@3
+- script: echo "Next Release: $(nextRelease)"
   displayName: 'Show next version'
-  inputs:
-    targetType: 'inline'
-    script: |
-      env
-      echo "Next Release: $nextRelease"
       
 - task: Npm@1
   displayName: 'Publish ionic-logging-service'
