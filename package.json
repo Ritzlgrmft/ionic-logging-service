@@ -36,8 +36,7 @@
 		"compodoc": "npm run compodoc-service && npm run compodoc-viewer",
 		"compodoc-service": "cd projects/ionic-logging-service && compodoc && cd ../..",
 		"compodoc-viewer": "cd projects/ionic-logging-viewer && compodoc && cd ../..",
-		"semantic-release-service": "semantic-release --pkgRoot dist/ionic-logging-service --dry-run",
-		"semantic-release-version": "semantic-release -p semantic-release-ado"
+		"semantic-release-service": "semantic-release --pkgRoot dist/ionic-logging-service --dry-run"
 	},
 	"dependencies": {
 		"@angular/animations": "^7.2.15",
