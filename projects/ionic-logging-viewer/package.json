@@ -1,12 +1,12 @@
 {
 	"name": "ionic-logging-viewer",
-	"version": "0.0.0-development",
+	"version": "8.0.0",
 	"description": "Viewer component for logs written by ionic-logging-service",
 	"author": {
 		"name": "Markus Wagner",
 		"email": "markus.wagner02@web.de"
 	},
-	"repository": "https://github.com/Ritzlgrmft/ionic-logging-viewer.git",
+	"repository": "https://github.com/Ritzlgrmft/ionic-logging-service.git",
 	"license": "MIT",
 	"private": false,
 	"keywords": [
@@ -16,10 +16,10 @@
 		"log4javascript"
 	],
 	"peerDependencies": {
-		"@angular/common": "^7.0.0",
-		"@angular/core": "^7.0.0",
-		"@ionic/angular": "^4.0.0",
-		"ionic-logging-service": "^7.0.0",
+		"@angular/common": "^8.0.0",
+		"@angular/core": "^8.0.0",
+		"@ionic/angular": "^4.7.0",
+		"ionic-logging-service": "^8.0.0",
 		"ionicons": "^4.0.0"
 	}
 }

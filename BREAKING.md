@@ -1,5 +1,9 @@
 # Breaking Changes
 
+## Version 8
+
+- update to Angular 8
+
 ## Version 7
 
 - update to Angular 7
