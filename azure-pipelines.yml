@@ -82,24 +82,8 @@ steps:
     customCommand: 'run codecov'
 
 - task: Npm@1
-  displayName: 'Calculate next version'
-  inputs:
-    command: custom
-    verbose: false
-    customCommand: 'run semantic-release-version'
-
-- task: Npm@1
   displayName: 'Publish ionic-logging-service'
-  condition: ne(variables['nextRelease'], '')
   inputs:
     command: custom
     verbose: false
     customCommand: 'run semantic-release-service'
-
-- task: Npm@1
-  displayName: 'Publish ionic-logging-viewer'
-  condition: ne(variables['nextRelease'], '')
-  inputs:
-    command: custom
-    verbose: false
-    customCommand: 'publish dist/ionic-logging-viewer --tag $nextRelease'
