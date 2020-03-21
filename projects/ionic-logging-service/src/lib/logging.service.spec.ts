@@ -14,7 +14,6 @@ import { MemoryAppender } from "./memory-appender.model";
 
 describe("LoggingService", () => {
 
-	let injector: TestBed;
 	let loggingService: LoggingService;
 	let httpMock: HttpTestingController;
 
@@ -25,9 +24,8 @@ describe("LoggingService", () => {
 				LoggingService,
 			],
 		});
-		injector = getTestBed();
-		loggingService = injector.get(LoggingService);
-		httpMock = injector.get(HttpTestingController);
+		loggingService = TestBed.inject(LoggingService);
+		httpMock = TestBed.inject(HttpTestingController);
 	});
 
 	afterEach(() => {

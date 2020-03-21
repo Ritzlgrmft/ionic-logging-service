@@ -7,7 +7,6 @@ import { LoggingViewerFilterService } from "./logging-viewer-filter.service";
 
 describe("LoggingViewerFilterService", () => {
 
-	let injector: TestBed;
 	let loggingViewerFilterService: LoggingViewerFilterService;
 
 	const loggerStub = jasmine.createSpyObj("logger", ["entry", "exit"]);
@@ -22,8 +21,7 @@ describe("LoggingViewerFilterService", () => {
 				LoggingViewerFilterService,
 			],
 		});
-		injector = getTestBed();
-		loggingViewerFilterService = injector.get(LoggingViewerFilterService);
+		loggingViewerFilterService = TestBed.inject(LoggingViewerFilterService);
 	});
 
 	describe("ctor()", () => {

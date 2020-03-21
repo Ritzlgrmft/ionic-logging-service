@@ -18,7 +18,8 @@
 					"configurations": {
 						"production": {
 							"project": "projects/ionic-logging-service/ng-package.prod.json"
-						}
+						,              "tsConfig": "projects/ionic-logging-service/tsconfig.lib.prod.json"
+}
 					}
 				},
 				"test": {
@@ -58,7 +59,8 @@
 					"configurations": {
 						"production": {
 							"project": "projects/ionic-logging-viewer/ng-package.prod.json"
-						}
+						,              "tsConfig": "projects/ionic-logging-viewer/tsconfig.lib.prod.json"
+}
 					}
 				},
 				"test": {
@@ -94,6 +96,7 @@
 				"build": {
 					"builder": "@angular-devkit/build-angular:browser",
 					"options": {
+            "aot": true,
 						"outputPath": "dist/ionic-logging-viewer-app",
 						"index": "projects/ionic-logging-viewer-app/src/index.html",
 						"main": "projects/ionic-logging-viewer-app/src/main.ts",
@@ -142,7 +145,11 @@
 									"type": "initial",
 									"maximumWarning": "2mb",
 									"maximumError": "5mb"
-								}
+								},
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
 							]
 						}
 					}

@@ -48,8 +48,8 @@ describe("LoggingViewerComponent", () => {
 
 		component = fixture.componentInstance;
 
-		loggingService = TestBed.get(LoggingService);
-		loggingViewerFilterService = TestBed.get(LoggingViewerFilterService);
+		loggingService = TestBed.inject(LoggingService);
+		loggingViewerFilterService = TestBed.inject(LoggingViewerFilterService);
 	});
 
 	describe("constructor", () => {
