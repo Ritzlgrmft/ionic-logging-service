@@ -80,10 +80,3 @@ steps:
     command: custom
     verbose: false
     customCommand: 'run codecov'
-
-- task: Npm@1
-  displayName: 'Publish ionic-logging-service'
-  inputs:
-    command: custom
-    verbose: false
-    customCommand: 'run semantic-release-service'

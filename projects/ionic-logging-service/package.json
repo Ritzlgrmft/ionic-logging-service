@@ -1,6 +1,6 @@
 {
 	"name": "ionic-logging-service",
-	"version": "0.0.0-development",
+	"version": "9.0.0",
 	"description": "Logging functionalities for apps built with Ionic framework",
 	"author": {
 		"name": "Markus Wagner",
