@@ -1,6 +1,6 @@
 {
 	"name": "ionic-logging-viewer",
-	"version": "8.0.0",
+	"version": "9.0.0",
 	"description": "Viewer component for logs written by ionic-logging-service",
 	"author": {
 		"name": "Markus Wagner",
