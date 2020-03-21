@@ -7,9 +7,9 @@ pool:
 steps:
 
 - task: NodeTool@0
-  displayName: 'Use Node 11.x'
+  displayName: 'Use Node 12.x'
   inputs:
-    versionSpec: 11.x
+    versionSpec: 12.x
 
 - task: Npm@1
   displayName: 'npm install'
