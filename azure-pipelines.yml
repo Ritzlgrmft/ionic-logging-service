@@ -2,7 +2,7 @@ trigger:
 - master
 
 pool:
-  name: macOS-latest
+  vmImage: 'macOS-latest'
 
 steps:
 
