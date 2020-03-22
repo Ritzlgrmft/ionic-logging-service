@@ -17,11 +17,11 @@ steps:
     verbose: false
 
 - task: Npm@1
-  displayName: 'Build'
+  displayName: 'Build ionic-logging-service'
   inputs:
     command: custom
     verbose: false
-    customCommand: 'run build'
+    customCommand: 'run build-service'
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish ionic-logging-service'
@@ -30,12 +30,26 @@ steps:
     ArtifactName: 'ionic-logging-service'
     publishLocation: 'Container'
 
+- task: Npm@1
+  displayName: 'Build ionic-logging-viewer'
+  inputs:
+    command: custom
+    verbose: false
+    customCommand: 'run build-viewer'
+
 - task: PublishBuildArtifacts@1
   displayName: 'Publish ionic-logging-viewer'
   inputs:
     PathtoPublish: 'dist/ionic-logging-viewer'
     ArtifactName: 'ionic-logging-viewer'
     publishLocation: 'Container'
+
+- task: Npm@1
+  displayName: 'Build ionic-logging-viewer-app'
+  inputs:
+    command: custom
+    verbose: false
+    customCommand: 'run build-viewer-app'
 
 - task: DeleteFiles@1
   displayName: 'Delete unit test results (ionic-logging-service)'
