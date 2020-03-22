@@ -27,5 +27,8 @@
   "exclude": [
     "src/test.ts",
     "**/*.spec.ts"
-  ]
+  ],
+  "paths":{
+    "ionic-logging-service": ["../dist/ionic-logging-service"]
+  }
 }
