@@ -149,11 +149,11 @@
 						<ion-item>
 							<ion-button expand="block" fill="outline" (click)="openModal()">Open modal</ion-button>
 						</ion-item>
-						<ion-radio-group>
+						<ion-radio-group [value]="selectedLanguage" (ionChange)="changeLanguage($event.detail.value)">
 							<ion-item *ngFor="let language of languages">
 								<ion-label>{{language}}</ion-label>
-								<ion-radio checked="{{language === selectedLanguage}}" value="{{language}}"
-									(ionSelect)="changeLanguage(language)"></ion-radio>
+								<ion-radio value="{{language}}"
+									></ion-radio>
 							</ion-item>
 						</ion-radio-group>
 						<ion-item *ngIf="selectedLanguage === 'custom'">
