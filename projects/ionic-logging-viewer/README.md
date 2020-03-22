@@ -1,6 +1,6 @@
 # ionic-logging-viewer
 
-**The dependencies used by the latest version are the same as needed for [Ionic 4.0.0](https://github.com/ionic-team/ionic/blob/master/CHANGELOG.md). For older versions use:**
+**The dependencies used by the latest version are the same as needed for [Ionic 5.0.0](https://github.com/ionic-team/ionic/blob/master/CHANGELOG.md). For older versions use:**
 
 | ionic-logging-viewer | Ionic | Angular
 | ----- | -------- | ------
