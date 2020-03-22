@@ -18,16 +18,16 @@
 					</ion-card-header>
 					<ion-list>
 						<ion-item>
-							<ion-label position="fixed">Logger</ion-label>
+							<ion-label position="floating">Logger</ion-label>
 							<ion-input type="text" [(ngModel)]="testLoggerName"
 								(ionChange)="onLogLevelOrLoggerChanged()"></ion-input>
 						</ion-item>
 						<ion-item>
-							<ion-label position="fixed">Method</ion-label>
+							<ion-label position="floating">Method</ion-label>
 							<ion-input type="text" [(ngModel)]="testMethod"></ion-input>
 						</ion-item>
 						<ion-item>
-							<ion-label position="fixed">Log Level</ion-label>
+							<ion-label position="floating">Log Level</ion-label>
 							<ion-select interface="popover" [(ngModel)]="testLogLevel"
 								(ionChange)="onLogLevelOrLoggerChanged()">
 								<ion-select-option *ngFor="let logLevel of logLevels" [value]="logLevel">
@@ -36,7 +36,7 @@
 							</ion-select>
 						</ion-item>
 						<ion-item>
-							<ion-label position="fixed">Message</ion-label>
+							<ion-label position="floating">Message</ion-label>
 							<ion-input type="text" [(ngModel)]="message"></ion-input>
 						</ion-item>
 						<ion-item>
@@ -72,17 +72,17 @@
 					</ion-card-header>
 					<ion-list>
 						<ion-item>
-							<ion-label position="fixed">Enabled</ion-label>
+							<ion-label>Enabled</ion-label>
 							<ion-toggle [(ngModel)]="ajaxAppenderEnabled" (ionChange)="onAjaxAppenderConfigChanged()">
 							</ion-toggle>
 						</ion-item>
 						<ion-item *ngIf="ajaxAppenderEnabled">
-							<ion-label position="fixed">Url</ion-label>
+							<ion-label position="floating">Url</ion-label>
 							<ion-input type="text" [(ngModel)]="ajaxAppenderUrl"
 								(ionChange)="onAjaxAppenderConfigChanged()"></ion-input>
 						</ion-item>
 						<ion-item *ngIf="ajaxAppenderEnabled">
-							<ion-label position="fixed">Threshold</ion-label>
+							<ion-label position="floating">Threshold</ion-label>
 							<ion-select interface="popover" [(ngModel)]="ajaxAppenderThreshold"
 								(ionChange)="onAjaxAppenderConfigChanged()">
 								<ion-select-option *ngFor="let logLevel of logLevels" [value]="logLevel">
@@ -91,7 +91,7 @@
 							</ion-select>
 						</ion-item>
 						<ion-item *ngIf="ajaxAppenderEnabled">
-							<ion-label position="fixed">Batch Size</ion-label>
+							<ion-label position="floating">Batch Size</ion-label>
 							<ion-select interface="popover" [(ngModel)]="ajaxAppenderBatchSize"
 								(ionChange)="onAjaxAppenderConfigChanged()">
 								<ion-select-option *ngFor="let batchSize of batchSizes" [value]="batchSize">
@@ -108,18 +108,18 @@
 					</ion-card-header>
 					<ion-list>
 						<ion-item>
-							<ion-label position="fixed">Enabled</ion-label>
+							<ion-label>Enabled</ion-label>
 							<ion-toggle [(ngModel)]="localStorageAppenderConfiguration.enabled"
 								(ionChange)="onLocalStorageConfigChanged()">
 							</ion-toggle>
 						</ion-item>
 						<ion-item *ngIf="localStorageAppenderConfiguration.enabled">
-							<ion-label position="fixed">Key</ion-label>
+							<ion-label position="floating">Key</ion-label>
 							<ion-input type="text" [(ngModel)]="localStorageAppenderConfiguration.localStorageKey"
 								(ionChange)="onLocalStorageConfigChanged()"></ion-input>
 						</ion-item>
 						<ion-item *ngIf="localStorageAppenderConfiguration.enabled">
-							<ion-label position="fixed">Threshold</ion-label>
+							<ion-label position="floating">Threshold</ion-label>
 							<ion-select interface="popover" [(ngModel)]="localStorageAppenderConfiguration.threshold"
 								(ionChange)="onLocalStorageConfigChanged()">
 								<ion-select-option *ngFor="let logLevel of logLevels" [value]="logLevel">
@@ -128,7 +128,7 @@
 							</ion-select>
 						</ion-item>
 						<ion-item *ngIf="localStorageAppenderConfiguration.enabled">
-							<ion-label position="fixed">Max Messages</ion-label>
+							<ion-label position="floating">Max Messages</ion-label>
 							<ion-select interface="popover" [(ngModel)]="localStorageAppenderConfiguration.maxMessages"
 								(ionChange)="onLocalStorageConfigChanged()">
 								<ion-select-option
@@ -157,15 +157,15 @@
 							</ion-item>
 						</ion-radio-group>
 						<ion-item *ngIf="selectedLanguage === 'custom'">
-							<ion-label position="fixed">title</ion-label>
+							<ion-label position="floating">title</ion-label>
 							<ion-input type="text" [(ngModel)]="translation.title"></ion-input>
 						</ion-item>
 						<ion-item *ngIf="selectedLanguage === 'custom'">
-							<ion-label position="fixed">cancel</ion-label>
+							<ion-label position="floating">cancel</ion-label>
 							<ion-input type="text" [(ngModel)]="translation.cancel"></ion-input>
 						</ion-item>
 						<ion-item *ngIf="selectedLanguage === 'custom'">
-							<ion-label position="fixed">searchPlaceholder</ion-label>
+							<ion-label position="floating">searchPlaceholder</ion-label>
 							<ion-input type="text" [(ngModel)]="translation.searchPlaceholder"></ion-input>
 						</ion-item>
 					</ion-list>
