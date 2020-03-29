@@ -51,15 +51,7 @@ export class LocalStorageAppender extends log4javascript.Appender {
 
 		// read existing logMessages
 		// tslint:disable-next-line:no-null-keyword
-		if (localStorage.getItem(this.localStorageKey) === null) {
-			this.logMessages = [];
-		} else {
-			this.logMessages = JSON.parse(localStorage.getItem(this.localStorageKey));
-			for (const logMessage of this.logMessages) {
-				// timestamps are serialized as strings
-				logMessage.timeStamp = new Date(logMessage.timeStamp);
-			}
-		}
+		this.logMessages = LocalStorageAppender.loadLogMessages(this.localStorageKey);
 
 		// process remaining configuration
 		this.configure({
@@ -67,6 +59,27 @@ export class LocalStorageAppender extends log4javascript.Appender {
 			maxMessages: configuration.maxMessages || LocalStorageAppender.maxMessagesDefault,
 			threshold: configuration.threshold || LocalStorageAppender.thresholdDefault,
 		});
+	}
+
+	/**
+	 * Load tog messages from local storage which are stored there under the given key.
+	 * @param localStorageKey local storage key
+	 * @return stored messages
+	 */
+	public static loadLogMessages(localStorageKey: string): LogMessage[] {
+		let logMessages: LogMessage[];
+
+		if (!localStorageKey || localStorage.getItem(localStorageKey) === null) {
+			logMessages = [];
+		} else {
+			logMessages = JSON.parse(localStorage.getItem(localStorageKey));
+			for (const logMessage of logMessages) {
+				// timestamps are serialized as strings
+				logMessage.timeStamp = new Date(logMessage.timeStamp);
+			}
+		}
+
+		return logMessages;
 	}
 
 	/**

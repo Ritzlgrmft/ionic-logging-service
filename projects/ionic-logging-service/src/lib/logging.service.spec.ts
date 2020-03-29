@@ -512,4 +512,32 @@ describe("LoggingService", () => {
 			loggingService.getRootLogger().warn("test");
 		});
 	});
+
+	describe("getLogMessagesFromLocalStorage(localStorageKey: string): LogMessage[]", () => {
+
+		it("returns empty array if no log message is written", () => {
+
+			localStorage.removeItem("xxx");
+
+			const messages = loggingService.getLogMessagesFromLocalStorage("xxx");
+
+			expect(messages.length).toBe(0);
+		});
+
+		it("returns array with written log message", () => {
+
+			const messagesIn = [{
+				level: "DEBUG",
+				logger: "myLogger",
+				message: ["myMessage"],
+				methodName: "myMethod",
+				timeStamp: new Date(),
+			}];
+			localStorage.setItem("xxx", JSON.stringify(messagesIn));
+
+			const messages = loggingService.getLogMessagesFromLocalStorage("xxx");
+
+			expect(messages.length).toBe(1);
+		});
+	});
 });

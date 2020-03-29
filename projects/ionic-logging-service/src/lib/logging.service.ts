@@ -113,6 +113,14 @@ export class LoggingService {
 		if (typeof configuration.localStorageAppender !== "undefined") {
 			const localStorageAppender = new LocalStorageAppender(configuration.localStorageAppender);
 			log4javascript.getRootLogger().addAppender(localStorageAppender);
+
+			// ensure that an eventual memoryAppender is behind the localStorageAppender
+			const appenders = new Logger().getInternalLogger().getEffectiveAppenders();
+			const memoryAppender = appenders.find((a) => a.toString() === "Ionic.Logging.MemoryAppender") as MemoryAppender;
+			if (memoryAppender) {
+				log4javascript.getRootLogger().removeAppender(memoryAppender);
+				log4javascript.getRootLogger().addAppender(memoryAppender);
+			}
 		}
 
 		// configure MemoryAppender
@@ -158,5 +166,14 @@ export class LoggingService {
 	 */
 	public getLogMessages(): LogMessage[] {
 		return this.memoryAppender.getLogMessages();
+	}
+
+	/**
+	 * Loads the log messages written by the LocalStorageAppender with the given key.
+	 * @param localStorageKey key for the local storage
+	 * @returns log messages
+	 */
+	public getLogMessagesFromLocalStorage(localStorageKey: string): LogMessage[] {
+		return LocalStorageAppender.loadLogMessages(localStorageKey);
 	}
 }

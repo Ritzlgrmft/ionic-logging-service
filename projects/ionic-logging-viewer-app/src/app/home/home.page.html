@@ -149,11 +149,17 @@
 						<ion-item>
 							<ion-button expand="block" fill="outline" (click)="openModal()">Open modal</ion-button>
 						</ion-item>
+						<ion-item>
+							<ion-label position="floating">Local Storage Keys</ion-label>
+							<ion-input type="text" [(ngModel)]="localStorageKeys"></ion-input>
+						</ion-item>
 						<ion-radio-group [value]="selectedLanguage" (ionChange)="changeLanguage($event.detail.value)">
+							<ion-list-header>
+								<ion-label>Language</ion-label>
+							</ion-list-header>
 							<ion-item *ngFor="let language of languages">
 								<ion-label>{{language}}</ion-label>
-								<ion-radio value="{{language}}"
-									></ion-radio>
+								<ion-radio value="{{language}}"></ion-radio>
 							</ion-item>
 						</ion-radio-group>
 						<ion-item *ngIf="selectedLanguage === 'custom'">

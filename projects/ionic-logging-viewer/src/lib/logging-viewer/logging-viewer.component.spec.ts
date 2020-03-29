@@ -15,14 +15,16 @@ describe("LoggingViewerComponent", () => {
 	let loggingService: LoggingService;
 	let loggingViewerFilterService: LoggingViewerFilterService;
 	const logMessages: LogMessage[] = [];
+	const logMessagesFromLocalStorage: LogMessage[] = [];
 
 	const loggerStub = jasmine.createSpyObj("logger", ["entry", "exit"]);
 
 	const loggingServiceEventEmitter = new EventEmitter<LogMessage>();
 	const loggingServiceStub = jasmine.createSpyObj("loggingServiceStub",
-		["getLogger", "getLogMessages", "logMessagesChanged"]);
+		["getLogger", "getLogMessages", "getLogMessagesFromLocalStorage", "logMessagesChanged"]);
 	loggingServiceStub.getLogger.and.returnValue(loggerStub);
 	loggingServiceStub.getLogMessages.and.returnValue(logMessages);
+	loggingServiceStub.getLogMessagesFromLocalStorage.and.returnValue(logMessagesFromLocalStorage);
 	loggingServiceStub.logMessagesChanged = loggingServiceEventEmitter;
 
 	beforeEach(async(() => {
@@ -278,6 +280,50 @@ describe("LoggingViewerComponent", () => {
 			const result = component.filterLogMessagesBySearch(logMessage);
 
 			expect(result).toBeFalsy();
+		});
+	});
+
+	describe("localStorageKeys", () => {
+
+		it("local storage empty no log messages", () => {
+
+			logMessagesFromLocalStorage.splice(0, logMessagesFromLocalStorage.length);
+			logMessages.push({
+				level: "DEBUG",
+				logger: "myLogger",
+				message: ["myMessage"],
+				methodName: "myMethod",
+				timeStamp: new Date(),
+			});
+			component.localStorageKeys = "xxx";
+			component.loadLogMessages();
+			component.filterLogMessages();
+
+			expect(component.logMessagesForDisplay.length).toBe(0);
+		});
+
+		it("local storage with log messages", () => {
+
+			logMessagesFromLocalStorage.splice(0, logMessagesFromLocalStorage.length);
+			logMessagesFromLocalStorage.push({
+				level: "DEBUG",
+				logger: "myLogger",
+				message: ["myMessage"],
+				methodName: "myMethod",
+				timeStamp: new Date(),
+			});
+			logMessagesFromLocalStorage.push({
+				level: "DEBUG",
+				logger: "myLogger",
+				message: ["myMessage2"],
+				methodName: "myMethod",
+				timeStamp: new Date(),
+			});
+			component.localStorageKeys = "xxx";
+			component.loadLogMessages();
+			component.filterLogMessages();
+
+			expect(component.logMessagesForDisplay.length).toBe(2);
 		});
 	});
 });

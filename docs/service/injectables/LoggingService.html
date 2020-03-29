@@ -121,6 +121,10 @@
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
+                                <a href="#getLogMessagesFromLocalStorage">getLogMessagesFromLocalStorage</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
                                 <a href="#getRootLogger">getRootLogger</a>
                             </li>
                         </ul>
@@ -268,8 +272,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="147"
-                            class="link-to-prism">src/lib/logging.service.ts:147</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="155"
+                            class="link-to-prism">src/lib/logging.service.ts:155</a></div>
                 </td>
             </tr>
 
@@ -348,8 +352,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="159"
-                            class="link-to-prism">src/lib/logging.service.ts:159</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="167"
+                            class="link-to-prism">src/lib/logging.service.ts:167</a></div>
                 </td>
             </tr>
 
@@ -362,6 +366,86 @@ That means you will get only the most current messages. The number of the messag
 by its maxMessages value.</p>
 </div>
 
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/LogMessage.html" target="_self" >LogMessage[]</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>log messages</p>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getLogMessagesFromLocalStorage"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            getLogMessagesFromLocalStorage
+                        </b>
+                        <a href="#getLogMessagesFromLocalStorage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getLogMessagesFromLocalStorage(localStorageKey: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="176"
+                            class="link-to-prism">src/lib/logging.service.ts:176</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Loads the log messages written by the LocalStorageAppender with the given key.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>localStorageKey</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>key for the local storage</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <div>
                     </div>
                     <div class="io-description">
@@ -400,8 +484,8 @@ by its maxMessages value.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="138"
-                            class="link-to-prism">src/lib/logging.service.ts:138</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="146"
+                            class="link-to-prism">src/lib/logging.service.ts:146</a></div>
                 </td>
             </tr>
 
@@ -668,6 +752,14 @@ export class LoggingService {
 		if (typeof configuration.localStorageAppender !&#x3D;&#x3D; &quot;undefined&quot;) {
 			const localStorageAppender &#x3D; new LocalStorageAppender(configuration.localStorageAppender);
 			log4javascript.getRootLogger().addAppender(localStorageAppender);
+
+			// ensure that an eventual memoryAppender is behind the localStorageAppender
+			const appenders &#x3D; new Logger().getInternalLogger().getEffectiveAppenders();
+			const memoryAppender &#x3D; appenders.find((a) &#x3D;&gt; a.toString() &#x3D;&#x3D;&#x3D; &quot;Ionic.Logging.MemoryAppender&quot;) as MemoryAppender;
+			if (memoryAppender) {
+				log4javascript.getRootLogger().removeAppender(memoryAppender);
+				log4javascript.getRootLogger().addAppender(memoryAppender);
+			}
 		}
 
 		// configure MemoryAppender
@@ -714,6 +806,15 @@ export class LoggingService {
 	public getLogMessages(): LogMessage[] {
 		return this.memoryAppender.getLogMessages();
 	}
+
+	/**
+	 * Loads the log messages written by the LocalStorageAppender with the given key.
+	 * @param localStorageKey key for the local storage
+	 * @returns log messages
+	 */
+	public getLogMessagesFromLocalStorage(localStorageKey: string): LogMessage[] {
+		return LocalStorageAppender.loadLogMessages(localStorageKey);
+	}
 }
 </code></pre>
     </div>
@@ -749,6 +850,7 @@ export class LoggingService {
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
             var COMPODOC_CURRENT_PAGE_URL = 'LoggingService.html';
+            var MAX_SEARCH_RESULTS = 15;
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

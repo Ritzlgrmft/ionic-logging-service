@@ -35,6 +35,7 @@ export class HomePage {
 	public languages: string[];
 	public selectedLanguage: string;
 	public translation: LoggingViewerTranslation;
+	public localStorageKeys: string;
 
 	private logger: Logger;
 
@@ -138,11 +139,7 @@ export class HomePage {
 
 		if (this.localStorageAppenderConfiguration.enabled) {
 			// add appender
-			localStorageAppender = new LocalStorageAppender(this.localStorageAppenderConfiguration); /*{
-				maxMessages: this.localStorageAppenderConfiguration.maxMessages,
-				threshold: this.localStorageAppenderConfiguration.threshold,
-				localStorageKey: this.localStorageAppenderConfiguration.localStorageKey,
-			});*/
+			localStorageAppender = new LocalStorageAppender(this.localStorageAppenderConfiguration);
 			this.loggingService.getRootLogger().getInternalLogger().addAppender(localStorageAppender);
 		}
 
@@ -199,9 +196,9 @@ export class HomePage {
 	public async openModal(): Promise<void> {
 		let componentProps: any;
 		if (this.selectedLanguage === "custom") {
-			componentProps = { translation: this.translation };
+			componentProps = { translation: this.translation, localStorageKeys: this.localStorageKeys };
 		} else {
-			componentProps = { language: this.selectedLanguage };
+			componentProps = { language: this.selectedLanguage, localStorageKeys: this.localStorageKeys };
 		}
 		const modal = await this.modalController.create({
 			component: LoggingViewerModalComponent,

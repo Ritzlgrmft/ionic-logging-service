@@ -35,6 +35,11 @@ export class LoggingViewerModalComponent implements OnInit {
 	public translation: LoggingViewerTranslation;
 
 	/**
+	 * Comma-separated list of localStorageKeys. If set, the logs get loaded from localStorage instead of memory.
+	 */
+	public localStorageKeys: string;
+
+	/**
 	 * Flag controlling which close button will be shown.
 	 */
 	public isAndroid: boolean;
@@ -60,6 +65,7 @@ export class LoggingViewerModalComponent implements OnInit {
 
 		this.language = navParams.get("language");
 		this.translation = navParams.get("translation");
+		this.localStorageKeys = navParams.get("localStorageKeys");
 		this.isAndroid = platform.is("android");
 
 		this.logger.exit(methodName);

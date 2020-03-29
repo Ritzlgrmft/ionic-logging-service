@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit, Input } from "@angular/core";
 import { Subscription } from "rxjs";
 
 import { Logger, LoggingService, LogLevelConverter, LogMessage } from "ionic-logging-service";
@@ -18,6 +18,12 @@ import { LoggingViewerFilterService } from "../logging-viewer-filter.service";
 	styleUrls: ["./logging-viewer.component.scss"]
 })
 export class LoggingViewerComponent implements OnInit, OnDestroy {
+
+	/**
+	 * Comma-separated list of localStorageKeys. If set, the logs get loaded from localStorage instead of memory.
+	 */
+	@Input()
+	public localStorageKeys: string;
 
 	/**
 	 * Log messages which fulfill the filter condition.
@@ -48,17 +54,18 @@ export class LoggingViewerComponent implements OnInit, OnDestroy {
 	 *
 	 * This is done by reading the filter data from [LoggingViewerFilterService](LoggingViewerFilterService.html)
 	 * and the log messages from [LoggingService](../../../ionic-logging-service/typedoc/index.html).
+	 * If the localStorageKeys property is set, the messages are read from local storage.
 	 */
 	public ngOnInit(): void {
 		const methodName = "ngOnInit";
 		this.logger.entry(methodName);
 
-		this.logMessages = this.loggingService.getLogMessages();
+		this.loadLogMessages();
 		this.filterLogMessages();
 
 		// subscribe to loggingService.logMessagesChanged event, to refresh, when new message is logged
-		this.logMessagesChangedSubscription = this.loggingService.logMessagesChanged.subscribe(() => {
-			this.logMessages = this.loggingService.getLogMessages();
+		this.logMessagesChangedSubscription = this.loggingService.logMessagesChanged.subscribe(async () => {
+			this.loadLogMessages();
 			this.filterLogMessages();
 		});
 
@@ -119,5 +126,21 @@ export class LoggingViewerComponent implements OnInit, OnDestroy {
 		return message.logger.search(searchValue) >= 0 ||
 			message.methodName.search(searchValue) >= 0 ||
 			message.message.join("|").search(searchValue) >= 0;
+	}
+
+	/**
+	 * Load the current log messages.
+	 * For unit test purposes mainly.
+	 */
+	public loadLogMessages(): void {
+		if (this.localStorageKeys) {
+			this.logMessages = [];
+			for (const localStorageKey of this.localStorageKeys.split(",")) {
+				this.logMessages = this.logMessages.concat(this.loggingService.getLogMessagesFromLocalStorage(localStorageKey));
+			}
+			this.logMessages = this.logMessages.sort((a, b) => a.timeStamp.getTime() - b.timeStamp.getTime());
+		} else {
+			this.logMessages = this.loggingService.getLogMessages();
+		}
 	}
 }

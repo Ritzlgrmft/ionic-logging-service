@@ -124,6 +124,10 @@ You have to configure which key is used for storing the messages.</p>
                                 <a href="#getMaxMessages">getMaxMessages</a>
                             </li>
                             <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#loadLogMessages">loadLogMessages</a>
+                            </li>
+                            <li>
                                     <span class="modifier">Public</span>
                                 <a href="#setMaxMessages">setMaxMessages</a>
                             </li>
@@ -229,8 +233,8 @@ You have to configure which key is used for storing the messages.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="100"
-                            class="link-to-prism">src/lib/local-storage-appender.model.ts:100</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="113"
+                            class="link-to-prism">src/lib/local-storage-appender.model.ts:113</a></div>
                 </td>
             </tr>
 
@@ -308,8 +312,8 @@ You have to configure which key is used for storing the messages.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="177"
-                            class="link-to-prism">src/lib/local-storage-appender.model.ts:177</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="190"
+                            class="link-to-prism">src/lib/local-storage-appender.model.ts:190</a></div>
                 </td>
             </tr>
 
@@ -352,8 +356,8 @@ Mainly for unit testing purposes.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="80"
-                            class="link-to-prism">src/lib/local-storage-appender.model.ts:80</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="93"
+                            class="link-to-prism">src/lib/local-storage-appender.model.ts:93</a></div>
                 </td>
             </tr>
 
@@ -433,8 +437,8 @@ The localStorageKey cannot be modified.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="131"
-                            class="link-to-prism">src/lib/local-storage-appender.model.ts:131</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="144"
+                            class="link-to-prism">src/lib/local-storage-appender.model.ts:144</a></div>
                 </td>
             </tr>
 
@@ -476,8 +480,8 @@ The localStorageKey cannot be modified.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="169"
-                            class="link-to-prism">src/lib/local-storage-appender.model.ts:169</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="182"
+                            class="link-to-prism">src/lib/local-storage-appender.model.ts:182</a></div>
                 </td>
             </tr>
 
@@ -526,8 +530,8 @@ Mainly for unit testing purposes.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="138"
-                            class="link-to-prism">src/lib/local-storage-appender.model.ts:138</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="151"
+                            class="link-to-prism">src/lib/local-storage-appender.model.ts:151</a></div>
                 </td>
             </tr>
 
@@ -539,6 +543,86 @@ Mainly for unit testing purposes.</p>
 
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadLogMessages"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Static</span>
+                            loadLogMessages
+                        </b>
+                        <a href="#loadLogMessages"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadLogMessages(localStorageKey: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="69"
+                            class="link-to-prism">src/lib/local-storage-appender.model.ts:69</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Load tog messages from local storage which are stored there under the given key.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>localStorageKey</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>local storage key</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/LogMessage.html" target="_self" >LogMessage[]</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>stored messages</p>
 
                     </div>
                 </td>
@@ -569,8 +653,8 @@ Mainly for unit testing purposes.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="148"
-                            class="link-to-prism">src/lib/local-storage-appender.model.ts:148</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="161"
+                            class="link-to-prism">src/lib/local-storage-appender.model.ts:161</a></div>
                 </td>
             </tr>
 
@@ -649,8 +733,8 @@ Mainly for unit testing purposes.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="124"
-                            class="link-to-prism">src/lib/local-storage-appender.model.ts:124</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="137"
+                            class="link-to-prism">src/lib/local-storage-appender.model.ts:137</a></div>
                 </td>
             </tr>
 
@@ -738,15 +822,7 @@ export class LocalStorageAppender extends log4javascript.Appender {
 
 		// read existing logMessages
 		// tslint:disable-next-line:no-null-keyword
-		if (localStorage.getItem(this.localStorageKey) &#x3D;&#x3D;&#x3D; null) {
-			this.logMessages &#x3D; [];
-		} else {
-			this.logMessages &#x3D; JSON.parse(localStorage.getItem(this.localStorageKey));
-			for (const logMessage of this.logMessages) {
-				// timestamps are serialized as strings
-				logMessage.timeStamp &#x3D; new Date(logMessage.timeStamp);
-			}
-		}
+		this.logMessages &#x3D; LocalStorageAppender.loadLogMessages(this.localStorageKey);
 
 		// process remaining configuration
 		this.configure({
@@ -754,6 +830,27 @@ export class LocalStorageAppender extends log4javascript.Appender {
 			maxMessages: configuration.maxMessages || LocalStorageAppender.maxMessagesDefault,
 			threshold: configuration.threshold || LocalStorageAppender.thresholdDefault,
 		});
+	}
+
+	/**
+	 * Load tog messages from local storage which are stored there under the given key.
+	 * @param localStorageKey local storage key
+	 * @return stored messages
+	 */
+	public static loadLogMessages(localStorageKey: string): LogMessage[] {
+		let logMessages: LogMessage[];
+
+		if (!localStorageKey || localStorage.getItem(localStorageKey) &#x3D;&#x3D;&#x3D; null) {
+			logMessages &#x3D; [];
+		} else {
+			logMessages &#x3D; JSON.parse(localStorage.getItem(localStorageKey));
+			for (const logMessage of logMessages) {
+				// timestamps are serialized as strings
+				logMessage.timeStamp &#x3D; new Date(logMessage.timeStamp);
+			}
+		}
+
+		return logMessages;
 	}
 
 	/**
@@ -895,6 +992,7 @@ export class LocalStorageAppender extends log4javascript.Appender {
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
             var COMPODOC_CURRENT_PAGE_URL = 'LocalStorageAppender.html';
+            var MAX_SEARCH_RESULTS = 15;
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>
