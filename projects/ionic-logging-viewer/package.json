@@ -19,7 +19,7 @@
 		"@angular/common": "^9.0.0",
 		"@angular/core": "^9.0.0",
 		"@ionic/angular": "^5.0.0",
-		"ionic-logging-service": "^9.0.0",
+		"ionic-logging-service": "^9.1.0",
 		"ionicons": "^5.0.0"
 	}
 }
