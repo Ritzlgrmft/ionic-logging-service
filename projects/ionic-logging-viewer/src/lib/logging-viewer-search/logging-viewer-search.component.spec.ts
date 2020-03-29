@@ -40,7 +40,7 @@ describe("LoggingViewerSearchComponent", () => {
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 
-		loggingViewerFilterService = TestBed.get(LoggingViewerFilterService);
+		loggingViewerFilterService = TestBed.inject(LoggingViewerFilterService);
 	});
 
 	describe("constructor", () => {
