@@ -169,7 +169,7 @@ With `browserConsoleAppender`, it is possible to configure the `BrowserConsoleAp
 
 ### localStorageAppender
 
-With `localStorageAppender`, you add an additional appender of type `AjaxAppender`, which stores log messages in the local storage.
+With `localStorageAppender`, you add an additional appender of type `LocalStorageAppender`, which stores log messages in the local storage.
 
 ### memoryAppender
 
