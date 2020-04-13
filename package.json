@@ -31,7 +31,7 @@
     "test-watch-service": "ng test ionic-logging-service --code-coverage",
     "test-watch-viewer": "ng test ionic-logging-viewer --code-coverage",
     "lint": "ng lint",
-    "e2e": "ng e2e --project ionic-logging-viewer-app-e2e",
+    "e2e": "webdriver-manager update --versions.chrome=80.0.3987.0 && ng e2e --project ionic-logging-viewer-app-e2e --webdriver-update=false",
     "codecov": "codecov",
     "compodoc": "npm run compodoc-service && npm run compodoc-viewer",
     "compodoc-service": "cd projects/ionic-logging-service && compodoc && cd ../..",
