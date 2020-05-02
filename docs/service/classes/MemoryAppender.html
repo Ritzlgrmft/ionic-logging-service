@@ -118,6 +118,10 @@ If you do not specify anything else, it is using this configuration:</p>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
+                                <a href="#removeLogMessages">removeLogMessages</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
                                 <a href="#setMaxMessages">setMaxMessages</a>
                             </li>
                             <li>
@@ -457,6 +461,49 @@ Only the defined properties get overwritten.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="removeLogMessages"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            removeLogMessages
+                        </b>
+                        <a href="#removeLogMessages"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>removeLogMessages()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="141"
+                            class="link-to-prism">src/lib/memory-appender.model.ts:141</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Remove all messages stored in memory.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="setMaxMessages"></a>
                     <span class="name">
                         <b>
@@ -557,8 +604,8 @@ Only the defined properties get overwritten.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="143"
-                            class="link-to-prism">src/lib/memory-appender.model.ts:143</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="150"
+                            class="link-to-prism">src/lib/memory-appender.model.ts:150</a></div>
                 </td>
             </tr>
 
@@ -808,6 +855,13 @@ export class MemoryAppender extends log4javascript.Appender {
 	 */
 	public getLogMessages(): LogMessage[] {
 		return this.logMessages;
+	}
+
+	/**
+	 * Remove all messages stored in memory.
+	 */
+	public removeLogMessages(): void {
+		this.logMessages.splice(0);
 	}
 
 	/**

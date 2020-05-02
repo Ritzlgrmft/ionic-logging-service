@@ -360,4 +360,17 @@ describe("LocalStorageAppender", () => {
 			expect(appender.getMaxMessages()).toBe(250);
 		});
 	});
+
+	describe("removeLogMessages(localeStorageKey: string): void", () => {
+
+		it("messages from localStorage removed", async () => {
+
+			const event = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["1"]);
+			appender.append(event);
+			await expect(localStorage.getItem(appender.getLocalStorageKey())).toBeDefined();
+
+			LocalStorageAppender.removeLogMessages(appender.getLocalStorageKey());
+			await expect(localStorage.getItem(appender.getLocalStorageKey())).toBeNull();
+		});
+	});
 });

@@ -240,4 +240,17 @@ describe("MemoryAppender", () => {
 			expect(messages[1].methodName).toBe("3");
 		});
 	});
+
+	describe("removeLogMessages(): void", () => {
+
+		it("messages removed", async () => {
+
+			const event = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["1"]);
+			appender.append(event);
+			await expect(appender.getLogMessages().length).toBe(1);
+
+			appender.removeLogMessages();
+			await expect(appender.getLogMessages().length).toBe(0);
+		});
+	});
 });

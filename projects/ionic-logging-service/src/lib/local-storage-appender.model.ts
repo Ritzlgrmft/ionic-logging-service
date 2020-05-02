@@ -62,7 +62,7 @@ export class LocalStorageAppender extends log4javascript.Appender {
 	}
 
 	/**
-	 * Load tog messages from local storage which are stored there under the given key.
+	 * Load log messages from local storage which are stored there under the given key.
 	 * @param localStorageKey local storage key
 	 * @return stored messages
 	 */
@@ -80,6 +80,14 @@ export class LocalStorageAppender extends log4javascript.Appender {
 		}
 
 		return logMessages;
+	}
+
+	/**
+	 * Remove log messages from local storage which are stored there under the given key.
+	 * @param localStorageKey local storage key
+	 */
+	public static removeLogMessages(localStorageKey: string): void {
+		localStorage.removeItem(localStorageKey);
 	}
 
 	/**

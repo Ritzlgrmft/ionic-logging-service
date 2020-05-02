@@ -25,10 +25,13 @@ import { MemoryAppender } from "./memory-appender.model";
 export class LoggingService {
 
 	/**
-	 * Event triggered when new log message was added.
-	 * @param message new log message
+	 * Event triggered when the log messages got (potentially) change.
+	 * This can happen when:
+	 * - new message was added
+	 * - all message where removed from memory
+	 * - all massages where removed for one spcific LocalStorageAppender
 	 */
-	public logMessagesChanged: EventEmitter<LogMessage>;
+	public logMessagesChanged: EventEmitter<void>;
 
 	/**
 	 * Event triggered when ajax appender could not send log messages to the server.
@@ -49,7 +52,7 @@ export class LoggingService {
 		log4javascript.logLog.setQuietMode(true);
 
 		// create event emitter
-		this.logMessagesChanged = new EventEmitter<LogMessage>();
+		this.logMessagesChanged = new EventEmitter<void>();
 		this.ajaxAppenderFailed = new EventEmitter<string>();
 
 		// configure appender
@@ -66,7 +69,7 @@ export class LoggingService {
 		this.memoryAppender = new MemoryAppender();
 		this.memoryAppender.setLayout(new log4javascript.PatternLayout("%d{HH:mm:ss,SSS} %c %m"));
 		this.memoryAppender.setOnLogMessagesChangedCallback((message) => {
-			this.logMessagesChanged.emit(message);
+			this.logMessagesChanged.emit();
 		});
 		logger.addAppender(this.memoryAppender);
 
@@ -175,5 +178,22 @@ export class LoggingService {
 	 */
 	public getLogMessagesFromLocalStorage(localStorageKey: string): LogMessage[] {
 		return LocalStorageAppender.loadLogMessages(localStorageKey);
+	}
+
+	/**
+	 * Remove all log messages.
+	 */
+	public removeLogMessages(): void {
+		this.memoryAppender.removeLogMessages();
+		this.logMessagesChanged.emit();
+	}
+
+	/**
+	 * Removes the log messages written by the LocalStorageAppender with the given key.
+	 * @param localStorageKey key for the local storage
+	 */
+	public removeLogMessagesFromLocalStorage(localStorageKey: string): void {
+		LocalStorageAppender.removeLogMessages(localStorageKey);
+		this.logMessagesChanged.emit();
 	}
 }

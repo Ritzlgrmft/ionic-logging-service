@@ -136,6 +136,13 @@ export class MemoryAppender extends log4javascript.Appender {
 	}
 
 	/**
+	 * Remove all messages stored in memory.
+	 */
+	public removeLogMessages(): void {
+		this.logMessages.splice(0);
+	}
+
+	/**
 	 * Registers a callback which will be called every time a new message is appended.
 	 * This could be useful if you want to show new messages in realtime.
 	 * @param callback callback to be called
