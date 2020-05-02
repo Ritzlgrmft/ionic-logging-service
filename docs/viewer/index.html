@@ -107,7 +107,7 @@ It is recommended to include them in <code>ion-toolbar</code>, but it is not nec
   &lt;ionic-logging-viewer-levels&gt;&lt;/ionic-logging-viewer-levels&gt;
 &lt;/ion-toolbar&gt;</code></pre></div><h3 id="loggingviewermodalcomponent-modal">LoggingViewerModalComponent modal</h3>
 <div><pre class="line-numbers"><code class="language-typescript">public async openModal(): Promise&lt;void&gt; {
-  let componentProps = { language: this.selectedLanguage };
+  let componentProps: LoggingViewerModalProperties = { language: this.selectedLanguage };
   const modal = await this.modalController.create({
     component: LoggingViewerModalComponent,
     componentProps: componentProps

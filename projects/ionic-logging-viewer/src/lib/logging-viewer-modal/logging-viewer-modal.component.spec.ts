@@ -18,7 +18,7 @@ describe("LoggingViewerModalComponent", () => {
 	const loggerStub = jasmine.createSpyObj("logger", ["debug", "entry", "exit", "info"]);
 
 	const loggingServiceEventEmitter = new EventEmitter<LogMessage>();
-	const loggingServiceStub = jasmine.createSpyObj("loggingServiceStub", ["getLogger", "getLogMessages"]);
+	const loggingServiceStub = jasmine.createSpyObj("loggingServiceStub", ["getLogger", "getLogMessages", "removeLogMessages", "removeLogMessagesFromLocalStorage"]);
 	loggingServiceStub.getLogger.and.returnValue(loggerStub);
 	loggingServiceStub.getLogMessages.and.returnValue([]);
 	loggingServiceStub.logMessagesChanged = loggingServiceEventEmitter;
@@ -146,6 +146,24 @@ describe("LoggingViewerModalComponent", () => {
 			const translation = component.getTranslation();
 
 			expect(translation.title).toBe("ttt");
+		});
+	});
+
+	describe("onClearLogs(): void", () => {
+
+		it("removes messages in memory", () => {
+
+			component.onClearLogs();
+
+			expect(loggingServiceStub.removeLogMessages).toHaveBeenCalled();
+		});
+
+		it("removes messages from local storage", () => {
+
+			component.localStorageKeys = "abc";
+			component.onClearLogs();
+
+			expect(loggingServiceStub.removeLogMessagesFromLocalStorage).toHaveBeenCalled();
 		});
 	});
 });

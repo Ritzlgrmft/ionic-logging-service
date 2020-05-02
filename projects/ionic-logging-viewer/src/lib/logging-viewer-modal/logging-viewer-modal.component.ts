@@ -1,7 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 
-// import { ViewController } from "@ionic/core";
-import { NavParams, ModalController, Platform } from "@ionic/angular";
+import { ModalController, Platform } from "@ionic/angular";
 
 import { Logger, LoggingService } from "ionic-logging-service";
 
@@ -26,18 +25,27 @@ export class LoggingViewerModalComponent implements OnInit {
 	 * Language to be used for the modal.
 	 * Currently supported: en, de
 	 */
+	@Input()
 	public language: string;
 
 	/**
 	 * Translation to be used for the modal.
 	 * If specified, the language is ignored.
 	 */
+	@Input()
 	public translation: LoggingViewerTranslation;
 
 	/**
 	 * Comma-separated list of localStorageKeys. If set, the logs get loaded from localStorage instead of memory.
 	 */
+	@Input()
 	public localStorageKeys: string;
+
+	/**
+	 * Flag showing a delete button, which removes all existing log messages.
+	 */
+	@Input()
+	public allowClearLogs: boolean;
 
 	/**
 	 * Flag controlling which close button will be shown.
@@ -56,16 +64,12 @@ export class LoggingViewerModalComponent implements OnInit {
 	constructor(
 		platform: Platform,
 		private modalController: ModalController,
-		navParams: NavParams,
-		loggingService: LoggingService) {
+		private loggingService: LoggingService) {
 
 		this.logger = loggingService.getLogger("Ionic.Logging.Viewer.Modal.Component");
 		const methodName = "ctor";
 		this.logger.entry(methodName);
 
-		this.language = navParams.get("language");
-		this.translation = navParams.get("translation");
-		this.localStorageKeys = navParams.get("localStorageKeys");
 		this.isAndroid = platform.is("android");
 
 		this.logger.exit(methodName);
@@ -108,6 +112,24 @@ export class LoggingViewerModalComponent implements OnInit {
 		this.logger.entry(methodName);
 
 		await this.modalController.dismiss();
+
+		this.logger.exit(methodName);
+	}
+
+	/**
+	 * Eventhandler called when the clear button is clicked.
+	 */
+	public onClearLogs(): void {
+		const methodName = "onClearLogs";
+		this.logger.entry(methodName);
+
+		if (this.localStorageKeys) {
+			for (const localStorageKey of this.localStorageKeys.split(",")) {
+				this.loggingService.removeLogMessagesFromLocalStorage(localStorageKey);
+			}
+		} else {
+			this.loggingService.removeLogMessages();
+		}
 
 		this.logger.exit(methodName);
 	}

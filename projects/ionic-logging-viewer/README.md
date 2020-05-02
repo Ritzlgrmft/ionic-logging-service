@@ -83,7 +83,7 @@ It is recommended to include them in `ion-toolbar`, but it is not necessary:
 
 ```typescript
 public async openModal(): Promise<void> {
-  let componentProps = { language: this.selectedLanguage };
+  let componentProps: LoggingViewerModalProperties = { language: this.selectedLanguage };
   const modal = await this.modalController.create({
     component: LoggingViewerModalComponent,
     componentProps: componentProps
