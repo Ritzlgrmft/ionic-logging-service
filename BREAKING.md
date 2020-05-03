@@ -1,5 +1,16 @@
 # Breaking Changes
 
+## Version 10
+
+### ionic-logging-service
+
+- logMessagesChanged does no longer emit the last added message
+
+### ionic-logging-viewer
+
+- LoggingViewerModal component provides now by default a delete button for deleting the existing messages.
+  The button can be hidden using the `allowClearLogs` parameter.
+
 ## Version 9
 
 - update to Angular 9

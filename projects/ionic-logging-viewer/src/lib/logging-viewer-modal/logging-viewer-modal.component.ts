@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from "@angular/core";
 
-import { ModalController, Platform } from "@ionic/angular";
+import { ModalController, Platform, AlertController } from "@ionic/angular";
 
 import { Logger, LoggingService } from "ionic-logging-service";
 
@@ -63,6 +63,7 @@ export class LoggingViewerModalComponent implements OnInit {
 	 */
 	constructor(
 		platform: Platform,
+		private alertController: AlertController,
 		private modalController: ModalController,
 		private loggingService: LoggingService) {
 
@@ -84,11 +85,15 @@ export class LoggingViewerModalComponent implements OnInit {
 		this.translations = {};
 		this.translations[LoggingViewerModalComponent.languageEn] = {
 			cancel: "Cancel",
+			confirmDelete: "Delete all log messages?",
+			ok: "Ok",
 			searchPlaceholder: "Search",
 			title: "Logging",
 		};
 		this.translations[LoggingViewerModalComponent.languageDe] = {
 			cancel: "Abbrechen",
+			confirmDelete: "Alle Logs löschen?",
+			ok: "Ok",
 			searchPlaceholder: "Suchen",
 			title: "Logging",
 		};
@@ -119,17 +124,33 @@ export class LoggingViewerModalComponent implements OnInit {
 	/**
 	 * Eventhandler called when the clear button is clicked.
 	 */
-	public onClearLogs(): void {
+	public async onClearLogs(): Promise<void> {
 		const methodName = "onClearLogs";
 		this.logger.entry(methodName);
 
-		if (this.localStorageKeys) {
-			for (const localStorageKey of this.localStorageKeys.split(",")) {
-				this.loggingService.removeLogMessagesFromLocalStorage(localStorageKey);
-			}
-		} else {
-			this.loggingService.removeLogMessages();
-		}
+		const alert = await this.alertController.create({
+			header: this.getTranslation().confirmDelete,
+			buttons: [
+				{
+					text: this.getTranslation().cancel,
+					role: "cancel",
+					cssClass: "secondary"
+				},
+				{
+					text: this.getTranslation().ok,
+					handler: () => {
+						if (this.localStorageKeys) {
+							for (const localStorageKey of this.localStorageKeys.split(",")) {
+								this.loggingService.removeLogMessagesFromLocalStorage(localStorageKey);
+							}
+						} else {
+							this.loggingService.removeLogMessages();
+						}
+					}
+				},
+			]
+		});
+		await alert.present();
 
 		this.logger.exit(methodName);
 	}

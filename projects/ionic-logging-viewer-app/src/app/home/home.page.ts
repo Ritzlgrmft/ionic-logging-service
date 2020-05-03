@@ -2,8 +2,8 @@ import { Component } from "@angular/core";
 import { ToastController, ModalController } from "@ionic/angular";
 
 import { AjaxAppender, LocalStorageAppender, Logger, LoggingService, LogLevel } from "ionic-logging-service";
-import { LoggingViewerModalComponent, LoggingViewerTranslation } from "ionic-logging-viewer";
-import { environment } from "../../environments/environment.prod";
+import { LoggingViewerModalComponent, LoggingViewerTranslation, LoggingViewerModalProperties } from "ionic-logging-viewer";
+import { environment } from "../../environments/environment";
 
 @Component({
 	selector: "app-home",
@@ -35,6 +35,7 @@ export class HomePage {
 	public languages: string[];
 	public selectedLanguage: string;
 	public translation: LoggingViewerTranslation;
+	public allowClearLogs: boolean;
 	public localStorageKeys: string;
 
 	private logger: Logger;
@@ -80,9 +81,12 @@ export class HomePage {
 		this.selectedLanguage = "en";
 		this.translation = {
 			cancel: "myCancel",
+			confirmDelete: "myConfirmDelete",
+			ok: "myOk",
 			searchPlaceholder: "mySearch",
 			title: "myTitle",
 		};
+		this.allowClearLogs = true;
 
 		this.logger.exit(methodName);
 	}
@@ -194,11 +198,11 @@ export class HomePage {
 	}
 
 	public async openModal(): Promise<void> {
-		let componentProps: any;
+		const componentProps: LoggingViewerModalProperties = { localStorageKeys: this.localStorageKeys, allowClearLogs: this.allowClearLogs };
 		if (this.selectedLanguage === "custom") {
-			componentProps = { translation: this.translation, localStorageKeys: this.localStorageKeys };
+			componentProps.translation = this.translation;
 		} else {
-			componentProps = { language: this.selectedLanguage, localStorageKeys: this.localStorageKeys };
+			componentProps.language = this.selectedLanguage;
 		}
 		const modal = await this.modalController.create({
 			component: LoggingViewerModalComponent,

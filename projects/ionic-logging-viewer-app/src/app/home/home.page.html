@@ -150,6 +150,10 @@
 							<ion-button expand="block" fill="outline" (click)="openModal()">Open modal</ion-button>
 						</ion-item>
 						<ion-item>
+							<ion-label>Allow Clear Logs</ion-label>
+							<ion-toggle [(ngModel)]="allowClearLogs"></ion-toggle>
+						</ion-item>
+						<ion-item>
 							<ion-label position="floating">Local Storage Keys</ion-label>
 							<ion-input type="text" [(ngModel)]="localStorageKeys"></ion-input>
 						</ion-item>
@@ -171,8 +175,16 @@
 							<ion-input type="text" [(ngModel)]="translation.cancel"></ion-input>
 						</ion-item>
 						<ion-item *ngIf="selectedLanguage === 'custom'">
+							<ion-label position="floating">ok</ion-label>
+							<ion-input type="text" [(ngModel)]="translation.ok"></ion-input>
+						</ion-item>
+						<ion-item *ngIf="selectedLanguage === 'custom'">
 							<ion-label position="floating">searchPlaceholder</ion-label>
 							<ion-input type="text" [(ngModel)]="translation.searchPlaceholder"></ion-input>
+						</ion-item>
+						<ion-item *ngIf="selectedLanguage === 'custom'">
+							<ion-label position="floating">confirmDelete</ion-label>
+							<ion-input type="text" [(ngModel)]="translation.confirmDelete"></ion-input>
 						</ion-item>
 					</ion-list>
 				</ion-card>
