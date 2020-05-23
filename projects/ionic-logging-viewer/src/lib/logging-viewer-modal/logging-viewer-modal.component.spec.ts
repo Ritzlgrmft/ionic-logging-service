@@ -1,7 +1,8 @@
 import { EventEmitter } from "@angular/core";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
-import { IonicModule, NavParams, ModalController } from "@ionic/angular";
+
+import { IonicModule, NavParams, ModalController, AlertController } from "@ionic/angular";
 
 import { LogMessage, LoggingService } from "ionic-logging-service";
 
@@ -23,6 +24,10 @@ describe("LoggingViewerModalComponent", () => {
 	loggingServiceStub.getLogMessages.and.returnValue([]);
 	loggingServiceStub.logMessagesChanged = loggingServiceEventEmitter;
 
+	const alertStub = jasmine.createSpyObj("alert", ["present"]);
+	const alertControllerStub = jasmine.createSpyObj("alertControllerStub", ["create"]);
+	alertControllerStub.create.and.returnValue(Promise.resolve(alertStub));
+
 	const modalControllerStub = jasmine.createSpyObj("modalControllerStub", ["dismiss"]);
 
 	const navParamsStub = jasmine.createSpyObj("navParams", ["get"]);
@@ -42,6 +47,7 @@ describe("LoggingViewerModalComponent", () => {
 			],
 			providers: [
 				{ provide: LoggingService, useValue: loggingServiceStub },
+				{ provide: AlertController, useValue: alertControllerStub },
 				{ provide: ModalController, useValue: modalControllerStub },
 				{ provide: NavParams, useValue: navParamsStub },
 				LoggingViewerFilterService
@@ -130,7 +136,7 @@ describe("LoggingViewerModalComponent", () => {
 
 			component.ngOnInit();
 			component.language = undefined;
-			component.translation = { title: "ttt", cancel: "bc", searchPlaceholder: "sp" };
+			component.translation = { title: "ttt", cancel: "bc", searchPlaceholder: "sp", ok: "oo", confirmDelete: "cd" };
 
 			const translation = component.getTranslation();
 
@@ -141,7 +147,7 @@ describe("LoggingViewerModalComponent", () => {
 
 			component.ngOnInit();
 			component.language = "en";
-			component.translation = { title: "ttt", cancel: "bc", searchPlaceholder: "sp" };
+			component.translation = { title: "ttt", cancel: "bc", searchPlaceholder: "sp", ok: "oo", confirmDelete: "cd" };
 
 			const translation = component.getTranslation();
 
@@ -151,17 +157,27 @@ describe("LoggingViewerModalComponent", () => {
 
 	describe("onClearLogs(): void", () => {
 
+		it("alert called", async (done: () => void) => {
+
+			await component.onClearLogs();
+			expect(alertStub.present).toHaveBeenCalled();
+
+			done();
+		});
+	});
+
+	describe("clearLogs(): void", () => {
+
 		it("removes messages in memory", () => {
 
-			component.onClearLogs();
-
+			component.clearLogs();
 			expect(loggingServiceStub.removeLogMessages).toHaveBeenCalled();
 		});
 
 		it("removes messages from local storage", () => {
 
 			component.localStorageKeys = "abc";
-			component.onClearLogs();
+			component.clearLogs();
 
 			expect(loggingServiceStub.removeLogMessagesFromLocalStorage).toHaveBeenCalled();
 		});
