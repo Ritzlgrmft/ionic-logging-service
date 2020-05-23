@@ -12,7 +12,7 @@
 	</ion-toolbar>
 	<ion-toolbar>
 		<ionic-logging-viewer-search [placeholder]="getTranslation().searchPlaceholder"></ionic-logging-viewer-search>
-		<ion-buttons slot="end" *ngIf="allowClearLogs !== false">
+		<ion-buttons slot="end" *ngIf="allowClearLogs !== false" class="clearLogs">
 			<ion-button (click)="onClearLogs()">
 				<ion-icon name="trash-outline"></ion-icon>
 			</ion-button>

@@ -138,21 +138,26 @@ export class LoggingViewerModalComponent implements OnInit {
 				},
 				{
 					text: this.getTranslation().ok,
-					handler: () => {
-						if (this.localStorageKeys) {
-							for (const localStorageKey of this.localStorageKeys.split(",")) {
-								this.loggingService.removeLogMessagesFromLocalStorage(localStorageKey);
-							}
-						} else {
-							this.loggingService.removeLogMessages();
-						}
-					}
+					handler: this.clearLogs
 				},
 			]
 		});
 		await alert.present();
 
 		this.logger.exit(methodName);
+	}
+
+	/**
+	 * Clear logs.
+	 */
+	public clearLogs(): void {
+		if (this.localStorageKeys) {
+			for (const localStorageKey of this.localStorageKeys.split(",")) {
+				this.loggingService.removeLogMessagesFromLocalStorage(localStorageKey);
+			}
+		} else {
+			this.loggingService.removeLogMessages();
+		}
 	}
 
 	/**
