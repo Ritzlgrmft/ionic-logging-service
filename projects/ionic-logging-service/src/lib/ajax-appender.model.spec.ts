@@ -159,7 +159,7 @@ describe("AjaxAppender", () => {
 	describe("getLayout(): log4javascript.Layout", () => {
 		it("uses default value if undefined", () => {
 
-			expect(appender.getLayout().toString()).toBe("JsonLayout");
+			expect(appender.getLayout().toString()).toBe("Ionic.Logging.JsonLayout");
 		});
 
 		it("uses given value if defined", () => {

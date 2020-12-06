@@ -68,6 +68,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="classes/AjaxAppender.html" data-type="entity-link">AjaxAppender</a>
                             </li>
                             <li class="link">
+                                <a href="classes/JsonLayout.html" data-type="entity-link">JsonLayout</a>
+                            </li>
+                            <li class="link">
                                 <a href="classes/LocalStorageAppender.html" data-type="entity-link">LocalStorageAppender</a>
                             </li>
                             <li class="link">

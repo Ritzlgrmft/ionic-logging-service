@@ -3,6 +3,7 @@ import { EventEmitter } from "@angular/core";
 import * as log4javascript from "log4javascript";
 
 import { AjaxAppenderConfiguration } from "./ajax-appender.configuration";
+import { JsonLayout } from "./json-layout.model";
 import { LogLevelConverter } from "./log-level.converter";
 
 /**
@@ -50,7 +51,7 @@ export class AjaxAppender extends log4javascript.Appender {
 		this.ajaxAppender = new log4javascript.AjaxAppender(configuration.url);
 		this.url = configuration.url;
 
-		this.ajaxAppender.setLayout(new log4javascript.JsonLayout(false, false));
+		this.ajaxAppender.setLayout(new JsonLayout(false, false));
 		this.ajaxAppender.addHeader("Content-Type", "application/json; charset=utf-8");
 		this.ajaxAppender.setSendAllOnUnload(true);
 
