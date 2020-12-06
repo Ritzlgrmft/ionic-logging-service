@@ -93,6 +93,18 @@ describe("AjaxAppender", () => {
 			});
 		});
 
+		describe("withCredentials", () => {
+			it("throws error if modified", () => {
+
+				const config: AjaxAppenderConfiguration = {
+					url: "MyUrl",
+					withCredentials: true
+				};
+
+				expect(() => appender.configure(config)).toThrowError("withCredentials must not be changed");
+			});
+		});
+
 		describe("threshold", () => {
 			it("uses default value if undefined", () => {
 

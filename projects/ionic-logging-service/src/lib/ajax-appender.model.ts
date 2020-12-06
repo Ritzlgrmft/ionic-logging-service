@@ -34,6 +34,7 @@ export class AjaxAppender extends log4javascript.Appender {
 
 	private ajaxAppender: log4javascript.AjaxAppender;
 	private url: string;
+	private withCredentials: boolean;
 
 	/**
 	 * Creates a new instance of the appender.
@@ -48,8 +49,9 @@ export class AjaxAppender extends log4javascript.Appender {
 		if (!configuration.url) {
 			throw new Error("url must be not empty");
 		}
-		this.ajaxAppender = new log4javascript.AjaxAppender(configuration.url);
+		this.ajaxAppender = new log4javascript.AjaxAppender(configuration.url, configuration.withCredentials);
 		this.url = configuration.url;
+		this.withCredentials = configuration.withCredentials;
 
 		this.ajaxAppender.setLayout(new JsonLayout(false, false));
 		this.ajaxAppender.addHeader("Content-Type", "application/json; charset=utf-8");
@@ -66,6 +68,7 @@ export class AjaxAppender extends log4javascript.Appender {
 			threshold: configuration.threshold || AjaxAppender.thresholdDefault,
 			timerInterval: configuration.timerInterval || AjaxAppender.timerIntervalDefault,
 			url: configuration.url,
+			withCredentials: configuration.withCredentials
 		});
 
 	}
@@ -74,7 +77,7 @@ export class AjaxAppender extends log4javascript.Appender {
 	 * Configures the logging depending on the given configuration.
 	 *
 	 * Only the defined properties get overwritten.
-	 * The url cannot be modified.
+	 * Neither url nor withCredentials can be modified.
 	 *
 	 * @param configuration configuration data.
 	 */
@@ -82,6 +85,9 @@ export class AjaxAppender extends log4javascript.Appender {
 		if (configuration) {
 			if (configuration.url && configuration.url !== this.url) {
 				throw new Error("url must not be changed");
+			}
+			if (configuration.withCredentials && configuration.withCredentials !== this.withCredentials) {
+				throw new Error("withCredentials must not be changed");
 			}
 			if (configuration.batchSize) {
 				this.setBatchSize(configuration.batchSize);

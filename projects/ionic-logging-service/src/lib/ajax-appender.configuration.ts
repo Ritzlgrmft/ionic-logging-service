@@ -9,6 +9,13 @@ export interface AjaxAppenderConfiguration {
 	url: string;
 
 	/**
+	 * Specifies whether cookies should be sent with each request.
+	 *
+	 * Default: false.
+	 */
+	withCredentials?: boolean;
+
+	/**
 	 * Number of log messages sent in each request.
 	 *
 	 * Default: 1.
