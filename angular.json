@@ -96,7 +96,7 @@
 				"build": {
 					"builder": "@angular-devkit/build-angular:browser",
 					"options": {
-            "aot": true,
+						"aot": true,
 						"outputPath": "dist/ionic-logging-viewer-app",
 						"index": "projects/ionic-logging-viewer-app/src/index.html",
 						"main": "projects/ionic-logging-viewer-app/src/main.ts",
@@ -120,8 +120,7 @@
 							"projects/ionic-logging-viewer-app/src/theme/variables.scss",
 							"projects/ionic-logging-viewer-app/src/global.scss"
 						],
-						"scripts": [],
-						"es5BrowserSupport": true
+						"scripts": []
 					},
 					"configurations": {
 						"production": {

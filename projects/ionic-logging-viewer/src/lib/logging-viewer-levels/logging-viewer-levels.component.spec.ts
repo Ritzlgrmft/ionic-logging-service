@@ -1,5 +1,5 @@
 // tslint:disable:no-magic-numbers
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
 import { IonicModule } from "@ionic/angular";
 
@@ -21,7 +21,7 @@ describe("LoggingViewerLevelsComponent", () => {
 		["getLogger"]);
 	loggingServiceStub.getLogger.and.returnValue(loggerStub);
 
-	beforeEach(async(() => {
+	beforeEach(waitForAsync(() => {
 		TestBed
 			.configureTestingModule({
 				declarations: [

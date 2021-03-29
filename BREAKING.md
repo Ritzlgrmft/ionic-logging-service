@@ -1,5 +1,9 @@
 # Breaking Changes
 
+## Version 11
+
+- update to Angular 10
+
 ## Version 10
 
 ### ionic-logging-service

@@ -3,15 +3,16 @@
 **The dependencies used by the latest version are the same as needed for [Ionic 5.0.0](https://github.com/ionic-team/ionic/blob/master/CHANGELOG.md). For older versions use:**
 
 | ionic-logging-service | Ionic | Angular
-| ----- | -------- | ------
-| 9.0.0 | >= 5.0.0 | ^9.0.0
-| 8.0.0 | >= 4.7.0 | ^8.0.0
-| 7.0.0 | >= 4.0.0-rc | ^7.0.0
-| 6.0.0 | >= 4.0.0-beta | ^6.0.0
-| 5.1.0 | >= 3.9.0 | ^5.0.0
-| 3.1.0 | >= 3.0.0 | ^4.0.0
-| 2.0.0 | >= 2.2.0 | ^2.4.8
-| 1.2.1 | >= 2.0.0 | ^2.2.1
+| ------ | -------- | ------
+| 11.0.0 | >= 5.0.0 | ^10.0.0
+|  9.0.0 | >= 5.0.0 | ^9.0.0
+|  8.0.0 | >= 4.7.0 | ^8.0.0
+|  7.0.0 | >= 4.0.0-rc | ^7.0.0
+|  6.0.0 | >= 4.0.0-beta | ^6.0.0
+|  5.1.0 | >= 3.9.0 | ^5.0.0
+|  3.1.0 | >= 3.0.0 | ^4.0.0
+|  2.0.0 | >= 2.2.0 | ^2.4.8
+|  1.2.1 | >= 2.0.0 | ^2.2.1
 
 This service encapsulates [log4javascript](http://log4javascript.org/)'s functionalities for apps built with [Ionic framework](http://ionicframework.com).
 

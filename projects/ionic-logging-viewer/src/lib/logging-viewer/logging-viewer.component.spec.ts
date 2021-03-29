@@ -1,6 +1,6 @@
 // tslint:disable:no-magic-numbers
 import { EventEmitter } from "@angular/core";
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { IonicModule } from "@ionic/angular";
 
 import { LoggingService, LogMessage } from "ionic-logging-service";
@@ -27,7 +27,7 @@ describe("LoggingViewerComponent", () => {
 	loggingServiceStub.getLogMessagesFromLocalStorage.and.returnValue(logMessagesFromLocalStorage);
 	loggingServiceStub.logMessagesChanged = loggingServiceEventEmitter;
 
-	beforeEach(async(() => {
+	beforeEach(waitForAsync(() => {
 		TestBed
 			.configureTestingModule({
 				declarations: [

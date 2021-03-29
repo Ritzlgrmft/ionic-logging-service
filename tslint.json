@@ -6,7 +6,10 @@
 		"indent": [
 			true,
 			"tabs"
-		],
+    ],
+    "deprecation": {
+      "severity": "warning"
+    },
 		"quotemark": [
 			true,
 			"double"

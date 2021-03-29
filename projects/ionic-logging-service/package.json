@@ -1,6 +1,6 @@
 {
 	"name": "ionic-logging-service",
-	"version": "10.1.0",
+	"version": "11.0.0",
 	"description": "Logging functionalities for apps built with Ionic framework",
 	"author": {
 		"name": "Markus Wagner",
@@ -20,6 +20,7 @@
 		"@angular/core": "^9.0.0"
 	},
 	"dependencies": {
-		"log4javascript": "^1.4.16"
+		"log4javascript": "^1.4.16",
+		"tslib": "^2.0.0"
 	}
 }
