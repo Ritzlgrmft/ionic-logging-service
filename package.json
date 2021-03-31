@@ -67,7 +67,7 @@
     "@types/jasmine": "3.5.10",
     "@types/jasminewd2": "2.0.8",
     "@types/node": "13.9.5",
-    "codecov": "3.6.5",
+    "codecov": "3.7.1",
     "codelyzer": "6.0.1",
     "cpx": "1.5.0",
     "fsevents": "1.2.9",
