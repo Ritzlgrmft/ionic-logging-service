@@ -1,6 +1,6 @@
 {
 	"name": "ionic-logging-viewer",
-	"version": "11.0.0",
+	"version": "12.0.0",
 	"description": "Viewer component for logs written by ionic-logging-service",
 	"author": {
 		"name": "Markus Wagner",
@@ -19,10 +19,10 @@
 		"tslib": "^2.0.0"
 	},
 	"peerDependencies": {
-		"@angular/common": "^10.0.0",
-		"@angular/core": "^10.0.0",
+		"@angular/common": "^11.0.0",
+		"@angular/core": "^11.0.0",
 		"@ionic/angular": "^5.0.0",
-		"ionic-logging-service": "^11.0.0",
+		"ionic-logging-service": "^12.0.0",
 		"ionicons": "^5.0.0"
 	}
 }
