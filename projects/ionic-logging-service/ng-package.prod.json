@@ -7,7 +7,7 @@
 			"log4javascript": "log4javascript"
 		}
 	},
-	"whitelistedNonPeerDependencies": [
+	"allowedNonPeerDependencies": [
 		"log4javascript"
 	]
 }
