@@ -28,13 +28,12 @@ export class MemoryAppender extends log4javascript.Appender {
 
 	private maxMessages: number;
 
-	// tslint:disable-next-line:completed-docs
 	private logMessages: LogMessage[];
-	// tslint:disable-next-line:completed-docs
 	private onLogMessagesChangedCallback: (message: LogMessage) => void;
 
 	/**
 	 * Creates a new instance of the appender.
+	 *
 	 * @param configuration configuration for the appender.
 	 */
 	constructor(configuration?: MemoryAppenderConfiguration) {
@@ -73,6 +72,7 @@ export class MemoryAppender extends log4javascript.Appender {
 
 	/**
 	 * Appender-specific method to append a log message.
+	 *
 	 * @param loggingEvent event to be appended.
 	 */
 	public append(loggingEvent: log4javascript.LoggingEvent): void {
@@ -99,6 +99,7 @@ export class MemoryAppender extends log4javascript.Appender {
 	/**
 	 * Gets the appender's name.
 	 * Mainly for unit testing purposes.
+	 *
 	 * @return appender's name
 	 */
 	public toString(): string {
@@ -116,6 +117,7 @@ export class MemoryAppender extends log4javascript.Appender {
 	 * Set the maximum number of messages which will be stored in memory.
 	 *
 	 * If the appender stores currently more messages than the new value allows, the oldest messages get removed.
+	 *
 	 * @param value new maximum number
 	 */
 	public setMaxMessages(value: number): void {
@@ -129,6 +131,7 @@ export class MemoryAppender extends log4javascript.Appender {
 
 	/**
 	 * Gets all messages stored in memory.
+	 *
 	 * @return stored messages
 	 */
 	public getLogMessages(): LogMessage[] {
@@ -145,6 +148,7 @@ export class MemoryAppender extends log4javascript.Appender {
 	/**
 	 * Registers a callback which will be called every time a new message is appended.
 	 * This could be useful if you want to show new messages in realtime.
+	 *
 	 * @param callback callback to be called
 	 */
 	public setOnLogMessagesChangedCallback(callback: (message: LogMessage) => void): void {

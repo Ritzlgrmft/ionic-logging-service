@@ -25,6 +25,7 @@ export class JsonLayout extends log4javascript.JsonLayout {
 	/**
 	 * Gets the layout's name.
 	 * Mainly for unit testing purposes.
+	 *
 	 * @return layout's name
 	 */
 	public toString(): string {

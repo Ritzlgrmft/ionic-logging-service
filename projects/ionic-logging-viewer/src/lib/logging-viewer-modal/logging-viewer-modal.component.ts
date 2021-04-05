@@ -52,11 +52,9 @@ export class LoggingViewerModalComponent implements OnInit {
 	 */
 	public isAndroid: boolean;
 
-	// tslint:disable-next-line:completed-docs
 	private logger: Logger;
 
-	// tslint:disable-next-line:completed-docs
-	private translations: { [language: string]: LoggingViewerTranslation; };
+	private translations: { [language: string]: LoggingViewerTranslation };
 
 	/**
 	 * Creates a new instance of the component.
@@ -138,7 +136,9 @@ export class LoggingViewerModalComponent implements OnInit {
 				},
 				{
 					text: this.getTranslation().ok,
-					handler: this.clearLogs
+					handler: () => {
+						this.clearLogs();
+					}
 				},
 			]
 		});

@@ -35,11 +35,11 @@ export class LoggingService {
 
 	/**
 	 * Event triggered when ajax appender could not send log messages to the server.
+	 *
 	 * @param message error message
 	 */
 	public ajaxAppenderFailed: EventEmitter<string>;
 
-	// tslint:disable-next-line:completed-docs
 	private memoryAppender: MemoryAppender;
 	private browserConsoleAppender: log4javascript.BrowserConsoleAppender;
 
@@ -78,6 +78,7 @@ export class LoggingService {
 
 	/**
 	 * Configures the logging depending on the given configuration.
+	 *
 	 * @param configuration configuration data.
 	 */
 	public configure(configuration?: LoggingServiceConfiguration): void {
@@ -144,6 +145,7 @@ export class LoggingService {
 
 	/**
 	 * Gets the root logger from which all other loggers derive.
+	 *
 	 * @return root logger
 	 */
 	public getRootLogger(): Logger {
@@ -152,6 +154,7 @@ export class LoggingService {
 
 	/**
 	 * Gets a logger with the specified name, creating it if a logger with that name does not already exist.
+	 *
 	 * @param loggerName name of the logger
 	 * @return logger
 	 */
@@ -165,6 +168,7 @@ export class LoggingService {
 	 * The log messages are retrieved from the internal [MemoryAppender](../memoryappender.html).
 	 * That means you will get only the most current messages. The number of the messages is limited
 	 * by its maxMessages value.
+	 *
 	 * @return log messages
 	 */
 	public getLogMessages(): LogMessage[] {
@@ -173,6 +177,7 @@ export class LoggingService {
 
 	/**
 	 * Loads the log messages written by the LocalStorageAppender with the given key.
+	 *
 	 * @param localStorageKey key for the local storage
 	 * @returns log messages
 	 */
@@ -190,6 +195,7 @@ export class LoggingService {
 
 	/**
 	 * Removes the log messages written by the LocalStorageAppender with the given key.
+	 *
 	 * @param localStorageKey key for the local storage
 	 */
 	public removeLogMessagesFromLocalStorage(localStorageKey: string): void {

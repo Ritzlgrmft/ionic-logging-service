@@ -19,7 +19,8 @@ describe("LoggingViewerModalComponent", () => {
 	const loggerStub = jasmine.createSpyObj("logger", ["debug", "entry", "exit", "info"]);
 
 	const loggingServiceEventEmitter = new EventEmitter<LogMessage>();
-	const loggingServiceStub = jasmine.createSpyObj("loggingServiceStub", ["getLogger", "getLogMessages", "removeLogMessages", "removeLogMessagesFromLocalStorage"]);
+	const loggingServiceStub = jasmine.createSpyObj("loggingServiceStub",
+		["getLogger", "getLogMessages", "removeLogMessages", "removeLogMessagesFromLocalStorage"]);
 	loggingServiceStub.getLogger.and.returnValue(loggerStub);
 	loggingServiceStub.getLogMessages.and.returnValue([]);
 	loggingServiceStub.logMessagesChanged = loggingServiceEventEmitter;

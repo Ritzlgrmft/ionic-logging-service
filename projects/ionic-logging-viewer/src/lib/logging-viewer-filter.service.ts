@@ -19,6 +19,7 @@ export class LoggingViewerFilterService {
 
 	/**
 	 * Creates a new instance of the service.
+	 *
 	 * @param loggingService needed for internal logging.
 	 */
 	constructor(
@@ -37,6 +38,7 @@ export class LoggingViewerFilterService {
 
 	/**
 	 * Gets the current log level.
+	 *
 	 * @return log level
 	 */
 	public get level(): string {
@@ -45,6 +47,7 @@ export class LoggingViewerFilterService {
 
 	/**
 	 * Sets the new log level and emits a filterChanged event.
+	 *
 	 * @param value new slog level
 	 */
 	public set level(value: string) {
@@ -54,6 +57,7 @@ export class LoggingViewerFilterService {
 
 	/**
 	 * Gets the current search value.
+	 *
 	 * @return search value
 	 */
 	public get search(): string {
@@ -62,6 +66,7 @@ export class LoggingViewerFilterService {
 
 	/**
 	 * Sets the new search value and emits a filterChanged event.
+	 *
 	 * @param value new search value
 	 */
 	public set search(value: string) {

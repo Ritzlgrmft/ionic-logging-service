@@ -198,7 +198,8 @@ export class HomePage {
 	}
 
 	public async openModal(): Promise<void> {
-		const componentProps: LoggingViewerModalProperties = { localStorageKeys: this.localStorageKeys, allowClearLogs: this.allowClearLogs };
+		const componentProps: LoggingViewerModalProperties =
+			{ localStorageKeys: this.localStorageKeys, allowClearLogs: this.allowClearLogs };
 		if (this.selectedLanguage === "custom") {
 			componentProps.translation = this.translation;
 		} else {
@@ -206,7 +207,7 @@ export class HomePage {
 		}
 		const modal = await this.modalController.create({
 			component: LoggingViewerModalComponent,
-			componentProps: componentProps
+			componentProps
 		});
 		await modal.present();
 	}

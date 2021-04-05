@@ -94,9 +94,8 @@ export class LoggingViewerComponent implements OnInit, OnDestroy {
 	 * Filter the log messages.
 	 */
 	public filterLogMessages(): void {
-		this.logMessagesForDisplay = this.logMessages.filter((message) => {
-			return this.filterLogMessagesByLevel(message) && this.filterLogMessagesBySearch(message);
-		});
+		this.logMessagesForDisplay = this.logMessages.filter(
+			(message) => this.filterLogMessagesByLevel(message) && this.filterLogMessagesBySearch(message));
 	}
 
 	/**

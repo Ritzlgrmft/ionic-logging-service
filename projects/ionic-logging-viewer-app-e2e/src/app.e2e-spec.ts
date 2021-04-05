@@ -22,9 +22,9 @@ describe("ionic-logging-viewer-app", () => {
 
 		let currentUrl: string;
 		do {
-			Utils.sleep(500);
+			await Utils.sleep(500);
 			currentUrl = await browser.getCurrentUrl();
-			// tslint:disable-next-line:no-console
+			// eslint-disable-next-line no-console
 			console.info(currentUrl, homePageUrl);
 		} while (currentUrl !== homePageUrl);
 

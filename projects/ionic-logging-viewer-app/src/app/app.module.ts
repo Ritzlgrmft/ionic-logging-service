@@ -10,6 +10,7 @@ import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { environment } from "../environments/environment.prod";
 
+// eslint-disable-next-line prefer-arrow/prefer-arrow-functions
 export function configureLogging(loggingService: LoggingService): () => void {
 	return () => loggingService.configure(environment.logging);
 }

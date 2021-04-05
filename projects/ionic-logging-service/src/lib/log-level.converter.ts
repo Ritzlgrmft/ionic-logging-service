@@ -9,6 +9,7 @@ export class LogLevelConverter {
 
 	/**
 	 * Converts log4javascript.Level to internal LogLevel.
+	 *
 	 * @param level log4javascript's data type
 	 * @return internal data type.
 	 */
@@ -37,6 +38,7 @@ export class LogLevelConverter {
 
 	/**
 	 * Converts string representation to internal LogLevel.
+	 *
 	 * @param level string representation
 	 * @return internal data type.
 	 */
@@ -65,6 +67,7 @@ export class LogLevelConverter {
 
 	/**
 	 * Converts internal LogLevel to log4javascript.Level.
+	 *
 	 * @param internal data type.
 	 * @return level log4javascript's data type
 	 */

@@ -28,13 +28,12 @@ export class LocalStorageAppender extends log4javascript.Appender {
 
 	private maxMessages: number;
 
-	// tslint:disable-next-line:completed-docs
 	private localStorageKey: string;
-	// tslint:disable-next-line:completed-docs
 	private logMessages: LogMessage[];
 
 	/**
 	 * Creates a new instance of the appender.
+	 *
 	 * @param configuration configuration for the appender.
 	 */
 	constructor(configuration: LocalStorageAppenderConfiguration) {
@@ -43,14 +42,12 @@ export class LocalStorageAppender extends log4javascript.Appender {
 		if (!configuration) {
 			throw new Error("configuration must be not empty");
 		}
-		// tslint:disable-next-line:no-null-keyword
 		if (!configuration.localStorageKey || configuration.localStorageKey === "") {
 			throw new Error("localStorageKey must be not empty");
 		}
 		this.localStorageKey = configuration.localStorageKey;
 
 		// read existing logMessages
-		// tslint:disable-next-line:no-null-keyword
 		this.logMessages = LocalStorageAppender.loadLogMessages(this.localStorageKey);
 
 		// process remaining configuration
@@ -63,6 +60,7 @@ export class LocalStorageAppender extends log4javascript.Appender {
 
 	/**
 	 * Load log messages from local storage which are stored there under the given key.
+	 *
 	 * @param localStorageKey local storage key
 	 * @return stored messages
 	 */
@@ -84,6 +82,7 @@ export class LocalStorageAppender extends log4javascript.Appender {
 
 	/**
 	 * Remove log messages from local storage which are stored there under the given key.
+	 *
 	 * @param localStorageKey local storage key
 	 */
 	public static removeLogMessages(localStorageKey: string): void {
@@ -116,6 +115,7 @@ export class LocalStorageAppender extends log4javascript.Appender {
 
 	/**
 	 * Appender-specific method to append a log message.
+	 *
 	 * @param loggingEvent event to be appended.
 	 */
 	public append(loggingEvent: log4javascript.LoggingEvent): void {
@@ -140,6 +140,7 @@ export class LocalStorageAppender extends log4javascript.Appender {
 	/**
 	 * Gets the appender's name.
 	 * Mainly for unit testing purposes.
+	 *
 	 * @return appender's name
 	 */
 	public toString(): string {
@@ -164,6 +165,7 @@ export class LocalStorageAppender extends log4javascript.Appender {
 	 * Set the maximum number of messages which will be stored in local storage.
 	 *
 	 * If the appender stores currently more messages than the new value allows, the oldest messages get removed.
+	 *
 	 * @param value new maximum number
 	 */
 	public setMaxMessages(value: number): void {
@@ -185,6 +187,7 @@ export class LocalStorageAppender extends log4javascript.Appender {
 	/**
 	 * Gets all messages stored in local storage.
 	 * Mainly for unit testing purposes.
+	 *
 	 * @return stored messages
 	 */
 	public getLogMessages(): LogMessage[] {

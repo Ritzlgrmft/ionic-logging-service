@@ -28,6 +28,7 @@ export class AjaxAppender extends log4javascript.Appender {
 
 	/**
 	 * Event triggered when the appender could not send log messages to the server.
+	 *
 	 * @param message error message
 	 */
 	public appenderFailed: EventEmitter<string>;
@@ -38,6 +39,7 @@ export class AjaxAppender extends log4javascript.Appender {
 
 	/**
 	 * Creates a new instance of the appender.
+	 *
 	 * @param configuration configuration for the appender.
 	 */
 	constructor(configuration: AjaxAppenderConfiguration) {
@@ -105,6 +107,7 @@ export class AjaxAppender extends log4javascript.Appender {
 
 	/**
 	 * Appender-specific method to append a log message.
+	 *
 	 * @param loggingEvent event to be appended.
 	 */
 	public append(loggingEvent: log4javascript.LoggingEvent): void {
@@ -114,6 +117,7 @@ export class AjaxAppender extends log4javascript.Appender {
 	/**
 	 * Gets the appender's name.
 	 * Mainly for unit testing purposes.
+	 *
 	 * @return appender's name
 	 */
 	public toString(): string {
@@ -137,6 +141,7 @@ export class AjaxAppender extends log4javascript.Appender {
 
 	/**
 	 * Sets the number of log messages to send in each request.
+	 *
 	 * @param batchSize new batch size
 	 */
 	public setBatchSize(batchSize: number): void {
@@ -166,6 +171,7 @@ export class AjaxAppender extends log4javascript.Appender {
 
 	/**
 	 * Sets the length of time in milliseconds between each sending of queued log messages.
+	 *
 	 * @param timerInterval new timer interval
 	 */
 	public setTimerInterval(timerInterval: number): void {

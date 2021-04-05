@@ -1,4 +1,4 @@
-﻿// tslint:disable:no-magic-numbers
+﻿/* eslint-disable no-magic-numbers */
 import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
 import { getTestBed, TestBed } from "@angular/core/testing";
 
@@ -66,7 +66,7 @@ describe("LoggingService", () => {
 		describe("logLevels", () => {
 			it("throws no error if logLevels is empty", () => {
 
-				const logLevels: Array<{ loggerName: string; logLevel: string; }> = [];
+				const logLevels: Array<{ loggerName: string; logLevel: string }> = [];
 				const config: LoggingServiceConfiguration = {
 					logLevels,
 				};
