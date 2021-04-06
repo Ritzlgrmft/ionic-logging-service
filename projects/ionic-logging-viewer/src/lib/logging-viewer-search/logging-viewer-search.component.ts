@@ -24,15 +24,15 @@ export class LoggingViewerSearchComponent implements OnInit, OnDestroy {
 	 * Placeholder to be shown in the empty search bar.
 	 */
 	@Input()
-	public placeholder: string;
+	public placeholder: string | undefined;
 
 	/**
 	 * Current search value.
 	 */
-	public search: string;
+	public search: string | undefined;
 
 	private logger: Logger;
-	private filterChangedSubscription: Subscription;
+	private filterChangedSubscription: Subscription | undefined;
 
 	/**
 	 * Creates a new instance of the component.
@@ -78,7 +78,7 @@ export class LoggingViewerSearchComponent implements OnInit, OnDestroy {
 		const methodName = "ngOnDestroy";
 		this.logger.entry(methodName);
 
-		this.filterChangedSubscription.unsubscribe();
+		this.filterChangedSubscription?.unsubscribe();
 
 		this.logger.exit(methodName);
 	}
@@ -90,7 +90,9 @@ export class LoggingViewerSearchComponent implements OnInit, OnDestroy {
 		const methodName = "onSearchChanged";
 		this.logger.entry(methodName, this.search);
 
-		this.loggingViewerFilterService.search = this.search;
+		if (this.search) {
+			this.loggingViewerFilterService.search = this.search;
+		}
 
 		this.logger.exit(methodName);
 	}

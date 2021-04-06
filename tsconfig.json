@@ -1,8 +1,12 @@
 {
 	"compileOnSave": false,
 	"compilerOptions": {
+		"strict": true,
+		"forceConsistentCasingInFileNames": true,
+		"noFallthroughCasesInSwitch": true,
+		"noImplicitReturns": true,
 		"baseUrl": "./",
-    "downlevelIteration": true,
+		"downlevelIteration": true,
 		"outDir": "./dist/out-tsc",
 		"sourceMap": true,
 		"declaration": false,
@@ -26,5 +30,9 @@
 				"dist/ionic-logging-viewer"
 			]
 		}
+	},
+	"angularCompilerOptions": {
+		"strictInjectionParameters": true,
+		"strictTemplates": true
 	}
 }

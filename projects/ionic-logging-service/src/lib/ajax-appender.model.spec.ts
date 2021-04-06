@@ -6,14 +6,13 @@ import { AjaxAppender } from "./ajax-appender.model";
 
 describe("AjaxAppender", () => {
 
-	let appender: AjaxAppender;
+	let appender = new AjaxAppender({ url: "MyUrl" });
 
 	beforeEach(() => {
 		appender = new AjaxAppender({ url: "MyUrl" });
 	});
 
 	afterEach(() => {
-		appender = undefined;
 	});
 
 	describe("ctor", () => {
@@ -78,7 +77,7 @@ describe("AjaxAppender", () => {
 
 		it("throws no error if no configuration is provided", () => {
 
-			const config: AjaxAppenderConfiguration = undefined;
+			const config: AjaxAppenderConfiguration | undefined = undefined;
 			appender.configure(config);
 		});
 

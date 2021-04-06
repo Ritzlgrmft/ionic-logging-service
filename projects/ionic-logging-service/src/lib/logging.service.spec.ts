@@ -39,7 +39,8 @@ describe("LoggingService", () => {
 		it("root logger has log level WARN", () => {
 
 			const appenders = new Logger().getInternalLogger().getEffectiveAppenders();
-			const browserConsoleAppender = appenders.find((a) => a.toString() === "BrowserConsoleAppender");
+			const browserConsoleAppender =
+				appenders.find((a) => a.toString() === "BrowserConsoleAppender") as log4javascript.BrowserConsoleAppender;
 			browserConsoleAppender.setThreshold(log4javascript.Level.OFF);
 
 			loggingService.getRootLogger().info("test");
@@ -396,7 +397,8 @@ describe("LoggingService", () => {
 
 				loggingService.configure(config);
 				const appenders = new Logger().getInternalLogger().getEffectiveAppenders();
-				const browserConsoleAppender = appenders.find((a) => a.toString() === "BrowserConsoleAppender");
+				const browserConsoleAppender =
+					appenders.find((a) => a.toString() === "BrowserConsoleAppender") as log4javascript.BrowserConsoleAppender;
 
 				expect(browserConsoleAppender.getThreshold()).toBe(log4javascript.Level.ALL);
 			});
@@ -409,7 +411,8 @@ describe("LoggingService", () => {
 
 				loggingService.configure(config);
 				const appenders = new Logger().getInternalLogger().getEffectiveAppenders();
-				const browserConsoleAppender = appenders.find((a) => a.toString() === "BrowserConsoleAppender");
+				const browserConsoleAppender =
+					appenders.find((a) => a.toString() === "BrowserConsoleAppender") as log4javascript.BrowserConsoleAppender;
 
 				expect(browserConsoleAppender.getThreshold()).toBe(log4javascript.Level.ALL);
 			});
@@ -424,7 +427,8 @@ describe("LoggingService", () => {
 
 				loggingService.configure(config);
 				const appenders = new Logger().getInternalLogger().getEffectiveAppenders();
-				const browserConsoleAppender = appenders.find((a) => a.toString() === "BrowserConsoleAppender");
+				const browserConsoleAppender =
+					appenders.find((a) => a.toString() === "BrowserConsoleAppender") as log4javascript.BrowserConsoleAppender;
 
 				expect(browserConsoleAppender.getThreshold()).toBe(log4javascript.Level.OFF);
 			});
@@ -465,7 +469,8 @@ describe("LoggingService", () => {
 		it("returns array with written log message", () => {
 
 			const appenders = new Logger().getInternalLogger().getEffectiveAppenders();
-			const browserConsoleAppender = appenders.find((a) => a.toString() === "BrowserConsoleAppender");
+			const browserConsoleAppender =
+				appenders.find((a) => a.toString() === "BrowserConsoleAppender") as log4javascript.BrowserConsoleAppender;
 			browserConsoleAppender.setThreshold(log4javascript.Level.OFF);
 
 			loggingService.getRootLogger().warn("test");
@@ -479,7 +484,8 @@ describe("LoggingService", () => {
 
 		it("logged messages are emitted", (done: () => void) => {
 			const appenders = new Logger().getInternalLogger().getEffectiveAppenders();
-			const browserConsoleAppender = appenders.find((a) => a.toString() === "BrowserConsoleAppender");
+			const browserConsoleAppender =
+				appenders.find((a) => a.toString() === "BrowserConsoleAppender") as log4javascript.BrowserConsoleAppender;
 			browserConsoleAppender.setThreshold(log4javascript.Level.OFF);
 
 			loggingService.logMessagesChanged.subscribe(() => {

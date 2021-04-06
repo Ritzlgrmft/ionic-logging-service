@@ -26,26 +26,26 @@ export class LoggingViewerModalComponent implements OnInit {
 	 * Currently supported: en, de
 	 */
 	@Input()
-	public language: string;
+	public language: string | undefined;
 
 	/**
 	 * Translation to be used for the modal.
 	 * If specified, the language is ignored.
 	 */
 	@Input()
-	public translation: LoggingViewerTranslation;
+	public translation: LoggingViewerTranslation | undefined;
 
 	/**
 	 * Comma-separated list of localStorageKeys. If set, the logs get loaded from localStorage instead of memory.
 	 */
 	@Input()
-	public localStorageKeys: string;
+	public localStorageKeys: string | undefined;
 
 	/**
 	 * Flag showing a delete button, which removes all existing log messages.
 	 */
 	@Input()
-	public allowClearLogs: boolean;
+	public allowClearLogs: boolean | undefined;
 
 	/**
 	 * Flag controlling which close button will be shown.
@@ -54,7 +54,7 @@ export class LoggingViewerModalComponent implements OnInit {
 
 	private logger: Logger;
 
-	private translations: { [language: string]: LoggingViewerTranslation };
+	private translations: { [language: string]: LoggingViewerTranslation } = {};
 
 	/**
 	 * Creates a new instance of the component.

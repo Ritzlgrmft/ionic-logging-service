@@ -157,7 +157,7 @@
 							<ion-label position="floating">Local Storage Keys</ion-label>
 							<ion-input type="text" [(ngModel)]="localStorageKeys"></ion-input>
 						</ion-item>
-						<ion-radio-group [value]="selectedLanguage" (ionChange)="changeLanguage($event.detail.value)">
+						<ion-radio-group [(ngModel)]="selectedLanguage">
 							<ion-list-header>
 								<ion-label>Language</ion-label>
 							</ion-list-header>

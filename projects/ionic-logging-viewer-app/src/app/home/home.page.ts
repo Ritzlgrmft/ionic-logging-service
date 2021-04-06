@@ -36,7 +36,7 @@ export class HomePage {
 	public selectedLanguage: string;
 	public translation: LoggingViewerTranslation;
 	public allowClearLogs: boolean;
-	public localStorageKeys: string;
+	public localStorageKeys: string | undefined;
 
 	private logger: Logger;
 
@@ -53,7 +53,7 @@ export class HomePage {
 		this.testLoggerName = "TestLogger";
 		this.testMethod = "TestMethod";
 		this.testLogLevel = "INFO";
-		this.logLevels = Object.keys(LogLevel).filter(key => typeof LogLevel[key] === "number");
+		this.logLevels = Object.keys(LogLevel).filter(key => this.mapLogLevel(key) !== undefined);
 		this.batchSizes = [1, 5, 10];
 		this.message = "message";
 		this.onLogLevelOrLoggerChanged();
@@ -96,7 +96,7 @@ export class HomePage {
 		this.logger.entry(methodName);
 
 		const logger = this.loggingService.getLogger(this.testLoggerName);
-		logger.setLogLevel(LogLevel[this.testLogLevel]);
+		logger.setLogLevel(this.mapLogLevel(this.testLogLevel) as LogLevel);
 
 		this.logger.exit(methodName);
 	}
@@ -106,7 +106,7 @@ export class HomePage {
 		this.logger.entry(methodName);
 
 		const appenders = this.loggingService.getRootLogger().getInternalLogger().getEffectiveAppenders();
-		let ajaxAppender = appenders.find((a) => a.toString() === "Ionic.Logging.AjaxAppender") as AjaxAppender;
+		let ajaxAppender = appenders.find((a) => a.toString() === "Ionic.Logging.AjaxAppender") as AjaxAppender | undefined;
 		if (ajaxAppender !== undefined) {
 			this.loggingService.getRootLogger().getInternalLogger().removeAppender(ajaxAppender);
 			ajaxAppender = undefined;
@@ -135,7 +135,8 @@ export class HomePage {
 		this.logger.entry(methodName);
 
 		const appenders = this.loggingService.getRootLogger().getInternalLogger().getEffectiveAppenders();
-		let localStorageAppender = appenders.find((a) => a.toString() === "Ionic.Logging.LocalStorageAppender") as LocalStorageAppender;
+		let localStorageAppender =
+			appenders.find((a) => a.toString() === "Ionic.Logging.LocalStorageAppender") as LocalStorageAppender | undefined;
 		if (localStorageAppender !== undefined) {
 			this.loggingService.getRootLogger().getInternalLogger().removeAppender(localStorageAppender);
 			localStorageAppender = undefined;
@@ -219,5 +220,28 @@ export class HomePage {
 	private async onAjaxAppenderFailed(message: string): Promise<void> {
 		const toast = await this.toastController.create({ message, duration: 2000 });
 		await toast.present();
+	}
+
+	private mapLogLevel(key: string): LogLevel | undefined {
+		switch (key) {
+			case "ALL":
+				return LogLevel.ALL;
+			case "TRACE":
+				return LogLevel.TRACE;
+			case "DEBUG":
+				return LogLevel.DEBUG;
+			case "INFO":
+				return LogLevel.INFO;
+			case "WARN":
+				return LogLevel.WARN;
+			case "ERROR":
+				return LogLevel.ERROR;
+			case "FATAL":
+				return LogLevel.FATAL;
+			case "OFF":
+				return LogLevel.OFF;
+			default:
+				return undefined;
+		}
 	}
 }

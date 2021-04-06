@@ -27,10 +27,10 @@ export class LoggingViewerLevelsComponent implements OnInit, OnDestroy {
 	/**
 	 * Selected level.
 	 */
-	public selectedLevel: string;
+	public selectedLevel: string | undefined;
 
 	private logger: Logger;
-	private filterChangedSubscription: Subscription;
+	private filterChangedSubscription: Subscription | undefined;
 
 	/**
 	 * Creates a new instance of the component.
@@ -81,7 +81,7 @@ export class LoggingViewerLevelsComponent implements OnInit, OnDestroy {
 		const methodName = "ngOnDestroy";
 		this.logger.entry(methodName);
 
-		this.filterChangedSubscription.unsubscribe();
+		this.filterChangedSubscription?.unsubscribe();
 
 		this.logger.exit(methodName);
 	}
@@ -93,7 +93,9 @@ export class LoggingViewerLevelsComponent implements OnInit, OnDestroy {
 		const methodName = "onLevelChanged";
 		this.logger.entry(methodName, this.selectedLevel);
 
-		this.loggingViewerFilterService.level = this.selectedLevel;
+		if (this.selectedLevel) {
+			this.loggingViewerFilterService.level = this.selectedLevel;
+		}
 
 		this.logger.exit(methodName);
 	}

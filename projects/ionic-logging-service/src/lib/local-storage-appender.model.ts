@@ -26,7 +26,7 @@ export class LocalStorageAppender extends log4javascript.Appender {
 	private static maxMessagesDefault = 250;
 	private static thresholdDefault = "WARN";
 
-	private maxMessages: number;
+	private maxMessages = LocalStorageAppender.maxMessagesDefault;
 
 	private localStorageKey: string;
 	private logMessages: LogMessage[];
@@ -36,7 +36,7 @@ export class LocalStorageAppender extends log4javascript.Appender {
 	 *
 	 * @param configuration configuration for the appender.
 	 */
-	constructor(configuration: LocalStorageAppenderConfiguration) {
+	constructor(configuration: LocalStorageAppenderConfiguration | undefined) {
 		super();
 
 		if (!configuration) {
@@ -70,7 +70,7 @@ export class LocalStorageAppender extends log4javascript.Appender {
 		if (!localStorageKey || localStorage.getItem(localStorageKey) === null) {
 			logMessages = [];
 		} else {
-			logMessages = JSON.parse(localStorage.getItem(localStorageKey));
+			logMessages = JSON.parse(localStorage.getItem(localStorageKey) as string);
 			for (const logMessage of logMessages) {
 				// timestamps are serialized as strings
 				logMessage.timeStamp = new Date(logMessage.timeStamp);
@@ -97,7 +97,7 @@ export class LocalStorageAppender extends log4javascript.Appender {
 	 *
 	 * @param configuration configuration data.
 	 */
-	public configure(configuration: LocalStorageAppenderConfiguration): void {
+	public configure(configuration: LocalStorageAppenderConfiguration | undefined): void {
 		if (configuration) {
 			if (configuration.localStorageKey && configuration.localStorageKey !== this.localStorageKey) {
 				throw new Error("localStorageKey must not be changed");
@@ -126,7 +126,7 @@ export class LocalStorageAppender extends log4javascript.Appender {
 		// add event to logMessages
 		const message: LogMessage = {
 			level: LogLevel[LogLevelConverter.levelFromLog4Javascript(loggingEvent.level)],
-			logger: typeof loggingEvent.logger !== "undefined" ? loggingEvent.logger.name : undefined,
+			logger: loggingEvent.logger?.name ?? "",
 			message: loggingEvent.messages.slice(1),
 			methodName: loggingEvent.messages[0],
 			timeStamp: loggingEvent.timeStamp,

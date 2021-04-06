@@ -40,6 +40,7 @@ export class MemoryAppender extends log4javascript.Appender {
 		super();
 
 		this.logMessages = [];
+		this.onLogMessagesChangedCallback = () => { };
 
 		// process configuration
 		configuration = configuration || {};
@@ -57,7 +58,7 @@ export class MemoryAppender extends log4javascript.Appender {
 	 *
 	 * @param configuration configuration data.
 	 */
-	public configure(configuration: MemoryAppenderConfiguration): void {
+	public configure(configuration: MemoryAppenderConfiguration | undefined): void {
 		if (configuration) {
 			if (configuration.maxMessages) {
 				this.setMaxMessages(configuration.maxMessages);
@@ -83,7 +84,7 @@ export class MemoryAppender extends log4javascript.Appender {
 		// add event to logMessages
 		const message: LogMessage = {
 			level: LogLevel[LogLevelConverter.levelFromLog4Javascript(loggingEvent.level)],
-			logger: typeof loggingEvent.logger === "object" ? loggingEvent.logger.name : undefined,
+			logger: loggingEvent.logger?.name ?? "",
 			message: loggingEvent.messages.slice(1),
 			methodName: loggingEvent.messages[0],
 			timeStamp: loggingEvent.timeStamp,
@@ -91,9 +92,7 @@ export class MemoryAppender extends log4javascript.Appender {
 		this.logMessages.push(message);
 
 		// inform about new message
-		if (typeof this.onLogMessagesChangedCallback === "function") {
-			this.onLogMessagesChangedCallback(message);
-		}
+		this.onLogMessagesChangedCallback(message);
 	}
 
 	/**

@@ -42,7 +42,7 @@ export class AjaxAppender extends log4javascript.Appender {
 	 *
 	 * @param configuration configuration for the appender.
 	 */
-	constructor(configuration: AjaxAppenderConfiguration) {
+	constructor(configuration: AjaxAppenderConfiguration | undefined) {
 		super();
 
 		if (!configuration) {
@@ -53,7 +53,7 @@ export class AjaxAppender extends log4javascript.Appender {
 		}
 		this.ajaxAppender = new log4javascript.AjaxAppender(configuration.url, configuration.withCredentials);
 		this.url = configuration.url;
-		this.withCredentials = configuration.withCredentials;
+		this.withCredentials = (configuration.withCredentials === true);
 
 		this.ajaxAppender.setLayout(new JsonLayout(false, false));
 		this.ajaxAppender.addHeader("Content-Type", "application/json; charset=utf-8");
@@ -83,7 +83,7 @@ export class AjaxAppender extends log4javascript.Appender {
 	 *
 	 * @param configuration configuration data.
 	 */
-	public configure(configuration: AjaxAppenderConfiguration): void {
+	public configure(configuration: AjaxAppenderConfiguration | undefined): void {
 		if (configuration) {
 			if (configuration.url && configuration.url !== this.url) {
 				throw new Error("url must not be changed");

@@ -23,17 +23,17 @@ export class LoggingViewerComponent implements OnInit, OnDestroy {
 	 * Comma-separated list of localStorageKeys. If set, the logs get loaded from localStorage instead of memory.
 	 */
 	@Input()
-	public localStorageKeys: string;
+	public localStorageKeys: string | undefined;
 
 	/**
 	 * Log messages which fulfill the filter condition.
 	 */
-	public logMessagesForDisplay: LogMessage[];
+	public logMessagesForDisplay: LogMessage[] = [];
 
 	private logger: Logger;
-	private logMessages: LogMessage[];
-	private logMessagesChangedSubscription: Subscription;
-	private filterChangedSubscription: Subscription;
+	private logMessages: LogMessage[] = [];
+	private logMessagesChangedSubscription: Subscription | undefined;
+	private filterChangedSubscription: Subscription | undefined;
 
 	/**
 	 * Creates a new instance of the component.
@@ -84,8 +84,8 @@ export class LoggingViewerComponent implements OnInit, OnDestroy {
 		const methodName = "ngOnDestroy";
 		this.logger.entry(methodName);
 
-		this.logMessagesChangedSubscription.unsubscribe();
-		this.filterChangedSubscription.unsubscribe();
+		this.logMessagesChangedSubscription?.unsubscribe();
+		this.filterChangedSubscription?.unsubscribe();
 
 		this.logger.exit(methodName);
 	}
