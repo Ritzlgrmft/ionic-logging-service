@@ -1,8 +1,8 @@
-﻿import * as log4javascript from "log4javascript";
-
-import { LogLevelConverter } from "./log-level.converter";
+﻿import { LogLevelConverter } from "./log-level.converter";
 import { LogLevel } from "./log-level.model";
 import { LogMessage } from "./log-message.model";
+import { Appender } from "./log4javascript/Appender";
+import { LoggingEvent } from "./log4javascript/LoggingEvent";
 import { MemoryAppenderConfiguration } from "./memory-appender.configuration";
 
 /**
@@ -21,7 +21,7 @@ import { MemoryAppenderConfiguration } from "./memory-appender.configuration";
  * }
  * ```
  */
-export class MemoryAppender extends log4javascript.Appender {
+export class MemoryAppender extends Appender {
 
 	private static maxMessagesDefault = 250;
 	private static thresholdDefault = "ALL";
@@ -29,7 +29,7 @@ export class MemoryAppender extends log4javascript.Appender {
 	private maxMessages: number;
 
 	private logMessages: LogMessage[];
-	private onLogMessagesChangedCallback: (message: LogMessage) => void;
+	private onLogMessagesChangedCallback: ((message: LogMessage) => void) | undefined;
 
 	/**
 	 * Creates a new instance of the appender.
@@ -75,7 +75,7 @@ export class MemoryAppender extends log4javascript.Appender {
 	 *
 	 * @param loggingEvent event to be appended.
 	 */
-	public append(loggingEvent: log4javascript.LoggingEvent): void {
+	public append(loggingEvent: LoggingEvent): void {
 		// if logMessages is already full, remove oldest element
 		while (this.logMessages.length >= this.maxMessages) {
 			this.logMessages.shift();
@@ -83,7 +83,7 @@ export class MemoryAppender extends log4javascript.Appender {
 		// add event to logMessages
 		const message: LogMessage = {
 			level: LogLevel[LogLevelConverter.levelFromLog4Javascript(loggingEvent.level)],
-			logger: typeof loggingEvent.logger === "object" ? loggingEvent.logger.name : undefined,
+			logger: typeof loggingEvent.logger === "object" ? loggingEvent.logger.name : "",
 			message: loggingEvent.messages.slice(1),
 			methodName: loggingEvent.messages[0],
 			timeStamp: loggingEvent.timeStamp,
@@ -91,7 +91,7 @@ export class MemoryAppender extends log4javascript.Appender {
 		this.logMessages.push(message);
 
 		// inform about new message
-		if (typeof this.onLogMessagesChangedCallback === "function") {
+		if (this.onLogMessagesChangedCallback) {
 			this.onLogMessagesChangedCallback(message);
 		}
 	}

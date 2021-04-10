@@ -20,7 +20,6 @@
 		"@angular/core": "^11.0.0"
 	},
 	"dependencies": {
-		"log4javascript": "^1.4.16",
 		"tslib": "^2.0.0"
 	}
 }

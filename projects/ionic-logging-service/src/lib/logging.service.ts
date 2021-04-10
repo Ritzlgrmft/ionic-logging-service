@@ -1,11 +1,12 @@
 ﻿import { EventEmitter, Injectable, Optional } from "@angular/core";
 
-import * as log4javascript from "log4javascript";
-
 import { AjaxAppender } from "./ajax-appender.model";
 import { LocalStorageAppender } from "./local-storage-appender.model";
 import { LogLevelConverter } from "./log-level.converter";
 import { LogMessage } from "./log-message.model";
+import { Log4JavaScript } from "./log4javascript/Log4JavaScript";
+import { LogLog } from "./log4javascript/LogLog";
+import { PatternLayout } from "./log4javascript/PatternLayout";
 import { Logger } from "./logger.model";
 import { LoggingServiceConfiguration } from "./logging-service.configuration";
 import { MemoryAppender } from "./memory-appender.model";
@@ -41,7 +42,7 @@ export class LoggingService {
 	public ajaxAppenderFailed: EventEmitter<string>;
 
 	private memoryAppender: MemoryAppender;
-	private browserConsoleAppender: log4javascript.BrowserConsoleAppender;
+	private browserConsoleAppender: BrowserConsoleAppender;
 
 	/**
 	 * Creates a new instance of the service.
@@ -49,25 +50,25 @@ export class LoggingService {
 	constructor() {
 
 		// prevent log4javascript to show alerts on case of errors
-		log4javascript.logLog.setQuietMode(true);
+		LogLog.setQuietMode(true);
 
 		// create event emitter
 		this.logMessagesChanged = new EventEmitter<void>();
 		this.ajaxAppenderFailed = new EventEmitter<string>();
 
 		// configure appender
-		const logger = log4javascript.getRootLogger();
+		const logger = Log4JavaScript.getRootLogger();
 		logger.setLevel(log4javascript.Level.WARN);
 
 		// browser console appender for debugger
-		this.browserConsoleAppender = new log4javascript.BrowserConsoleAppender();
-		this.browserConsoleAppender.setLayout(new log4javascript.PatternLayout("%d{HH:mm:ss,SSS} %c %m"));
+		this.browserConsoleAppender = new BrowserConsoleAppender();
+		this.browserConsoleAppender.setLayout(new PatternLayout("%d{HH:mm:ss,SSS} %c %m"));
 		this.browserConsoleAppender.setThreshold(log4javascript.Level.ALL);
 		logger.addAppender(this.browserConsoleAppender);
 
 		// in-memory appender for display on log messages page
 		this.memoryAppender = new MemoryAppender();
-		this.memoryAppender.setLayout(new log4javascript.PatternLayout("%d{HH:mm:ss,SSS} %c %m"));
+		this.memoryAppender.setLayout(new PatternLayout("%d{HH:mm:ss,SSS} %c %m"));
 		this.memoryAppender.setOnLogMessagesChangedCallback((message) => {
 			this.logMessagesChanged.emit();
 		});

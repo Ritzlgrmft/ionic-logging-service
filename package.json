@@ -50,7 +50,6 @@
     "@angular/router": "^11.0.0",
     "@ionic/angular": "^5.0.0",
     "ionicons": "^5.0.0",
-    "log4javascript": "^1.4.16",
     "rxjs": "~6.5.3",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
