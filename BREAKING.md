@@ -1,5 +1,9 @@
 # Breaking Changes
 
+## Version 12
+
+- update to Angular 11
+
 ## Version 11
 
 - update to Angular 10
