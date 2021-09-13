@@ -104,7 +104,7 @@ By default, the following configuration is used:
   - `BrowserConsoleAppender`
   - `MemoryAppender`
 
-To change it, just call `configure()`. This method takes an object of type `LoggingConfiguration`.
+To change it, just call `configure()`. This method takes an object of type `LoggingServiceConfiguration`.
 
 The recommended way is to place the configuration in `environment.ts`:
 
