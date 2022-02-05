@@ -1,5 +1,10 @@
 # Breaking Changes
 
+## Version 14
+
+- update to Angular 13
+- update to Ionic 6
+
 ## Version 13
 
 - update to Angular 12

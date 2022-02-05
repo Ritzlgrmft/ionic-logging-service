@@ -16,28 +16,26 @@ export function configureLogging(loggingService: LoggingService): () => void {
 }
 
 @NgModule({
-	declarations: [
-		AppComponent
-	],
-	entryComponents: [
-	],
-	imports: [
-		BrowserModule,
-		IonicModule.forRoot(),
-		AppRoutingModule,
-		LoggingServiceModule
-	],
-	providers: [
-		{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-		{
-			deps: [LoggingService],
-			multi: true,
-			provide: APP_INITIALIZER,
-			useFactory: configureLogging,
-		}
-	],
-	bootstrap: [
-		AppComponent
-	]
+    declarations: [
+        AppComponent
+    ],
+    imports: [
+        BrowserModule,
+        IonicModule.forRoot(),
+        AppRoutingModule,
+        LoggingServiceModule
+    ],
+    providers: [
+        { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+        {
+            deps: [LoggingService],
+            multi: true,
+            provide: APP_INITIALIZER,
+            useFactory: configureLogging,
+        }
+    ],
+    bootstrap: [
+        AppComponent
+    ]
 })
 export class AppModule { }

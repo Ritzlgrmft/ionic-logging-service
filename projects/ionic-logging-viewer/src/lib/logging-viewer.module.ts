@@ -11,27 +11,25 @@ import { LoggingViewerSearchComponent } from "./logging-viewer-search/logging-vi
 import { LoggingViewerModalComponent } from "./logging-viewer-modal/logging-viewer-modal.component";
 
 @NgModule({
-	imports: [
-		CommonModule,
-		FormsModule,
-		IonicModule
-	],
-	declarations: [
-		LoggingViewerComponent,
-		LoggingViewerSearchComponent,
-		LoggingViewerLevelsComponent,
-		LoggingViewerModalComponent
-	],
-	entryComponents: [
-	],
-	exports: [
-		LoggingViewerComponent,
-		LoggingViewerSearchComponent,
-		LoggingViewerLevelsComponent,
-		LoggingViewerModalComponent
-	],
-	providers: [
-		LoggingViewerFilterService
-	]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule
+    ],
+    declarations: [
+        LoggingViewerComponent,
+        LoggingViewerSearchComponent,
+        LoggingViewerLevelsComponent,
+        LoggingViewerModalComponent
+    ],
+    exports: [
+        LoggingViewerComponent,
+        LoggingViewerSearchComponent,
+        LoggingViewerLevelsComponent,
+        LoggingViewerModalComponent
+    ],
+    providers: [
+        LoggingViewerFilterService
+    ]
 })
 export class LoggingViewerModule { }

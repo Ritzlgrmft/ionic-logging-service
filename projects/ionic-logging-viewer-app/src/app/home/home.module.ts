@@ -9,24 +9,20 @@ import { LoggingViewerModule, LoggingViewerModalComponent } from "ionic-logging-
 import { HomePage } from "./home.page";
 
 @NgModule({
-	imports: [
-		CommonModule,
-		FormsModule,
-		IonicModule,
-		RouterModule.forChild([
-			{
-				path: "",
-				component: HomePage
-			}
-		]),
-		LoggingViewerModule
-	],
-	declarations: [
-		HomePage,
-	],
-	entryComponents: [
-		HomePage,
-		LoggingViewerModalComponent
-	]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        RouterModule.forChild([
+            {
+                path: "",
+                component: HomePage
+            }
+        ]),
+        LoggingViewerModule
+    ],
+    declarations: [
+        HomePage,
+    ]
 })
 export class HomePageModule { }

@@ -3,10 +3,6 @@
 	"dest": "../../dist/ionic-logging-viewer",
 	"deleteDestPath": false,
 	"lib": {
-		"entryFile": "src/public_api.ts",
-		"umdModuleIds": {
-			"ionic-logging-service": "ionicLoggingService",
-			"@ionic/angular": "ionicAngular"
-		}
+    "entryFile": "src/public_api.ts"
 	}
 }

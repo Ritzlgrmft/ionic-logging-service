@@ -3,10 +3,7 @@
 	"dest": "../../dist/ionic-logging-service",
 	"deleteDestPath": false,
 	"lib": {
-		"entryFile": "src/public_api.ts",
-		"umdModuleIds": {
-			"log4javascript": "log4javascript"
-		}
+    "entryFile": "src/public_api.ts"
 	},
 	"allowedNonPeerDependencies": [
 		"log4javascript"

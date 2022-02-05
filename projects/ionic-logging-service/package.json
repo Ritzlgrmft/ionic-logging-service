@@ -1,6 +1,6 @@
 {
 	"name": "ionic-logging-service",
-	"version": "13.0.0",
+	"version": "14.0.0",
 	"description": "Logging functionalities for apps built with Ionic framework",
 	"author": {
 		"name": "Markus Wagner",
@@ -16,8 +16,8 @@
 		"log4javascript"
 	],
 	"peerDependencies": {
-		"@angular/common": "^12.0.0",
-		"@angular/core": "^12.0.0"
+		"@angular/common": "^13.0.0",
+		"@angular/core": "^13.0.0"
 	},
 	"dependencies": {
 		"log4javascript": "^1.4.16",

@@ -60,6 +60,7 @@ export class LoggingViewerFilterService {
 	 *
 	 * @return search value
 	 */
+	// eslint-disable-next-line @typescript-eslint/member-ordering
 	public get search(): string {
 		return this.searchValue;
 	}

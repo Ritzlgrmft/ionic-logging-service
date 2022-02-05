@@ -1,3 +1,4 @@
+/.angular/cache
 coverage/
 dist/
 node_modules/
