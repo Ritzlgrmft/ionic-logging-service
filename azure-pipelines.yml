@@ -87,10 +87,3 @@ steps:
     testRunTitle: Unit Tests ionic-logging-viewer
     testResultsFormat: JUnit
     testResultsFiles: "**/TESTS*.xml"
-
-- task: Npm@1
-  displayName: 'Publish codecov'
-  inputs:
-    command: custom
-    verbose: false
-    customCommand: 'run codecov'
