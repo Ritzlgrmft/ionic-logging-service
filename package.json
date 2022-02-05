@@ -35,8 +35,6 @@
     "compodoc": "npm run compodoc-service && npm run compodoc-viewer",
     "compodoc-service": "cd projects/ionic-logging-service && compodoc && cd ../..",
     "compodoc-viewer": "cd projects/ionic-logging-viewer && compodoc && cd ../..",
-    "semantic-release-version": "semantic-release --plugins @semantic-release/git --plugins @semantic-release/commit-analyzer --plugins semantic-release-ado --debug",
-    "semantic-release-service": "semantic-release --pkgRoot dist/ionic-logging-service",
     "postinstall": "ngcc"
   },
   "dependencies": {
