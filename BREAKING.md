@@ -1,5 +1,9 @@
 # Breaking Changes
 
+## Version 15
+
+- update to Angular 14
+
 ## Version 14
 
 - update to Angular 13
