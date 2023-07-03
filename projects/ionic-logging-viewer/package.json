@@ -19,8 +19,8 @@
 		"tslib": "^2.3.1"
 	},
 	"peerDependencies": {
-		"@angular/common": "^15.0.0",
-		"@angular/core": "^15.0.0",
+		"@angular/common": "^16.0.0",
+		"@angular/core": "^16.0.0",
 		"@ionic/angular": "^6.1.9",
 		"ionic-logging-service": "^16.0.0",
 		"ionicons": "^6.0.0"
