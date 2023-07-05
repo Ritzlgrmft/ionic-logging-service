@@ -8,7 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
 
@@ -40,9 +41,10 @@
 
 
 
+
 <ol class="breadcrumb">
   <li>Classes</li>
-  <li>LocalStorageAppender</li>
+  <li >LocalStorageAppender</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -63,6 +65,7 @@
             <code>src/lib/local-storage-appender.model.ts</code>
         </p>
 
+
             <p class="comment">
                 <h3>Description</h3>
             </p>
@@ -71,16 +74,11 @@
 <p>The messages are saved JSON-serialized.
 You have to configure which key is used for storing the messages.</p>
 <p>A typical configuration could be:</p>
-<p>```json</p>
-<ul>
-<li>{</li>
-<li>&quot;localStorageKey&quot;: &quot;myLogs&quot;,</li>
-<li>&quot;maxMessages&quot;: 500,</li>
-<li>&quot;threshold&quot;: &quot;INFO&quot;</li>
-<li>}</li>
-<li>```</li>
-</ul>
-
+<div><pre class="line-numbers"><code class="language-json">{
+  &quot;localStorageKey&quot;: &quot;myLogs&quot;,
+  &quot;maxMessages&quot;: 500,
+  &quot;threshold&quot;: &quot;INFO&quot;
+}</code></pre></div>
             </p>
 
 
@@ -101,43 +99,43 @@ You have to configure which key is used for storing the messages.</p>
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#append">append</a>
+                                <a href="#append" >append</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#clearLog">clearLog</a>
+                                <a href="#clearLog" >clearLog</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#configure">configure</a>
+                                <a href="#configure" >configure</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#getLocalStorageKey">getLocalStorageKey</a>
+                                <a href="#getLocalStorageKey" >getLocalStorageKey</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#getLogMessages">getLogMessages</a>
+                                <a href="#getLogMessages" >getLogMessages</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#getMaxMessages">getMaxMessages</a>
+                                <a href="#getMaxMessages" >getMaxMessages</a>
                             </li>
                             <li>
                                     <span class="modifier">Static</span>
-                                <a href="#loadLogMessages">loadLogMessages</a>
+                                <a href="#loadLogMessages" >loadLogMessages</a>
                             </li>
                             <li>
                                     <span class="modifier">Static</span>
-                                <a href="#removeLogMessages">removeLogMessages</a>
+                                <a href="#removeLogMessages" >removeLogMessages</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#setMaxMessages">setMaxMessages</a>
+                                <a href="#setMaxMessages" >setMaxMessages</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#toString">toString</a>
+                                <a href="#toString" >toString</a>
                             </li>
                         </ul>
                     </td>
@@ -157,12 +155,12 @@ You have to configure which key is used for storing the messages.</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(configuration: <a href="../interfaces/LocalStorageAppenderConfiguration.html">LocalStorageAppenderConfiguration</a>)</code>
+<code>constructor(configuration: <a href="../interfaces/LocalStorageAppenderConfiguration.html" target="_self">LocalStorageAppenderConfiguration</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/lib/local-storage-appender.model.ts:34</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/lib/local-storage-appender.model.ts:32</a></div>
                             </td>
                         </tr>
 
@@ -194,8 +192,8 @@ You have to configure which key is used for storing the messages.</p>
                                                     </td>
                                                     
                                                         <td>
-                                                                <code><p>configuration for the appender.</p>
-</code>
+                                                                <p>configuration for the appender.</p>
+
                                                         </td>
                                                 </tr>
                                         </tbody>
@@ -219,10 +217,8 @@ You have to configure which key is used for storing the messages.</p>
                 <td class="col-md-4">
                     <a name="append"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            append
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>append</b></span>
                         <a href="#append"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -250,6 +246,7 @@ You have to configure which key is used for storing the messages.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -298,10 +295,8 @@ You have to configure which key is used for storing the messages.</p>
                 <td class="col-md-4">
                     <a name="clearLog"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            clearLog
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>clearLog</b></span>
                         <a href="#clearLog"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -316,8 +311,8 @@ You have to configure which key is used for storing the messages.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="198"
-                            class="link-to-prism">src/lib/local-storage-appender.model.ts:198</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="201"
+                            class="link-to-prism">src/lib/local-storage-appender.model.ts:201</a></div>
                 </td>
             </tr>
 
@@ -342,10 +337,8 @@ Mainly for unit testing purposes.</p>
                 <td class="col-md-4">
                     <a name="configure"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            configure
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>configure</b></span>
                         <a href="#configure"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -353,15 +346,15 @@ Mainly for unit testing purposes.</p>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>configure(configuration: <a href="../interfaces/LocalStorageAppenderConfiguration.html">LocalStorageAppenderConfiguration</a>)</code>
+                    <code>configure(configuration: <a href="../interfaces/LocalStorageAppenderConfiguration.html" target="_self">LocalStorageAppenderConfiguration</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="101"
-                            class="link-to-prism">src/lib/local-storage-appender.model.ts:101</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="100"
+                            class="link-to-prism">src/lib/local-storage-appender.model.ts:100</a></div>
                 </td>
             </tr>
 
@@ -375,6 +368,7 @@ The localStorageKey cannot be modified.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -423,10 +417,8 @@ The localStorageKey cannot be modified.</p>
                 <td class="col-md-4">
                     <a name="getLocalStorageKey"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            getLocalStorageKey
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>getLocalStorageKey</b></span>
                         <a href="#getLocalStorageKey"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -441,8 +433,8 @@ The localStorageKey cannot be modified.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="152"
-                            class="link-to-prism">src/lib/local-storage-appender.model.ts:152</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="153"
+                            class="link-to-prism">src/lib/local-storage-appender.model.ts:153</a></div>
                 </td>
             </tr>
 
@@ -466,10 +458,8 @@ The localStorageKey cannot be modified.</p>
                 <td class="col-md-4">
                     <a name="getLogMessages"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            getLogMessages
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>getLogMessages</b></span>
                         <a href="#getLogMessages"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -484,8 +474,8 @@ The localStorageKey cannot be modified.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="190"
-                            class="link-to-prism">src/lib/local-storage-appender.model.ts:190</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="193"
+                            class="link-to-prism">src/lib/local-storage-appender.model.ts:193</a></div>
                 </td>
             </tr>
 
@@ -516,10 +506,8 @@ Mainly for unit testing purposes.</p>
                 <td class="col-md-4">
                     <a name="getMaxMessages"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            getMaxMessages
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>getMaxMessages</b></span>
                         <a href="#getMaxMessages"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -534,8 +522,8 @@ Mainly for unit testing purposes.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="159"
-                            class="link-to-prism">src/lib/local-storage-appender.model.ts:159</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="160"
+                            class="link-to-prism">src/lib/local-storage-appender.model.ts:160</a></div>
                 </td>
             </tr>
 
@@ -559,10 +547,8 @@ Mainly for unit testing purposes.</p>
                 <td class="col-md-4">
                     <a name="loadLogMessages"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Static</span>
-                            loadLogMessages
-                        </b>
+                        <span class="modifier">Static</span>
+                        <span ><b>loadLogMessages</b></span>
                         <a href="#loadLogMessages"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -577,8 +563,8 @@ Mainly for unit testing purposes.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="69"
-                            class="link-to-prism">src/lib/local-storage-appender.model.ts:69</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="67"
+                            class="link-to-prism">src/lib/local-storage-appender.model.ts:67</a></div>
                 </td>
             </tr>
 
@@ -590,6 +576,7 @@ Mainly for unit testing purposes.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -639,10 +626,8 @@ Mainly for unit testing purposes.</p>
                 <td class="col-md-4">
                     <a name="removeLogMessages"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Static</span>
-                            removeLogMessages
-                        </b>
+                        <span class="modifier">Static</span>
+                        <span ><b>removeLogMessages</b></span>
                         <a href="#removeLogMessages"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -657,8 +642,8 @@ Mainly for unit testing purposes.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="89"
-                            class="link-to-prism">src/lib/local-storage-appender.model.ts:89</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="88"
+                            class="link-to-prism">src/lib/local-storage-appender.model.ts:88</a></div>
                 </td>
             </tr>
 
@@ -670,6 +655,7 @@ Mainly for unit testing purposes.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -718,10 +704,8 @@ Mainly for unit testing purposes.</p>
                 <td class="col-md-4">
                     <a name="setMaxMessages"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            setMaxMessages
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>setMaxMessages</b></span>
                         <a href="#setMaxMessages"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -736,8 +720,8 @@ Mainly for unit testing purposes.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="169"
-                            class="link-to-prism">src/lib/local-storage-appender.model.ts:169</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="171"
+                            class="link-to-prism">src/lib/local-storage-appender.model.ts:171</a></div>
                 </td>
             </tr>
 
@@ -750,6 +734,7 @@ Mainly for unit testing purposes.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -798,10 +783,8 @@ Mainly for unit testing purposes.</p>
                 <td class="col-md-4">
                     <a name="toString"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            toString
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>toString</b></span>
                         <a href="#toString"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -816,8 +799,8 @@ Mainly for unit testing purposes.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="145"
-                            class="link-to-prism">src/lib/local-storage-appender.model.ts:145</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="146"
+                            class="link-to-prism">src/lib/local-storage-appender.model.ts:146</a></div>
                 </td>
             </tr>
 
@@ -882,13 +865,12 @@ export class LocalStorageAppender extends log4javascript.Appender {
 
 	private maxMessages: number;
 
-	// tslint:disable-next-line:completed-docs
 	private localStorageKey: string;
-	// tslint:disable-next-line:completed-docs
 	private logMessages: LogMessage[];
 
 	/**
 	 * Creates a new instance of the appender.
+	 *
 	 * @param configuration configuration for the appender.
 	 */
 	constructor(configuration: LocalStorageAppenderConfiguration) {
@@ -897,14 +879,12 @@ export class LocalStorageAppender extends log4javascript.Appender {
 		if (!configuration) {
 			throw new Error(&quot;configuration must be not empty&quot;);
 		}
-		// tslint:disable-next-line:no-null-keyword
 		if (!configuration.localStorageKey || configuration.localStorageKey &#x3D;&#x3D;&#x3D; &quot;&quot;) {
 			throw new Error(&quot;localStorageKey must be not empty&quot;);
 		}
 		this.localStorageKey &#x3D; configuration.localStorageKey;
 
 		// read existing logMessages
-		// tslint:disable-next-line:no-null-keyword
 		this.logMessages &#x3D; LocalStorageAppender.loadLogMessages(this.localStorageKey);
 
 		// process remaining configuration
@@ -917,6 +897,7 @@ export class LocalStorageAppender extends log4javascript.Appender {
 
 	/**
 	 * Load log messages from local storage which are stored there under the given key.
+	 *
 	 * @param localStorageKey local storage key
 	 * @return stored messages
 	 */
@@ -938,6 +919,7 @@ export class LocalStorageAppender extends log4javascript.Appender {
 
 	/**
 	 * Remove log messages from local storage which are stored there under the given key.
+	 *
 	 * @param localStorageKey local storage key
 	 */
 	public static removeLogMessages(localStorageKey: string): void {
@@ -970,6 +952,7 @@ export class LocalStorageAppender extends log4javascript.Appender {
 
 	/**
 	 * Appender-specific method to append a log message.
+	 *
 	 * @param loggingEvent event to be appended.
 	 */
 	public append(loggingEvent: log4javascript.LoggingEvent): void {
@@ -994,6 +977,7 @@ export class LocalStorageAppender extends log4javascript.Appender {
 	/**
 	 * Gets the appender&#x27;s name.
 	 * Mainly for unit testing purposes.
+	 *
 	 * @return appender&#x27;s name
 	 */
 	public toString(): string {
@@ -1018,6 +1002,7 @@ export class LocalStorageAppender extends log4javascript.Appender {
 	 * Set the maximum number of messages which will be stored in local storage.
 	 *
 	 * If the appender stores currently more messages than the new value allows, the oldest messages get removed.
+	 *
 	 * @param value new maximum number
 	 */
 	public setMaxMessages(value: number): void {
@@ -1039,6 +1024,7 @@ export class LocalStorageAppender extends log4javascript.Appender {
 	/**
 	 * Gets all messages stored in local storage.
 	 * Mainly for unit testing purposes.
+	 *
 	 * @return stored messages
 	 */
 	public getLogMessages(): LogMessage[] {
@@ -1060,14 +1046,15 @@ export class LocalStorageAppender extends log4javascript.Appender {
 
 
 
-                   
+
+
 
 
 
 
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -1079,6 +1066,15 @@ export class LocalStorageAppender extends log4javascript.Appender {
            </div>
        </div>
 
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
@@ -1088,9 +1084,9 @@ export class LocalStorageAppender extends log4javascript.Appender {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
-       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+
        <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

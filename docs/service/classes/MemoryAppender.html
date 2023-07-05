@@ -8,7 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
 
@@ -40,9 +41,10 @@
 
 
 
+
 <ol class="breadcrumb">
   <li>Classes</li>
-  <li>MemoryAppender</li>
+  <li >MemoryAppender</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -63,6 +65,7 @@
             <code>src/lib/memory-appender.model.ts</code>
         </p>
 
+
             <p class="comment">
                 <h3>Description</h3>
             </p>
@@ -70,18 +73,13 @@
                 <p>An appender which stores the log messages in the browser&#39;s memory.</p>
 <p>The MemoryAppender is enabled by default.
 If you do not specify anything else, it is using this configuration:</p>
-<p>```JSON</p>
-<ul>
-<li>{</li>
-<li>&quot;memoryAppender&quot;: [</li>
-<li>{</li>
-<li>&quot;maxMessages&quot;: 250,</li>
-<li>&quot;threshold&quot;: &quot;ALL&quot;</li>
-<li>}</li>
-<li>}</li>
-<li>```</li>
-</ul>
-
+<div><pre class="line-numbers"><code class="language-JSON">{
+  &quot;memoryAppender&quot;: [
+    {
+      &quot;maxMessages&quot;: 250,
+      &quot;threshold&quot;: &quot;ALL&quot;
+    }
+}</code></pre></div>
             </p>
 
 
@@ -102,35 +100,35 @@ If you do not specify anything else, it is using this configuration:</p>
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#append">append</a>
+                                <a href="#append" >append</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#configure">configure</a>
+                                <a href="#configure" >configure</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#getLogMessages">getLogMessages</a>
+                                <a href="#getLogMessages" >getLogMessages</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#getMaxMessages">getMaxMessages</a>
+                                <a href="#getMaxMessages" >getMaxMessages</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#removeLogMessages">removeLogMessages</a>
+                                <a href="#removeLogMessages" >removeLogMessages</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#setMaxMessages">setMaxMessages</a>
+                                <a href="#setMaxMessages" >setMaxMessages</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#setOnLogMessagesChangedCallback">setOnLogMessagesChangedCallback</a>
+                                <a href="#setOnLogMessagesChangedCallback" >setOnLogMessagesChangedCallback</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#toString">toString</a>
+                                <a href="#toString" >toString</a>
                             </li>
                         </ul>
                     </td>
@@ -150,12 +148,12 @@ If you do not specify anything else, it is using this configuration:</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(configuration?: <a href="../interfaces/MemoryAppenderConfiguration.html">MemoryAppenderConfiguration</a>)</code>
+<code>constructor(configuration?: <a href="../interfaces/MemoryAppenderConfiguration.html" target="_self">MemoryAppenderConfiguration</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/lib/memory-appender.model.ts:34</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/lib/memory-appender.model.ts:32</a></div>
                             </td>
                         </tr>
 
@@ -187,8 +185,8 @@ If you do not specify anything else, it is using this configuration:</p>
                                                     </td>
                                                     
                                                         <td>
-                                                                <code><p>configuration for the appender.</p>
-</code>
+                                                                <p>configuration for the appender.</p>
+
                                                         </td>
                                                 </tr>
                                         </tbody>
@@ -212,10 +210,8 @@ If you do not specify anything else, it is using this configuration:</p>
                 <td class="col-md-4">
                     <a name="append"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            append
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>append</b></span>
                         <a href="#append"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -243,6 +239,7 @@ If you do not specify anything else, it is using this configuration:</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -291,10 +288,8 @@ If you do not specify anything else, it is using this configuration:</p>
                 <td class="col-md-4">
                     <a name="configure"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            configure
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>configure</b></span>
                         <a href="#configure"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -302,15 +297,15 @@ If you do not specify anything else, it is using this configuration:</p>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>configure(configuration: <a href="../interfaces/MemoryAppenderConfiguration.html">MemoryAppenderConfiguration</a>)</code>
+                    <code>configure(configuration: <a href="../interfaces/MemoryAppenderConfiguration.html" target="_self">MemoryAppenderConfiguration</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="61"
-                            class="link-to-prism">src/lib/memory-appender.model.ts:61</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="60"
+                            class="link-to-prism">src/lib/memory-appender.model.ts:60</a></div>
                 </td>
             </tr>
 
@@ -323,6 +318,7 @@ Only the defined properties get overwritten.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -371,10 +367,8 @@ Only the defined properties get overwritten.</p>
                 <td class="col-md-4">
                     <a name="getLogMessages"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            getLogMessages
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>getLogMessages</b></span>
                         <a href="#getLogMessages"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -389,8 +383,8 @@ Only the defined properties get overwritten.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="134"
-                            class="link-to-prism">src/lib/memory-appender.model.ts:134</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="137"
+                            class="link-to-prism">src/lib/memory-appender.model.ts:137</a></div>
                 </td>
             </tr>
 
@@ -420,10 +414,8 @@ Only the defined properties get overwritten.</p>
                 <td class="col-md-4">
                     <a name="getMaxMessages"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            getMaxMessages
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>getMaxMessages</b></span>
                         <a href="#getMaxMessages"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -438,8 +430,8 @@ Only the defined properties get overwritten.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="111"
-                            class="link-to-prism">src/lib/memory-appender.model.ts:111</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="112"
+                            class="link-to-prism">src/lib/memory-appender.model.ts:112</a></div>
                 </td>
             </tr>
 
@@ -463,10 +455,8 @@ Only the defined properties get overwritten.</p>
                 <td class="col-md-4">
                     <a name="removeLogMessages"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            removeLogMessages
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>removeLogMessages</b></span>
                         <a href="#removeLogMessages"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -481,8 +471,8 @@ Only the defined properties get overwritten.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="141"
-                            class="link-to-prism">src/lib/memory-appender.model.ts:141</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="144"
+                            class="link-to-prism">src/lib/memory-appender.model.ts:144</a></div>
                 </td>
             </tr>
 
@@ -506,10 +496,8 @@ Only the defined properties get overwritten.</p>
                 <td class="col-md-4">
                     <a name="setMaxMessages"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            setMaxMessages
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>setMaxMessages</b></span>
                         <a href="#setMaxMessages"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -524,8 +512,8 @@ Only the defined properties get overwritten.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="121"
-                            class="link-to-prism">src/lib/memory-appender.model.ts:121</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="123"
+                            class="link-to-prism">src/lib/memory-appender.model.ts:123</a></div>
                 </td>
             </tr>
 
@@ -538,6 +526,7 @@ Only the defined properties get overwritten.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -586,10 +575,8 @@ Only the defined properties get overwritten.</p>
                 <td class="col-md-4">
                     <a name="setOnLogMessagesChangedCallback"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            setOnLogMessagesChangedCallback
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>setOnLogMessagesChangedCallback</b></span>
                         <a href="#setOnLogMessagesChangedCallback"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -604,8 +591,8 @@ Only the defined properties get overwritten.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="150"
-                            class="link-to-prism">src/lib/memory-appender.model.ts:150</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="154"
+                            class="link-to-prism">src/lib/memory-appender.model.ts:154</a></div>
                 </td>
             </tr>
 
@@ -618,6 +605,7 @@ This could be useful if you want to show new messages in realtime.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -666,10 +654,8 @@ This could be useful if you want to show new messages in realtime.</p>
                 <td class="col-md-4">
                     <a name="toString"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            toString
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>toString</b></span>
                         <a href="#toString"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -684,8 +670,8 @@ This could be useful if you want to show new messages in realtime.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="104"
-                            class="link-to-prism">src/lib/memory-appender.model.ts:104</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="105"
+                            class="link-to-prism">src/lib/memory-appender.model.ts:105</a></div>
                 </td>
             </tr>
 
@@ -750,13 +736,12 @@ export class MemoryAppender extends log4javascript.Appender {
 
 	private maxMessages: number;
 
-	// tslint:disable-next-line:completed-docs
 	private logMessages: LogMessage[];
-	// tslint:disable-next-line:completed-docs
 	private onLogMessagesChangedCallback: (message: LogMessage) &#x3D;&gt; void;
 
 	/**
 	 * Creates a new instance of the appender.
+	 *
 	 * @param configuration configuration for the appender.
 	 */
 	constructor(configuration?: MemoryAppenderConfiguration) {
@@ -795,6 +780,7 @@ export class MemoryAppender extends log4javascript.Appender {
 
 	/**
 	 * Appender-specific method to append a log message.
+	 *
 	 * @param loggingEvent event to be appended.
 	 */
 	public append(loggingEvent: log4javascript.LoggingEvent): void {
@@ -821,6 +807,7 @@ export class MemoryAppender extends log4javascript.Appender {
 	/**
 	 * Gets the appender&#x27;s name.
 	 * Mainly for unit testing purposes.
+	 *
 	 * @return appender&#x27;s name
 	 */
 	public toString(): string {
@@ -838,6 +825,7 @@ export class MemoryAppender extends log4javascript.Appender {
 	 * Set the maximum number of messages which will be stored in memory.
 	 *
 	 * If the appender stores currently more messages than the new value allows, the oldest messages get removed.
+	 *
 	 * @param value new maximum number
 	 */
 	public setMaxMessages(value: number): void {
@@ -851,6 +839,7 @@ export class MemoryAppender extends log4javascript.Appender {
 
 	/**
 	 * Gets all messages stored in memory.
+	 *
 	 * @return stored messages
 	 */
 	public getLogMessages(): LogMessage[] {
@@ -867,6 +856,7 @@ export class MemoryAppender extends log4javascript.Appender {
 	/**
 	 * Registers a callback which will be called every time a new message is appended.
 	 * This could be useful if you want to show new messages in realtime.
+	 *
 	 * @param callback callback to be called
 	 */
 	public setOnLogMessagesChangedCallback(callback: (message: LogMessage) &#x3D;&gt; void): void {
@@ -879,14 +869,15 @@ export class MemoryAppender extends log4javascript.Appender {
 
 
 
-                   
+
+
 
 
 
 
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -898,6 +889,15 @@ export class MemoryAppender extends log4javascript.Appender {
            </div>
        </div>
 
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
@@ -907,9 +907,9 @@ export class MemoryAppender extends log4javascript.Appender {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
-       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+
        <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

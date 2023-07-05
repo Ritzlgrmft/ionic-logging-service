@@ -8,7 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
 
@@ -40,9 +41,10 @@
 
 
 
+
 <ol class="breadcrumb">
   <li>Classes</li>
-  <li>AjaxAppender</li>
+  <li >AjaxAppender</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -63,23 +65,19 @@
             <code>src/lib/ajax-appender.model.ts</code>
         </p>
 
+
             <p class="comment">
                 <h3>Description</h3>
             </p>
             <p class="comment">
                 <p>An appender which sends the log messages to a server via HTTP.</p>
 <p>A typical configuration could be:</p>
-<p>```json</p>
-<ul>
-<li>{</li>
-<li>&quot;url&quot;: &quot;<a href="https://my.backend.xy/LoggingBackend&quot;">https://my.backend.xy/LoggingBackend&quot;</a>,</li>
-<li>&quot;batchSize&quot;: 10,</li>
-<li>&quot;timerInterval&quot;: 60000,</li>
-<li>&quot;threshold&quot;: &quot;INFO&quot;</li>
-<li>}</li>
-<li>```</li>
-</ul>
-
+<div><pre class="line-numbers"><code class="language-json">{
+  &quot;url&quot;: &quot;https://my.backend.xy/LoggingBackend&quot;,
+  &quot;batchSize&quot;: 10,
+  &quot;timerInterval&quot;: 60000,
+  &quot;threshold&quot;: &quot;INFO&quot;
+}</code></pre></div>
             </p>
 
 
@@ -99,7 +97,7 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#appenderFailed">appenderFailed</a>
+                                <a href="#appenderFailed" >appenderFailed</a>
                             </li>
                         </ul>
                     </td>
@@ -115,43 +113,43 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#append">append</a>
+                                <a href="#append" >append</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#configure">configure</a>
+                                <a href="#configure" >configure</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#getBatchSize">getBatchSize</a>
+                                <a href="#getBatchSize" >getBatchSize</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#getInternalAppender">getInternalAppender</a>
+                                <a href="#getInternalAppender" >getInternalAppender</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#getLayout">getLayout</a>
+                                <a href="#getLayout" >getLayout</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#getTimerInterval">getTimerInterval</a>
+                                <a href="#getTimerInterval" >getTimerInterval</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#setBatchSize">setBatchSize</a>
+                                <a href="#setBatchSize" >setBatchSize</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#setLayout">setLayout</a>
+                                <a href="#setLayout" >setLayout</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#setTimerInterval">setTimerInterval</a>
+                                <a href="#setTimerInterval" >setTimerInterval</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#toString">toString</a>
+                                <a href="#toString" >toString</a>
                             </li>
                         </ul>
                     </td>
@@ -171,12 +169,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(configuration: <a href="../interfaces/AjaxAppenderConfiguration.html">AjaxAppenderConfiguration</a>)</code>
+<code>constructor(configuration: <a href="../interfaces/AjaxAppenderConfiguration.html" target="_self">AjaxAppenderConfiguration</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/lib/ajax-appender.model.ts:37</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/lib/ajax-appender.model.ts:38</a></div>
                             </td>
                         </tr>
 
@@ -208,8 +206,8 @@
                                                     </td>
                                                     
                                                         <td>
-                                                                <code><p>configuration for the appender.</p>
-</code>
+                                                                <p>configuration for the appender.</p>
+
                                                         </td>
                                                 </tr>
                                         </tbody>
@@ -223,67 +221,66 @@
 
             <section>
     
-        <h3 id="inputs">
-            Properties
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="appenderFailed"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>appenderFailed</b></span>
+                        <a href="#appenderFailed"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
                 <tr>
                     <td class="col-md-4">
-                        <a name="appenderFailed"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                            appenderFailed</b>
-                            <a href="#appenderFailed"><span class="icon ion-ios-link"></span></a>
-                        </span>
+                        <i>Type : </i>    <code>EventEmitter&lt;string&gt;</code>
+
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>    <code>EventEmitter&lt;string&gt;</code>
-
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/lib/ajax-appender.model.ts:34</a></div>
                         </td>
                     </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/lib/ajax-appender.model.ts:33</a></div>
-                            </td>
-                        </tr>
 
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Event triggered when the appender could not send log messages to the server.</p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Event triggered when the appender could not send log messages to the server.</p>
 </div>
+                </td>
+            </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description">
+                                <b>Parameters :</b>
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                            <tr>
+                                                    <td>message</td>
+                                                    <td>
+                                                            <code><p>error message</p>
+</code>
+                                                    </td>
+                                            </tr>
+                                    </tbody>
+                                </table>
+                        </div>
                     </td>
                 </tr>
-
-                    <tr>
-                        <td class="col-md-4">
-                          <div class="io-description">
-                                  <b>Parameters :</b>
-                                  <table class="params">
-                                      <thead>
-                                          <tr>
-                                                <td>Name</td>
-                                                    <td>Description</td>
-                                          </tr>
-                                      </thead>
-                                      <tbody>
-                                                <tr>
-                                                        <td>message</td>
-                                                        <td>
-                                                                <code><p>error message</p>
-</code>
-                                                        </td>
-                                                </tr>
-                                      </tbody>
-                                  </table>
-                          </div>
-                        </td>
-                    </tr>
-            </tbody>
-        </table>
+        </tbody>
+    </table>
 </section>
 
             <section>
@@ -297,10 +294,8 @@
                 <td class="col-md-4">
                     <a name="append"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            append
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>append</b></span>
                         <a href="#append"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -315,8 +310,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="110"
-                            class="link-to-prism">src/lib/ajax-appender.model.ts:110</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="113"
+                            class="link-to-prism">src/lib/ajax-appender.model.ts:113</a></div>
                 </td>
             </tr>
 
@@ -328,6 +323,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -376,10 +372,8 @@
                 <td class="col-md-4">
                     <a name="configure"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            configure
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>configure</b></span>
                         <a href="#configure"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -387,15 +381,15 @@
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>configure(configuration: <a href="../interfaces/AjaxAppenderConfiguration.html">AjaxAppenderConfiguration</a>)</code>
+                    <code>configure(configuration: <a href="../interfaces/AjaxAppenderConfiguration.html" target="_self">AjaxAppenderConfiguration</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="84"
-                            class="link-to-prism">src/lib/ajax-appender.model.ts:84</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="86"
+                            class="link-to-prism">src/lib/ajax-appender.model.ts:86</a></div>
                 </td>
             </tr>
 
@@ -409,6 +403,7 @@ Neither url nor withCredentials can be modified.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -457,10 +452,8 @@ Neither url nor withCredentials can be modified.</p>
                 <td class="col-md-4">
                     <a name="getBatchSize"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            getBatchSize
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>getBatchSize</b></span>
                         <a href="#getBatchSize"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -475,8 +468,8 @@ Neither url nor withCredentials can be modified.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="134"
-                            class="link-to-prism">src/lib/ajax-appender.model.ts:134</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="138"
+                            class="link-to-prism">src/lib/ajax-appender.model.ts:138</a></div>
                 </td>
             </tr>
 
@@ -500,10 +493,8 @@ Neither url nor withCredentials can be modified.</p>
                 <td class="col-md-4">
                     <a name="getInternalAppender"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            getInternalAppender
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>getInternalAppender</b></span>
                         <a href="#getInternalAppender"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -518,8 +509,8 @@ Neither url nor withCredentials can be modified.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="127"
-                            class="link-to-prism">src/lib/ajax-appender.model.ts:127</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="131"
+                            class="link-to-prism">src/lib/ajax-appender.model.ts:131</a></div>
                 </td>
             </tr>
 
@@ -544,10 +535,8 @@ Mainly for unit testing purposes.</p>
                 <td class="col-md-4">
                     <a name="getLayout"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            getLayout
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>getLayout</b></span>
                         <a href="#getLayout"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -562,8 +551,8 @@ Mainly for unit testing purposes.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="149"
-                            class="link-to-prism">src/lib/ajax-appender.model.ts:149</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="154"
+                            class="link-to-prism">src/lib/ajax-appender.model.ts:154</a></div>
                 </td>
             </tr>
 
@@ -587,10 +576,8 @@ Mainly for unit testing purposes.</p>
                 <td class="col-md-4">
                     <a name="getTimerInterval"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            getTimerInterval
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>getTimerInterval</b></span>
                         <a href="#getTimerInterval"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -605,8 +592,8 @@ Mainly for unit testing purposes.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="163"
-                            class="link-to-prism">src/lib/ajax-appender.model.ts:163</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="168"
+                            class="link-to-prism">src/lib/ajax-appender.model.ts:168</a></div>
                 </td>
             </tr>
 
@@ -630,10 +617,8 @@ Mainly for unit testing purposes.</p>
                 <td class="col-md-4">
                     <a name="setBatchSize"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            setBatchSize
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>setBatchSize</b></span>
                         <a href="#setBatchSize"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -648,8 +633,8 @@ Mainly for unit testing purposes.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="142"
-                            class="link-to-prism">src/lib/ajax-appender.model.ts:142</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="147"
+                            class="link-to-prism">src/lib/ajax-appender.model.ts:147</a></div>
                 </td>
             </tr>
 
@@ -661,6 +646,7 @@ Mainly for unit testing purposes.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -709,10 +695,8 @@ Mainly for unit testing purposes.</p>
                 <td class="col-md-4">
                     <a name="setLayout"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            setLayout
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>setLayout</b></span>
                         <a href="#setLayout"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -727,8 +711,8 @@ Mainly for unit testing purposes.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="156"
-                            class="link-to-prism">src/lib/ajax-appender.model.ts:156</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="161"
+                            class="link-to-prism">src/lib/ajax-appender.model.ts:161</a></div>
                 </td>
             </tr>
 
@@ -740,6 +724,7 @@ Mainly for unit testing purposes.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -783,10 +768,8 @@ Mainly for unit testing purposes.</p>
                 <td class="col-md-4">
                     <a name="setTimerInterval"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            setTimerInterval
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>setTimerInterval</b></span>
                         <a href="#setTimerInterval"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -801,8 +784,8 @@ Mainly for unit testing purposes.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="171"
-                            class="link-to-prism">src/lib/ajax-appender.model.ts:171</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="177"
+                            class="link-to-prism">src/lib/ajax-appender.model.ts:177</a></div>
                 </td>
             </tr>
 
@@ -814,6 +797,7 @@ Mainly for unit testing purposes.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -862,10 +846,8 @@ Mainly for unit testing purposes.</p>
                 <td class="col-md-4">
                     <a name="toString"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            toString
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>toString</b></span>
                         <a href="#toString"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -880,8 +862,8 @@ Mainly for unit testing purposes.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="119"
-                            class="link-to-prism">src/lib/ajax-appender.model.ts:119</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="123"
+                            class="link-to-prism">src/lib/ajax-appender.model.ts:123</a></div>
                 </td>
             </tr>
 
@@ -946,6 +928,7 @@ export class AjaxAppender extends log4javascript.Appender {
 
 	/**
 	 * Event triggered when the appender could not send log messages to the server.
+	 *
 	 * @param message error message
 	 */
 	public appenderFailed: EventEmitter&lt;string&gt;;
@@ -956,6 +939,7 @@ export class AjaxAppender extends log4javascript.Appender {
 
 	/**
 	 * Creates a new instance of the appender.
+	 *
 	 * @param configuration configuration for the appender.
 	 */
 	constructor(configuration: AjaxAppenderConfiguration) {
@@ -1023,6 +1007,7 @@ export class AjaxAppender extends log4javascript.Appender {
 
 	/**
 	 * Appender-specific method to append a log message.
+	 *
 	 * @param loggingEvent event to be appended.
 	 */
 	public append(loggingEvent: log4javascript.LoggingEvent): void {
@@ -1032,6 +1017,7 @@ export class AjaxAppender extends log4javascript.Appender {
 	/**
 	 * Gets the appender&#x27;s name.
 	 * Mainly for unit testing purposes.
+	 *
 	 * @return appender&#x27;s name
 	 */
 	public toString(): string {
@@ -1055,6 +1041,7 @@ export class AjaxAppender extends log4javascript.Appender {
 
 	/**
 	 * Sets the number of log messages to send in each request.
+	 *
 	 * @param batchSize new batch size
 	 */
 	public setBatchSize(batchSize: number): void {
@@ -1084,6 +1071,7 @@ export class AjaxAppender extends log4javascript.Appender {
 
 	/**
 	 * Sets the length of time in milliseconds between each sending of queued log messages.
+	 *
 	 * @param timerInterval new timer interval
 	 */
 	public setTimerInterval(timerInterval: number): void {
@@ -1097,14 +1085,15 @@ export class AjaxAppender extends log4javascript.Appender {
 
 
 
-                   
+
+
 
 
 
 
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -1116,6 +1105,15 @@ export class AjaxAppender extends log4javascript.Appender {
            </div>
        </div>
 
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
@@ -1125,9 +1123,9 @@ export class AjaxAppender extends log4javascript.Appender {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
-       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+
        <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

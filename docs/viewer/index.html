@@ -8,11 +8,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
-	      <link rel="stylesheet" href="./styles/style.css">
+	   <link rel="stylesheet" href="./styles/style.css">
+        <link rel="stylesheet" href="./styles/dark.css">
     </head>
     <body>
 
-        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
             <a href="./" class="navbar-brand">ionic-logging-viewer</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
@@ -30,8 +31,8 @@
                <div class="content getting-started">
                    <div class="content-data">
 
-<h1 id="ionic-logging-viewer">ionic-logging-viewer</h1>
-<p><strong>The dependencies used by the latest version are the same as needed for <a href="https://github.com/ionic-team/ionic/blob/master/CHANGELOG.md">Ionic 5.0.0</a>. For older versions use:</strong></p>
+<h1>ionic-logging-viewer</h1>
+<p><strong>The dependencies used by the latest version are the same as needed for <a href="https://github.com/ionic-team/ionic/blob/master/CHANGELOG.md">Ionic 6.1.9</a>. For older versions use:</strong></p>
 <table class="table table-bordered compodoc-table">
 <thead>
 <tr>
@@ -41,6 +42,41 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>17.0.0</td>
+<td>&gt;= 6.1.9</td>
+<td>^16.0.0</td>
+</tr>
+<tr>
+<td>16.0.0</td>
+<td>&gt;= 6.1.9</td>
+<td>^15.0.0</td>
+</tr>
+<tr>
+<td>15.0.0</td>
+<td>&gt;= 6.1.9</td>
+<td>^14.0.0</td>
+</tr>
+<tr>
+<td>14.0.0</td>
+<td>&gt;= 6.0.0</td>
+<td>^13.0.0</td>
+</tr>
+<tr>
+<td>13.0.0</td>
+<td>&gt;= 5.0.0</td>
+<td>^12.0.0</td>
+</tr>
+<tr>
+<td>12.0.0</td>
+<td>&gt;= 5.0.0</td>
+<td>^11.0.0</td>
+</tr>
+<tr>
+<td>11.0.0</td>
+<td>&gt;= 5.0.0</td>
+<td>^10.0.0</td>
+</tr>
 <tr>
 <td>9.0.0</td>
 <td>&gt;= 5.0.0</td>
@@ -68,10 +104,8 @@ for displaying the current logs, written by <a href="https://github.com/Ritzlgrm
 The viewer is meant for development and testing purposes, not for production.</p>
 <p>It provides two components:</p>
 <ul>
-<li><code>LoggingViewerComponent</code>:  
-can be embedded in any web page using the directive</li>
-<li><code>LoggingViewerModalComponent</code>:  
-a complete implemented modal containing the <code>LoggingViewerComponent</code></li>
+<li><code>LoggingViewerComponent</code>:<br>can be embedded in any web page using the directive</li>
+<li><code>LoggingViewerModalComponent</code>:<br>a complete implemented modal containing the <code>LoggingViewerComponent</code></li>
 </ul>
 <p>Additionally, there are two components for filtering the data:</p>
 <ul>
@@ -81,11 +115,11 @@ allows filtering by log level</li>
 allows filtering by an arbitrary expression</li>
 </ul>
 <p>A sample app using these components is <a href="https://github.com/Ritzlgrmft/ionic-logging-viewer">ionic-logging-viewer-app</a>.</p>
-<h2 id="screenshots">Screenshots</h2>
+<h2>Screenshots</h2>
 <p><img src="https://raw.githubusercontent.com/Ritzlgrmft/ionic-logging-service/master/images/logging-modal.png" alt="Logging Modal" class="img-responsive"></p>
-<h2 id="usage">Usage</h2>
-<h3 id="npm-package">npm package</h3>
-<div><pre class="line-numbers"><code class="language-bash">npm install ionic-logging-viewer --save</code></pre></div><h3 id="import-module">import module</h3>
+<h2>Usage</h2>
+<h3>npm package</h3>
+<div><pre class="line-numbers"><code class="language-bash">npm install ionic-logging-viewer --save</code></pre></div><h3>import module</h3>
 <p>Import the <code>LoggingViewerModule</code> in to your <code>app.module.ts</code>:</p>
 <div><pre class="line-numbers"><code class="language-typescript">import { LoggingViewerModule } from &quot;ionic-logging-viewer&quot;;
 ...
@@ -95,9 +129,9 @@ allows filtering by an arbitrary expression</li>
     LoggingViewerModule
   ],
   ...
-})</code></pre></div><h3 id="loggingviewercomponent-directive">LoggingViewerComponent directive</h3>
+})</code></pre></div><h3>LoggingViewerComponent directive</h3>
 <p>If you want to use the directive in one of your pages, just add</p>
-<div><pre class="line-numbers"><code class="language-html">&lt;ionic-logging-viewer&gt;&lt;/ionic-logging-viewer&gt;</code></pre></div><h3 id="loggingviewerlevelscomponent-and-loggingviewersearchcomponent-directives">LoggingViewerLevelsComponent and LoggingViewerSearchComponent directives</h3>
+<div><pre class="line-numbers"><code class="language-html">&lt;ionic-logging-viewer&gt;&lt;/ionic-logging-viewer&gt;</code></pre></div><h3>LoggingViewerLevelsComponent and LoggingViewerSearchComponent directives</h3>
 <p>For filtering the log messages, you can add also these directives to your page.
 It is recommended to include them in <code>ion-toolbar</code>, but it is not necessary:</p>
 <div><pre class="line-numbers"><code class="language-html">&lt;ion-toolbar&gt;
@@ -105,7 +139,7 @@ It is recommended to include them in <code>ion-toolbar</code>, but it is not nec
 &lt;/ion-toolbar&gt;
 &lt;ion-toolbar&gt;
   &lt;ionic-logging-viewer-levels&gt;&lt;/ionic-logging-viewer-levels&gt;
-&lt;/ion-toolbar&gt;</code></pre></div><h3 id="loggingviewermodalcomponent-modal">LoggingViewerModalComponent modal</h3>
+&lt;/ion-toolbar&gt;</code></pre></div><h3>LoggingViewerModalComponent modal</h3>
 <div><pre class="line-numbers"><code class="language-typescript">public async openModal(): Promise&lt;void&gt; {
   let componentProps: LoggingViewerModalProperties = { language: this.selectedLanguage };
   const modal = await this.modalController.create({
@@ -113,7 +147,7 @@ It is recommended to include them in <code>ion-toolbar</code>, but it is not nec
     componentProps: componentProps
   });
   await modal.present();
-}</code></pre></div><h3 id="multi-language-support">multi language support</h3>
+}</code></pre></div><h3>multi language support</h3>
 <p>The <code>LoggingViewerComponent</code> does not need multi language support, since it just
 displays the logged data. The same applies to <code>LoggingViewerLevelsComponent</code>
 and <code>LoggingViewerSearchComponent</code>.</p>
@@ -124,7 +158,7 @@ use to select the language. Currently <code>en</code> and <code>de</code> are su
 <p>If you need another language, either open an issue, or just use the <code>translation</code> parameter.
 This parameter you can use to pass your completely own texts.
 Just fill the <code>LoggingViewerTranslation</code> object.</p>
-<h2 id="api">API</h2>
+<h2>API</h2>
 <p>see <a href="https://ritzlgrmft.github.io/ionic-logging-service//viewer/index.html">API documentation</a>.</p>
 
 
@@ -140,14 +174,16 @@ Just fill the <code>LoggingViewerTranslation</code> object.</p>
 
 
 
-                   
+
+
+
 
 
 
 
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -159,6 +195,15 @@ Just fill the <code>LoggingViewerTranslation</code> object.</p>
            </div>
        </div>
 
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 0;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'getting-started';
@@ -168,9 +213,9 @@ Just fill the <code>LoggingViewerTranslation</code> object.</p>
 
        <script src="./js/libs/custom-elements.min.js"></script>
        <script src="./js/libs/lit-html.js"></script>
-       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
-       <script src="./js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+
        <script src="./js/menu-wc.js" defer></script>
+       <script nomodule src="./js/menu-wc_es5.js" defer></script>
 
        <script src="./js/libs/bootstrap-native.js"></script>
 

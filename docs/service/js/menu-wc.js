@@ -1,6 +1,5 @@
 'use strict';
 
-
 customElements.define('compodoc-menu', class extends HTMLElement {
     constructor() {
         super();
@@ -39,6 +38,11 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                         <span class="icon ion-ios-list"></span>Dependencies
                                     </a>
                                 </li>
+                                <li class="link">
+                                    <a href="properties.html" data-type="chapter-link">
+                                        <span class="icon ion-ios-apps"></span>Properties
+                                    </a>
+                                </li>
                     </ul>
                 </li>
                     <li class="chapter modules">
@@ -52,7 +56,7 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                         </a>
                         <ul class="links collapse " ${ isNormalMode ? 'id="modules-links"' : 'id="xs-modules-links"' }>
                             <li class="link">
-                                <a href="modules/LoggingServiceModule.html" data-type="entity-link">LoggingServiceModule</a>
+                                <a href="modules/LoggingServiceModule.html" data-type="entity-link" >LoggingServiceModule</a>
                             </li>
                 </ul>
                 </li>
@@ -65,22 +69,22 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                         </div>
                         <ul class="links collapse " ${ isNormalMode ? 'id="classes-links"' : 'id="xs-classes-links"' }>
                             <li class="link">
-                                <a href="classes/AjaxAppender.html" data-type="entity-link">AjaxAppender</a>
+                                <a href="classes/AjaxAppender.html" data-type="entity-link" >AjaxAppender</a>
                             </li>
                             <li class="link">
-                                <a href="classes/JsonLayout.html" data-type="entity-link">JsonLayout</a>
+                                <a href="classes/JsonLayout.html" data-type="entity-link" >JsonLayout</a>
                             </li>
                             <li class="link">
-                                <a href="classes/LocalStorageAppender.html" data-type="entity-link">LocalStorageAppender</a>
+                                <a href="classes/LocalStorageAppender.html" data-type="entity-link" >LocalStorageAppender</a>
                             </li>
                             <li class="link">
-                                <a href="classes/Logger.html" data-type="entity-link">Logger</a>
+                                <a href="classes/Logger.html" data-type="entity-link" >Logger</a>
                             </li>
                             <li class="link">
-                                <a href="classes/LogLevelConverter.html" data-type="entity-link">LogLevelConverter</a>
+                                <a href="classes/LogLevelConverter.html" data-type="entity-link" >LogLevelConverter</a>
                             </li>
                             <li class="link">
-                                <a href="classes/MemoryAppender.html" data-type="entity-link">MemoryAppender</a>
+                                <a href="classes/MemoryAppender.html" data-type="entity-link" >MemoryAppender</a>
                             </li>
                         </ul>
                     </li>
@@ -93,7 +97,7 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </div>
                             <ul class="links collapse " ${ isNormalMode ? 'id="injectables-links"' : 'id="xs-injectables-links"' }>
                                 <li class="link">
-                                    <a href="injectables/LoggingService.html" data-type="entity-link">LoggingService</a>
+                                    <a href="injectables/LoggingService.html" data-type="entity-link" >LoggingService</a>
                                 </li>
                             </ul>
                         </li>
@@ -106,22 +110,22 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                         </div>
                         <ul class="links collapse " ${ isNormalMode ? ' id="interfaces-links"' : 'id="xs-interfaces-links"' }>
                             <li class="link">
-                                <a href="interfaces/AjaxAppenderConfiguration.html" data-type="entity-link">AjaxAppenderConfiguration</a>
+                                <a href="interfaces/AjaxAppenderConfiguration.html" data-type="entity-link" >AjaxAppenderConfiguration</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/BrowserConsoleAppenderConfiguration.html" data-type="entity-link">BrowserConsoleAppenderConfiguration</a>
+                                <a href="interfaces/BrowserConsoleAppenderConfiguration.html" data-type="entity-link" >BrowserConsoleAppenderConfiguration</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/LocalStorageAppenderConfiguration.html" data-type="entity-link">LocalStorageAppenderConfiguration</a>
+                                <a href="interfaces/LocalStorageAppenderConfiguration.html" data-type="entity-link" >LocalStorageAppenderConfiguration</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/LoggingServiceConfiguration.html" data-type="entity-link">LoggingServiceConfiguration</a>
+                                <a href="interfaces/LoggingServiceConfiguration.html" data-type="entity-link" >LoggingServiceConfiguration</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/LogMessage.html" data-type="entity-link">LogMessage</a>
+                                <a href="interfaces/LogMessage.html" data-type="entity-link" >LogMessage</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/MemoryAppenderConfiguration.html" data-type="entity-link">MemoryAppenderConfiguration</a>
+                                <a href="interfaces/MemoryAppenderConfiguration.html" data-type="entity-link" >MemoryAppenderConfiguration</a>
                             </li>
                         </ul>
                     </li>

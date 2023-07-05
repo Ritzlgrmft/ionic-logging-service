@@ -8,7 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
-	      <link rel="stylesheet" href="./styles/style.css">
+	   <link rel="stylesheet" href="./styles/style.css">
+        <link rel="stylesheet" href="./styles/dark.css">
     </head>
     <body>
 
@@ -31,7 +32,7 @@
                    <div class="content-data">
 
 <h1 id="ionic-logging-service">ionic-logging-service</h1>
-<p><strong>The dependencies used by the latest version are the same as needed for <a href="https://github.com/ionic-team/ionic/blob/master/CHANGELOG.md">Ionic 5.0.0</a>. For older versions use:</strong></p>
+<p><strong>The dependencies used by the latest version are the same as needed for <a href="https://github.com/ionic-team/ionic/blob/master/CHANGELOG.md">Ionic 6.1.9</a>. For older versions use:</strong></p>
 <table class="table table-bordered compodoc-table">
 <thead>
 <tr>
@@ -41,6 +42,41 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>17.0.0</td>
+<td>&gt;= 6.1.9</td>
+<td>^16.0.0</td>
+</tr>
+<tr>
+<td>16.0.0</td>
+<td>&gt;= 6.1.9</td>
+<td>^15.0.0</td>
+</tr>
+<tr>
+<td>15.0.0</td>
+<td>&gt;= 6.1.9</td>
+<td>^14.0.0</td>
+</tr>
+<tr>
+<td>14.0.0</td>
+<td>&gt;= 6.0.0</td>
+<td>^13.0.0</td>
+</tr>
+<tr>
+<td>13.0.0</td>
+<td>&gt;= 5.0.0</td>
+<td>^12.0.0</td>
+</tr>
+<tr>
+<td>12.0.0</td>
+<td>&gt;= 5.0.0</td>
+<td>^11.0.0</td>
+</tr>
+<tr>
+<td>11.0.0</td>
+<td>&gt;= 5.0.0</td>
+<td>^10.0.0</td>
+</tr>
 <tr>
 <td>9.0.0</td>
 <td>&gt;= 5.0.0</td>
@@ -153,7 +189,7 @@ I  18:49:43.801  MyApp.MyComponent  myMethod  exit  [2, 5, 99]</code></pre></div
 </ul>
 </li>
 </ul>
-<p>To change it, just call <code>configure()</code>. This method takes an object of type <code>LoggingConfiguration</code>.</p>
+<p>To change it, just call <code>configure()</code>. This method takes an object of type <code>LoggingServiceConfiguration</code>.</p>
 <p>The recommended way is to place the configuration in <code>environment.ts</code>:</p>
 <div><pre class="line-numbers"><code class="language-TypeScript">export const environment = {
   logging: {
@@ -217,14 +253,16 @@ export class AppModule { }</code></pre></div><h3 id="loglevels">logLevels</h3>
 
 
 
-                   
+
+
+
 
 
 
 
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -236,6 +274,15 @@ export class AppModule { }</code></pre></div><h3 id="loglevels">logLevels</h3>
            </div>
        </div>
 
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 0;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'getting-started';
@@ -245,9 +292,9 @@ export class AppModule { }</code></pre></div><h3 id="loglevels">logLevels</h3>
 
        <script src="./js/libs/custom-elements.min.js"></script>
        <script src="./js/libs/lit-html.js"></script>
-       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
-       <script src="./js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+
        <script src="./js/menu-wc.js" defer></script>
+       <script nomodule src="./js/menu-wc_es5.js" defer></script>
 
        <script src="./js/libs/bootstrap-native.js"></script>
 

@@ -233,7 +233,7 @@ describe("LogLevelConverter", () => {
 			const value = 42;
 
 			try {
-				LogLevelConverter.levelToLog4Javascript(value);
+				LogLevelConverter.levelToLog4Javascript(value as LogLevel);
 				fail("no error thrown");
 			} catch (e) {
 				expect(e).toEqual(jasmine.any(Error));
