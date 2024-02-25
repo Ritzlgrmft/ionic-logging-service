@@ -19,10 +19,10 @@
 		"tslib": "^2.3.1"
 	},
 	"peerDependencies": {
-		"@angular/common": "^16.0.0",
-		"@angular/core": "^16.0.0",
-		"@ionic/angular": "^6.1.9",
-		"ionic-logging-service": "^17.0.0",
-		"ionicons": "^6.0.0"
+		"@angular/common": ">=17.0.0",
+		"@angular/core": ">=17.0.0",
+		"@ionic/angular": ">=7.0.0",
+		"ionic-logging-service": "^18.0.0",
+		"ionicons": ">=7.0.0"
 	}
 }

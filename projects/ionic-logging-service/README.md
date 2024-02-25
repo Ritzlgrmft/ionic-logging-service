@@ -1,9 +1,10 @@
 # ionic-logging-service
 
-**The dependencies used by the latest version are the same as needed for [Ionic 6.1.9](https://github.com/ionic-team/ionic/blob/master/CHANGELOG.md). For older versions use:**
+**The dependencies used by the latest version are the same as needed for [Ionic 7.0.0](https://github.com/ionic-team/ionic/blob/master/CHANGELOG.md). For older versions use:**
 
 | ionic-logging-service | Ionic | Angular
 | ------ | -------- | ------
+| 18.0.0 | >= 7.0.0 | >=17.0.0
 | 17.0.0 | >= 6.1.9 | ^16.0.0
 | 16.0.0 | >= 6.1.9 | ^15.0.0
 | 15.0.0 | >= 6.1.9 | ^14.0.0

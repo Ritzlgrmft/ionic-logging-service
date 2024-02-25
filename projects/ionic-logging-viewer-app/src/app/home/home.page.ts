@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import { ToastController, ModalController } from "@ionic/angular";
 
 import { AjaxAppender, LocalStorageAppender, Logger, LoggingService, LogLevel } from "ionic-logging-service";
@@ -52,7 +52,12 @@ export class HomePage {
 
 		this.testLoggerName = "TestLogger";
 		this.testMethod = "TestMethod";
-		this.testLogLevel = "INFO";
+		window.setTimeout(() => {
+			// for some reasons, the floating label is not shown corretly, 
+			// if we just initialize the the values for the selects
+			// therefore we have to do it delayed
+			this.testLogLevel = "INFO";
+		}, 1000);
 		this.logLevels = Object.keys(LogLevel).filter(key => typeof LogLevel[key] === "number");
 		this.batchSizes = [1, 5, 10];
 		this.message = "message";
@@ -69,8 +74,10 @@ export class HomePage {
 		this.localStorageAppenderConfiguration.enabled = (localStorageAppender !== undefined);
 		if (localStorageAppender) {
 			this.localStorageAppenderConfiguration.localStorageKey = localStorageAppender.getLocalStorageKey();
-			this.localStorageAppenderConfiguration.threshold = localStorageAppender.getThreshold().toString();
-			this.localStorageAppenderConfiguration.maxMessages = localStorageAppender.getMaxMessages();
+			window.setTimeout(() => {
+				this.localStorageAppenderConfiguration.threshold = localStorageAppender.getThreshold().toString();
+				this.localStorageAppenderConfiguration.maxMessages = localStorageAppender.getMaxMessages();
+			}, 1000);
 		} else {
 			this.localStorageAppenderConfiguration.localStorageKey = environment.logging.localStorageAppender.localStorageKey;
 			this.localStorageAppenderConfiguration.threshold = environment.logging.localStorageAppender.threshold;
@@ -95,8 +102,10 @@ export class HomePage {
 		const methodName = "onLogLevelOrLoggerChanged";
 		this.logger.entry(methodName);
 
-		const logger = this.loggingService.getLogger(this.testLoggerName);
-		logger.setLogLevel(LogLevel[this.testLogLevel]);
+		if (this.testLogLevel) {
+			const logger = this.loggingService.getLogger(this.testLoggerName);
+			logger.setLogLevel(LogLevel[this.testLogLevel]);
+		}
 
 		this.logger.exit(methodName);
 	}
