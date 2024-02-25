@@ -1,5 +1,10 @@
 # Breaking Changes
 
+## Version 18
+
+- update to Angular 17+
+- update to Ionic 7
+
 ## Version 17
 
 - update to Angular 16
