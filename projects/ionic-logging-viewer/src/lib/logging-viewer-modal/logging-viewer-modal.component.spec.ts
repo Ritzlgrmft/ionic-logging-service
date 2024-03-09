@@ -158,12 +158,10 @@ describe("LoggingViewerModalComponent", () => {
 
 	describe("onClearLogs(): void", () => {
 
-		it("alert called", async (done: () => void) => {
+		it("alert called", async () => {
 
 			await component.onClearLogs();
 			expect(alertStub.present).toHaveBeenCalled();
-
-			done();
 		});
 	});
 

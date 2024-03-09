@@ -89,9 +89,7 @@ describe("Logger", () => {
 			argument.me = argument;
 
 			const formattedArgument = logger.formatArgument(argument);
-			if (!formattedArgument.startsWith(cyclicErrorNodeJS) && !formattedArgument.startsWith(cyclicErrorChrome)) {
-				fail(formattedArgument);
-			}
+			expect(formattedArgument.startsWith(cyclicErrorNodeJS) || formattedArgument.startsWith(cyclicErrorChrome)).toBeTrue();
 		});
 
 		it("error argument converted using toString()", () => {
