@@ -54,13 +54,13 @@ describe("LoggingService", () => {
 
 		it("throws no error if no configuration is provided", () => {
 
-			loggingService.configure(undefined);
+			expect(() => loggingService.configure(undefined)).not.toThrow();
 		});
 
 		it("throws no error if configuration is empty", () => {
 
 			const config: LoggingServiceConfiguration = {};
-			loggingService.configure(config);
+			expect(() => loggingService.configure(config)).not.toThrow();
 		});
 
 		describe("logLevels", () => {
@@ -71,7 +71,7 @@ describe("LoggingService", () => {
 					logLevels,
 				};
 
-				loggingService.configure(config);
+				expect(() => loggingService.configure(config)).not.toThrow();
 			});
 
 			it("change log level of root logger", () => {

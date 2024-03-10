@@ -17,13 +17,13 @@ describe("MemoryAppender", () => {
 		it("throws no error if no configuration is provided", () => {
 
 			const config: MemoryAppenderConfiguration = undefined;
-			appender.configure(config);
+			expect(() => appender.configure(config)).not.toThrow();
 		});
 
 		it("throws no error if configuration is empty", () => {
 
 			const config: MemoryAppenderConfiguration = {};
-			appender.configure(config);
+			expect(() => appender.configure(config)).not.toThrow();
 		});
 
 		describe("maxMessages", () => {

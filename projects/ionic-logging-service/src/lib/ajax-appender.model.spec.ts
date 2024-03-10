@@ -79,7 +79,7 @@ describe("AjaxAppender", () => {
 		it("throws no error if no configuration is provided", () => {
 
 			const config: AjaxAppenderConfiguration = undefined;
-			appender.configure(config);
+			expect(() => appender.configure(config)).not.toThrow();
 		});
 
 		describe("url", () => {
