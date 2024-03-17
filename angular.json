@@ -192,19 +192,13 @@
               "projects/ionic-logging-viewer-app//**/*.html"
             ]
           }
-        }
-      }
-    },
-    "ionic-logging-viewer-app-e2e": {
-      "root": "projects/ionic-logging-viewer-app-e2e/",
-      "projectType": "application",
-      "prefix": "",
-      "architect": {
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
+        },
+        "cypress-run": {
+          "builder": "@cypress/schematic:cypress",
           "options": {
-            "protractorConfig": "projects/ionic-logging-viewer-app-e2e/protractor.conf.js",
-            "devServerTarget": "ionic-logging-viewer-app:serve"
+            "devServerTarget": "ionic-logging-viewer-app:serve",
+            "configFile": "cypress.config.ts",
+            "project": "projects/ionic-logging-viewer-app"
           },
           "configurations": {
             "production": {
@@ -212,16 +206,37 @@
             }
           }
         },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
+        "cypress-open": {
+          "builder": "@cypress/schematic:cypress",
           "options": {
-            "lintFilePatterns": [
-              "projects/ionic-logging-viewer-app-e2e//**/*.ts",
-              "projects/ionic-logging-viewer-app-e2e//**/*.html"
-            ]
+            "watch": true,
+            "headless": false,
+            "devServerTarget": "ionic-logging-viewer-app:serve",
+            "configFile": "cypress.config.ts",
+            "project": "projects/ionic-logging-viewer-app"
+          }
+        },
+        "ct": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "ionic-logging-viewer-app:serve",
+            "watch": true,
+            "headless": false,
+            "testingType": "component"
+          },
+          "configurations": {
+            "development": {
+              "devServerTarget": "ionic-logging-viewer-app:serve:development"
+            }
           }
         }
       }
     }
+  },
+  "cli": {
+    "schematicCollections": [
+      "@cypress/schematic",
+      "@schematics/angular"
+    ]
   }
 }

@@ -52,12 +52,7 @@ export class HomePage {
 
 		this.testLoggerName = "TestLogger";
 		this.testMethod = "TestMethod";
-		window.setTimeout(() => {
-			// for some reasons, the floating label is not shown corretly, 
-			// if we just initialize the the values for the selects
-			// therefore we have to do it delayed
-			this.testLogLevel = "INFO";
-		}, 1000);
+		this.testLogLevel = "INFO";
 		this.logLevels = Object.keys(LogLevel).filter(key => typeof LogLevel[key] === "number");
 		this.batchSizes = [1, 5, 10];
 		this.message = "message";
