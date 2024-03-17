@@ -18,26 +18,24 @@
 					</ion-card-header>
 					<ion-list>
 						<ion-item>
-							<ion-label position="floating">Logger</ion-label>
-							<ion-input type="text" [(ngModel)]="testLoggerName"
-								(ionChange)="onLogLevelOrLoggerChanged()"></ion-input>
+							<ion-input type="text" label="Logger" label-placement="floating"
+								[(ngModel)]="testLoggerName" (ionChange)="onLogLevelOrLoggerChanged()"></ion-input>
 						</ion-item>
 						<ion-item>
-							<ion-label position="floating">Method</ion-label>
-							<ion-input type="text" [(ngModel)]="testMethod"></ion-input>
+							<ion-input type="text" label="Method" label-placement="floating"
+								[(ngModel)]="testMethod"></ion-input>
 						</ion-item>
 						<ion-item>
-							<ion-label position="floating">Log Level</ion-label>
-							<ion-select interface="popover" [(ngModel)]="testLogLevel"
-								(ionChange)="onLogLevelOrLoggerChanged()">
+							<ion-select interface="popover" label="Log Level" label-placement="floating"
+								[(ngModel)]="testLogLevel" (ionChange)="onLogLevelOrLoggerChanged()">
 								<ion-select-option *ngFor="let logLevel of logLevels" [value]="logLevel">
 									{{ logLevel }}
 								</ion-select-option>
 							</ion-select>
 						</ion-item>
 						<ion-item>
-							<ion-label position="floating">Message</ion-label>
-							<ion-input type="text" [(ngModel)]="message"></ion-input>
+							<ion-input type="text" label="Message" label-placement="floating"
+								[(ngModel)]="message"></ion-input>
 						</ion-item>
 						<ion-item>
 							<ion-button expand="block" fill="outline" (click)="logTrace()">TRACE</ion-button>
@@ -72,28 +70,24 @@
 					</ion-card-header>
 					<ion-list>
 						<ion-item>
-							<ion-label>Enabled</ion-label>
-							<ion-toggle [(ngModel)]="ajaxAppenderEnabled" (ionChange)="onAjaxAppenderConfigChanged()">
-							</ion-toggle>
+							<ion-toggle [(ngModel)]="ajaxAppenderEnabled"
+								(ionChange)="onAjaxAppenderConfigChanged()">Enabled</ion-toggle>
 						</ion-item>
 						<ion-item *ngIf="ajaxAppenderEnabled">
-							<ion-label position="floating">Url</ion-label>
-							<ion-input type="text" [(ngModel)]="ajaxAppenderUrl"
+							<ion-input type="text" label="Url" label-placement="floating" [(ngModel)]="ajaxAppenderUrl"
 								(ionChange)="onAjaxAppenderConfigChanged()"></ion-input>
 						</ion-item>
 						<ion-item *ngIf="ajaxAppenderEnabled">
-							<ion-label position="floating">Threshold</ion-label>
-							<ion-select interface="popover" [(ngModel)]="ajaxAppenderThreshold"
-								(ionChange)="onAjaxAppenderConfigChanged()">
+							<ion-select interface="popover" label="Threshold" label-placement="floating"
+								[(ngModel)]="ajaxAppenderThreshold" (ionChange)="onAjaxAppenderConfigChanged()">
 								<ion-select-option *ngFor="let logLevel of logLevels" [value]="logLevel">
 									{{ logLevel }}
 								</ion-select-option>
 							</ion-select>
 						</ion-item>
 						<ion-item *ngIf="ajaxAppenderEnabled">
-							<ion-label position="floating">Batch Size</ion-label>
-							<ion-select interface="popover" [(ngModel)]="ajaxAppenderBatchSize"
-								(ionChange)="onAjaxAppenderConfigChanged()">
+							<ion-select interface="popover" label="Batch Size" label-placement="floating"
+								[(ngModel)]="ajaxAppenderBatchSize" (ionChange)="onAjaxAppenderConfigChanged()">
 								<ion-select-option *ngFor="let batchSize of batchSizes" [value]="batchSize">
 									{{ batchSize }}
 								</ion-select-option>
@@ -108,19 +102,17 @@
 					</ion-card-header>
 					<ion-list>
 						<ion-item>
-							<ion-label>Enabled</ion-label>
 							<ion-toggle [(ngModel)]="localStorageAppenderConfiguration.enabled"
-								(ionChange)="onLocalStorageConfigChanged()">
-							</ion-toggle>
+								(ionChange)="onLocalStorageConfigChanged()">Enabled</ion-toggle>
 						</ion-item>
 						<ion-item *ngIf="localStorageAppenderConfiguration.enabled">
-							<ion-label position="floating">Key</ion-label>
-							<ion-input type="text" [(ngModel)]="localStorageAppenderConfiguration.localStorageKey"
+							<ion-input type="text" label="Key" label-placement="floating"
+								[(ngModel)]="localStorageAppenderConfiguration.localStorageKey"
 								(ionChange)="onLocalStorageConfigChanged()"></ion-input>
 						</ion-item>
 						<ion-item *ngIf="localStorageAppenderConfiguration.enabled">
-							<ion-label position="floating">Threshold</ion-label>
-							<ion-select interface="popover" [(ngModel)]="localStorageAppenderConfiguration.threshold"
+							<ion-select interface="popover" label="Threshold" label-placement="floating"
+								[(ngModel)]="localStorageAppenderConfiguration.threshold"
 								(ionChange)="onLocalStorageConfigChanged()">
 								<ion-select-option *ngFor="let logLevel of logLevels" [value]="logLevel">
 									{{ logLevel }}
@@ -128,8 +120,8 @@
 							</ion-select>
 						</ion-item>
 						<ion-item *ngIf="localStorageAppenderConfiguration.enabled">
-							<ion-label position="floating">Max Messages</ion-label>
-							<ion-select interface="popover" [(ngModel)]="localStorageAppenderConfiguration.maxMessages"
+							<ion-select interface="popover" label="Max Messages" label-placement="floating"
+								[(ngModel)]="localStorageAppenderConfiguration.maxMessages"
 								(ionChange)="onLocalStorageConfigChanged()">
 								<ion-select-option
 									*ngFor="let maxMessagesValue of localStorageAppenderConfiguration.maxMessagesValues"
@@ -150,12 +142,12 @@
 							<ion-button expand="block" fill="outline" (click)="openModal()">Open modal</ion-button>
 						</ion-item>
 						<ion-item>
-							<ion-label>Allow Clear Logs</ion-label>
-							<ion-toggle [(ngModel)]="allowClearLogs"></ion-toggle>
+							<ion-toggle [(ngModel)]="allowClearLogs">Allow Clear Logs</ion-toggle>
 						</ion-item>
 						<ion-item>
 							<ion-label position="floating">Local Storage Keys</ion-label>
-							<ion-input type="text" [(ngModel)]="localStorageKeys"></ion-input>
+							<ion-input type="text" label="Local Storage Keys" label-placement="floating"
+								[(ngModel)]="localStorageKeys"></ion-input>
 						</ion-item>
 						<ion-radio-group [value]="selectedLanguage" (ionChange)="changeLanguage($event.detail.value)">
 							<ion-list-header>
@@ -163,28 +155,28 @@
 							</ion-list-header>
 							<ion-item *ngFor="let language of languages">
 								<ion-label>{{language}}</ion-label>
-								<ion-radio value="{{language}}"></ion-radio>
+								<ion-radio value="{{language}}">{{language}}</ion-radio>
 							</ion-item>
 						</ion-radio-group>
 						<ion-item *ngIf="selectedLanguage === 'custom'">
-							<ion-label position="floating">title</ion-label>
-							<ion-input type="text" [(ngModel)]="translation.title"></ion-input>
+							<ion-input type="text" label="title" label-placement="floating"
+								[(ngModel)]="translation.title"></ion-input>
 						</ion-item>
 						<ion-item *ngIf="selectedLanguage === 'custom'">
-							<ion-label position="floating">cancel</ion-label>
-							<ion-input type="text" [(ngModel)]="translation.cancel"></ion-input>
+							<ion-input type="text" label="cancel" label-placement="floating"
+								[(ngModel)]="translation.cancel"></ion-input>
 						</ion-item>
 						<ion-item *ngIf="selectedLanguage === 'custom'">
-							<ion-label position="floating">ok</ion-label>
-							<ion-input type="text" [(ngModel)]="translation.ok"></ion-input>
+							<ion-input type="text" label="ok" label-placement="floating"
+								[(ngModel)]="translation.ok"></ion-input>
 						</ion-item>
 						<ion-item *ngIf="selectedLanguage === 'custom'">
-							<ion-label position="floating">searchPlaceholder</ion-label>
-							<ion-input type="text" [(ngModel)]="translation.searchPlaceholder"></ion-input>
+							<ion-input type="text" label="searchPlaceholder" label-placement="floating"
+								[(ngModel)]="translation.searchPlaceholder"></ion-input>
 						</ion-item>
 						<ion-item *ngIf="selectedLanguage === 'custom'">
-							<ion-label position="floating">confirmDelete</ion-label>
-							<ion-input type="text" [(ngModel)]="translation.confirmDelete"></ion-input>
+							<ion-input type="text" label="confirmDelete" label-placement="floating"
+								[(ngModel)]="translation.confirmDelete"></ion-input>
 						</ion-item>
 					</ion-list>
 				</ion-card>
