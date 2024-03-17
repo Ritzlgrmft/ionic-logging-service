@@ -21,7 +21,7 @@
     "build-service": "ng build ionic-logging-service --configuration production && cpx 'projects/ionic-logging-service/README.md' dist/ionic-logging-service --verbose",
     "build-viewer": "ng build ionic-logging-viewer --configuration production && cpx 'projects/ionic-logging-viewer/README.md' dist/ionic-logging-viewer --verbose",
     "build-viewer-app": "ng build ionic-logging-viewer-app --configuration production",
-    "test": "npm run test-service && npm run test-viewer && ng lint",
+    "test": "npm run test-service && npm run test-viewer && ng lint && npm run e2e",
     "test-service": "npm run test-coverage-service && npm run test-compodoc-service",
     "test-viewer": "npm run test-coverage-viewer && npm run test-compodoc-viewer",
     "test-coverage-service": "ng test ionic-logging-service --code-coverage --watch false --browsers ChromeHeadless",
@@ -91,7 +91,6 @@
     "karma-jasmine-html-reporter": "^2.1.0",
     "karma-junit-reporter": "2.0.1",
     "ng-packagr": "^17.2.1",
-    "puppeteer": "^13.7.0",
     "ts-node": "10.9.2",
     "typescript": "5.3.3"
   },
