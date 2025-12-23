@@ -3,7 +3,8 @@
   "ignorePatterns": [
     "!**/*",
     "cypress.config.ts",
-    "projects/ionic-logging-viewer-app/cypress/**/*"
+    "projects/ionic-logging-viewer-app/cypress/**/*",
+    "**/environment.prod.ts"
   ],
   "overrides": [
     {

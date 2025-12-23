@@ -145,7 +145,7 @@
 							<ion-toggle [(ngModel)]="allowClearLogs">Allow Clear Logs</ion-toggle>
 						</ion-item>
 						<ion-item>
-							<!-- <ion-label position="floating">Local Storage Keys</ion-label> -->
+							<ion-label position="floating">Local Storage Keys</ion-label>
 							<ion-input type="text" label="Local Storage Keys" label-placement="floating"
 								[(ngModel)]="localStorageKeys"></ion-input>
 						</ion-item>
@@ -154,7 +154,7 @@
 								<ion-label>Language</ion-label>
 							</ion-list-header>
 							<ion-item *ngFor="let language of languages">
-								<!-- <ion-label>{{language}}</ion-label> -->
+								<ion-label>{{language}}</ion-label>
 								<ion-radio value="{{language}}">{{language}}</ion-radio>
 							</ion-item>
 						</ion-radio-group>

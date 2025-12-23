@@ -1,5 +1,5 @@
 ﻿/* eslint-disable no-magic-numbers */
-import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
+import { HttpTestingController, provideHttpClientTesting } from "@angular/common/http/testing";
 import { getTestBed, TestBed } from "@angular/core/testing";
 
 import * as log4javascript from "log4javascript";
@@ -11,6 +11,7 @@ import { Logger } from "./logger.model";
 import { LoggingServiceConfiguration } from "./logging-service.configuration";
 import { LoggingService } from "./logging.service";
 import { MemoryAppender } from "./memory-appender.model";
+import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 
 describe("LoggingService", () => {
 
@@ -19,11 +20,13 @@ describe("LoggingService", () => {
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			imports: [HttpClientTestingModule],
-			providers: [
-				LoggingService,
-			],
-		});
+    imports: [],
+    providers: [
+        LoggingService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+    ]
+});
 		loggingService = TestBed.inject(LoggingService);
 		httpMock = TestBed.inject(HttpTestingController);
 	});

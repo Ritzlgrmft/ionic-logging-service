@@ -1,12 +1,11 @@
-import { Component } from "@angular/core";
-import { ToastController, ModalController } from "@ionic/angular";
+import { Component, ViewChild } from "@angular/core";
+import { ToastController, ModalController, IonicModule } from "@ionic/angular";
 
-import { AjaxAppender, LocalStorageAppender, Logger, LoggingService, LoggingServiceModule, LogLevel } from "ionic-logging-service";
+import { AjaxAppender, LocalStorageAppender, Logger, LoggingService, LogLevel } from "ionic-logging-service";
 import { LoggingViewerModalComponent, LoggingViewerTranslation, LoggingViewerModalProperties, LoggingViewerModule } from "ionic-logging-viewer";
 import { environment } from "../../environments/environment";
-import { IonButton, IonCard, IonCardHeader, IonCardTitle, IonCol, IonContent, IonGrid, IonHeader, IonInput, IonItem, IonLabel, IonList, IonListHeader, IonRadioGroup, IonRow, IonSelect, IonTitle, IonToggle, IonToolbar } from "@ionic/angular/standalone";
+import { IonButton, IonCard, IonCardHeader, IonCardTitle, IonCol, IonContent, IonGrid, IonHeader, IonInput, IonItem, IonLabel, IonList, IonListHeader, IonRadioGroup, IonRow, IonTitle, IonToggle, IonToolbar } from "@ionic/angular/standalone";
 import { FormsModule } from "@angular/forms";
-import { NgForOf, NgIf } from "@angular/common";
 
 @Component({
 	selector: "app-home",
@@ -28,14 +27,10 @@ import { NgForOf, NgIf } from "@angular/common";
 		IonListHeader,
 		IonRadioGroup,
 		IonRow,
-		IonSelect,
 		IonTitle,
 		IonToggle,
 		IonToolbar,
-		LoggingServiceModule,
-		LoggingViewerModule,
-		NgIf,
-		NgForOf
+		LoggingViewerModule
 	],
 	templateUrl: "home.page.html",
 	styleUrls: ["home.page.scss"],

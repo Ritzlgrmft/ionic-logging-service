@@ -6,6 +6,9 @@ import { Logger, LoggingService } from "ionic-logging-service";
 
 import { LoggingViewerTranslation } from "../logging-viewer-translation.model";
 
+import { addIcons } from "ionicons";
+import { closeCircle, trashOutline } from "ionicons/icons";
+
 /**
  * Ionic modal containing [LoggingViewerComponent](LoggingViewerComponent.html),
  * [LoggingViewerLevelsComponent](LoggingViewerLevelsComponent.html) and
@@ -70,6 +73,7 @@ export class LoggingViewerModalComponent implements OnInit {
 		this.logger.entry(methodName);
 
 		this.isAndroid = platform.is("android");
+		addIcons({ closeCircle, trashOutline });
 
 		this.logger.exit(methodName);
 	}
