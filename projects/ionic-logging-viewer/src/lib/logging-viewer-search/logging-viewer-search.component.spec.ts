@@ -20,18 +20,16 @@ describe("LoggingViewerSearchComponent", () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-			declarations: [
-				LoggingViewerSearchComponent
-			],
-			imports: [
-				FormsModule,
-				IonicModule,
-			],
-			providers: [
-				{ provide: LoggingService, useValue: loggingServiceStub },
-				LoggingViewerFilterService
-			]
-		})
+    imports: [
+        FormsModule,
+        IonicModule,
+        LoggingViewerSearchComponent,
+    ],
+    providers: [
+        { provide: LoggingService, useValue: loggingServiceStub },
+        LoggingViewerFilterService
+    ]
+})
 			.compileComponents();
 	}));
 

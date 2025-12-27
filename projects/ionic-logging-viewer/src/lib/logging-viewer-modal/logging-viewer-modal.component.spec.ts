@@ -29,27 +29,22 @@ describe("LoggingViewerModalComponent", () => {
 	const alertControllerStub = jasmine.createSpyObj("alertControllerStub", ["create"]);
 	alertControllerStub.create.and.returnValue(Promise.resolve(alertStub));
 
-	const modalControllerStub = jasmine.createSpyObj("modalControllerStub", ["dismiss"]);
-
 	const navParamsStub = jasmine.createSpyObj("navParams", ["get"]);
 	navParamsStub.get.and.returnValue(undefined);
 
 	beforeEach(waitForAsync(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [
-				LoggingViewerModalComponent,
-				LoggingViewerSearchComponent,
-				LoggingViewerLevelsComponent,
-				LoggingViewerComponent
-			],
 			imports: [
 				FormsModule,
 				IonicModule,
+				LoggingViewerModalComponent,
+				LoggingViewerSearchComponent,
+				LoggingViewerLevelsComponent,
+				LoggingViewerComponent,
 			],
 			providers: [
 				{ provide: LoggingService, useValue: loggingServiceStub },
 				{ provide: AlertController, useValue: alertControllerStub },
-				{ provide: ModalController, useValue: modalControllerStub },
 				{ provide: NavParams, useValue: navParamsStub },
 				LoggingViewerFilterService
 			]
@@ -91,10 +86,11 @@ describe("LoggingViewerModalComponent", () => {
 	describe("onClose(): void", () => {
 
 		it("calls modalController.dismiss()", async () => {
+			const dismissSpy = spyOn((component as any).modalController, 'dismiss').and.returnValue(Promise.resolve());
 
 			await component.onClose();
 
-			expect(modalControllerStub.dismiss).toHaveBeenCalled();
+			expect(dismissSpy).toHaveBeenCalled();
 		});
 	});
 

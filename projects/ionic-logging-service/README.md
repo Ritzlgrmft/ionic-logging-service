@@ -121,29 +121,18 @@ export const environment = {
 };
 ```
 
-Call `configure()` in your `app.module.ts`:
+Call `configure()` in your `app.config.ts`:
 
 ```TypeScript
-export function configureLogging(loggingService: LoggingService): () => void {
-  return () => loggingService.configure(environment.logging);
-}
-
-@NgModule({
-  ...
-  imports: [
-    ...
-    LoggingServiceModule
-  ],
+export const appConfig: ApplicationConfig = {
   providers: [
-    {
-      deps: [LoggingService],
-      multi: true,
-      provide: APP_INITIALIZER,
-      useFactory: configureLogging
-    }
+    ...
+    provideAppInitializer(() => {
+      const loggingService = inject(LoggingService);
+      loggingService.configure(environment.logging);
+    }),
   ]
-})
-export class AppModule { }
+};
 ```
 
 ### logLevels

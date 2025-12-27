@@ -1,14 +1,20 @@
-import { ApplicationConfig, provideZoneChangeDetection } from "@angular/core";
+import { ApplicationConfig, inject, provideAppInitializer, provideZoneChangeDetection } from "@angular/core";
 import { provideRouter, RouteReuseStrategy } from "@angular/router";
 
 import { routes } from "./app.routes";
 import { IonicRouteStrategy, provideIonicAngular } from "@ionic/angular/standalone";
+import { LoggingService } from "ionic-logging-service";
+import { environment } from "../environments/environment";
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideIonicAngular(),
-    provideRouter(routes)
+    provideRouter(routes),
+    provideAppInitializer(() => {
+      const loggingService = inject(LoggingService);
+      loggingService.configure(environment.logging);
+    }),
   ]
 };

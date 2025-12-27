@@ -29,17 +29,15 @@ describe("LoggingViewerComponent", () => {
 	beforeEach(waitForAsync(() => {
 		TestBed
 			.configureTestingModule({
-				declarations: [
-					LoggingViewerComponent,
-				],
-				imports: [
-					IonicModule,
-				],
-				providers: [
-					{ provide: LoggingService, useValue: loggingServiceStub },
-					LoggingViewerFilterService,
-				],
-			})
+    imports: [
+        IonicModule,
+        LoggingViewerComponent,
+    ],
+    providers: [
+        { provide: LoggingService, useValue: loggingServiceStub },
+        LoggingViewerFilterService,
+    ],
+})
 			.compileComponents();
 	}));
 

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from "@angular/core";
 
-import { ModalController, Platform, AlertController } from "@ionic/angular";
+import { ModalController, Platform, AlertController, IonicModule } from "@ionic/angular";
 
 import { Logger, LoggingService } from "ionic-logging-service";
 
@@ -8,6 +8,10 @@ import { LoggingViewerTranslation } from "../logging-viewer-translation.model";
 
 import { addIcons } from "ionicons";
 import { closeCircle, trashOutline } from "ionicons/icons";
+import { NgIf } from "@angular/common";
+import { LoggingViewerSearchComponent } from "../logging-viewer-search/logging-viewer-search.component";
+import { LoggingViewerLevelsComponent } from "../logging-viewer-levels/logging-viewer-levels.component";
+import { LoggingViewerComponent } from "../logging-viewer/logging-viewer.component";
 
 /**
  * Ionic modal containing [LoggingViewerComponent](LoggingViewerComponent.html),
@@ -18,7 +22,7 @@ import { closeCircle, trashOutline } from "ionicons/icons";
     selector: "ionic-logging-viewer-modal",
     templateUrl: "./logging-viewer-modal.component.html",
     styleUrls: ["./logging-viewer-modal.component.scss"],
-    standalone: false
+    imports: [IonicModule, NgIf, LoggingViewerSearchComponent, LoggingViewerLevelsComponent, LoggingViewerComponent]
 })
 export class LoggingViewerModalComponent implements OnInit {
 
