@@ -99,7 +99,7 @@
     "karma-junit-reporter": "2.0.1",
     "ng-packagr": "^18.2.1",
     "ts-node": "10.9.2",
-    "typescript": "5.5.4"
+    "typescript": "5.5.3"
   },
   "config": {
     "commitizen": {

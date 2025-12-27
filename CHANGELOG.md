@@ -2,6 +2,10 @@
 
 ## Upcoming
 
+### general
+
+- update to ESLint 9
+
 ### ionic-logging-viewer
 
 - embed icons for `closeCircle` and `trashOutline`
