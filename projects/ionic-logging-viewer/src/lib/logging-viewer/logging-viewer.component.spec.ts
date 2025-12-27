@@ -1,4 +1,3 @@
-/* eslint-disable no-magic-numbers */
 import { EventEmitter } from "@angular/core";
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { IonicModule } from "@ionic/angular";

@@ -1,5 +1,4 @@
-﻿/* eslint-disable no-magic-numbers */
-import { getTestBed, TestBed } from "@angular/core/testing";
+﻿import { TestBed } from "@angular/core/testing";
 
 import { LoggingService } from "ionic-logging-service";
 

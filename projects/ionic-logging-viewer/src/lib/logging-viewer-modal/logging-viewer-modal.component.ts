@@ -57,7 +57,7 @@ export class LoggingViewerModalComponent implements OnInit {
 
 	private logger: Logger;
 
-	private translations: { [language: string]: LoggingViewerTranslation };
+	private translations: Record<string, LoggingViewerTranslation>;
 
 	/**
 	 * Creates a new instance of the component.

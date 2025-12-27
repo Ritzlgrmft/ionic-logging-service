@@ -1,4 +1,3 @@
-/* eslint-disable no-magic-numbers */
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
 import { IonicModule } from "@ionic/angular";
@@ -12,7 +11,6 @@ describe("LoggingViewerLevelsComponent", () => {
 
 	let component: LoggingViewerLevelsComponent;
 	let fixture: ComponentFixture<LoggingViewerLevelsComponent>;
-	let loggingService: LoggingService;
 	let loggingViewerFilterService: LoggingViewerFilterService;
 
 	const loggerStub = jasmine.createSpyObj("logger", ["entry", "exit"]);
@@ -21,8 +19,8 @@ describe("LoggingViewerLevelsComponent", () => {
 		["getLogger"]);
 	loggingServiceStub.getLogger.and.returnValue(loggerStub);
 
-	beforeEach(waitForAsync(() => {
-		TestBed
+	beforeEach(waitForAsync(async () => {
+		await TestBed
 			.configureTestingModule({
 				declarations: [
 					LoggingViewerLevelsComponent,
@@ -44,7 +42,6 @@ describe("LoggingViewerLevelsComponent", () => {
 
 		component = fixture.componentInstance;
 
-		loggingService = TestBed.inject(LoggingService);
 		loggingViewerFilterService = TestBed.inject(LoggingViewerFilterService);
 	});
 

@@ -1,4 +1,4 @@
-﻿import { EventEmitter, Injectable, Optional } from "@angular/core";
+﻿import { EventEmitter, Injectable } from "@angular/core";
 
 import * as log4javascript from "log4javascript";
 
@@ -68,7 +68,7 @@ export class LoggingService {
 		// in-memory appender for display on log messages page
 		this.memoryAppender = new MemoryAppender();
 		this.memoryAppender.setLayout(new log4javascript.PatternLayout("%d{HH:mm:ss,SSS} %c %m"));
-		this.memoryAppender.setOnLogMessagesChangedCallback((message) => {
+		this.memoryAppender.setOnLogMessagesChangedCallback(() => {
 			this.logMessagesChanged.emit();
 		});
 		logger.addAppender(this.memoryAppender);
@@ -98,7 +98,7 @@ export class LoggingService {
 				}
 				try {
 					logger.setLevel(LogLevelConverter.levelToLog4Javascript(LogLevelConverter.levelFromString(level.logLevel)));
-				} catch (e) {
+				} catch {
 					throw new Error(`invalid log level ${level.logLevel}`);
 				}
 			}

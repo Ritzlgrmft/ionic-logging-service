@@ -1,4 +1,3 @@
-/* eslint-disable no-magic-numbers */
 import * as log4javascript from "log4javascript";
 
 import { LogLevel } from "./log-level.model";

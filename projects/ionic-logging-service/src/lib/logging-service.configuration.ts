@@ -12,7 +12,7 @@ export interface LoggingServiceConfiguration {
 	 * Log levels for different loggers.
 	 * Default: root: WARN
 	 */
-	logLevels?: Array<{
+	logLevels?: {
 		/**
 		 * Logger name or "root" for root logger.
 		 */
@@ -23,7 +23,7 @@ export interface LoggingServiceConfiguration {
 		 * Valid values are: ALL, DEBUG, ERROR, FATAL, INFO, OFF, TRACE, WARN
 		 */
 		logLevel: string;
-	}>;
+	}[];
 
 	/**
 	 * Settings for AjaxAppender.

@@ -1,12 +1,10 @@
-﻿/* eslint-disable no-magic-numbers */
-import { HttpTestingController, provideHttpClientTesting } from "@angular/common/http/testing";
-import { getTestBed, TestBed } from "@angular/core/testing";
+﻿import { HttpTestingController, provideHttpClientTesting } from "@angular/common/http/testing";
+import { TestBed } from "@angular/core/testing";
 
 import * as log4javascript from "log4javascript";
 
 import { AjaxAppender } from "./ajax-appender.model";
 import { LocalStorageAppender } from "./local-storage-appender.model";
-import { LogMessage } from "./log-message.model";
 import { Logger } from "./logger.model";
 import { LoggingServiceConfiguration } from "./logging-service.configuration";
 import { LoggingService } from "./logging.service";
@@ -20,13 +18,13 @@ describe("LoggingService", () => {
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-    imports: [],
-    providers: [
-        LoggingService,
-        provideHttpClient(withInterceptorsFromDi()),
-        provideHttpClientTesting(),
-    ]
-});
+			imports: [],
+			providers: [
+				LoggingService,
+				provideHttpClient(withInterceptorsFromDi()),
+				provideHttpClientTesting(),
+			]
+		});
 		loggingService = TestBed.inject(LoggingService);
 		httpMock = TestBed.inject(HttpTestingController);
 	});
@@ -69,7 +67,7 @@ describe("LoggingService", () => {
 		describe("logLevels", () => {
 			it("throws no error if logLevels is empty", () => {
 
-				const logLevels: Array<{ loggerName: string; logLevel: string }> = [];
+				const logLevels: { loggerName: string; logLevel: string }[] = [];
 				const config: LoggingServiceConfiguration = {
 					logLevels,
 				};

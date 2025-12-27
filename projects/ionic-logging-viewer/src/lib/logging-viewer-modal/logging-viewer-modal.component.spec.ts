@@ -34,8 +34,8 @@ describe("LoggingViewerModalComponent", () => {
 	const navParamsStub = jasmine.createSpyObj("navParams", ["get"]);
 	navParamsStub.get.and.returnValue(undefined);
 
-	beforeEach(waitForAsync(() => {
-		TestBed.configureTestingModule({
+	beforeEach(waitForAsync(async () => {
+		await TestBed.configureTestingModule({
 			declarations: [
 				LoggingViewerModalComponent,
 				LoggingViewerSearchComponent,
@@ -90,9 +90,9 @@ describe("LoggingViewerModalComponent", () => {
 
 	describe("onClose(): void", () => {
 
-		it("calls modalController.dismiss()", () => {
+		it("calls modalController.dismiss()", async () => {
 
-			component.onClose();
+			await component.onClose();
 
 			expect(modalControllerStub.dismiss).toHaveBeenCalled();
 		});

@@ -1,4 +1,3 @@
-/* eslint-disable no-magic-numbers */
 import * as log4javascript from "log4javascript";
 
 import { JsonLayout } from "./json-layout.model";
