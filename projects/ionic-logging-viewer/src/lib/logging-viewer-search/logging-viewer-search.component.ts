@@ -5,6 +5,8 @@ import { Subscription } from "rxjs";
 import { LoggingService, Logger } from "ionic-logging-service";
 
 import { LoggingViewerFilterService } from "../logging-viewer-filter.service";
+import { IonicModule } from "@ionic/angular";
+import { FormsModule } from "@angular/forms";
 
 /**
  * Component for displaying the search bar for filtering the current logs.
@@ -17,7 +19,7 @@ import { LoggingViewerFilterService } from "../logging-viewer-filter.service";
     selector: "ionic-logging-viewer-search",
     templateUrl: "./logging-viewer-search.component.html",
     styleUrls: ["./logging-viewer-search.component.scss"],
-    standalone: false
+    imports: [IonicModule, FormsModule]
 })
 export class LoggingViewerSearchComponent implements OnInit, OnDestroy {
 

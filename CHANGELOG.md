@@ -4,12 +4,14 @@
 
 ### general
 
+- update to Angular 19
 - update to ESLint 9
 
 ### ionic-logging-viewer
 
 - embed icons for `closeCircle` and `trashOutline`
+- update to standalone components
 
-### ionic-logging-iewer-app
+### ionic-logging-viewer-app
 
-- update to Angular 19
+- update to standalone components

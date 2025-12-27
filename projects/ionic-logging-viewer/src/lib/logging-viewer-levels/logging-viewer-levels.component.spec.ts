@@ -22,18 +22,16 @@ describe("LoggingViewerLevelsComponent", () => {
 	beforeEach(waitForAsync(async () => {
 		await TestBed
 			.configureTestingModule({
-				declarations: [
-					LoggingViewerLevelsComponent,
-				],
-				imports: [
-					FormsModule,
-					IonicModule,
-				],
-				providers: [
-					{ provide: LoggingService, useValue: loggingServiceStub },
-					LoggingViewerFilterService,
-				],
-			})
+    imports: [
+        FormsModule,
+        IonicModule,
+        LoggingViewerLevelsComponent,
+    ],
+    providers: [
+        { provide: LoggingService, useValue: loggingServiceStub },
+        LoggingViewerFilterService,
+    ],
+})
 			.compileComponents();
 	}));
 

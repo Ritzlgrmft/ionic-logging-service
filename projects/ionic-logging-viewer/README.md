@@ -51,18 +51,18 @@ npm install ionic-logging-viewer --save
 
 ### import module
 
-Import the `LoggingViewerModule` in to your `app.module.ts`:
+Call `configure()` in your `app.config.ts`:
 
-```typescript
-import { LoggingViewerModule } from "ionic-logging-viewer";
-...
-@NgModule({
-  imports: [
-    IonicModule.forRoot(AppComponent),
-    LoggingViewerModule
-  ],
-  ...
-})
+```TypeScript
+export const appConfig: ApplicationConfig = {
+  providers: [
+    ...
+    provideAppInitializer(() => {
+      const loggingService = inject(LoggingService);
+      loggingService.configure(environment.logging);
+    }),
+  ]
+};
 ```
 
 ### LoggingViewerComponent directive
