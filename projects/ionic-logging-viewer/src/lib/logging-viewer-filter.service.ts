@@ -5,7 +5,9 @@ import { Logger, LoggingService } from "ionic-logging-service";
 /**
  * Service for storing filter settings for logging viewer.
  */
-@Injectable()
+@Injectable({
+	providedIn: 'root'
+})
 export class LoggingViewerFilterService {
 
 	/**

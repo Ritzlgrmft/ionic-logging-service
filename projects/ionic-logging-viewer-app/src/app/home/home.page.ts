@@ -1,43 +1,44 @@
 import { Component } from "@angular/core";
 import { ToastController, ModalController } from "@ionic/angular";
 
-import { AjaxAppender, LocalStorageAppender, Logger, LoggingService, LoggingServiceModule, LogLevel } from "ionic-logging-service";
-import { LoggingViewerModalComponent, LoggingViewerTranslation, LoggingViewerModalProperties, LoggingViewerModule } from "ionic-logging-viewer";
+import { AjaxAppender, LocalStorageAppender, Logger, LoggingService, LogLevel } from "ionic-logging-service";
+import { LoggingViewerModalComponent, LoggingViewerTranslation, LoggingViewerModalProperties, LoggingViewerComponent, LoggingViewerLevelsComponent, LoggingViewerSearchComponent } from "ionic-logging-viewer";
 import { environment } from "../../environments/environment";
 import { IonButton, IonCard, IonCardHeader, IonCardTitle, IonCol, IonContent, IonGrid, IonHeader, IonInput, IonItem, IonLabel, IonList, IonListHeader, IonRadioGroup, IonRow, IonSelect, IonTitle, IonToggle, IonToolbar } from "@ionic/angular/standalone";
 import { FormsModule } from "@angular/forms";
 import { NgForOf, NgIf } from "@angular/common";
 
 @Component({
-    selector: "app-home",
-    imports: [
-        FormsModule,
-        IonButton,
-        IonCard,
-        IonCardHeader,
-        IonCardTitle,
-        IonCol,
-        IonContent,
-        IonGrid,
-        IonHeader,
-        IonInput,
-        IonItem,
-        IonLabel,
-        IonList,
-        IonListHeader,
-        IonRadioGroup,
-        IonRow,
-        IonSelect,
-        IonTitle,
-        IonToggle,
-        IonToolbar,
-        LoggingServiceModule,
-        LoggingViewerModule,
-        NgIf,
-        NgForOf
-    ],
-    templateUrl: "home.page.html",
-    styleUrls: ["home.page.scss"]
+	selector: "app-home",
+	imports: [
+		FormsModule,
+		IonButton,
+		IonCard,
+		IonCardHeader,
+		IonCardTitle,
+		IonCol,
+		IonContent,
+		IonGrid,
+		IonHeader,
+		IonInput,
+		IonItem,
+		IonLabel,
+		IonList,
+		IonListHeader,
+		IonRadioGroup,
+		IonRow,
+		IonSelect,
+		IonTitle,
+		IonToggle,
+		IonToolbar,
+		LoggingViewerComponent,
+		LoggingViewerLevelsComponent,
+		LoggingViewerSearchComponent,
+		NgIf,
+		NgForOf
+	],
+	templateUrl: "home.page.html",
+	styleUrls: ["home.page.scss"], standalone: true
 })
 export class HomePage {
 
