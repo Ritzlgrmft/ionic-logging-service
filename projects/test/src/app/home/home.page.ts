@@ -8,32 +8,31 @@ import { IonButton, IonCard, IonCardHeader, IonCardTitle, IonCol, IonContent, Io
 import { FormsModule } from "@angular/forms";
 
 @Component({
-	selector: "app-home",
-	standalone: true,
-	imports: [
-		FormsModule,
-		IonButton,
-		IonCard,
-		IonCardHeader,
-		IonCardTitle,
-		IonCol,
-		IonContent,
-		IonGrid,
-		IonHeader,
-		IonInput,
-		IonItem,
-		IonLabel,
-		IonList,
-		IonListHeader,
-		IonRadioGroup,
-		IonRow,
-		IonTitle,
-		IonToggle,
-		IonToolbar,
-		LoggingViewerModule
-	],
-	templateUrl: "home.page.html",
-	styleUrls: ["home.page.scss"],
+    selector: "app-home",
+    imports: [
+        FormsModule,
+        IonButton,
+        IonCard,
+        IonCardHeader,
+        IonCardTitle,
+        IonCol,
+        IonContent,
+        IonGrid,
+        IonHeader,
+        IonInput,
+        IonItem,
+        IonLabel,
+        IonList,
+        IonListHeader,
+        IonRadioGroup,
+        IonRow,
+        IonTitle,
+        IonToggle,
+        IonToolbar,
+        LoggingViewerModule
+    ],
+    templateUrl: "home.page.html",
+    styleUrls: ["home.page.scss"]
 })
 export class HomePage {
 

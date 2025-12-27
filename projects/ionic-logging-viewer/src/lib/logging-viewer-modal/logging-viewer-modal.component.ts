@@ -15,9 +15,10 @@ import { closeCircle, trashOutline } from "ionicons/icons";
  * [LoggingViewerSearchComponent](LoggingViewerSearchComponent.html).
  */
 @Component({
-	selector: "ionic-logging-viewer-modal",
-	templateUrl: "./logging-viewer-modal.component.html",
-	styleUrls: ["./logging-viewer-modal.component.scss"]
+    selector: "ionic-logging-viewer-modal",
+    templateUrl: "./logging-viewer-modal.component.html",
+    styleUrls: ["./logging-viewer-modal.component.scss"],
+    standalone: false
 })
 export class LoggingViewerModalComponent implements OnInit {
 

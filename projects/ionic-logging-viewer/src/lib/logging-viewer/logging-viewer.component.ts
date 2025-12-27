@@ -13,9 +13,10 @@ import { LoggingViewerFilterService } from "../logging-viewer-filter.service";
  * &lt;ionic-logging-viewer>&lt;/ionic-logging-viewer>
  */
 @Component({
-	selector: "ionic-logging-viewer",
-	templateUrl: "./logging-viewer.component.html",
-	styleUrls: ["./logging-viewer.component.scss"]
+    selector: "ionic-logging-viewer",
+    templateUrl: "./logging-viewer.component.html",
+    styleUrls: ["./logging-viewer.component.scss"],
+    standalone: false
 })
 export class LoggingViewerComponent implements OnInit, OnDestroy {
 

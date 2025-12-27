@@ -12,4 +12,4 @@
 
 ### ionic-logging-iewer-app
 
-- update to Angular 18
+- update to Angular 19

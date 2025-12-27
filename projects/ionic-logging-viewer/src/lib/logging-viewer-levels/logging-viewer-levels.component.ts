@@ -13,9 +13,10 @@ import { LoggingViewerFilterService } from "../logging-viewer-filter.service";
  * &lt;ionic-logging-viewer-levels>&lt;/ionic-logging-viewer-levels>
  */
 @Component({
-	selector: "ionic-logging-viewer-levels",
-	templateUrl: "./logging-viewer-levels.component.html",
-	styleUrls: ["./logging-viewer-levels.component.scss"]
+    selector: "ionic-logging-viewer-levels",
+    templateUrl: "./logging-viewer-levels.component.html",
+    styleUrls: ["./logging-viewer-levels.component.scss"],
+    standalone: false
 })
 export class LoggingViewerLevelsComponent implements OnInit, OnDestroy {
 
