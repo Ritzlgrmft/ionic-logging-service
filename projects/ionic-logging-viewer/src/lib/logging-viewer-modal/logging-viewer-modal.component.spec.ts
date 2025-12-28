@@ -2,7 +2,7 @@ import { EventEmitter } from "@angular/core";
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
 
-import { IonicModule, NavParams, ModalController, AlertController } from "@ionic/angular";
+import { IonicModule, NavParams, AlertController } from "@ionic/angular";
 
 import { LogMessage, LoggingService } from "ionic-logging-service";
 
