@@ -2,7 +2,7 @@ import { EventEmitter } from "@angular/core";
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
 
-import { IonicModule, NavParams, AlertController } from "@ionic/angular";
+import { IonicModule, NavParams, AlertController, AngularDelegate } from "@ionic/angular";
 
 import { LogMessage, LoggingService } from "ionic-logging-service";
 
@@ -32,6 +32,8 @@ describe("LoggingViewerModalComponent", () => {
 	const navParamsStub = jasmine.createSpyObj("navParams", ["get"]);
 	navParamsStub.get.and.returnValue(undefined);
 
+	const angularDelegateStub = jasmine.createSpyObj("angularDelegateStub", ["create"]);
+
 	beforeEach(waitForAsync(async () => {
 		await TestBed.configureTestingModule({
 			imports: [
@@ -46,6 +48,7 @@ describe("LoggingViewerModalComponent", () => {
 				{ provide: LoggingService, useValue: loggingServiceStub },
 				{ provide: AlertController, useValue: alertControllerStub },
 				{ provide: NavParams, useValue: navParamsStub },
+				{ provide: AngularDelegate, useValue: angularDelegateStub },
 				LoggingViewerFilterService
 			]
 		})

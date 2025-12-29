@@ -1,1 +1,2 @@
-<ion-searchbar placeholder="{{placeholder}}" [(ngModel)]="search" (ionChange)="onSearchChanged()"></ion-searchbar>
+<ion-searchbar placeholder="{{placeholder}}" [(ngModel)]="search" [debounce]="1000"
+    (ionInput)="onSearchChanged()"></ion-searchbar>
