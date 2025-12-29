@@ -36,7 +36,8 @@
     "compodoc-service": "cd projects/ionic-logging-service && compodoc && cd ../..",
     "compodoc-viewer": "cd projects/ionic-logging-viewer && compodoc && cd ../..",
     "cypress:open": "ng run ionic-logging-viewer-app:cypress-open",
-    "cypress:run": "ng run ionic-logging-viewer-app:cypress-run"
+    "cypress:run": "ng run ionic-logging-viewer-app:cypress-run",
+    "serve-viewer-app": "ionic serve --project ionic-logging-viewer-app"
   },
   "dependencies": {
     "@angular/common": ">=17.0.0",
@@ -72,8 +73,7 @@
     "@cypress/schematic": "^2.5.2",
     "@eslint/eslintrc": "^3.3.3",
     "@eslint/js": "^9.39.2",
-    "@ionic/angular": "7.8.6",
-    "@ionic/angular-toolkit": "12.1.1",
+    "@ionic/angular": "8.7.15",
     "@types/jasmine": "~5.1.4",
     "@types/jasminewd2": "2.0.13",
     "@types/node": "20.19.27",
@@ -87,7 +87,7 @@
     "eslint-plugin-jsdoc": "61.5.0",
     "eslint-plugin-prefer-arrow": "1.2.3",
     "fsevents": "2.3.3",
-    "ionicons": "7.4.0",
+    "ionicons": "8.0.13",
     "jasmine-core": "^5.3.0",
     "jasmine-reporters": "2.5.2",
     "jasmine-spec-reporter": "~7.0.0",

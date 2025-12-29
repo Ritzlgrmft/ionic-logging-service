@@ -113,8 +113,8 @@
               }
             ],
             "styles": [
-              "projects/ionic-logging-viewer-app/src/theme/variables.scss",
-              "projects/ionic-logging-viewer-app/src/global.scss"
+              "projects/ionic-logging-viewer-app/src/global.scss",
+              "projects/ionic-logging-viewer-app/src/theme/variables.scss"
             ],
             "scripts": [],
             "extractLicenses": false,
@@ -268,8 +268,8 @@
               }
             ],
             "styles": [
-              "projects/ionic-logging-viewer-app/src/theme/variables.scss",
-              "projects/ionic-logging-viewer-app/src/global.scss"
+              "projects/ionic-logging-viewer-app/src/global.scss",
+              "projects/ionic-logging-viewer-app/src/theme/variables.scss"
             ],
             "scripts": []
           },
