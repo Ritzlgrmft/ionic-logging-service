@@ -5,7 +5,7 @@ import { Logger, LoggingService, LogLevelConverter, LogMessage } from "ionic-log
 
 import { LoggingViewerFilterService } from "../logging-viewer-filter.service";
 import { IonicModule } from "@ionic/angular";
-import { NgFor, DatePipe } from "@angular/common";
+import { DatePipe } from "@angular/common";
 
 /**
  * Component for displaying the current logs.
@@ -18,7 +18,7 @@ import { NgFor, DatePipe } from "@angular/common";
 	selector: "ionic-logging-viewer",
 	templateUrl: "./logging-viewer.component.html",
 	styleUrls: ["./logging-viewer.component.scss"],
-	imports: [IonicModule, NgFor, DatePipe]
+	imports: [IonicModule, DatePipe]
 })
 export class LoggingViewerComponent implements OnInit, OnDestroy {
 

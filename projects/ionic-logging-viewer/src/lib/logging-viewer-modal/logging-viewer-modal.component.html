@@ -1,27 +1,32 @@
 <ion-header>
-	<ion-toolbar color=primary>
-		<ion-title>{{ getTranslation().title }}</ion-title>
-		<ion-buttons slot="start">
-			<ion-button *ngIf="!isAndroid" (click)="onClose()">
-				{{ getTranslation().cancel }}
-			</ion-button>
-			<ion-button *ngIf="isAndroid" icon-only (click)="onClose()">
-				<ion-icon name="close-circle"></ion-icon>
-			</ion-button>
-		</ion-buttons>
-	</ion-toolbar>
-	<ion-toolbar>
-		<ionic-logging-viewer-search [placeholder]="getTranslation().searchPlaceholder"></ionic-logging-viewer-search>
-		<ion-buttons slot="end" *ngIf="allowClearLogs !== false" class="clearLogs">
-			<ion-button (click)="onClearLogs()">
-				<ion-icon name="trash-outline"></ion-icon>
-			</ion-button>
-		</ion-buttons>
-	</ion-toolbar>
-	<ion-toolbar>
-		<ionic-logging-viewer-levels></ionic-logging-viewer-levels>
-	</ion-toolbar>
+  <ion-toolbar color=primary>
+    <ion-title>{{ getTranslation().title }}</ion-title>
+    <ion-buttons slot="start">
+      @if (!isAndroid) {
+      <ion-button (click)="onClose()">
+        {{ getTranslation().cancel }}
+      </ion-button>
+      } @else {
+      <ion-button icon-only (click)="onClose()">
+        <ion-icon name="close-circle"></ion-icon>
+      </ion-button>
+      }
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ionic-logging-viewer-search [placeholder]="getTranslation().searchPlaceholder"></ionic-logging-viewer-search>
+    @if (allowClearLogs !== false) {
+    <ion-buttons slot="end" class="clearLogs">
+      <ion-button (click)="onClearLogs()">
+        <ion-icon name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    }
+  </ion-toolbar>
+  <ion-toolbar>
+    <ionic-logging-viewer-levels></ionic-logging-viewer-levels>
+  </ion-toolbar>
 </ion-header>
 <ion-content>
-	<ionic-logging-viewer [localStorageKeys]="localStorageKeys"></ionic-logging-viewer>
+  <ionic-logging-viewer [localStorageKeys]="localStorageKeys"></ionic-logging-viewer>
 </ion-content>

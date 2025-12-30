@@ -6,37 +6,35 @@ import { LoggingViewerModalComponent, LoggingViewerTranslation, LoggingViewerMod
 import { environment } from "../../environments/environment";
 import { IonButton, IonCard, IonCardHeader, IonCardTitle, IonCol, IonContent, IonGrid, IonHeader, IonInput, IonItem, IonLabel, IonList, IonListHeader, IonRadioGroup, IonRow, IonSelect, IonTitle, IonToggle, IonToolbar } from "@ionic/angular/standalone";
 import { FormsModule } from "@angular/forms";
-import { NgForOf, NgIf } from "@angular/common";
+
 
 @Component({
 	selector: "app-home",
 	imports: [
-		FormsModule,
-		IonButton,
-		IonCard,
-		IonCardHeader,
-		IonCardTitle,
-		IonCol,
-		IonContent,
-		IonGrid,
-		IonHeader,
-		IonInput,
-		IonItem,
-		IonLabel,
-		IonList,
-		IonListHeader,
-		IonRadioGroup,
-		IonRow,
-		IonSelect,
-		IonTitle,
-		IonToggle,
-		IonToolbar,
-		LoggingViewerComponent,
-		LoggingViewerLevelsComponent,
-		LoggingViewerSearchComponent,
-		NgIf,
-		NgForOf
-	],
+    FormsModule,
+    IonButton,
+    IonCard,
+    IonCardHeader,
+    IonCardTitle,
+    IonCol,
+    IonContent,
+    IonGrid,
+    IonHeader,
+    IonInput,
+    IonItem,
+    IonLabel,
+    IonList,
+    IonListHeader,
+    IonRadioGroup,
+    IonRow,
+    IonSelect,
+    IonTitle,
+    IonToggle,
+    IonToolbar,
+    LoggingViewerComponent,
+    LoggingViewerLevelsComponent,
+    LoggingViewerSearchComponent
+],
 	templateUrl: "home.page.html",
 	styleUrls: ["home.page.scss"], standalone: true
 })

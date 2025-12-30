@@ -16,9 +16,11 @@
 - embed icons for `closeCircle` and `trashOutline`
 - update to standalone components
 - migrate to Angular's inject function
+- migrate to Angular's control flow blocks
 
 ### ionic-logging-viewer-app
 
 - update to standalone components
 - update to Ionic 8
 - migrate to Angular's inject function
+- migrate to Angular's control flow blocks

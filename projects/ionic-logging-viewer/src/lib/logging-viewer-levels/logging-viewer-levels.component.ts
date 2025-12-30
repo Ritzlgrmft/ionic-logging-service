@@ -6,7 +6,7 @@ import { Logger, LoggingService } from "ionic-logging-service";
 import { LoggingViewerFilterService } from "../logging-viewer-filter.service";
 import { IonicModule } from "@ionic/angular";
 import { FormsModule } from "@angular/forms";
-import { NgFor } from "@angular/common";
+
 
 /**
  * Component for displaying the log levels for filtering the current logs.
@@ -19,7 +19,7 @@ import { NgFor } from "@angular/common";
 	selector: "ionic-logging-viewer-levels",
 	templateUrl: "./logging-viewer-levels.component.html",
 	styleUrls: ["./logging-viewer-levels.component.scss"],
-	imports: [IonicModule, FormsModule, NgFor]
+	imports: [IonicModule, FormsModule]
 })
 export class LoggingViewerLevelsComponent implements OnInit, OnDestroy {
 
