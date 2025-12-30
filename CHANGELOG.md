@@ -4,7 +4,7 @@
 
 ### general
 
-- update to Angular 19
+- update to Angular 20
 - update to ESLint 9
 
 ### ionic-logging-service
@@ -19,3 +19,4 @@
 ### ionic-logging-viewer-app
 
 - update to standalone components
+- update to Ionic 8
