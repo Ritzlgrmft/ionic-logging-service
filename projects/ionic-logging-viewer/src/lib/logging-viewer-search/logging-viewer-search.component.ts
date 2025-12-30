@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input } from "@angular/core";
+import { Component, OnInit, OnDestroy, Input, inject } from "@angular/core";
 
 import { Subscription } from "rxjs";
 
@@ -16,12 +16,15 @@ import { FormsModule } from "@angular/forms";
  * &lt;ionic-logging-viewer-search placeholder="Search">&lt;/ionic-logging-viewer-search>
  */
 @Component({
-    selector: "ionic-logging-viewer-search",
-    templateUrl: "./logging-viewer-search.component.html",
-    styleUrls: ["./logging-viewer-search.component.scss"],
-    imports: [IonicModule, FormsModule]
+	selector: "ionic-logging-viewer-search",
+	templateUrl: "./logging-viewer-search.component.html",
+	styleUrls: ["./logging-viewer-search.component.scss"],
+	imports: [IonicModule, FormsModule]
 })
 export class LoggingViewerSearchComponent implements OnInit, OnDestroy {
+
+	private loggingService = inject(LoggingService);
+	private loggingViewerFilterService = inject(LoggingViewerFilterService);
 
 	/**
 	 * Placeholder to be shown in the empty search bar.
@@ -40,11 +43,8 @@ export class LoggingViewerSearchComponent implements OnInit, OnDestroy {
 	/**
 	 * Creates a new instance of the component.
 	 */
-	constructor(
-		loggingService: LoggingService,
-		private loggingViewerFilterService: LoggingViewerFilterService) {
-
-		this.logger = loggingService.getLogger("Ionic.Logging.Viewer.Search.Component");
+	constructor() {
+		this.logger = this.loggingService.getLogger("Ionic.Logging.Viewer.Search.Component");
 		const methodName = "ctor";
 		this.logger.entry(methodName);
 

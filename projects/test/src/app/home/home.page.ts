@@ -1,4 +1,4 @@
-import { Component, ViewChild } from "@angular/core";
+import { Component, ViewChild, inject } from "@angular/core";
 import { ToastController, ModalController, IonicModule } from "@ionic/angular";
 
 import { AjaxAppender, LocalStorageAppender, Logger, LoggingService, LogLevel } from "ionic-logging-service";
@@ -8,33 +8,37 @@ import { IonButton, IonCard, IonCardHeader, IonCardTitle, IonCol, IonContent, Io
 import { FormsModule } from "@angular/forms";
 
 @Component({
-    selector: "app-home",
-    imports: [
-        FormsModule,
-        IonButton,
-        IonCard,
-        IonCardHeader,
-        IonCardTitle,
-        IonCol,
-        IonContent,
-        IonGrid,
-        IonHeader,
-        IonInput,
-        IonItem,
-        IonLabel,
-        IonList,
-        IonListHeader,
-        IonRadioGroup,
-        IonRow,
-        IonTitle,
-        IonToggle,
-        IonToolbar,
-        LoggingViewerModule
-    ],
-    templateUrl: "home.page.html",
-    styleUrls: ["home.page.scss"]
+	selector: "app-home",
+	imports: [
+		FormsModule,
+		IonButton,
+		IonCard,
+		IonCardHeader,
+		IonCardTitle,
+		IonCol,
+		IonContent,
+		IonGrid,
+		IonHeader,
+		IonInput,
+		IonItem,
+		IonLabel,
+		IonList,
+		IonListHeader,
+		IonRadioGroup,
+		IonRow,
+		IonTitle,
+		IonToggle,
+		IonToolbar,
+		LoggingViewerModule
+	],
+	templateUrl: "home.page.html",
+	styleUrls: ["home.page.scss"]
 })
 export class HomePage {
+	private modalController = inject(ModalController);
+	private toastController = inject(ToastController);
+	private loggingService = inject(LoggingService);
+
 
 	public testLoggerName: string;
 	public testMethod: string;
@@ -64,13 +68,8 @@ export class HomePage {
 
 	private logger: Logger;
 
-	constructor(
-		private modalController: ModalController,
-		private toastController: ToastController,
-		private loggingService: LoggingService
-	) {
-
-		this.logger = loggingService.getLogger("Ionic.Logging.Sample.HomePage");
+	constructor() {
+		this.logger = this.loggingService.getLogger("Ionic.Logging.Sample.HomePage");
 		const methodName = "ctor";
 		this.logger.entry(methodName);
 
@@ -82,7 +81,7 @@ export class HomePage {
 		this.message = "message";
 		this.onLogLevelOrLoggerChanged();
 
-		const appenders = loggingService.getRootLogger().getInternalLogger().getEffectiveAppenders();
+		const appenders = this.loggingService.getRootLogger().getInternalLogger().getEffectiveAppenders();
 		const ajaxAppender = appenders.find((a) => a.toString() === "Ionic.Logging.AjaxAppender") as AjaxAppender;
 		this.ajaxAppenderEnabled = (ajaxAppender !== undefined);
 		this.ajaxAppenderUrl = window.location.origin;

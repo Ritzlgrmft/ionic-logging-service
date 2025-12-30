@@ -1,4 +1,4 @@
-﻿import { EventEmitter, Injectable } from "@angular/core";
+﻿import { EventEmitter, Injectable, inject } from "@angular/core";
 
 import { Logger, LoggingService } from "ionic-logging-service";
 
@@ -9,6 +9,8 @@ import { Logger, LoggingService } from "ionic-logging-service";
 	providedIn: 'root'
 })
 export class LoggingViewerFilterService {
+
+	private loggingService = inject(LoggingService);
 
 	/**
 	 * Event triggered when the filter was changed.
@@ -24,10 +26,8 @@ export class LoggingViewerFilterService {
 	 *
 	 * @param loggingService needed for internal logging.
 	 */
-	constructor(
-		loggingService: LoggingService) {
-
-		this.logger = loggingService.getLogger("Ionic.Logging.Viewer.Filter.Service");
+	constructor() {
+		this.logger = this.loggingService.getLogger("Ionic.Logging.Viewer.Filter.Service");
 		const methodName = "ctor";
 		this.logger.entry(methodName);
 

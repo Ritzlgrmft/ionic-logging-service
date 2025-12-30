@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { ToastController, ModalController } from "@ionic/angular";
 
 import { AjaxAppender, LocalStorageAppender, Logger, LoggingService, LogLevel } from "ionic-logging-service";
@@ -42,6 +42,11 @@ import { NgForOf, NgIf } from "@angular/common";
 })
 export class HomePage {
 
+	private modalController = inject(ModalController);
+	private toastController = inject(ToastController);
+	private loggingService = inject(LoggingService);
+
+
 	public testLoggerName: string;
 	public testMethod: string;
 	public testLogLevel: string;
@@ -70,13 +75,8 @@ export class HomePage {
 
 	private logger: Logger;
 
-	constructor(
-		private modalController: ModalController,
-		private toastController: ToastController,
-		private loggingService: LoggingService
-	) {
-
-		this.logger = loggingService.getLogger("Ionic.Logging.Sample.HomePage");
+	constructor() {
+		this.logger = this.loggingService.getLogger("Ionic.Logging.Sample.HomePage");
 		const methodName = "ctor";
 		this.logger.entry(methodName);
 
@@ -88,7 +88,7 @@ export class HomePage {
 		this.message = "message";
 		this.onLogLevelOrLoggerChanged();
 
-		const appenders = loggingService.getRootLogger().getInternalLogger().getEffectiveAppenders();
+		const appenders = this.loggingService.getRootLogger().getInternalLogger().getEffectiveAppenders();
 		const ajaxAppender = appenders.find((a) => a.toString() === "Ionic.Logging.AjaxAppender") as AjaxAppender;
 		this.ajaxAppenderEnabled = (ajaxAppender !== undefined);
 		this.ajaxAppenderUrl = window.location.origin;

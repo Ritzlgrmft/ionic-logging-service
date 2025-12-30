@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, Input } from "@angular/core";
+import { Component, OnDestroy, OnInit, Input, inject } from "@angular/core";
 import { Subscription } from "rxjs";
 
 import { Logger, LoggingService, LogLevelConverter, LogMessage } from "ionic-logging-service";
@@ -22,6 +22,9 @@ import { NgFor, DatePipe } from "@angular/common";
 })
 export class LoggingViewerComponent implements OnInit, OnDestroy {
 
+	private loggingService = inject(LoggingService);
+	private loggingViewerFilterService = inject(LoggingViewerFilterService);
+
 	/**
 	 * Comma-separated list of localStorageKeys. If set, the logs get loaded from localStorage instead of memory.
 	 */
@@ -41,11 +44,8 @@ export class LoggingViewerComponent implements OnInit, OnDestroy {
 	/**
 	 * Creates a new instance of the component.
 	 */
-	constructor(
-		private loggingService: LoggingService,
-		private loggingViewerFilterService: LoggingViewerFilterService) {
-
-		this.logger = loggingService.getLogger("Ionic.Logging.Viewer.Component");
+	constructor() {
+		this.logger = this.loggingService.getLogger("Ionic.Logging.Viewer.Component");
 		const methodName = "ctor";
 		this.logger.entry(methodName);
 

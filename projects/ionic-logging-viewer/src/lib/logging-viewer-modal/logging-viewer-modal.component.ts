@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, inject } from "@angular/core";
 
 import { ModalController, Platform, AlertController, IonicModule } from "@ionic/angular";
 
@@ -19,12 +19,17 @@ import { LoggingViewerComponent } from "../logging-viewer/logging-viewer.compone
  * [LoggingViewerSearchComponent](LoggingViewerSearchComponent.html).
  */
 @Component({
-    selector: "ionic-logging-viewer-modal",
-    templateUrl: "./logging-viewer-modal.component.html",
-    styleUrls: ["./logging-viewer-modal.component.scss"],
-    imports: [IonicModule, NgIf, LoggingViewerSearchComponent, LoggingViewerLevelsComponent, LoggingViewerComponent]
+	selector: "ionic-logging-viewer-modal",
+	templateUrl: "./logging-viewer-modal.component.html",
+	styleUrls: ["./logging-viewer-modal.component.scss"],
+	imports: [IonicModule, NgIf, LoggingViewerSearchComponent, LoggingViewerLevelsComponent, LoggingViewerComponent]
 })
 export class LoggingViewerModalComponent implements OnInit {
+
+	private platform = inject(Platform);
+	private alertController = inject(AlertController);
+	private modalController = inject(ModalController);
+	private loggingService = inject(LoggingService);
 
 	private static languageEn = "en";
 	private static languageDe = "de";
@@ -67,17 +72,13 @@ export class LoggingViewerModalComponent implements OnInit {
 	/**
 	 * Creates a new instance of the component.
 	 */
-	constructor(
-		platform: Platform,
-		private alertController: AlertController,
-		private modalController: ModalController,
-		private loggingService: LoggingService) {
-
-		this.logger = loggingService.getLogger("Ionic.Logging.Viewer.Modal.Component");
+	constructor() {
+		this.logger = this.
+			loggingService.getLogger("Ionic.Logging.Viewer.Modal.Component");
 		const methodName = "ctor";
 		this.logger.entry(methodName);
 
-		this.isAndroid = platform.is("android");
+		this.isAndroid = this.platform.is("android");
 		addIcons({ closeCircle, trashOutline });
 
 		this.logger.exit(methodName);

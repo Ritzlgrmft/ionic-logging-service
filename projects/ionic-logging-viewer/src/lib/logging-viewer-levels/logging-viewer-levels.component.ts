@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit, inject } from "@angular/core";
 import { Subscription } from "rxjs";
 
 import { Logger, LoggingService } from "ionic-logging-service";
@@ -16,12 +16,15 @@ import { NgFor } from "@angular/common";
  * &lt;ionic-logging-viewer-levels>&lt;/ionic-logging-viewer-levels>
  */
 @Component({
-    selector: "ionic-logging-viewer-levels",
-    templateUrl: "./logging-viewer-levels.component.html",
-    styleUrls: ["./logging-viewer-levels.component.scss"],
-    imports: [IonicModule, FormsModule, NgFor]
+	selector: "ionic-logging-viewer-levels",
+	templateUrl: "./logging-viewer-levels.component.html",
+	styleUrls: ["./logging-viewer-levels.component.scss"],
+	imports: [IonicModule, FormsModule, NgFor]
 })
 export class LoggingViewerLevelsComponent implements OnInit, OnDestroy {
+
+	private loggingService = inject(LoggingService);
+	private loggingViewerFilterService = inject(LoggingViewerFilterService);
 
 	/**
 	 * Log levels used for filtering: DEBUG, INFO, WARN, ERROR
@@ -39,11 +42,8 @@ export class LoggingViewerLevelsComponent implements OnInit, OnDestroy {
 	/**
 	 * Creates a new instance of the component.
 	 */
-	constructor(
-		loggingService: LoggingService,
-		private loggingViewerFilterService: LoggingViewerFilterService) {
-
-		this.logger = loggingService.getLogger("Ionic.Logging.Viewer.Levels.Component");
+	constructor() {
+		this.logger = this.loggingService.getLogger("Ionic.Logging.Viewer.Levels.Component");
 		const methodName = "ctor";
 		this.logger.entry(methodName);
 
