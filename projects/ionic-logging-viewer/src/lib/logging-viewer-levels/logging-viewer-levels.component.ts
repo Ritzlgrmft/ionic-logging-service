@@ -85,7 +85,9 @@ export class LoggingViewerLevelsComponent implements OnInit, OnDestroy {
 		const methodName = "ngOnDestroy";
 		this.logger.entry(methodName);
 
-		this.filterChangedSubscription.unsubscribe();
+		if (this.filterChangedSubscription) {
+			this.filterChangedSubscription.unsubscribe();
+		}
 
 		this.logger.exit(methodName);
 	}

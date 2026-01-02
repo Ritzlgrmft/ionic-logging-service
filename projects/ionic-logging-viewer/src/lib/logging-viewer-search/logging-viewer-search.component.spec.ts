@@ -20,16 +20,16 @@ describe("LoggingViewerSearchComponent", () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-    imports: [
-        FormsModule,
-        IonicModule,
-        LoggingViewerSearchComponent,
-    ],
-    providers: [
-        { provide: LoggingService, useValue: loggingServiceStub },
-        LoggingViewerFilterService
-    ]
-})
+			imports: [
+				FormsModule,
+				IonicModule,
+				LoggingViewerSearchComponent,
+			],
+			providers: [
+				{ provide: LoggingService, useValue: loggingServiceStub },
+				LoggingViewerFilterService
+			]
+		})
 			.compileComponents();
 	}));
 
@@ -77,13 +77,6 @@ describe("LoggingViewerSearchComponent", () => {
 	});
 
 	describe("ngOnInit", () => {
-
-		it("use default, if no value for placeholder", () => {
-
-			fixture.detectChanges();
-
-			expect(component.placeholder).toBe("Search");
-		});
 
 		it("given value for placeholder", () => {
 

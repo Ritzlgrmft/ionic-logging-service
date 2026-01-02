@@ -29,15 +29,15 @@ describe("LoggingViewerComponent", () => {
 	beforeEach(waitForAsync(() => {
 		TestBed
 			.configureTestingModule({
-    imports: [
-        IonicModule,
-        LoggingViewerComponent,
-    ],
-    providers: [
-        { provide: LoggingService, useValue: loggingServiceStub },
-        LoggingViewerFilterService,
-    ],
-})
+				imports: [
+					IonicModule,
+					LoggingViewerComponent,
+				],
+				providers: [
+					{ provide: LoggingService, useValue: loggingServiceStub },
+					LoggingViewerFilterService,
+				],
+			})
 			.compileComponents();
 	}));
 
@@ -284,6 +284,9 @@ describe("LoggingViewerComponent", () => {
 
 		it("local storage empty no log messages", () => {
 
+			fixture.componentRef.setInput("localStorageKeys", "xxx");
+			fixture.detectChanges();
+
 			logMessagesFromLocalStorage.splice(0, logMessagesFromLocalStorage.length);
 			logMessages.push({
 				level: "DEBUG",
@@ -292,7 +295,6 @@ describe("LoggingViewerComponent", () => {
 				methodName: "myMethod",
 				timeStamp: new Date(),
 			});
-			component.localStorageKeys = "xxx";
 			component.loadLogMessages();
 			component.filterLogMessages();
 
@@ -301,6 +303,9 @@ describe("LoggingViewerComponent", () => {
 
 		it("local storage with log messages", () => {
 
+			fixture.componentRef.setInput("localStorageKeys", "xxx");
+			fixture.detectChanges();
+			
 			logMessagesFromLocalStorage.splice(0, logMessagesFromLocalStorage.length);
 			logMessagesFromLocalStorage.push({
 				level: "DEBUG",
@@ -316,7 +321,6 @@ describe("LoggingViewerComponent", () => {
 				methodName: "myMethod",
 				timeStamp: new Date(),
 			});
-			component.localStorageKeys = "xxx";
 			component.loadLogMessages();
 			component.filterLogMessages();
 

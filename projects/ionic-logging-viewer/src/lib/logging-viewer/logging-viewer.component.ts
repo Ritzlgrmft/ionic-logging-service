@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, Input, inject } from "@angular/core";
+import { Component, OnDestroy, OnInit, Input, inject, input } from "@angular/core";
 import { Subscription } from "rxjs";
 
 import { Logger, LoggingService, LogLevelConverter, LogMessage } from "ionic-logging-service";
@@ -28,8 +28,7 @@ export class LoggingViewerComponent implements OnInit, OnDestroy {
 	/**
 	 * Comma-separated list of localStorageKeys. If set, the logs get loaded from localStorage instead of memory.
 	 */
-	@Input()
-	public localStorageKeys: string;
+	public readonly localStorageKeys = input<string>(undefined);
 
 	/**
 	 * Log messages which fulfill the filter condition.
@@ -87,8 +86,12 @@ export class LoggingViewerComponent implements OnInit, OnDestroy {
 		const methodName = "ngOnDestroy";
 		this.logger.entry(methodName);
 
-		this.logMessagesChangedSubscription.unsubscribe();
-		this.filterChangedSubscription.unsubscribe();
+		if (this.logMessagesChangedSubscription) {
+			this.logMessagesChangedSubscription.unsubscribe();
+		}
+		if (this.filterChangedSubscription) {
+			this.filterChangedSubscription.unsubscribe();
+		}
 
 		this.logger.exit(methodName);
 	}
@@ -135,9 +138,9 @@ export class LoggingViewerComponent implements OnInit, OnDestroy {
 	 * For unit test purposes mainly.
 	 */
 	public loadLogMessages(): void {
-		if (this.localStorageKeys) {
+		if (this.localStorageKeys()) {
 			this.logMessages = [];
-			for (const localStorageKey of this.localStorageKeys.split(",")) {
+			for (const localStorageKey of this.localStorageKeys().split(",")) {
 				this.logMessages = this.logMessages.concat(this.loggingService.getLogMessagesFromLocalStorage(localStorageKey));
 			}
 			this.logMessages = this.logMessages.sort((a, b) => a.timeStamp.getTime() - b.timeStamp.getTime());

@@ -10,7 +10,9 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    provideIonicAngular(),
+    provideIonicAngular({
+      useSetInputAPI: true,
+    }),
     provideRouter(routes),
     provideAppInitializer(() => {
       const loggingService = inject(LoggingService);

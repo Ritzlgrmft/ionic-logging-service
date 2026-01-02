@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, inject } from "@angular/core";
+import { Component, OnInit, Input, inject, input } from "@angular/core";
 
 import { ModalController, Platform, AlertController, IonicModule } from "@ionic/angular";
 
@@ -38,6 +38,8 @@ export class LoggingViewerModalComponent implements OnInit {
 	 * Language to be used for the modal.
 	 * Currently supported: en, de
 	 */
+	// TODO: Skipped for migration because:
+	//  Your application code writes to the input. This prevents migration.
 	@Input()
 	public language: string;
 
@@ -45,20 +47,20 @@ export class LoggingViewerModalComponent implements OnInit {
 	 * Translation to be used for the modal.
 	 * If specified, the language is ignored.
 	 */
+	// TODO: Skipped for migration because:
+	//  Your application code writes to the input. This prevents migration.
 	@Input()
 	public translation: LoggingViewerTranslation;
 
 	/**
 	 * Comma-separated list of localStorageKeys. If set, the logs get loaded from localStorage instead of memory.
 	 */
-	@Input()
-	public localStorageKeys: string;
+	public readonly localStorageKeys = input<string>(undefined);
 
 	/**
 	 * Flag showing a delete button, which removes all existing log messages.
 	 */
-	@Input()
-	public allowClearLogs: boolean;
+	public readonly allowClearLogs = input<boolean>(true);
 
 	/**
 	 * Flag controlling which close button will be shown.
@@ -161,8 +163,8 @@ export class LoggingViewerModalComponent implements OnInit {
 	 * Clear logs.
 	 */
 	public clearLogs(): void {
-		if (this.localStorageKeys) {
-			for (const localStorageKey of this.localStorageKeys.split(",")) {
+		if (this.localStorageKeys()) {
+			for (const localStorageKey of this.localStorageKeys().split(",")) {
 				this.loggingService.removeLogMessagesFromLocalStorage(localStorageKey);
 			}
 		} else {

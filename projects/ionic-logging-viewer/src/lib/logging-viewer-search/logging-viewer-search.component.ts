@@ -29,6 +29,8 @@ export class LoggingViewerSearchComponent implements OnInit, OnDestroy {
 	/**
 	 * Placeholder to be shown in the empty search bar.
 	 */
+	// TODO: Skipped for migration because:
+	//  Your application code writes to the input. This prevents migration.
 	@Input()
 	public placeholder: string;
 
@@ -60,9 +62,6 @@ export class LoggingViewerSearchComponent implements OnInit, OnDestroy {
 		const methodName = "ngOnInit";
 		this.logger.entry(methodName);
 
-		if (!this.placeholder) {
-			this.placeholder = "Search";
-		}
 		this.search = this.loggingViewerFilterService.search;
 
 		// subscribe to loggingViewerFilterService.filterChanged event, to refresh,
@@ -81,7 +80,9 @@ export class LoggingViewerSearchComponent implements OnInit, OnDestroy {
 		const methodName = "ngOnDestroy";
 		this.logger.entry(methodName);
 
-		this.filterChangedSubscription.unsubscribe();
+		if (this.filterChangedSubscription) {
+			this.filterChangedSubscription.unsubscribe();
+		}
 
 		this.logger.exit(methodName);
 	}

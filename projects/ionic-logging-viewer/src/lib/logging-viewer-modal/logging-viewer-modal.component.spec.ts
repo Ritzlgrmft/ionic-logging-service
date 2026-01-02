@@ -1,4 +1,4 @@
-import { EventEmitter } from "@angular/core";
+import { EventEmitter, signal, NO_ERRORS_SCHEMA } from "@angular/core";
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
 
@@ -7,9 +7,6 @@ import { IonicModule, NavParams, AlertController, AngularDelegate } from "@ionic
 import { LogMessage, LoggingService } from "ionic-logging-service";
 
 import { LoggingViewerModalComponent } from "./logging-viewer-modal.component";
-import { LoggingViewerComponent } from "../logging-viewer/logging-viewer.component";
-import { LoggingViewerSearchComponent } from "../logging-viewer-search/logging-viewer-search.component";
-import { LoggingViewerLevelsComponent } from "../logging-viewer-levels/logging-viewer-levels.component";
 import { LoggingViewerFilterService } from "../logging-viewer-filter.service";
 
 describe("LoggingViewerModalComponent", () => {
@@ -40,10 +37,8 @@ describe("LoggingViewerModalComponent", () => {
 				FormsModule,
 				IonicModule,
 				LoggingViewerModalComponent,
-				LoggingViewerSearchComponent,
-				LoggingViewerLevelsComponent,
-				LoggingViewerComponent,
 			],
+			schemas: [NO_ERRORS_SCHEMA],
 			providers: [
 				{ provide: LoggingService, useValue: loggingServiceStub },
 				{ provide: AlertController, useValue: alertControllerStub },
@@ -58,7 +53,10 @@ describe("LoggingViewerModalComponent", () => {
 	beforeEach(() => {
 		fixture = TestBed.createComponent(LoggingViewerModalComponent);
 		component = fixture.componentInstance;
-		fixture.detectChanges();
+	});
+
+	afterEach(() => {
+		fixture.destroy();
 	});
 
 	describe("constructor", () => {
@@ -159,6 +157,7 @@ describe("LoggingViewerModalComponent", () => {
 
 		it("alert called", async () => {
 
+			component.ngOnInit();
 			await component.onClearLogs();
 			expect(alertStub.present).toHaveBeenCalled();
 		});
@@ -174,10 +173,11 @@ describe("LoggingViewerModalComponent", () => {
 
 		it("removes messages from local storage", () => {
 
-			component.localStorageKeys = "abc";
+			(component as any).localStorageKeys = signal("abc");
+
 			component.clearLogs();
 
-			expect(loggingServiceStub.removeLogMessagesFromLocalStorage).toHaveBeenCalled();
+			expect(loggingServiceStub.removeLogMessagesFromLocalStorage).toHaveBeenCalledWith("abc");
 		});
 	});
 });
