@@ -80,11 +80,10 @@ describe("LoggingViewerSearchComponent", () => {
 
 		it("given value for placeholder", () => {
 
-			component.placeholder = "abc";
-
+			fixture.componentRef.setInput("placeholder", "abc");
 			fixture.detectChanges();
 
-			expect(component.placeholder).toBe("abc");
+			expect(component.placeholder()).toBe("abc");
 		});
 	});
 });

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, inject } from "@angular/core";
+import { Component, OnInit, OnDestroy, inject, input, effect } from "@angular/core";
 
 import { Subscription } from "rxjs";
 
@@ -29,10 +29,7 @@ export class LoggingViewerSearchComponent implements OnInit, OnDestroy {
 	/**
 	 * Placeholder to be shown in the empty search bar.
 	 */
-	// TODO: Skipped for migration because:
-	//  Your application code writes to the input. This prevents migration.
-	@Input()
-	public placeholder: string;
+	public readonly placeholder = input<string>(undefined);
 
 	/**
 	 * Current search value.
