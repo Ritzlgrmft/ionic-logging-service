@@ -99,9 +99,10 @@ describe("LoggingViewerModalComponent", () => {
 
 		it("known language, no translation: title is translated", () => {
 
+			fixture.componentRef.setInput("language", "de");
+			fixture.componentRef.setInput("translation", undefined);
+
 			component.ngOnInit();
-			component.language = "de";
-			component.translation = undefined;
 
 			const translation = component.getTranslation();
 
@@ -110,9 +111,10 @@ describe("LoggingViewerModalComponent", () => {
 
 		it("unknown language, no translation: english translation is used", () => {
 
+			fixture.componentRef.setInput("language", "fr");
+			fixture.componentRef.setInput("translation", undefined);
+
 			component.ngOnInit();
-			component.language = "fr";
-			component.translation = undefined;
 
 			const translation = component.getTranslation();
 
@@ -121,9 +123,10 @@ describe("LoggingViewerModalComponent", () => {
 
 		it("no language, no translation: english translation is used", () => {
 
+			fixture.componentRef.setInput("language", undefined);
+			fixture.componentRef.setInput("translation", undefined);
+
 			component.ngOnInit();
-			component.language = undefined;
-			component.translation = undefined;
 
 			const translation = component.getTranslation();
 
@@ -132,9 +135,10 @@ describe("LoggingViewerModalComponent", () => {
 
 		it("no language, but translation: translation is used", () => {
 
+			fixture.componentRef.setInput("language", undefined);
+			fixture.componentRef.setInput("translation", { title: "ttt", cancel: "bc", searchPlaceholder: "sp", ok: "oo", confirmDelete: "cd" });
+
 			component.ngOnInit();
-			component.language = undefined;
-			component.translation = { title: "ttt", cancel: "bc", searchPlaceholder: "sp", ok: "oo", confirmDelete: "cd" };
 
 			const translation = component.getTranslation();
 
@@ -143,9 +147,10 @@ describe("LoggingViewerModalComponent", () => {
 
 		it("language and translation: translation is used", () => {
 
+			fixture.componentRef.setInput("language", "en");
+			fixture.componentRef.setInput("translation", { title: "ttt", cancel: "bc", searchPlaceholder: "sp", ok: "oo", confirmDelete: "cd" });
+
 			component.ngOnInit();
-			component.language = "en";
-			component.translation = { title: "ttt", cancel: "bc", searchPlaceholder: "sp", ok: "oo", confirmDelete: "cd" };
 
 			const translation = component.getTranslation();
 

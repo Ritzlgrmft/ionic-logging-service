@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, inject, input } from "@angular/core";
+import { Component, OnInit, inject, input } from "@angular/core";
 
 import { ModalController, Platform, AlertController, IonicModule } from "@ionic/angular";
 
@@ -38,19 +38,13 @@ export class LoggingViewerModalComponent implements OnInit {
 	 * Language to be used for the modal.
 	 * Currently supported: en, de
 	 */
-	// TODO: Skipped for migration because:
-	//  Your application code writes to the input. This prevents migration.
-	@Input()
-	public language: string;
+	public readonly language = input<string>(undefined);
 
 	/**
 	 * Translation to be used for the modal.
 	 * If specified, the language is ignored.
 	 */
-	// TODO: Skipped for migration because:
-	//  Your application code writes to the input. This prevents migration.
-	@Input()
-	public translation: LoggingViewerTranslation;
+	public readonly translation = input<LoggingViewerTranslation>(undefined);
 
 	/**
 	 * Comma-separated list of localStorageKeys. If set, the logs get loaded from localStorage instead of memory.
@@ -179,10 +173,12 @@ export class LoggingViewerModalComponent implements OnInit {
 	 * - English translation, otherwise
 	 */
 	public getTranslation(): LoggingViewerTranslation {
-		if (typeof this.translation !== "undefined") {
-			return this.translation;
-		} else if (typeof this.language !== "undefined" && typeof this.translations[this.language] === "object") {
-			return this.translations[this.language];
+		const language = this.language();
+		const translation = this.translation();
+		if (typeof translation !== "undefined") {
+			return translation;
+		} else if (typeof language !== "undefined" && typeof this.translations[language] === "object") {
+			return this.translations[language];
 		} else {
 			return this.translations[LoggingViewerModalComponent.languageEn];
 		}
