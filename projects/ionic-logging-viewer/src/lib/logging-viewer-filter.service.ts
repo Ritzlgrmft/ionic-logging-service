@@ -1,4 +1,4 @@
-﻿import { EventEmitter, Injectable, inject } from "@angular/core";
+﻿import { Injectable, inject, signal } from "@angular/core";
 
 import { Logger, LoggingService } from "ionic-logging-service";
 
@@ -12,14 +12,9 @@ export class LoggingViewerFilterService {
 
 	private loggingService = inject(LoggingService);
 
-	/**
-	 * Event triggered when the filter was changed.
-	 */
-	public filterChanged: EventEmitter<void>;
-
 	private logger: Logger;
-	private levelValue: string;
-	private searchValue: string;
+	private levelValue = signal("DEBUG");
+	private searchValue = signal("");
 
 	/**
 	 * Creates a new instance of the service.
@@ -31,10 +26,6 @@ export class LoggingViewerFilterService {
 		const methodName = "ctor";
 		this.logger.entry(methodName);
 
-		this.levelValue = "DEBUG";
-		this.searchValue = "";
-		this.filterChanged = new EventEmitter<void>();
-
 		this.logger.exit(methodName);
 	}
 
@@ -44,17 +35,16 @@ export class LoggingViewerFilterService {
 	 * @return log level
 	 */
 	public get level(): string {
-		return this.levelValue;
+		return this.levelValue();
 	}
 
 	/**
-	 * Sets the new log level and emits a filterChanged event.
+	 * Sets the new log level and emits a signal.
 	 *
-	 * @param value new slog level
+	 * @param value new log level
 	 */
 	public set level(value: string) {
-		this.levelValue = value;
-		this.filterChanged.emit();
+		this.levelValue.set(value);
 	}
 
 	/**
@@ -63,16 +53,15 @@ export class LoggingViewerFilterService {
 	 * @return search value
 	 */
 	public get search(): string {
-		return this.searchValue;
+		return this.searchValue();
 	}
 
 	/**
-	 * Sets the new search value and emits a filterChanged event.
+	 * Sets the new search value and emits a signal.
 	 *
 	 * @param value new search value
 	 */
 	public set search(value: string) {
-		this.searchValue = value;
-		this.filterChanged.emit();
+		this.searchValue.set(value);
 	}
 }

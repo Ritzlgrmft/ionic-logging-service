@@ -51,13 +51,13 @@ describe("LoggingViewerSearchComponent", () => {
 		});
 	});
 
-	describe("filterChangedSubscription", () => {
+	describe("search updates", () => {
 
-		it("event updates search value", () => {
-
-			fixture.detectChanges();
+		it("signal updates search value", () => {
 
 			loggingViewerFilterService.search += "X";
+
+			fixture.detectChanges();
 
 			expect(component.search).toBe(loggingViewerFilterService.search);
 		});

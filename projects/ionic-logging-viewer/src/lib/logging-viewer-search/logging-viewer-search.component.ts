@@ -1,7 +1,5 @@
 import { Component, OnInit, OnDestroy, inject, input, effect } from "@angular/core";
 
-import { Subscription } from "rxjs";
-
 import { LoggingService, Logger } from "ionic-logging-service";
 
 import { LoggingViewerFilterService } from "../logging-viewer-filter.service";
@@ -37,7 +35,6 @@ export class LoggingViewerSearchComponent implements OnInit, OnDestroy {
 	public search: string;
 
 	private logger: Logger;
-	private filterChangedSubscription: Subscription;
 
 	/**
 	 * Creates a new instance of the component.
@@ -46,6 +43,12 @@ export class LoggingViewerSearchComponent implements OnInit, OnDestroy {
 		this.logger = this.loggingService.getLogger("Ionic.Logging.Viewer.Search.Component");
 		const methodName = "ctor";
 		this.logger.entry(methodName);
+
+		// handle signals of loggingViewerFilterService, to refresh,
+		// when someone else modifies the search value
+		effect(() => {
+			this.search = this.loggingViewerFilterService.search;
+		});
 
 		this.logger.exit(methodName);
 	}
@@ -59,14 +62,6 @@ export class LoggingViewerSearchComponent implements OnInit, OnDestroy {
 		const methodName = "ngOnInit";
 		this.logger.entry(methodName);
 
-		this.search = this.loggingViewerFilterService.search;
-
-		// subscribe to loggingViewerFilterService.filterChanged event, to refresh,
-		// when someone else modifies the search value
-		this.filterChangedSubscription = this.loggingViewerFilterService.filterChanged.subscribe(() => {
-			this.search = this.loggingViewerFilterService.search;
-		});
-
 		this.logger.exit(methodName);
 	}
 
@@ -76,10 +71,6 @@ export class LoggingViewerSearchComponent implements OnInit, OnDestroy {
 	public ngOnDestroy(): void {
 		const methodName = "ngOnDestroy";
 		this.logger.entry(methodName);
-
-		if (this.filterChangedSubscription) {
-			this.filterChangedSubscription.unsubscribe();
-		}
 
 		this.logger.exit(methodName);
 	}

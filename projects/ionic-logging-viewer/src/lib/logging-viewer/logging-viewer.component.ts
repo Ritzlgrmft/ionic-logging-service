@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, Input, inject, input } from "@angular/core";
+import { Component, OnDestroy, OnInit, inject, input, effect } from "@angular/core";
 import { Subscription } from "rxjs";
 
 import { Logger, LoggingService, LogLevelConverter, LogMessage } from "ionic-logging-service";
@@ -38,7 +38,6 @@ export class LoggingViewerComponent implements OnInit, OnDestroy {
 	private logger: Logger;
 	private logMessages: LogMessage[];
 	private logMessagesChangedSubscription: Subscription;
-	private filterChangedSubscription: Subscription;
 
 	/**
 	 * Creates a new instance of the component.
@@ -47,6 +46,11 @@ export class LoggingViewerComponent implements OnInit, OnDestroy {
 		this.logger = this.loggingService.getLogger("Ionic.Logging.Viewer.Component");
 		const methodName = "ctor";
 		this.logger.entry(methodName);
+
+		// handle signals, to refresh the messages, when filter is modified
+		effect(() => {
+			this.filterLogMessages(this.loggingViewerFilterService.level, this.loggingViewerFilterService.search);
+		});
 
 		this.logger.exit(methodName);
 	}
@@ -63,17 +67,12 @@ export class LoggingViewerComponent implements OnInit, OnDestroy {
 		this.logger.entry(methodName);
 
 		this.loadLogMessages();
-		this.filterLogMessages();
+		this.filterLogMessages(this.loggingViewerFilterService.level, this.loggingViewerFilterService.search);
 
 		// subscribe to loggingService.logMessagesChanged event, to refresh, when new message is logged
 		this.logMessagesChangedSubscription = this.loggingService.logMessagesChanged.subscribe(async () => {
 			this.loadLogMessages();
-			this.filterLogMessages();
-		});
-
-		// subscribe to loggingViewerFilterService.filterChanged event, to refresh, when filter is modified
-		this.filterChangedSubscription = this.loggingViewerFilterService.filterChanged.subscribe(() => {
-			this.filterLogMessages();
+			this.filterLogMessages(this.loggingViewerFilterService.level, this.loggingViewerFilterService.search);
 		});
 
 		this.logger.exit(methodName);
@@ -89,9 +88,6 @@ export class LoggingViewerComponent implements OnInit, OnDestroy {
 		if (this.logMessagesChangedSubscription) {
 			this.logMessagesChangedSubscription.unsubscribe();
 		}
-		if (this.filterChangedSubscription) {
-			this.filterChangedSubscription.unsubscribe();
-		}
 
 		this.logger.exit(methodName);
 	}
@@ -99,9 +95,9 @@ export class LoggingViewerComponent implements OnInit, OnDestroy {
 	/**
 	 * Filter the log messages.
 	 */
-	public filterLogMessages(): void {
+	public filterLogMessages(level: string, search: string): void {
 		this.logMessagesForDisplay = this.logMessages.filter(
-			(message) => this.filterLogMessagesByLevel(message) && this.filterLogMessagesBySearch(message));
+			(message) => this.filterLogMessagesByLevel(message, level) && this.filterLogMessagesBySearch(message, search));
 	}
 
 	/**
@@ -110,9 +106,8 @@ export class LoggingViewerComponent implements OnInit, OnDestroy {
 	 * @param message the log message to check
 	 * @returns true if check was successful
 	 */
-	public filterLogMessagesByLevel(message: LogMessage): boolean {
-		const levelValue = this.loggingViewerFilterService.level;
-		return LogLevelConverter.levelFromString(message.level) >= LogLevelConverter.levelFromString(levelValue);
+	public filterLogMessagesByLevel(message: LogMessage, level: string): boolean {
+		return LogLevelConverter.levelFromString(message.level) >= LogLevelConverter.levelFromString(level);
 	}
 
 	/**
@@ -126,11 +121,11 @@ export class LoggingViewerComponent implements OnInit, OnDestroy {
 	 * @param message the log message to check
 	 * @returns true if check was successful
 	 */
-	public filterLogMessagesBySearch(message: LogMessage): boolean {
-		const searchValue = new RegExp(this.loggingViewerFilterService.search, "i");
-		return message.logger.search(searchValue) >= 0 ||
-			message.methodName.search(searchValue) >= 0 ||
-			message.message.join("|").search(searchValue) >= 0;
+	public filterLogMessagesBySearch(message: LogMessage, search: string): boolean {
+		const searchRegex = new RegExp(search, "i");
+		return message.logger.search(searchRegex) >= 0 ||
+			message.methodName.search(searchRegex) >= 0 ||
+			message.message.join("|").search(searchRegex) >= 0;
 	}
 
 	/**

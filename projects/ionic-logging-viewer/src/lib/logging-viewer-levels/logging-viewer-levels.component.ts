@@ -1,5 +1,4 @@
-import { Component, OnDestroy, OnInit, inject } from "@angular/core";
-import { Subscription } from "rxjs";
+import { Component, OnDestroy, OnInit, effect, inject } from "@angular/core";
 
 import { Logger, LoggingService } from "ionic-logging-service";
 
@@ -37,7 +36,6 @@ export class LoggingViewerLevelsComponent implements OnInit, OnDestroy {
 	public selectedLevel: string;
 
 	private logger: Logger;
-	private filterChangedSubscription: Subscription;
 
 	/**
 	 * Creates a new instance of the component.
@@ -55,6 +53,12 @@ export class LoggingViewerLevelsComponent implements OnInit, OnDestroy {
 			"ERROR",
 		);
 
+		// handle signals of loggingViewerFilterService, to refresh,
+		// when someone else modifies the level
+		effect(() => {
+			this.selectedLevel = this.loggingViewerFilterService.level;
+		});
+
 		this.logger.exit(methodName);
 	}
 
@@ -67,14 +71,6 @@ export class LoggingViewerLevelsComponent implements OnInit, OnDestroy {
 		const methodName = "ngOnInit";
 		this.logger.entry(methodName);
 
-		this.selectedLevel = this.loggingViewerFilterService.level;
-
-		// subscribe to loggingViewerFilterService.filterChanged event, to refresh,
-		// when someone else modifies the level
-		this.filterChangedSubscription = this.loggingViewerFilterService.filterChanged.subscribe(() => {
-			this.selectedLevel = this.loggingViewerFilterService.level;
-		});
-
 		this.logger.exit(methodName);
 	}
 
@@ -84,10 +80,6 @@ export class LoggingViewerLevelsComponent implements OnInit, OnDestroy {
 	public ngOnDestroy(): void {
 		const methodName = "ngOnDestroy";
 		this.logger.entry(methodName);
-
-		if (this.filterChangedSubscription) {
-			this.filterChangedSubscription.unsubscribe();
-		}
 
 		this.logger.exit(methodName);
 	}

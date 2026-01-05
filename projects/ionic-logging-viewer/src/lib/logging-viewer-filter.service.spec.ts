@@ -71,27 +71,4 @@ describe("LoggingViewerFilterService", () => {
 		});
 	});
 
-	describe("filterChanged: EventEmitter<void>", () => {
-
-		it("new level gets emitted", (done: () => void) => {
-
-			loggingViewerFilterService.filterChanged.subscribe(() => {
-				expect(loggingViewerFilterService.level).toBe("WARN");
-				done();
-			});
-
-			loggingViewerFilterService.level = "WARN";
-		});
-
-		it("new search gets emitted", (done: () => void) => {
-
-			loggingViewerFilterService.filterChanged.subscribe(() => {
-				expect(loggingViewerFilterService.search).toBe("ghi");
-				done();
-			});
-
-			loggingViewerFilterService.search = "ghi";
-		});
-	});
-
 });

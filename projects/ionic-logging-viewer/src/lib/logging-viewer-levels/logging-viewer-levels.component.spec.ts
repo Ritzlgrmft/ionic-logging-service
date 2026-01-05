@@ -22,16 +22,16 @@ describe("LoggingViewerLevelsComponent", () => {
 	beforeEach(waitForAsync(async () => {
 		await TestBed
 			.configureTestingModule({
-    imports: [
-        FormsModule,
-        IonicModule,
-        LoggingViewerLevelsComponent,
-    ],
-    providers: [
-        { provide: LoggingService, useValue: loggingServiceStub },
-        LoggingViewerFilterService,
-    ],
-})
+				imports: [
+					FormsModule,
+					IonicModule,
+					LoggingViewerLevelsComponent,
+				],
+				providers: [
+					{ provide: LoggingService, useValue: loggingServiceStub },
+					LoggingViewerFilterService,
+				],
+			})
 			.compileComponents();
 	}));
 
@@ -53,17 +53,17 @@ describe("LoggingViewerLevelsComponent", () => {
 		});
 	});
 
-	describe("filterChangedSubscription", () => {
+	describe("level updates", () => {
 
-		it("event updates selected level", () => {
-
-			fixture.detectChanges();
+		it("signal updates selected level", () => {
 
 			if (loggingViewerFilterService.level === "INFO") {
 				loggingViewerFilterService.level = "DEBUG";
 			} else {
 				loggingViewerFilterService.level = "INFO";
 			}
+
+			fixture.detectChanges();
 
 			expect(component.selectedLevel).toBe(loggingViewerFilterService.level);
 		});

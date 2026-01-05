@@ -106,10 +106,8 @@ describe("LoggingViewerComponent", () => {
 				methodName: "myMethod",
 				timeStamp: new Date(),
 			};
-			loggingViewerFilterService.level = "DEBUG";
-			loggingViewerFilterService.search = "";
 
-			const result = component.filterLogMessagesByLevel(logMessage);
+			const result = component.filterLogMessagesByLevel(logMessage, "DEBUG");
 
 			expect(result).toBeTruthy();
 		});
@@ -123,10 +121,8 @@ describe("LoggingViewerComponent", () => {
 				methodName: "myMethod",
 				timeStamp: new Date(),
 			};
-			loggingViewerFilterService.level = "DEBUG";
-			loggingViewerFilterService.search = "";
 
-			const result = component.filterLogMessagesByLevel(logMessage);
+			const result = component.filterLogMessagesByLevel(logMessage, "DEBUG");
 
 			expect(result).toBeTruthy();
 		});
@@ -140,10 +136,8 @@ describe("LoggingViewerComponent", () => {
 				methodName: "myMethod",
 				timeStamp: new Date(),
 			};
-			loggingViewerFilterService.level = "INFO";
-			loggingViewerFilterService.search = "";
 
-			const result = component.filterLogMessagesByLevel(logMessage);
+			const result = component.filterLogMessagesByLevel(logMessage, "INFO");
 
 			expect(result).toBeFalsy();
 		});
@@ -160,9 +154,8 @@ describe("LoggingViewerComponent", () => {
 				methodName: "myMethod",
 				timeStamp: new Date(),
 			};
-			loggingViewerFilterService.search = "";
 
-			const result = component.filterLogMessagesBySearch(logMessage);
+			const result = component.filterLogMessagesBySearch(logMessage, "");
 
 			expect(result).toBeTruthy();
 		});
@@ -176,9 +169,8 @@ describe("LoggingViewerComponent", () => {
 				methodName: "myMethod",
 				timeStamp: new Date(),
 			};
-			loggingViewerFilterService.search = "yLog";
 
-			const result = component.filterLogMessagesBySearch(logMessage);
+			const result = component.filterLogMessagesBySearch(logMessage, "yLog");
 
 			expect(result).toBeTruthy();
 		});
@@ -192,9 +184,8 @@ describe("LoggingViewerComponent", () => {
 				methodName: "myMethod",
 				timeStamp: new Date(),
 			};
-			loggingViewerFilterService.search = "ylog";
 
-			const result = component.filterLogMessagesBySearch(logMessage);
+			const result = component.filterLogMessagesBySearch(logMessage, "ylog");
 
 			expect(result).toBeTruthy();
 		});
@@ -208,9 +199,8 @@ describe("LoggingViewerComponent", () => {
 				methodName: "myMethod",
 				timeStamp: new Date(),
 			};
-			loggingViewerFilterService.search = "yMeth";
 
-			const result = component.filterLogMessagesBySearch(logMessage);
+			const result = component.filterLogMessagesBySearch(logMessage, "yMeth");
 
 			expect(result).toBeTruthy();
 		});
@@ -224,9 +214,8 @@ describe("LoggingViewerComponent", () => {
 				methodName: "myMethod",
 				timeStamp: new Date(),
 			};
-			loggingViewerFilterService.search = "ymeth";
 
-			const result = component.filterLogMessagesBySearch(logMessage);
+			const result = component.filterLogMessagesBySearch(logMessage, "ymeth");
 
 			expect(result).toBeTruthy();
 		});
@@ -240,9 +229,8 @@ describe("LoggingViewerComponent", () => {
 				methodName: "myMethod",
 				timeStamp: new Date(),
 			};
-			loggingViewerFilterService.search = "yMes";
 
-			const result = component.filterLogMessagesBySearch(logMessage);
+			const result = component.filterLogMessagesBySearch(logMessage, "yMes");
 
 			expect(result).toBeTruthy();
 		});
@@ -256,9 +244,8 @@ describe("LoggingViewerComponent", () => {
 				methodName: "myMethod",
 				timeStamp: new Date(),
 			};
-			loggingViewerFilterService.search = "ymes";
 
-			const result = component.filterLogMessagesBySearch(logMessage);
+			const result = component.filterLogMessagesBySearch(logMessage, "ymes");
 
 			expect(result).toBeTruthy();
 		});
@@ -272,9 +259,8 @@ describe("LoggingViewerComponent", () => {
 				methodName: "myMethod",
 				timeStamp: new Date(),
 			};
-			loggingViewerFilterService.search = "xxx";
 
-			const result = component.filterLogMessagesBySearch(logMessage);
+			const result = component.filterLogMessagesBySearch(logMessage, "xxx");
 
 			expect(result).toBeFalsy();
 		});
@@ -296,7 +282,7 @@ describe("LoggingViewerComponent", () => {
 				timeStamp: new Date(),
 			});
 			component.loadLogMessages();
-			component.filterLogMessages();
+			component.filterLogMessages("DEBUG", "");
 
 			expect(component.logMessagesForDisplay.length).toBe(0);
 		});
@@ -305,7 +291,7 @@ describe("LoggingViewerComponent", () => {
 
 			fixture.componentRef.setInput("localStorageKeys", "xxx");
 			fixture.detectChanges();
-			
+
 			logMessagesFromLocalStorage.splice(0, logMessagesFromLocalStorage.length);
 			logMessagesFromLocalStorage.push({
 				level: "DEBUG",
@@ -322,7 +308,7 @@ describe("LoggingViewerComponent", () => {
 				timeStamp: new Date(),
 			});
 			component.loadLogMessages();
-			component.filterLogMessages();
+			component.filterLogMessages("DEBUG", "");
 
 			expect(component.logMessagesForDisplay.length).toBe(2);
 		});
