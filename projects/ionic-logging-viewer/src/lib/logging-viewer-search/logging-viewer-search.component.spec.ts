@@ -76,7 +76,7 @@ describe("LoggingViewerSearchComponent", () => {
 		});
 	});
 
-	describe("ngOnInit", () => {
+	describe("init", () => {
 
 		it("given value for placeholder", () => {
 

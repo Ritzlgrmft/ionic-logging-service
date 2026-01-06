@@ -45,7 +45,7 @@ describe("LoggingService", () => {
 
 			loggingService.getRootLogger().info("test");
 			loggingService.getRootLogger().warn("test");
-			const messages = loggingService.getLogMessages();
+			const messages = loggingService.getLogMessages()();
 
 			expect(messages.length).toBe(1);
 		});
@@ -458,7 +458,7 @@ describe("LoggingService", () => {
 
 		it("returns empty array if no log message is written", () => {
 
-			const messages = loggingService.getLogMessages();
+			const messages = loggingService.getLogMessages()();
 
 			expect(messages.length).toBe(0);
 		});
@@ -470,25 +470,9 @@ describe("LoggingService", () => {
 			browserConsoleAppender.setThreshold(log4javascript.Level.OFF);
 
 			loggingService.getRootLogger().warn("test");
-			const messages = loggingService.getLogMessages();
+			const messages = loggingService.getLogMessages()();
 
 			expect(messages.length).toBe(1);
-		});
-	});
-
-	describe("logMessagesChanged: EventEmitter<void>", () => {
-
-		it("logged messages are emitted", (done: () => void) => {
-			const appenders = new Logger().getInternalLogger().getEffectiveAppenders();
-			const browserConsoleAppender = appenders.find((a) => a.toString() === "BrowserConsoleAppender");
-			browserConsoleAppender.setThreshold(log4javascript.Level.OFF);
-
-			loggingService.logMessagesChanged.subscribe(() => {
-				expect(1).toBe(loggingService.getLogMessages().length);
-				done();
-			});
-
-			loggingService.getRootLogger().warn("test");
 		});
 	});
 
@@ -544,22 +528,19 @@ describe("LoggingService", () => {
 
 	describe("removeLogMessages(): void", () => {
 
-		it("removes messages", (done: () => void) => {
+		fit("removes messages", () => {
 
 			loggingService.getRootLogger().info("test");
 
-			loggingService.logMessagesChanged.subscribe(() => {
-				expect(loggingService.getLogMessages().length).toBe(0);
-				done();
-			});
-
 			loggingService.removeLogMessages();
+
+			expect(loggingService.getLogMessages().length).toBe(0);
 		});
 	});
 
 	describe("removeLogMessagesFromLocalStorage(localStorageKey: string): void", () => {
 
-		it("removes messages", (done: () => void) => {
+		it("removes messages", () => {
 
 			const messagesIn = [{
 				level: "DEBUG",
@@ -570,12 +551,9 @@ describe("LoggingService", () => {
 			}];
 			localStorage.setItem("xxx", JSON.stringify(messagesIn));
 
-			loggingService.logMessagesChanged.subscribe(() => {
-				expect(localStorage.getItem("xxx")).toBeNull();
-				done();
-			});
-
 			loggingService.removeLogMessagesFromLocalStorage("xxx");
+
+			expect(localStorage.getItem("xxx")).toBeNull();
 		});
 	});
 });

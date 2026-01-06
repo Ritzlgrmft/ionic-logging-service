@@ -1,4 +1,4 @@
-import { EventEmitter } from "@angular/core";
+import { EventEmitter, signal } from "@angular/core";
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { IonicModule } from "@ionic/angular";
 
@@ -11,9 +11,8 @@ describe("LoggingViewerComponent", () => {
 
 	let component: LoggingViewerComponent;
 	let fixture: ComponentFixture<LoggingViewerComponent>;
-	let loggingService: LoggingService;
 	let loggingViewerFilterService: LoggingViewerFilterService;
-	const logMessages: LogMessage[] = [];
+	const logMessages = signal<LogMessage[]>([]);
 	const logMessagesFromLocalStorage: LogMessage[] = [];
 
 	const loggerStub = jasmine.createSpyObj("logger", ["entry", "exit"]);
@@ -47,7 +46,6 @@ describe("LoggingViewerComponent", () => {
 
 		component = fixture.componentInstance;
 
-		loggingService = TestBed.inject(LoggingService);
 		loggingViewerFilterService = TestBed.inject(LoggingViewerFilterService);
 	});
 
@@ -64,8 +62,7 @@ describe("LoggingViewerComponent", () => {
 
 		it("level DEBUG, search empty", () => {
 
-			logMessages.splice(0, logMessages.length);
-			logMessages.push(
+			logMessages.set([
 				{
 					level: "DEBUG",
 					logger: "myLogger",
@@ -73,23 +70,22 @@ describe("LoggingViewerComponent", () => {
 					methodName: "myMethod",
 					timeStamp: new Date(),
 				}, {
-				level: "INFO",
-				logger: "myLogger",
-				message: ["myMessage", "xxx"],
-				methodName: "myMethod",
-				timeStamp: new Date(),
-			}, {
-				level: "INFO",
-				logger: "myLogger",
-				message: ["myMessage"],
-				methodName: "myMethod",
-				timeStamp: new Date(),
-			});
+					level: "INFO",
+					logger: "myLogger",
+					message: ["myMessage", "xxx"],
+					methodName: "myMethod",
+					timeStamp: new Date(),
+				}, {
+					level: "INFO",
+					logger: "myLogger",
+					message: ["myMessage"],
+					methodName: "myMethod",
+					timeStamp: new Date(),
+				}]);
 			loggingViewerFilterService.level = "INFO";
 			loggingViewerFilterService.search = "";
 
-			// logMessagesChanged calls indirectly filterLogMessages
-			loggingService.logMessagesChanged.emit();
+			component.filterLogMessages(logMessages(), loggingViewerFilterService.level, loggingViewerFilterService.search);
 
 			expect(component.logMessagesForDisplay.length).toBe(2);
 		});
@@ -274,15 +270,14 @@ describe("LoggingViewerComponent", () => {
 			fixture.detectChanges();
 
 			logMessagesFromLocalStorage.splice(0, logMessagesFromLocalStorage.length);
-			logMessages.push({
+			logMessages.set([{
 				level: "DEBUG",
 				logger: "myLogger",
 				message: ["myMessage"],
 				methodName: "myMethod",
 				timeStamp: new Date(),
-			});
-			component.loadLogMessages();
-			component.filterLogMessages("DEBUG", "");
+			}]);
+			component.filterLogMessages(logMessagesFromLocalStorage, "DEBUG", "");
 
 			expect(component.logMessagesForDisplay.length).toBe(0);
 		});
@@ -307,8 +302,7 @@ describe("LoggingViewerComponent", () => {
 				methodName: "myMethod",
 				timeStamp: new Date(),
 			});
-			component.loadLogMessages();
-			component.filterLogMessages("DEBUG", "");
+			component.filterLogMessages(logMessagesFromLocalStorage, "DEBUG", "");
 
 			expect(component.logMessagesForDisplay.length).toBe(2);
 		});

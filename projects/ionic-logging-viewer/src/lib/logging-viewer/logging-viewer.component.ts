@@ -1,5 +1,4 @@
-import { Component, OnDestroy, OnInit, inject, input, effect } from "@angular/core";
-import { Subscription } from "rxjs";
+import { Component, inject, input, effect, computed } from "@angular/core";
 
 import { Logger, LoggingService, LogLevelConverter, LogMessage } from "ionic-logging-service";
 
@@ -20,7 +19,7 @@ import { DatePipe } from "@angular/common";
 	styleUrls: ["./logging-viewer.component.scss"],
 	imports: [IonicModule, DatePipe]
 })
-export class LoggingViewerComponent implements OnInit, OnDestroy {
+export class LoggingViewerComponent {
 
 	private loggingService = inject(LoggingService);
 	private loggingViewerFilterService = inject(LoggingViewerFilterService);
@@ -36,8 +35,17 @@ export class LoggingViewerComponent implements OnInit, OnDestroy {
 	public logMessagesForDisplay: LogMessage[];
 
 	private logger: Logger;
-	private logMessages: LogMessage[];
-	private logMessagesChangedSubscription: Subscription;
+	private logMessages = computed(() => {
+		if (this.localStorageKeys()) {
+			let messages: LogMessage[] = [];
+			for (const localStorageKey of this.localStorageKeys().split(",")) {
+				messages = messages.concat(this.loggingService.getLogMessagesFromLocalStorage(localStorageKey));
+			}
+			return messages.sort((a, b) => a.timeStamp.getTime() - b.timeStamp.getTime());
+		} else {
+			return this.loggingService.getLogMessages()();
+		}
+	});
 
 	/**
 	 * Creates a new instance of the component.
@@ -47,47 +55,10 @@ export class LoggingViewerComponent implements OnInit, OnDestroy {
 		const methodName = "ctor";
 		this.logger.entry(methodName);
 
-		// handle signals, to refresh the messages, when filter is modified
+		// refresh the messages, when messages or filter are modified
 		effect(() => {
-			this.filterLogMessages(this.loggingViewerFilterService.level, this.loggingViewerFilterService.search);
+			this.filterLogMessages(this.logMessages(), this.loggingViewerFilterService.level, this.loggingViewerFilterService.search);
 		});
-
-		this.logger.exit(methodName);
-	}
-
-	/**
-	 * Initialize the component.
-	 *
-	 * This is done by reading the filter data from [LoggingViewerFilterService](LoggingViewerFilterService.html)
-	 * and the log messages from [LoggingService](../../../ionic-logging-service/typedoc/index.html).
-	 * If the localStorageKeys property is set, the messages are read from local storage.
-	 */
-	public ngOnInit(): void {
-		const methodName = "ngOnInit";
-		this.logger.entry(methodName);
-
-		this.loadLogMessages();
-		this.filterLogMessages(this.loggingViewerFilterService.level, this.loggingViewerFilterService.search);
-
-		// subscribe to loggingService.logMessagesChanged event, to refresh, when new message is logged
-		this.logMessagesChangedSubscription = this.loggingService.logMessagesChanged.subscribe(async () => {
-			this.loadLogMessages();
-			this.filterLogMessages(this.loggingViewerFilterService.level, this.loggingViewerFilterService.search);
-		});
-
-		this.logger.exit(methodName);
-	}
-
-	/**
-	 * Clean up.
-	 */
-	public ngOnDestroy(): void {
-		const methodName = "ngOnDestroy";
-		this.logger.entry(methodName);
-
-		if (this.logMessagesChangedSubscription) {
-			this.logMessagesChangedSubscription.unsubscribe();
-		}
 
 		this.logger.exit(methodName);
 	}
@@ -95,8 +66,8 @@ export class LoggingViewerComponent implements OnInit, OnDestroy {
 	/**
 	 * Filter the log messages.
 	 */
-	public filterLogMessages(level: string, search: string): void {
-		this.logMessagesForDisplay = this.logMessages.filter(
+	public filterLogMessages(logMessages: LogMessage[], level: string, search: string): void {
+		this.logMessagesForDisplay = logMessages.filter(
 			(message) => this.filterLogMessagesByLevel(message, level) && this.filterLogMessagesBySearch(message, search));
 	}
 
@@ -126,21 +97,5 @@ export class LoggingViewerComponent implements OnInit, OnDestroy {
 		return message.logger.search(searchRegex) >= 0 ||
 			message.methodName.search(searchRegex) >= 0 ||
 			message.message.join("|").search(searchRegex) >= 0;
-	}
-
-	/**
-	 * Load the current log messages.
-	 * For unit test purposes mainly.
-	 */
-	public loadLogMessages(): void {
-		if (this.localStorageKeys()) {
-			this.logMessages = [];
-			for (const localStorageKey of this.localStorageKeys().split(",")) {
-				this.logMessages = this.logMessages.concat(this.loggingService.getLogMessagesFromLocalStorage(localStorageKey));
-			}
-			this.logMessages = this.logMessages.sort((a, b) => a.timeStamp.getTime() - b.timeStamp.getTime());
-		} else {
-			this.logMessages = this.loggingService.getLogMessages();
-		}
 	}
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, inject, input, effect } from "@angular/core";
+import { Component, inject, input, effect } from "@angular/core";
 
 import { LoggingService, Logger } from "ionic-logging-service";
 
@@ -19,7 +19,7 @@ import { FormsModule } from "@angular/forms";
 	styleUrls: ["./logging-viewer-search.component.scss"],
 	imports: [IonicModule, FormsModule]
 })
-export class LoggingViewerSearchComponent implements OnInit, OnDestroy {
+export class LoggingViewerSearchComponent {
 
 	private loggingService = inject(LoggingService);
 	private loggingViewerFilterService = inject(LoggingViewerFilterService);
@@ -49,28 +49,6 @@ export class LoggingViewerSearchComponent implements OnInit, OnDestroy {
 		effect(() => {
 			this.search = this.loggingViewerFilterService.search;
 		});
-
-		this.logger.exit(methodName);
-	}
-
-	/**
-	 * Initialize the component.
-	 *
-	 * This is done by reading the filter data from [LoggingViewerFilterService](LoggingViewerFilterService.html).
-	 */
-	public ngOnInit(): void {
-		const methodName = "ngOnInit";
-		this.logger.entry(methodName);
-
-		this.logger.exit(methodName);
-	}
-
-	/**
-	 * Clean up.
-	 */
-	public ngOnDestroy(): void {
-		const methodName = "ngOnDestroy";
-		this.logger.entry(methodName);
 
 		this.logger.exit(methodName);
 	}

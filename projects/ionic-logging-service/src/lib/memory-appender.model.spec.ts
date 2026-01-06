@@ -81,25 +81,13 @@ describe("MemoryAppender", () => {
 
 	describe("append(loggingEvent: log4javascript.LoggingEvent): void", () => {
 
-		it("triggers onLogMessagesChangedCallback callback", () => {
-
-			const onLogMessagesChangedCallback = jasmine.createSpy("onLogMessagesChangedCallback");
-			appender.setOnLogMessagesChangedCallback(onLogMessagesChangedCallback);
-
-			const event = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, []);
-
-			appender.append(event);
-
-			expect(onLogMessagesChangedCallback).toHaveBeenCalledWith(appender.getLogMessages()[0]);
-		});
-
 		it("writes message to messages array", () => {
 
 			const event = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, []);
 
 			appender.append(event);
 
-			const messages = appender.getLogMessages();
+			const messages = appender.getLogMessages()();
 			expect(messages.length).toBe(1);
 			expect(messages[0].timeStamp).toBe(event.timeStamp);
 			expect(messages[0].level).toBe(event.level.toString());
@@ -113,7 +101,7 @@ describe("MemoryAppender", () => {
 			appender.append(event);
 			appender.append(event2);
 
-			const messages = appender.getLogMessages();
+			const messages = appender.getLogMessages()();
 			expect(messages.length).toBe(2);
 			expect(messages[0].methodName).toBe("1");
 			expect(messages[1].methodName).toBe("2");
@@ -130,7 +118,7 @@ describe("MemoryAppender", () => {
 			appender.append(event2);
 			appender.append(event3);
 
-			const messages = appender.getLogMessages();
+			const messages = appender.getLogMessages()();
 			expect(messages.length).toBe(2);
 			expect(messages[0].methodName).toBe("2");
 			expect(messages[1].methodName).toBe("3");
@@ -143,7 +131,7 @@ describe("MemoryAppender", () => {
 
 			appender.append(event);
 
-			const messages = appender.getLogMessages();
+			const messages = appender.getLogMessages()();
 			expect(messages[0].logger).toBe("MyLogger");
 		});
 
@@ -153,7 +141,7 @@ describe("MemoryAppender", () => {
 
 			appender.append(event);
 
-			const messages = appender.getLogMessages();
+			const messages = appender.getLogMessages()();
 			expect(messages[0].logger).toBeUndefined();
 		});
 	});
@@ -198,12 +186,12 @@ describe("MemoryAppender", () => {
 			appender.append(event2);
 			appender.append(event3);
 
-			let messages = appender.getLogMessages();
+			let messages = appender.getLogMessages()();
 			expect(messages.length).toBe(3);
 
 			appender.setMaxMessages(1);
 
-			messages = appender.getLogMessages();
+			messages = appender.getLogMessages()();
 			expect(messages.length).toBe(1);
 			expect(messages[0].methodName).toBe("3");
 		});
@@ -232,7 +220,7 @@ describe("MemoryAppender", () => {
 			appender.doAppend(event2);
 			appender.doAppend(event3);
 
-			const messages = appender.getLogMessages();
+			const messages = appender.getLogMessages()();
 			expect(messages.length).toBe(2);
 
 			expect(messages[0].methodName).toBe("1");
@@ -246,10 +234,10 @@ describe("MemoryAppender", () => {
 
 			const event = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["1"]);
 			appender.append(event);
-			await expect(appender.getLogMessages().length).toBe(1);
+			await expect(appender.getLogMessages()().length).toBe(1);
 
 			appender.removeLogMessages();
-			await expect(appender.getLogMessages().length).toBe(0);
+			await expect(appender.getLogMessages()().length).toBe(0);
 		});
 	});
 });

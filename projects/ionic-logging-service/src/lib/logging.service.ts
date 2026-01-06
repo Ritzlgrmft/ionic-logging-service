@@ -1,4 +1,4 @@
-﻿import { EventEmitter, Injectable } from "@angular/core";
+﻿import { EventEmitter, Injectable, Signal } from "@angular/core";
 
 import * as log4javascript from "log4javascript";
 
@@ -25,15 +25,6 @@ import { MemoryAppender } from "./memory-appender.model";
 export class LoggingService {
 
 	/**
-	 * Event triggered when the log messages got (potentially) change.
-	 * This can happen when:
-	 * - new message was added
-	 * - all message where removed from memory
-	 * - all massages where removed for one spcific LocalStorageAppender
-	 */
-	public logMessagesChanged: EventEmitter<void>;
-
-	/**
 	 * Event triggered when ajax appender could not send log messages to the server.
 	 *
 	 * @param message error message
@@ -52,7 +43,6 @@ export class LoggingService {
 		log4javascript.logLog.setQuietMode(true);
 
 		// create event emitter
-		this.logMessagesChanged = new EventEmitter<void>();
 		this.ajaxAppenderFailed = new EventEmitter<string>();
 
 		// configure appender
@@ -68,9 +58,6 @@ export class LoggingService {
 		// in-memory appender for display on log messages page
 		this.memoryAppender = new MemoryAppender();
 		this.memoryAppender.setLayout(new log4javascript.PatternLayout("%d{HH:mm:ss,SSS} %c %m"));
-		this.memoryAppender.setOnLogMessagesChangedCallback(() => {
-			this.logMessagesChanged.emit();
-		});
 		logger.addAppender(this.memoryAppender);
 
 		this.configure();
@@ -171,7 +158,7 @@ export class LoggingService {
 	 *
 	 * @return log messages
 	 */
-	public getLogMessages(): LogMessage[] {
+	public getLogMessages(): Signal<LogMessage[]> {
 		return this.memoryAppender.getLogMessages();
 	}
 
@@ -190,7 +177,6 @@ export class LoggingService {
 	 */
 	public removeLogMessages(): void {
 		this.memoryAppender.removeLogMessages();
-		this.logMessagesChanged.emit();
 	}
 
 	/**
@@ -200,6 +186,5 @@ export class LoggingService {
 	 */
 	public removeLogMessagesFromLocalStorage(localStorageKey: string): void {
 		LocalStorageAppender.removeLogMessages(localStorageKey);
-		this.logMessagesChanged.emit();
 	}
 }
