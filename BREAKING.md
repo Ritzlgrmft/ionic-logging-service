@@ -1,5 +1,11 @@
 # Breaking Changes
 
+## Upcoming
+
+- update to Angular 20+
+- update to Ionic 8
+- event emitters replaced by signals
+
 ## Version 18
 
 - update to Angular 17+

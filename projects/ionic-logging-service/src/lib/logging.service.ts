@@ -1,4 +1,4 @@
-﻿import { EventEmitter, Injectable, Signal } from "@angular/core";
+﻿import { Injectable, signal, Signal } from "@angular/core";
 
 import * as log4javascript from "log4javascript";
 
@@ -24,15 +24,9 @@ import { MemoryAppender } from "./memory-appender.model";
 })
 export class LoggingService {
 
-	/**
-	 * Event triggered when ajax appender could not send log messages to the server.
-	 *
-	 * @param message error message
-	 */
-	public ajaxAppenderFailed: EventEmitter<string>;
-
 	private memoryAppender: MemoryAppender;
 	private browserConsoleAppender: log4javascript.BrowserConsoleAppender;
+	private ajaxAppender: AjaxAppender;
 
 	/**
 	 * Creates a new instance of the service.
@@ -41,9 +35,6 @@ export class LoggingService {
 
 		// prevent log4javascript to show alerts on case of errors
 		log4javascript.logLog.setQuietMode(true);
-
-		// create event emitter
-		this.ajaxAppenderFailed = new EventEmitter<string>();
 
 		// configure appender
 		const logger = log4javascript.getRootLogger();
@@ -93,11 +84,8 @@ export class LoggingService {
 
 		// configure AjaxAppender
 		if (typeof configuration.ajaxAppender !== "undefined") {
-			const ajaxAppender = new AjaxAppender(configuration.ajaxAppender);
-			ajaxAppender.appenderFailed.subscribe((message: string) => {
-				this.ajaxAppenderFailed.emit(message);
-			});
-			log4javascript.getRootLogger().addAppender(ajaxAppender);
+			this.ajaxAppender = new AjaxAppender(configuration.ajaxAppender);
+			log4javascript.getRootLogger().addAppender(this.ajaxAppender);
 		}
 
 		// configure LocalStorageAppender
@@ -186,5 +174,15 @@ export class LoggingService {
 	 */
 	public removeLogMessagesFromLocalStorage(localStorageKey: string): void {
 		LocalStorageAppender.removeLogMessages(localStorageKey);
+	}
+
+	/**
+	 * Error messages when the ajax appender could not send log messages to the server.
+	 * @returns error messages
+	 */
+	public getLastAjaxAppenderFailure(): Signal<string> {
+		return this.ajaxAppender
+			? this.ajaxAppender.getLastFailure()
+			: signal<string>(undefined).asReadonly();
 	}
 }

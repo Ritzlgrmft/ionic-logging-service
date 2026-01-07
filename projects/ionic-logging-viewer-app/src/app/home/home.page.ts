@@ -1,4 +1,4 @@
-import { Component, inject } from "@angular/core";
+import { Component, effect, inject, signal } from "@angular/core";
 import { ToastController, ModalController } from "@ionic/angular";
 
 import { AjaxAppender, LocalStorageAppender, Logger, LoggingService, LogLevel } from "ionic-logging-service";
@@ -11,30 +11,30 @@ import { FormsModule } from "@angular/forms";
 @Component({
 	selector: "app-home",
 	imports: [
-    FormsModule,
-    IonButton,
-    IonCard,
-    IonCardHeader,
-    IonCardTitle,
-    IonCol,
-    IonContent,
-    IonGrid,
-    IonHeader,
-    IonInput,
-    IonItem,
-    IonLabel,
-    IonList,
-    IonListHeader,
-    IonRadioGroup,
-    IonRow,
-    IonSelect,
-    IonTitle,
-    IonToggle,
-    IonToolbar,
-    LoggingViewerComponent,
-    LoggingViewerLevelsComponent,
-    LoggingViewerSearchComponent
-],
+		FormsModule,
+		IonButton,
+		IonCard,
+		IonCardHeader,
+		IonCardTitle,
+		IonCol,
+		IonContent,
+		IonGrid,
+		IonHeader,
+		IonInput,
+		IonItem,
+		IonLabel,
+		IonList,
+		IonListHeader,
+		IonRadioGroup,
+		IonRow,
+		IonSelect,
+		IonTitle,
+		IonToggle,
+		IonToolbar,
+		LoggingViewerComponent,
+		LoggingViewerLevelsComponent,
+		LoggingViewerSearchComponent
+	],
 	templateUrl: "home.page.html",
 	styleUrls: ["home.page.scss"], standalone: true
 })
@@ -44,7 +44,6 @@ export class HomePage {
 	private toastController = inject(ToastController);
 	private loggingService = inject(LoggingService);
 
-
 	public testLoggerName: string;
 	public testMethod: string;
 	public testLogLevel: string;
@@ -52,10 +51,11 @@ export class HomePage {
 	public batchSizes: number[];
 	public message: string;
 
-	public ajaxAppenderEnabled: boolean;
+	public ajaxAppenderEnabled = signal<boolean>(false);
 	public ajaxAppenderUrl: string;
 	public ajaxAppenderThreshold: string;
 	public ajaxAppenderBatchSize: number;
+	private ajaxAppender: AjaxAppender;
 
 	public localStorageAppenderConfiguration = {
 		enabled: false,
@@ -88,7 +88,7 @@ export class HomePage {
 
 		const appenders = this.loggingService.getRootLogger().getInternalLogger().getEffectiveAppenders();
 		const ajaxAppender = appenders.find((a) => a.toString() === "Ionic.Logging.AjaxAppender") as AjaxAppender;
-		this.ajaxAppenderEnabled = (ajaxAppender !== undefined);
+		this.ajaxAppenderEnabled.set(ajaxAppender !== undefined);
 		this.ajaxAppenderUrl = window.location.origin;
 		this.ajaxAppenderThreshold = "WARN";
 		this.ajaxAppenderBatchSize = 1;
@@ -118,6 +118,15 @@ export class HomePage {
 		};
 		this.allowClearLogs = true;
 
+		effect(() => {
+			if (this.ajaxAppenderEnabled()) {
+				const lastFailure = this.ajaxAppender.getLastFailure()();
+				if (lastFailure) {
+					this.onAjaxAppenderFailed(lastFailure);
+				}
+			}
+		});
+
 		this.logger.exit(methodName);
 	}
 
@@ -137,26 +146,19 @@ export class HomePage {
 		const methodName = "onLogLevelOrLoggerChanged";
 		this.logger.entry(methodName);
 
-		const appenders = this.loggingService.getRootLogger().getInternalLogger().getEffectiveAppenders();
-		let ajaxAppender = appenders.find((a) => a.toString() === "Ionic.Logging.AjaxAppender") as AjaxAppender;
-		if (ajaxAppender !== undefined) {
-			this.loggingService.getRootLogger().getInternalLogger().removeAppender(ajaxAppender);
-			ajaxAppender = undefined;
+		if (this.ajaxAppender !== undefined) {
+			this.loggingService.getRootLogger().getInternalLogger().removeAppender(this.ajaxAppender);
+			this.ajaxAppender = undefined;
 		}
 
-		if (this.ajaxAppenderEnabled) {
+		if (this.ajaxAppenderEnabled()) {
 			// add appender
-			ajaxAppender = new AjaxAppender({
+			this.ajaxAppender = new AjaxAppender({
 				batchSize: this.ajaxAppenderBatchSize,
 				threshold: this.ajaxAppenderThreshold,
 				url: this.ajaxAppenderUrl,
 			});
-			this.loggingService.getRootLogger().getInternalLogger().addAppender(ajaxAppender);
-
-			// hack since loggingService.ajaxAppenderFailed gets setup only during loggingService.configure, which we do not call here
-			ajaxAppender.appenderFailed.subscribe((message) => {
-				this.onAjaxAppenderFailed(message);
-			});
+			this.loggingService.getRootLogger().getInternalLogger().addAppender(this.ajaxAppender);
 		}
 
 		this.logger.exit(methodName);

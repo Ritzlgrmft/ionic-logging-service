@@ -1,4 +1,4 @@
-import { EventEmitter } from "@angular/core";
+import { Signal, signal } from "@angular/core";
 
 import * as log4javascript from "log4javascript";
 
@@ -26,16 +26,11 @@ export class AjaxAppender extends log4javascript.Appender {
 	private static timerIntervalDefault = 0;
 	private static thresholdDefault = "WARN";
 
-	/**
-	 * Event triggered when the appender could not send log messages to the server.
-	 *
-	 * @param message error message
-	 */
-	public appenderFailed: EventEmitter<string>;
-
 	private ajaxAppender: log4javascript.AjaxAppender;
 	private url: string;
 	private withCredentials: boolean;
+
+	private lastFailure = signal<string>(undefined);
 
 	/**
 	 * Creates a new instance of the appender.
@@ -59,9 +54,8 @@ export class AjaxAppender extends log4javascript.Appender {
 		this.ajaxAppender.addHeader("Content-Type", "application/json; charset=utf-8");
 		this.ajaxAppender.setSendAllOnUnload(true);
 
-		this.appenderFailed = new EventEmitter<string>();
 		this.ajaxAppender.setFailCallback((message: any) => {
-			this.appenderFailed.emit(message);
+			this.lastFailure.set(message);
 		});
 
 		// process remaining configuration
@@ -177,5 +171,13 @@ export class AjaxAppender extends log4javascript.Appender {
 	public setTimerInterval(timerInterval: number): void {
 		this.ajaxAppender.setTimed(timerInterval > 0);
 		this.ajaxAppender.setTimerInterval(timerInterval);
+	}
+
+	/**
+	 * Last error message when the appender could not send log messages to the server.
+	 * @returns error message
+	 */
+	public getLastFailure(): Signal<string> {
+		return this.lastFailure.asReadonly();
 	}
 }

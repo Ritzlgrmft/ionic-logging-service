@@ -476,7 +476,7 @@ describe("LoggingService", () => {
 		});
 	});
 
-	describe("ajaxAppenderFailed: EventEmitter<string>", () => {
+	describe("ajaxAppenderFailed: lastAjaxAppenderFailure set", () => {
 
 		it("error message emitted", (done: () => void) => {
 			const config: LoggingServiceConfiguration = {
@@ -489,12 +489,14 @@ describe("LoggingService", () => {
 			};
 			loggingService.configure(config);
 
-			loggingService.ajaxAppenderFailed.subscribe((message: string) => {
-				expect(message).toBe("AjaxAppender.append: XMLHttpRequest request to URL badUrl returned status code 404");
-				done();
-			});
-
 			loggingService.getRootLogger().warn("test");
+
+			// Wait for the asynchronous failure callback
+			setTimeout(() => {
+				const lastFailure = loggingService.getLastAjaxAppenderFailure()();
+				expect(lastFailure).toBe("AjaxAppender.append: XMLHttpRequest request to URL badUrl returned status code 404");
+				done();
+			}, 100);
 		});
 	});
 
@@ -528,7 +530,7 @@ describe("LoggingService", () => {
 
 	describe("removeLogMessages(): void", () => {
 
-		fit("removes messages", () => {
+		it("removes messages", () => {
 
 			loggingService.getRootLogger().info("test");
 

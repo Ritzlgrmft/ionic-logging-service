@@ -1,10 +1,10 @@
-import { EventEmitter, signal, NO_ERRORS_SCHEMA } from "@angular/core";
+import { signal, NO_ERRORS_SCHEMA } from "@angular/core";
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
 
 import { IonicModule, NavParams, AlertController, AngularDelegate } from "@ionic/angular";
 
-import { LogMessage, LoggingService } from "ionic-logging-service";
+import { LoggingService } from "ionic-logging-service";
 
 import { LoggingViewerModalComponent } from "./logging-viewer-modal.component";
 import { LoggingViewerFilterService } from "../logging-viewer-filter.service";
@@ -15,12 +15,10 @@ describe("LoggingViewerModalComponent", () => {
 
 	const loggerStub = jasmine.createSpyObj("logger", ["debug", "entry", "exit", "info"]);
 
-	const loggingServiceEventEmitter = new EventEmitter<LogMessage>();
 	const loggingServiceStub = jasmine.createSpyObj("loggingServiceStub",
 		["getLogger", "getLogMessages", "removeLogMessages", "removeLogMessagesFromLocalStorage"]);
 	loggingServiceStub.getLogger.and.returnValue(loggerStub);
 	loggingServiceStub.getLogMessages.and.returnValue([]);
-	loggingServiceStub.logMessagesChanged = loggingServiceEventEmitter;
 
 	const alertStub = jasmine.createSpyObj("alert", ["present"]);
 	const alertControllerStub = jasmine.createSpyObj("alertControllerStub", ["create"]);

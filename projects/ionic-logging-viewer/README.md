@@ -117,4 +117,4 @@ Just fill the `LoggingViewerTranslation` object.
 
 ## API
 
-see [API documentation](https://ritzlgrmft.github.io/ionic-logging-service//viewer/index.html).
+see [API documentation](https://ritzlgrmft.github.io/ionic-logging-service/viewer/index.html).

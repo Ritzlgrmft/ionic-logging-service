@@ -1,4 +1,4 @@
-import { EventEmitter, signal } from "@angular/core";
+import { signal } from "@angular/core";
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { IonicModule } from "@ionic/angular";
 
@@ -17,13 +17,11 @@ describe("LoggingViewerComponent", () => {
 
 	const loggerStub = jasmine.createSpyObj("logger", ["entry", "exit"]);
 
-	const loggingServiceEventEmitter = new EventEmitter<LogMessage>();
 	const loggingServiceStub = jasmine.createSpyObj("loggingServiceStub",
-		["getLogger", "getLogMessages", "getLogMessagesFromLocalStorage", "logMessagesChanged"]);
+		["getLogger", "getLogMessages", "getLogMessagesFromLocalStorage"]);
 	loggingServiceStub.getLogger.and.returnValue(loggerStub);
 	loggingServiceStub.getLogMessages.and.returnValue(logMessages);
 	loggingServiceStub.getLogMessagesFromLocalStorage.and.returnValue(logMessagesFromLocalStorage);
-	loggingServiceStub.logMessagesChanged = loggingServiceEventEmitter;
 
 	beforeEach(waitForAsync(() => {
 		TestBed
