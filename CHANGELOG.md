@@ -14,6 +14,7 @@
 - migrate to Angular's inject function
 - migrate to Angular's control flow blocks
 - use signals instead of EventEmitter
+- remove dependency to Zone.js
 
 ### ionic-logging-viewer
 

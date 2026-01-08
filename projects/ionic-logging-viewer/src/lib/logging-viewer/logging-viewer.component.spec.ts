@@ -1,17 +1,15 @@
 import { signal } from "@angular/core";
-import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { IonicModule } from "@ionic/angular";
 
 import { LoggingService, LogMessage } from "ionic-logging-service";
 
-import { LoggingViewerFilterService } from "../logging-viewer-filter.service";
 import { LoggingViewerComponent } from "./logging-viewer.component";
 
 describe("LoggingViewerComponent", () => {
 
 	let component: LoggingViewerComponent;
 	let fixture: ComponentFixture<LoggingViewerComponent>;
-	let loggingViewerFilterService: LoggingViewerFilterService;
 	const logMessages = signal<LogMessage[]>([]);
 	const logMessagesFromLocalStorage: LogMessage[] = [];
 
@@ -23,28 +21,24 @@ describe("LoggingViewerComponent", () => {
 	loggingServiceStub.getLogMessages.and.returnValue(logMessages);
 	loggingServiceStub.getLogMessagesFromLocalStorage.and.returnValue(logMessagesFromLocalStorage);
 
-	beforeEach(waitForAsync(() => {
-		TestBed
-			.configureTestingModule({
-				imports: [
-					IonicModule,
-					LoggingViewerComponent,
-				],
-				providers: [
-					{ provide: LoggingService, useValue: loggingServiceStub },
-					LoggingViewerFilterService,
-				],
-			})
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
+			imports: [
+				IonicModule,
+				LoggingViewerComponent,
+			],
+			providers: [
+				{ provide: LoggingService, useValue: loggingServiceStub }
+			],
+		})
 			.compileComponents();
-	}));
+	});
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(LoggingViewerComponent);
 		fixture.detectChanges();
 
 		component = fixture.componentInstance;
-
-		loggingViewerFilterService = TestBed.inject(LoggingViewerFilterService);
 	});
 
 	describe("constructor", () => {

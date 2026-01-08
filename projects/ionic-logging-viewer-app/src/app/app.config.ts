@@ -1,4 +1,4 @@
-import { ApplicationConfig, inject, provideAppInitializer, provideZoneChangeDetection } from "@angular/core";
+import { ApplicationConfig, inject, provideAppInitializer, provideZonelessChangeDetection } from "@angular/core";
 import { provideRouter, RouteReuseStrategy } from "@angular/router";
 
 import { routes } from "./app.routes";
@@ -8,7 +8,7 @@ import { environment } from "../environments/environment";
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideZonelessChangeDetection(),
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideIonicAngular({
       useSetInputAPI: true,

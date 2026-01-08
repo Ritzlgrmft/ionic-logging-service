@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
 import { IonicModule } from "@ionic/angular";
 
@@ -19,21 +19,20 @@ describe("LoggingViewerLevelsComponent", () => {
 		["getLogger"]);
 	loggingServiceStub.getLogger.and.returnValue(loggerStub);
 
-	beforeEach(waitForAsync(async () => {
-		await TestBed
-			.configureTestingModule({
-				imports: [
-					FormsModule,
-					IonicModule,
-					LoggingViewerLevelsComponent,
-				],
-				providers: [
-					{ provide: LoggingService, useValue: loggingServiceStub },
-					LoggingViewerFilterService,
-				],
-			})
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
+			imports: [
+				FormsModule,
+				IonicModule,
+				LoggingViewerLevelsComponent,
+			],
+			providers: [
+				{ provide: LoggingService, useValue: loggingServiceStub },
+				LoggingViewerFilterService,
+			],
+		})
 			.compileComponents();
-	}));
+	});
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(LoggingViewerLevelsComponent);

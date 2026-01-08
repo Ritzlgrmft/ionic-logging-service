@@ -1,5 +1,5 @@
 import { signal, NO_ERRORS_SCHEMA } from "@angular/core";
-import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
 
 import { IonicModule, NavParams, AlertController, AngularDelegate } from "@ionic/angular";
@@ -29,7 +29,7 @@ describe("LoggingViewerModalComponent", () => {
 
 	const angularDelegateStub = jasmine.createSpyObj("angularDelegateStub", ["create"]);
 
-	beforeEach(waitForAsync(async () => {
+	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			imports: [
 				FormsModule,
@@ -46,7 +46,7 @@ describe("LoggingViewerModalComponent", () => {
 			]
 		})
 			.compileComponents();
-	}));
+	});
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(LoggingViewerModalComponent);
