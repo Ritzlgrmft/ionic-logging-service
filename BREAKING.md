@@ -2,7 +2,7 @@
 
 ## Upcoming
 
-- update to Angular 20+
+- update to Angular 21+
 - update to Ionic 8
 - event emitters replaced by signals
 

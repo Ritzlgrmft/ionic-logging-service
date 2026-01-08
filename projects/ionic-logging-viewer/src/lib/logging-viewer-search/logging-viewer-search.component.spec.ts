@@ -53,13 +53,14 @@ describe("LoggingViewerSearchComponent", () => {
 
 	describe("search updates", () => {
 
-		it("signal updates search value", () => {
+		it("signal updates search value", (done) => {
 
-			loggingViewerFilterService.search += "X";
+			loggingViewerFilterService.search.set("X");
 
-			fixture.detectChanges();
-
-			expect(component.search).toBe(loggingViewerFilterService.search);
+			setTimeout(() => {
+				expect(component.search).toBe(loggingViewerFilterService.search());
+				done();
+			}, 0);
 		});
 	});
 
@@ -72,7 +73,7 @@ describe("LoggingViewerSearchComponent", () => {
 			component.search += "Y";
 			component.onSearchChanged();
 
-			expect(loggingViewerFilterService.search).toBe(component.search);
+			expect(loggingViewerFilterService.search()).toBe(component.search);
 		});
 	});
 

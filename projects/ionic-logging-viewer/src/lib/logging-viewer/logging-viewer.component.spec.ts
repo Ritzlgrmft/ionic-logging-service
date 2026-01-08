@@ -58,9 +58,9 @@ describe("LoggingViewerComponent", () => {
 
 	describe("filterLogMessages", () => {
 
-		it("level DEBUG, search empty", () => {
+		it("level INFO, search empty", () => {
 
-			logMessages.set([
+			const messages = [
 				{
 					level: "DEBUG",
 					logger: "myLogger",
@@ -79,11 +79,9 @@ describe("LoggingViewerComponent", () => {
 					message: ["myMessage"],
 					methodName: "myMethod",
 					timeStamp: new Date(),
-				}]);
-			loggingViewerFilterService.level = "INFO";
-			loggingViewerFilterService.search = "";
+				}];
 
-			component.filterLogMessages(logMessages(), loggingViewerFilterService.level, loggingViewerFilterService.search);
+			component.filterLogMessages(messages, "INFO", "");
 
 			expect(component.logMessagesForDisplay.length).toBe(2);
 		});

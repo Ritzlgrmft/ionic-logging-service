@@ -56,7 +56,8 @@ export class LoggingViewerLevelsComponent {
 		// handle signals of loggingViewerFilterService, to refresh,
 		// when someone else modifies the level
 		effect(() => {
-			this.selectedLevel = this.loggingViewerFilterService.level;
+			const level = this.loggingViewerFilterService.level();
+			this.selectedLevel = level;
 		});
 
 		this.logger.exit(methodName);
@@ -69,7 +70,7 @@ export class LoggingViewerLevelsComponent {
 		const methodName = "onLevelChanged";
 		this.logger.entry(methodName, this.selectedLevel);
 
-		this.loggingViewerFilterService.level = this.selectedLevel;
+		this.loggingViewerFilterService.level.set(this.selectedLevel);
 
 		this.logger.exit(methodName);
 	}

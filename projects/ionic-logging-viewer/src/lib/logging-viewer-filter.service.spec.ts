@@ -37,7 +37,7 @@ describe("LoggingViewerFilterService", () => {
 
 			it("return DEBUG as default", () => {
 
-				expect(loggingViewerFilterService.level).toBe("DEBUG");
+				expect(loggingViewerFilterService.level()).toBe("DEBUG");
 			});
 		});
 
@@ -45,8 +45,8 @@ describe("LoggingViewerFilterService", () => {
 
 			it("get returns new value", () => {
 
-				loggingViewerFilterService.level = "INFO";
-				expect(loggingViewerFilterService.level).toBe("INFO");
+				loggingViewerFilterService.level.set("INFO");
+				expect(loggingViewerFilterService.level()).toBe("INFO");
 			});
 		});
 	});
@@ -57,7 +57,7 @@ describe("LoggingViewerFilterService", () => {
 
 			it("return empty string as default", () => {
 
-				expect(loggingViewerFilterService.search).toBe("");
+				expect(loggingViewerFilterService.search()).toBe("");
 			});
 		});
 
@@ -65,8 +65,8 @@ describe("LoggingViewerFilterService", () => {
 
 			it("get returns new value", () => {
 
-				loggingViewerFilterService.search = "abc";
-				expect(loggingViewerFilterService.search).toBe("abc");
+				loggingViewerFilterService.search.set("abc");
+				expect(loggingViewerFilterService.search()).toBe("abc");
 			});
 		});
 	});

@@ -13,8 +13,16 @@ export class LoggingViewerFilterService {
 	private loggingService = inject(LoggingService);
 
 	private logger: Logger;
-	private levelValue = signal("DEBUG");
-	private searchValue = signal("");
+
+	/**
+	 * Signal for the current log level.
+	 */
+	public level = signal("DEBUG");
+
+	/**
+	 * Signal for the current search value.
+	 */
+	public search = signal("");
 
 	/**
 	 * Creates a new instance of the service.
@@ -27,41 +35,5 @@ export class LoggingViewerFilterService {
 		this.logger.entry(methodName);
 
 		this.logger.exit(methodName);
-	}
-
-	/**
-	 * Gets the current log level.
-	 *
-	 * @return log level
-	 */
-	public get level(): string {
-		return this.levelValue();
-	}
-
-	/**
-	 * Sets the new log level and emits a signal.
-	 *
-	 * @param value new log level
-	 */
-	public set level(value: string) {
-		this.levelValue.set(value);
-	}
-
-	/**
-	 * Gets the current search value.
-	 *
-	 * @return search value
-	 */
-	public get search(): string {
-		return this.searchValue();
-	}
-
-	/**
-	 * Sets the new search value and emits a signal.
-	 *
-	 * @param value new search value
-	 */
-	public set search(value: string) {
-		this.searchValue.set(value);
 	}
 }

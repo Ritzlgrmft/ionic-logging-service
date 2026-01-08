@@ -47,7 +47,8 @@ export class LoggingViewerSearchComponent {
 		// handle signals of loggingViewerFilterService, to refresh,
 		// when someone else modifies the search value
 		effect(() => {
-			this.search = this.loggingViewerFilterService.search;
+			const search = this.loggingViewerFilterService.search();
+			this.search = search;
 		});
 
 		this.logger.exit(methodName);
@@ -60,7 +61,7 @@ export class LoggingViewerSearchComponent {
 		const methodName = "onSearchChanged";
 		this.logger.entry(methodName, this.search);
 
-		this.loggingViewerFilterService.search = this.search;
+		this.loggingViewerFilterService.search.set(this.search);
 
 		this.logger.exit(methodName);
 	}

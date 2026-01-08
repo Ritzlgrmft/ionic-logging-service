@@ -57,15 +57,15 @@ describe("LoggingViewerLevelsComponent", () => {
 
 		it("signal updates selected level", () => {
 
-			if (loggingViewerFilterService.level === "INFO") {
-				loggingViewerFilterService.level = "DEBUG";
+			if (loggingViewerFilterService.level() === "INFO") {
+				loggingViewerFilterService.level.set("DEBUG");
 			} else {
-				loggingViewerFilterService.level = "INFO";
+				loggingViewerFilterService.level.set("INFO");
 			}
 
 			fixture.detectChanges();
 
-			expect(component.selectedLevel).toBe(loggingViewerFilterService.level);
+			expect(component.selectedLevel).toBe(loggingViewerFilterService.level());
 		});
 	});
 
@@ -82,7 +82,7 @@ describe("LoggingViewerLevelsComponent", () => {
 			}
 			component.onLevelChanged();
 
-			expect(loggingViewerFilterService.level).toBe(component.selectedLevel);
+			expect(loggingViewerFilterService.level()).toBe(component.selectedLevel);
 		});
 	});
 });

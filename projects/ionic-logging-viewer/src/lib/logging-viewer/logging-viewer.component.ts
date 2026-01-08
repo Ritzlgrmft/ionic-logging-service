@@ -57,7 +57,10 @@ export class LoggingViewerComponent {
 
 		// refresh the messages, when messages or filter are modified
 		effect(() => {
-			this.filterLogMessages(this.logMessages(), this.loggingViewerFilterService.level, this.loggingViewerFilterService.search);
+			const logMessages = this.logMessages();
+			const level = this.loggingViewerFilterService.level();
+			const search = this.loggingViewerFilterService.search();
+			this.filterLogMessages(logMessages, level, search);
 		});
 
 		this.logger.exit(methodName);
