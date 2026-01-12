@@ -1,3 +1,5 @@
+import { afterEach, describe, it, expect, beforeEach } from "vitest";
+
 import * as log4javascript from "log4javascript";
 
 import { LocalStorageAppenderConfiguration } from "./local-storage-appender.configuration";

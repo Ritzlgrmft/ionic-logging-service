@@ -1,3 +1,5 @@
+import { describe, it, expect, beforeEach } from "vitest";
+
 import * as log4javascript from "log4javascript";
 
 import { MemoryAppenderConfiguration } from "./memory-appender.configuration";

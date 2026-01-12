@@ -19,15 +19,21 @@
             "production": {
               "project": "projects/ionic-logging-service/ng-package.prod.json",
               "tsConfig": "projects/ionic-logging-service/tsconfig.lib.prod.json"
-            }
+            },
+            "development": {}
           }
         },
         "test": {
-          "builder": "@angular/build:karma",
+          "builder": "@angular/build:unit-test",
           "options": {
-            "main": "projects/ionic-logging-service/src/test.ts",
             "tsConfig": "projects/ionic-logging-service/tsconfig.spec.json",
-            "karmaConfig": "projects/ionic-logging-service/karma.conf.js"
+            "coverage": true,
+            "coverageThresholds": {
+              "statements": 95,
+              "branches": 95,
+              "functions": 95,
+              "lines": 95
+            }
           }
         },
         "lint": {
@@ -61,12 +67,9 @@
           }
         },
         "test": {
-          "builder": "@angular/build:karma",
+          "builder": "@angular/build:unit-test",
           "options": {
-            "main": "projects/ionic-logging-viewer/src/test.ts",
-            "tsConfig": "projects/ionic-logging-viewer/tsconfig.spec.json",
-            "karmaConfig": "projects/ionic-logging-viewer/karma.conf.js",
-            "sourceMap": true
+            "tsConfig": "projects/ionic-logging-viewer/tsconfig.spec.json"
           }
         },
         "lint": {
@@ -175,20 +178,9 @@
           }
         },
         "test": {
-          "builder": "@angular/build:karma",
+          "builder": "@angular/build:unit-test",
           "options": {
-            "main": "projects/ionic-logging-viewer-app/src/test.ts",
-            "polyfills": "projects/ionic-logging-viewer-app/src/polyfills.ts",
-            "tsConfig": "projects/ionic-logging-viewer-app/tsconfig.spec.json",
-            "karmaConfig": "projects/ionic-logging-viewer-app/karma.conf.js",
-            "styles": [
-              "projects/ionic-logging-viewer-app/src/styles.css"
-            ],
-            "scripts": [],
-            "assets": [
-              "projects/ionic-logging-viewer-app/src/favicon.ico",
-              "projects/ionic-logging-viewer-app/src/assets"
-            ]
+            "tsConfig": "projects/ionic-logging-viewer-app/tsconfig.spec.json"
           }
         },
         "lint": {
@@ -235,97 +227,6 @@
             "development": {
               "devServerTarget": "ionic-logging-viewer-app:serve:development"
             }
-          }
-        }
-      }
-    },
-    "test": {
-      "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      },
-      "root": "projects/test",
-      "sourceRoot": "projects/test/src",
-      "prefix": "app",
-      "architect": {
-        "build": {
-          "builder": "@angular/build:application",
-          "options": {
-            "outputPath": "dist/test",
-            "index": "projects/test/src/index.html",
-            "browser": "projects/test/src/main.ts",
-            "polyfills": [],
-            "tsConfig": "projects/test/tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
-            "assets": [
-              {
-                "glob": "**/*",
-                "input": "projects/test/public"
-              }
-            ],
-            "styles": [
-              "projects/ionic-logging-viewer-app/src/global.scss",
-              "projects/ionic-logging-viewer-app/src/theme/variables.scss"
-            ],
-            "scripts": []
-          },
-          "configurations": {
-            "production": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "2kB",
-                  "maximumError": "4kB"
-                }
-              ],
-              "outputHashing": "all"
-            },
-            "development": {
-              "optimization": false,
-              "extractLicenses": false,
-              "sourceMap": true
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "serve": {
-          "builder": "@angular/build:dev-server",
-          "configurations": {
-            "production": {
-              "buildTarget": "test:build:production"
-            },
-            "development": {
-              "buildTarget": "test:build:development"
-            }
-          },
-          "defaultConfiguration": "development"
-        },
-        "extract-i18n": {
-          "builder": "@angular/build:extract-i18n"
-        },
-        "test": {
-          "builder": "@angular/build:karma",
-          "options": {
-            "polyfills": [],
-            "tsConfig": "projects/test/tsconfig.spec.json",
-            "inlineStyleLanguage": "scss",
-            "assets": [
-              {
-                "glob": "**/*",
-                "input": "projects/test/public"
-              }
-            ],
-            "styles": [
-              "projects/test/src/styles.scss"
-            ],
-            "scripts": []
           }
         }
       }
