@@ -12,10 +12,75 @@
         <link rel="stylesheet" href="./styles/dark.css">
     </head>
     <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
 
-        <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="./" class="navbar-brand">ionic-logging-service</a>
-            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="./" class="navbar-brand">ionic-logging-service</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
@@ -24,15 +89,16 @@
 
         <div class="container-fluid main">
            <div class="row main">
-               <div class="hidden-xs menu">
+               <div class="d-none d-md-block menu">
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content getting-started">
+               <div class="content readme">
                    <div class="content-data">
 
-<h1 id="ionic-logging-service">ionic-logging-service</h1>
-<p><strong>The dependencies used by the latest version are the same as needed for <a href="https://github.com/ionic-team/ionic/blob/master/CHANGELOG.md">Ionic 6.1.9</a>. For older versions use:</strong></p>
+
+<h1>ionic-logging-service</h1>
+<p><strong>The dependencies used by the latest version are the same as needed for <a href="https://github.com/ionic-team/ionic/blob/master/CHANGELOG.md">Ionic 8.0.0</a>. For older versions use:</strong></p>
 <table class="table table-bordered compodoc-table">
 <thead>
 <tr>
@@ -42,6 +108,16 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>21.0.0</td>
+<td>&gt;= 8.0.0</td>
+<td>&gt;=21.0.0</td>
+</tr>
+<tr>
+<td>18.0.0</td>
+<td>&gt;= 7.0.0</td>
+<td>&gt;=17.0.0</td>
+</tr>
 <tr>
 <td>17.0.0</td>
 <td>&gt;= 6.1.9</td>
@@ -121,9 +197,9 @@
 </table>
 <p>This service encapsulates <a href="http://log4javascript.org/">log4javascript</a>&#39;s functionalities for apps built with <a href="http://ionicframework.com">Ionic framework</a>.</p>
 <p>For a sample, just have a look at <a href="https://github.com/Ritzlgrmft/ionic-logging-viewer">ionic-logging-viewer</a>.</p>
-<h2 id="usage">Usage</h2>
+<h2>Usage</h2>
 <p>First, you need to import the <code>LoggingServiceModule</code> in your <code>AppModule</code>. The next step is typically the configuration (see below). And then, finally, you can use the <code>LoggingService</code> in your code, e.g.:</p>
-<div><pre class="line-numbers"><code class="language-TypeScript">import { Logger, LoggingService } from &quot;ionic-logging-service&quot;;
+<b>Example :</b><div><pre class="line-numbers"><code class="language-TypeScript">import { Logger, LoggingService } from &quot;ionic-logging-service&quot;;
 
 export class MyComponent {
 
@@ -155,18 +231,18 @@ export class MyComponent {
     return result;
   }
 }</code></pre></div><p>Depending how the code is called, this could produce the following output in the browser&#39;s console:</p>
-<div><pre class="line-numbers"><code class="language-text">I  18:49:43.794  MyApp.MyComponent  ctor  entry
+<b>Example :</b><div><pre class="line-numbers"><code class="language-text">I  18:49:43.794  MyApp.MyComponent  ctor  entry
 I  18:49:43.797  MyApp.MyComponent  ctor  exit
 I  18:49:43.801  MyApp.MyComponent  myMethod  entry  42  Hello
 E  18:49:43.814  MyApp.MyComponent  myMethod  some error
-I  18:49:43.801  MyApp.MyComponent  myMethod  exit  [2, 5, 99]</code></pre></div><h2 id="logger">Logger</h2>
+I  18:49:43.801  MyApp.MyComponent  myMethod  exit  [2, 5, 99]</code></pre></div><h2>Logger</h2>
 <p>A logger is the component responsible for logging. Typically, you have one logger per every class. The logger name describe the place where in your app the class is placed. The single parts are separated by dots (&#39;.&#39;). This is quite the same as with namespaces in dotnet or packages in Java.</p>
 <p>This builds some kind of hierarchy. E.g., if you have a logger named <code>A.B.C.D</code>, you get automatically also loggers for <code>A.B.C</code>, <code>A.B</code> and <code>A</code>. Additionally, there is the so-called root logger, which is the parent of all other loggers.</p>
 <p>The hierarchy is important, since the loggers inherit the log level from there parent - if there is no other level defined. That means, you can define just one log level for the complete app (by setting the root logger&#39;s level), and you can par example define, you do not want to see logs written for logger <code>A.B.C</code> (this includes also <code>A.B.C.D</code>).</p>
-<h2 id="level">Level</h2>
+<h2>Level</h2>
 <p>Every log message has a level. This is the severity of the message. Available levels are <code>TRACE</code>, <code>DEBUG</code>, <code>INFO</code>, <code>WARN</code>, <code>ERROR</code> and <code>FATAL</code> - these correspond to the logging methods <code>trace</code>, <code>debug</code>, <code>info</code>, <code>warn</code>, <code>error</code> and <code>fatal</code> of <code>Logger</code>. Levels are ordered as follows: <code>TRACE</code> &lt; <code>DEBUG</code> &lt; <code>INFO</code> &lt; <code>WARN</code> &lt; <code>ERROR</code> &lt; <code>FATAL</code>. This means the <code>FATAL</code> is the most severe and <code>TRACE</code> the least. Also included are levels called <code>ALL</code> and <code>OFF</code> intended to enable or disable all logging respectively.</p>
 <p>Setting a level to a logger disables log messages of severity lower than that level. For instance, if a level of <code>INFO</code> is set on a logger then only log messages of severity <code>INFO</code> or greater will be logged, meaning <code>DEBUG</code> and <code>TRACE</code> messages will not be logged.</p>
-<h2 id="appender">Appender</h2>
+<h2>Appender</h2>
 <p>Appenders make the logs visible, e.g. by writing them to the browser&#39;s console. This is quite useful during development, either in console or using <code>ionic serve --consolelogs</code>. But later, you will need other logs:</p>
 <ul>
 <li><code>AjaxAppender</code>: sends the log messages to a backend server</li>
@@ -174,7 +250,7 @@ I  18:49:43.801  MyApp.MyComponent  myMethod  exit  [2, 5, 99]</code></pre></div
 <li><code>LocalStorageAppender</code>: stores the log messages in local storage</li>
 </ul>
 <p>If you want to see a complete example, have a look at <a href="https://github.com/Ritzlgrmft/ionic-feedback-sample">ionic-feedback-sample</a>.</p>
-<h2 id="configuration">Configuration</h2>
+<h2>Configuration</h2>
 <p>By default, the following configuration is used:</p>
 <ul>
 <li><p>Logger:</p>
@@ -191,33 +267,22 @@ I  18:49:43.801  MyApp.MyComponent  myMethod  exit  [2, 5, 99]</code></pre></div
 </ul>
 <p>To change it, just call <code>configure()</code>. This method takes an object of type <code>LoggingServiceConfiguration</code>.</p>
 <p>The recommended way is to place the configuration in <code>environment.ts</code>:</p>
-<div><pre class="line-numbers"><code class="language-TypeScript">export const environment = {
+<b>Example :</b><div><pre class="line-numbers"><code class="language-TypeScript">export const environment = {
   logging: {
     ...
   }
-};</code></pre></div><p>Call <code>configure()</code> in your <code>app.module.ts</code>:</p>
-<div><pre class="line-numbers"><code class="language-TypeScript">export function configureLogging(loggingService: LoggingService): () =&gt; void {
-  return () =&gt; loggingService.configure(environment.logging);
-}
-
-&#64;NgModule({
-  ...
-  imports: [
-    ...
-    LoggingServiceModule
-  ],
+};</code></pre></div><p>Call <code>configure()</code> in your <code>app.config.ts</code>:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-TypeScript">export const appConfig: ApplicationConfig = {
   providers: [
-    {
-      deps: [LoggingService],
-      multi: true,
-      provide: APP_INITIALIZER,
-      useFactory: configureLogging
-    }
+    ...
+    provideAppInitializer(() =&gt; {
+      const loggingService = inject(LoggingService);
+      loggingService.configure(environment.logging);
+    }),
   ]
-})
-export class AppModule { }</code></pre></div><h3 id="loglevels">logLevels</h3>
+};</code></pre></div><h3>logLevels</h3>
 <p><code>logLevels</code> gets an array of log level definitions for different loggers, e.g.</p>
-<div><pre class="line-numbers"><code class="language-JavaScript">{
+<b>Example :</b><div><pre class="line-numbers"><code class="language-JavaScript">{
   &quot;logLevels&quot;: [
     {
       &quot;loggerName&quot;: &quot;root&quot;,
@@ -229,16 +294,19 @@ export class AppModule { }</code></pre></div><h3 id="loglevels">logLevels</h3>
     }
   ]
 };</code></pre></div><p>That means, instead of the default log level <code>WARN</code>, you want to log all messages with level <code>DEBUG</code> and higher. Only for <code>MyApp.MyNamespace.MyLogger</code>, you want to restrict the level to <code>INFO</code>.</p>
-<h3 id="ajaxappender">ajaxAppender</h3>
+<h3>ajaxAppender</h3>
 <p>With <code>ajaxAppender</code>, you add an additional appender of type <code>AjaxAppender</code>, which sends the log messages to a backend server.</p>
-<h3 id="browserconsoleappender">browserConsoleAppender</h3>
+<h3>browserConsoleAppender</h3>
 <p>With <code>browserConsoleAppender</code>, it is possible to configure the <code>BrowserConsoleAppender</code>, which writes the log to the browser&#39;s console.</p>
-<h3 id="localstorageappender">localStorageAppender</h3>
+<h3>localStorageAppender</h3>
 <p>With <code>localStorageAppender</code>, you add an additional appender of type <code>LocalStorageAppender</code>, which stores log messages in the local storage.</p>
-<h3 id="memoryappender">memoryAppender</h3>
+<h3>memoryAppender</h3>
 <p>With <code>memoryAppender</code>, it is possible to configure the <code>MemoryAppender</code>, which keeps log messages in the memory.</p>
-<h2 id="api">API</h2>
-<p>see <a href="https://ritzlgrmft.github.io/ionic-logging-service//service/index.html">API documentation</a>.</p>
+<h2>API</h2>
+<p>see <a href="https://ritzlgrmft.github.io/ionic-logging-service/service/index.html">API documentation</a>.</p>
+
+
+
 
 
 
@@ -285,10 +353,23 @@ export class AppModule { }</code></pre></div><h3 id="loglevels">logLevels</h3>
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 0;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'getting-started';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'readme';
             var COMPODOC_CURRENT_PAGE_URL = 'index.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
 
        <script src="./js/libs/custom-elements.min.js"></script>
        <script src="./js/libs/lit-html.js"></script>
@@ -301,7 +382,6 @@ export class AppModule { }</code></pre></div><h3 id="loglevels">logLevels</h3>
        <script src="./js/libs/es6-shim.min.js"></script>
        <script src="./js/libs/EventDispatcher.js"></script>
        <script src="./js/libs/promise.min.js"></script>
-       <script src="./js/libs/zepto.min.js"></script>
 
        <script src="./js/compodoc.js"></script>
 

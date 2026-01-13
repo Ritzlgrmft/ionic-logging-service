@@ -1,9 +1,10 @@
 # ionic-logging-viewer
 
-**The dependencies used by the latest version are the same as needed for [Ionic 7.0.0](https://github.com/ionic-team/ionic/blob/master/CHANGELOG.md). For older versions use:**
+**The dependencies used by the latest version are the same as needed for [Ionic 8.0.0](https://github.com/ionic-team/ionic/blob/master/CHANGELOG.md). For older versions use:**
 
 | ionic-logging-viewer | Ionic | Angular
 | ------ | -------- | ------
+| 21.0.0 | >= 8.0.0 | >=21.0.0
 | 18.0.0 | >= 7.0.0 | >=17.0.0
 | 17.0.0 | >= 6.1.9 | ^16.0.0
 | 16.0.0 | >= 6.1.9 | ^15.0.0
@@ -51,18 +52,18 @@ npm install ionic-logging-viewer --save
 
 ### import module
 
-Import the `LoggingViewerModule` in to your `app.module.ts`:
+Call `configure()` in your `app.config.ts`:
 
-```typescript
-import { LoggingViewerModule } from "ionic-logging-viewer";
-...
-@NgModule({
-  imports: [
-    IonicModule.forRoot(AppComponent),
-    LoggingViewerModule
-  ],
-  ...
-})
+```TypeScript
+export const appConfig: ApplicationConfig = {
+  providers: [
+    ...
+    provideAppInitializer(() => {
+      const loggingService = inject(LoggingService);
+      loggingService.configure(environment.logging);
+    }),
+  ]
+};
 ```
 
 ### LoggingViewerComponent directive
@@ -117,4 +118,4 @@ Just fill the `LoggingViewerTranslation` object.
 
 ## API
 
-see [API documentation](https://ritzlgrmft.github.io/ionic-logging-service//viewer/index.html).
+see [API documentation](https://ritzlgrmft.github.io/ionic-logging-service/viewer/index.html).

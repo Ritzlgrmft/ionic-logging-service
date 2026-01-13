@@ -1,5 +1,4 @@
-﻿/* eslint-disable no-magic-numbers */
-import { getTestBed, TestBed } from "@angular/core/testing";
+﻿import { TestBed } from "@angular/core/testing";
 
 import { LoggingService } from "ionic-logging-service";
 
@@ -38,7 +37,7 @@ describe("LoggingViewerFilterService", () => {
 
 			it("return DEBUG as default", () => {
 
-				expect(loggingViewerFilterService.level).toBe("DEBUG");
+				expect(loggingViewerFilterService.level()).toBe("DEBUG");
 			});
 		});
 
@@ -46,8 +45,8 @@ describe("LoggingViewerFilterService", () => {
 
 			it("get returns new value", () => {
 
-				loggingViewerFilterService.level = "INFO";
-				expect(loggingViewerFilterService.level).toBe("INFO");
+				loggingViewerFilterService.level.set("INFO");
+				expect(loggingViewerFilterService.level()).toBe("INFO");
 			});
 		});
 	});
@@ -58,7 +57,7 @@ describe("LoggingViewerFilterService", () => {
 
 			it("return empty string as default", () => {
 
-				expect(loggingViewerFilterService.search).toBe("");
+				expect(loggingViewerFilterService.search()).toBe("");
 			});
 		});
 
@@ -66,32 +65,9 @@ describe("LoggingViewerFilterService", () => {
 
 			it("get returns new value", () => {
 
-				loggingViewerFilterService.search = "abc";
-				expect(loggingViewerFilterService.search).toBe("abc");
+				loggingViewerFilterService.search.set("abc");
+				expect(loggingViewerFilterService.search()).toBe("abc");
 			});
-		});
-	});
-
-	describe("filterChanged: EventEmitter<void>", () => {
-
-		it("new level gets emitted", (done: () => void) => {
-
-			loggingViewerFilterService.filterChanged.subscribe(() => {
-				expect(loggingViewerFilterService.level).toBe("WARN");
-				done();
-			});
-
-			loggingViewerFilterService.level = "WARN";
-		});
-
-		it("new search gets emitted", (done: () => void) => {
-
-			loggingViewerFilterService.filterChanged.subscribe(() => {
-				expect(loggingViewerFilterService.search).toBe("ghi");
-				done();
-			});
-
-			loggingViewerFilterService.search = "ghi";
 		});
 	});
 

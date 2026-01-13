@@ -1,5 +1,17 @@
 # Breaking Changes
 
+## Version 21
+
+- update to Angular 21+
+- update to Ionic 8
+- event emitters replaced by signals
+
+- `AjaxAppender`: replace EventEmitter `appenderFailed` with signal `getLastFailure()`
+- `LoggingService`:
+  - replace EventEmitter `ajaxAppenderFailed` and `logMessagesChanged` with signals `getLastAjaxAppenderFailure()` and `getLogMessages()`
+  - `getLogMessages()` returns a signal
+- `MemoryAppender`: `getLogMessages()` returns a signal
+
 ## Version 18
 
 - update to Angular 17+

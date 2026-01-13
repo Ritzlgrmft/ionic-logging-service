@@ -13,6 +13,6 @@ export * from "./lib/log-message.model";
 export * from "./lib/logger.model";
 export * from "./lib/logging.service";
 export * from "./lib/logging-service.configuration";
-export * from "./lib/logging-service.module";
+
 export * from "./lib/memory-appender.configuration";
 export * from "./lib/memory-appender.model";

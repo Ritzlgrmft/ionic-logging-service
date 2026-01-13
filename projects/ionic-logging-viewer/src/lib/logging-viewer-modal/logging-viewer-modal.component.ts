@@ -1,10 +1,17 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, inject, input } from "@angular/core";
 
-import { ModalController, Platform, AlertController } from "@ionic/angular";
+import { ModalController, Platform, AlertController, IonicModule } from "@ionic/angular";
 
 import { Logger, LoggingService } from "ionic-logging-service";
 
 import { LoggingViewerTranslation } from "../logging-viewer-translation.model";
+
+import { addIcons } from "ionicons";
+import { closeCircle, trashOutline } from "ionicons/icons";
+
+import { LoggingViewerSearchComponent } from "../logging-viewer-search/logging-viewer-search.component";
+import { LoggingViewerLevelsComponent } from "../logging-viewer-levels/logging-viewer-levels.component";
+import { LoggingViewerComponent } from "../logging-viewer/logging-viewer.component";
 
 /**
  * Ionic modal containing [LoggingViewerComponent](LoggingViewerComponent.html),
@@ -14,9 +21,15 @@ import { LoggingViewerTranslation } from "../logging-viewer-translation.model";
 @Component({
 	selector: "ionic-logging-viewer-modal",
 	templateUrl: "./logging-viewer-modal.component.html",
-	styleUrls: ["./logging-viewer-modal.component.scss"]
+	styleUrls: ["./logging-viewer-modal.component.scss"],
+	imports: [IonicModule, LoggingViewerSearchComponent, LoggingViewerLevelsComponent, LoggingViewerComponent]
 })
 export class LoggingViewerModalComponent implements OnInit {
+
+	private platform = inject(Platform);
+	private alertController = inject(AlertController);
+	private modalController = inject(ModalController);
+	private loggingService = inject(LoggingService);
 
 	private static languageEn = "en";
 	private static languageDe = "de";
@@ -25,27 +38,23 @@ export class LoggingViewerModalComponent implements OnInit {
 	 * Language to be used for the modal.
 	 * Currently supported: en, de
 	 */
-	@Input()
-	public language: string;
+	public readonly language = input<string>(undefined);
 
 	/**
 	 * Translation to be used for the modal.
 	 * If specified, the language is ignored.
 	 */
-	@Input()
-	public translation: LoggingViewerTranslation;
+	public readonly translation = input<LoggingViewerTranslation>(undefined);
 
 	/**
 	 * Comma-separated list of localStorageKeys. If set, the logs get loaded from localStorage instead of memory.
 	 */
-	@Input()
-	public localStorageKeys: string;
+	public readonly localStorageKeys = input<string>(undefined);
 
 	/**
 	 * Flag showing a delete button, which removes all existing log messages.
 	 */
-	@Input()
-	public allowClearLogs: boolean;
+	public readonly allowClearLogs = input<boolean>(true);
 
 	/**
 	 * Flag controlling which close button will be shown.
@@ -54,22 +63,19 @@ export class LoggingViewerModalComponent implements OnInit {
 
 	private logger: Logger;
 
-	private translations: { [language: string]: LoggingViewerTranslation };
+	private translations: Record<string, LoggingViewerTranslation>;
 
 	/**
 	 * Creates a new instance of the component.
 	 */
-	constructor(
-		platform: Platform,
-		private alertController: AlertController,
-		private modalController: ModalController,
-		private loggingService: LoggingService) {
-
-		this.logger = loggingService.getLogger("Ionic.Logging.Viewer.Modal.Component");
+	constructor() {
+		this.logger = this.
+			loggingService.getLogger("Ionic.Logging.Viewer.Modal.Component");
 		const methodName = "ctor";
 		this.logger.entry(methodName);
 
-		this.isAndroid = platform.is("android");
+		this.isAndroid = this.platform.is("android");
+		addIcons({ closeCircle, trashOutline });
 
 		this.logger.exit(methodName);
 	}
@@ -151,8 +157,8 @@ export class LoggingViewerModalComponent implements OnInit {
 	 * Clear logs.
 	 */
 	public clearLogs(): void {
-		if (this.localStorageKeys) {
-			for (const localStorageKey of this.localStorageKeys.split(",")) {
+		if (this.localStorageKeys()) {
+			for (const localStorageKey of this.localStorageKeys().split(",")) {
 				this.loggingService.removeLogMessagesFromLocalStorage(localStorageKey);
 			}
 		} else {
@@ -167,10 +173,12 @@ export class LoggingViewerModalComponent implements OnInit {
 	 * - English translation, otherwise
 	 */
 	public getTranslation(): LoggingViewerTranslation {
-		if (typeof this.translation !== "undefined") {
-			return this.translation;
-		} else if (typeof this.language !== "undefined" && typeof this.translations[this.language] === "object") {
-			return this.translations[this.language];
+		const language = this.language();
+		const translation = this.translation();
+		if (typeof translation !== "undefined") {
+			return translation;
+		} else if (typeof language !== "undefined" && typeof this.translations[language] === "object") {
+			return this.translations[language];
 		} else {
 			return this.translations[LoggingViewerModalComponent.languageEn];
 		}

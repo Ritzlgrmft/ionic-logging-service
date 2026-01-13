@@ -12,10 +12,75 @@
         <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
 
-        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
-            <a href="../" class="navbar-brand">ionic-logging-viewer</a>
-            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">ionic-logging-viewer</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
@@ -24,12 +89,16 @@
 
         <div class="container-fluid main">
            <div class="row main">
-               <div class="hidden-xs menu">
+               <div class="d-none d-md-block menu">
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
                <div class="content component">
                    <div class="content-data">
+
+
+
+
 
 
 
@@ -84,13 +153,6 @@
     </p>
 
 
-    <p class="comment">
-        <h3>Implements</h3>
-    </p>
-    <p class="comment">
-                <code>OnInit</code>
-                <code>OnDestroy</code>
-    </p>
 
 
 <section data-compodoc="block-metadata">
@@ -115,6 +177,13 @@
             </tr>
 
 
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>IonicModule</code>
+                                <code><a href="https://angular.io/api/common/DatePipe" target="_blank" >DatePipe</a></code>
+                </td>
+            </tr>
 
             <tr>
                 <td class="col-md-3">styleUrls</td>
@@ -179,18 +248,6 @@
                                     <span class="modifier">Public</span>
                                 <a href="#filterLogMessagesBySearch" >filterLogMessagesBySearch</a>
                             </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#loadLogMessages" >loadLogMessages</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#ngOnDestroy" >ngOnDestroy</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#ngOnInit" >ngOnInit</a>
-                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -223,12 +280,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(loggingService: LoggingService, loggingViewerFilterService: <a href="../injectables/LoggingViewerFilterService.html" target="_self">LoggingViewerFilterService</a>)</code>
+<code>constructor()</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/lib/logging-viewer/logging-viewer.component.ts:36</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/lib/logging-viewer/logging-viewer.component.ts:48</a></div>
                             </td>
                         </tr>
 
@@ -236,44 +293,6 @@
                     <td class="col-md-4">
                             <div class="io-description"><p>Creates a new instance of the component.</p>
 </div>
-                            <div>
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>loggingService</td>
-                                                  
-                                                        <td>
-                                                                    <code>LoggingService</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>loggingViewerFilterService</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/LoggingViewerFilterService.html" target="_self" >LoggingViewerFilterService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
                     </td>
                 </tr>
             </tbody>
@@ -296,9 +315,14 @@
 
                     </td>
                 </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>undefined</code>
+                    </td>
+                </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/lib/logging-viewer/logging-viewer.component.ts:26</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/lib/logging-viewer/logging-viewer.component.ts:30</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -324,7 +348,7 @@
                 <td class="col-md-4">
                     <a name="filterLogMessages"></a>
                     <span class="name">
-                        <span class="modifier">Public</span>
+                            <span class="modifier">Public</span>
                         <span ><b>filterLogMessages</b></span>
                         <a href="#filterLogMessages"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -332,29 +356,83 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>filterLogMessages()</code>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>filterLogMessages(logMessages: LogMessage[], level: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, search: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="96"
-                            class="link-to-prism">src/lib/logging-viewer/logging-viewer.component.ts:96</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="72"
+                                    class="link-to-prism">src/lib/logging-viewer/logging-viewer.component.ts:72</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Filter the log messages.</p>
+                        <div class="io-description"><p>Filter the log messages.</p>
 </div>
 
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>logMessages</td>
+                                            <td>
+                                                        <code>LogMessage[]</code>
+                                            </td>
 
-                    </div>
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>level</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>search</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -365,7 +443,7 @@
                 <td class="col-md-4">
                     <a name="filterLogMessagesByLevel"></a>
                     <span class="name">
-                        <span class="modifier">Public</span>
+                            <span class="modifier">Public</span>
                         <span ><b>filterLogMessagesByLevel</b></span>
                         <a href="#filterLogMessagesByLevel"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -373,67 +451,79 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>filterLogMessagesByLevel(message: LogMessage)</code>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>filterLogMessagesByLevel(message: LogMessage, level: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="107"
-                            class="link-to-prism">src/lib/logging-viewer/logging-viewer.component.ts:107</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="83"
+                                    class="link-to-prism">src/lib/logging-viewer/logging-viewer.component.ts:83</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Check if the log message&#39;s level fulfills the level condition.</p>
+                        <div class="io-description"><p>Check if the log message&#39;s level fulfills the level condition.</p>
 </div>
 
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                    <td>Description</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>message</td>
-                                    <td>
-                                            <code>LogMessage</code>
-                                    </td>
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>message</td>
+                                            <td>
+                                                        <code>LogMessage</code>
+                                            </td>
 
-                                    <td>
-                                        No
-                                    </td>
+                                            <td>
+                                                    No
+                                            </td>
 
 
-                                    <td>
-                                        <p>the log message to check</p>
+                                            <td>
+                                                    <p>the log message to check</p>
 
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>level</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
 
-                    </div>
-                    <div class="io-description">
-                        <p>true if check was successful</p>
+                                            <td>
+                                                    No
+                                            </td>
 
-                    </div>
+
+                                            <td>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>true if check was successful</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -444,7 +534,7 @@
                 <td class="col-md-4">
                     <a name="filterLogMessagesBySearch"></a>
                     <span class="name">
-                        <span class="modifier">Public</span>
+                            <span class="modifier">Public</span>
                         <span ><b>filterLogMessagesBySearch</b></span>
                         <a href="#filterLogMessagesBySearch"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -452,23 +542,23 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>filterLogMessagesBySearch(message: LogMessage)</code>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>filterLogMessagesBySearch(message: LogMessage, search: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="123"
-                            class="link-to-prism">src/lib/logging-viewer/logging-viewer.component.ts:123</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="98"
+                                    class="link-to-prism">src/lib/logging-viewer/logging-viewer.component.ts:98</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Check if the log message fulfills the search condition.</p>
+                        <div class="io-description"><p>Check if the log message fulfills the search condition.</p>
 <p>The search value gets searched in:</p>
 <ul>
 <li>logger name</li>
@@ -477,175 +567,60 @@
 </ul>
 </div>
 
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                    <td>Description</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>message</td>
-                                    <td>
-                                            <code>LogMessage</code>
-                                    </td>
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>message</td>
+                                            <td>
+                                                        <code>LogMessage</code>
+                                            </td>
 
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                    <td>
-                                        <p>the log message to check</p>
-
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        <p>true if check was successful</p>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="loadLogMessages"></a>
-                    <span class="name">
-                        <span class="modifier">Public</span>
-                        <span ><b>loadLogMessages</b></span>
-                        <a href="#loadLogMessages"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>loadLogMessages()</code>
-                </td>
-            </tr>
+                                            <td>
+                                                    No
+                                            </td>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="134"
-                            class="link-to-prism">src/lib/logging-viewer/logging-viewer.component.ts:134</a></div>
-                </td>
-            </tr>
+                                            <td>
+                                                    <p>the log message to check</p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>search</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Load the current log messages.
-For unit test purposes mainly.</p>
-</div>
+                                            <td>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                        </div>
+                            <div class="io-description">
+                                <p>true if check was successful</p>
 
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="ngOnDestroy"></a>
-                    <span class="name">
-                        <span class="modifier">Public</span>
-                        <span ><b>ngOnDestroy</b></span>
-                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>ngOnDestroy()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="83"
-                            class="link-to-prism">src/lib/logging-viewer/logging-viewer.component.ts:83</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Clean up.</p>
-</div>
-
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="ngOnInit"></a>
-                    <span class="name">
-                        <span class="modifier">Public</span>
-                        <span ><b>ngOnInit</b></span>
-                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>ngOnInit()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="59"
-                            class="link-to-prism">src/lib/logging-viewer/logging-viewer.component.ts:59</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Initialize the component.</p>
-<p>This is done by reading the filter data from <a href="LoggingViewerFilterService.html">LoggingViewerFilterService</a>
-and the log messages from <a href="../../../ionic-logging-service/typedoc/index.html">LoggingService</a>.
-If the localStorageKeys property is set, the messages are read from local storage.</p>
-</div>
-
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                    </div>
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -676,7 +651,7 @@ If the localStorageKeys property is set, the messages are read from local storag
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/lib/logging-viewer/logging-viewer.component.ts:31</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/lib/logging-viewer/logging-viewer.component.ts:35</a></div>
                         </td>
                     </tr>
 
@@ -695,12 +670,13 @@ If the localStorageKeys property is set, the messages are read from local storag
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnDestroy, OnInit, Input } from &quot;@angular/core&quot;;
-import { Subscription } from &quot;rxjs&quot;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject, input, effect, computed } from &quot;@angular/core&quot;;
 
 import { Logger, LoggingService, LogLevelConverter, LogMessage } from &quot;ionic-logging-service&quot;;
 
 import { LoggingViewerFilterService } from &quot;../logging-viewer-filter.service&quot;;
+import { IonicModule } from &quot;@ionic/angular&quot;;
+import { DatePipe } from &quot;@angular/common&quot;;
 
 /**
  * Component for displaying the current logs.
@@ -712,15 +688,18 @@ import { LoggingViewerFilterService } from &quot;../logging-viewer-filter.servic
 @Component({
 	selector: &quot;ionic-logging-viewer&quot;,
 	templateUrl: &quot;./logging-viewer.component.html&quot;,
-	styleUrls: [&quot;./logging-viewer.component.scss&quot;]
+	styleUrls: [&quot;./logging-viewer.component.scss&quot;],
+	imports: [IonicModule, DatePipe]
 })
-export class LoggingViewerComponent implements OnInit, OnDestroy {
+export class LoggingViewerComponent {
+
+	private loggingService &#x3D; inject(LoggingService);
+	private loggingViewerFilterService &#x3D; inject(LoggingViewerFilterService);
 
 	/**
 	 * Comma-separated list of localStorageKeys. If set, the logs get loaded from localStorage instead of memory.
 	 */
-	@Input()
-	public localStorageKeys: string;
+	public readonly localStorageKeys &#x3D; input&lt;string&gt;(undefined);
 
 	/**
 	 * Log messages which fulfill the filter condition.
@@ -728,61 +707,33 @@ export class LoggingViewerComponent implements OnInit, OnDestroy {
 	public logMessagesForDisplay: LogMessage[];
 
 	private logger: Logger;
-	private logMessages: LogMessage[];
-	private logMessagesChangedSubscription: Subscription;
-	private filterChangedSubscription: Subscription;
+	private logMessages &#x3D; computed(() &#x3D;&gt; {
+		if (this.localStorageKeys()) {
+			let messages: LogMessage[] &#x3D; [];
+			for (const localStorageKey of this.localStorageKeys().split(&quot;,&quot;)) {
+				messages &#x3D; messages.concat(this.loggingService.getLogMessagesFromLocalStorage(localStorageKey));
+			}
+			return messages.sort((a, b) &#x3D;&gt; a.timeStamp.getTime() - b.timeStamp.getTime());
+		} else {
+			return this.loggingService.getLogMessages()();
+		}
+	});
 
 	/**
 	 * Creates a new instance of the component.
 	 */
-	constructor(
-		private loggingService: LoggingService,
-		private loggingViewerFilterService: LoggingViewerFilterService) {
-
-		this.logger &#x3D; loggingService.getLogger(&quot;Ionic.Logging.Viewer.Component&quot;);
+	constructor() {
+		this.logger &#x3D; this.loggingService.getLogger(&quot;Ionic.Logging.Viewer.Component&quot;);
 		const methodName &#x3D; &quot;ctor&quot;;
 		this.logger.entry(methodName);
 
-		this.logger.exit(methodName);
-	}
-
-	/**
-	 * Initialize the component.
-	 *
-	 * This is done by reading the filter data from [LoggingViewerFilterService](LoggingViewerFilterService.html)
-	 * and the log messages from [LoggingService](../../../ionic-logging-service/typedoc/index.html).
-	 * If the localStorageKeys property is set, the messages are read from local storage.
-	 */
-	public ngOnInit(): void {
-		const methodName &#x3D; &quot;ngOnInit&quot;;
-		this.logger.entry(methodName);
-
-		this.loadLogMessages();
-		this.filterLogMessages();
-
-		// subscribe to loggingService.logMessagesChanged event, to refresh, when new message is logged
-		this.logMessagesChangedSubscription &#x3D; this.loggingService.logMessagesChanged.subscribe(async () &#x3D;&gt; {
-			this.loadLogMessages();
-			this.filterLogMessages();
+		// refresh the messages, when messages or filter are modified
+		effect(() &#x3D;&gt; {
+			const logMessages &#x3D; this.logMessages();
+			const level &#x3D; this.loggingViewerFilterService.level();
+			const search &#x3D; this.loggingViewerFilterService.search();
+			this.filterLogMessages(logMessages, level, search);
 		});
-
-		// subscribe to loggingViewerFilterService.filterChanged event, to refresh, when filter is modified
-		this.filterChangedSubscription &#x3D; this.loggingViewerFilterService.filterChanged.subscribe(() &#x3D;&gt; {
-			this.filterLogMessages();
-		});
-
-		this.logger.exit(methodName);
-	}
-
-	/**
-	 * Clean up.
-	 */
-	public ngOnDestroy(): void {
-		const methodName &#x3D; &quot;ngOnDestroy&quot;;
-		this.logger.entry(methodName);
-
-		this.logMessagesChangedSubscription.unsubscribe();
-		this.filterChangedSubscription.unsubscribe();
 
 		this.logger.exit(methodName);
 	}
@@ -790,9 +741,9 @@ export class LoggingViewerComponent implements OnInit, OnDestroy {
 	/**
 	 * Filter the log messages.
 	 */
-	public filterLogMessages(): void {
-		this.logMessagesForDisplay &#x3D; this.logMessages.filter(
-			(message) &#x3D;&gt; this.filterLogMessagesByLevel(message) &amp;&amp; this.filterLogMessagesBySearch(message));
+	public filterLogMessages(logMessages: LogMessage[], level: string, search: string): void {
+		this.logMessagesForDisplay &#x3D; logMessages.filter(
+			(message) &#x3D;&gt; this.filterLogMessagesByLevel(message, level) &amp;&amp; this.filterLogMessagesBySearch(message, search));
 	}
 
 	/**
@@ -801,9 +752,8 @@ export class LoggingViewerComponent implements OnInit, OnDestroy {
 	 * @param message the log message to check
 	 * @returns true if check was successful
 	 */
-	public filterLogMessagesByLevel(message: LogMessage): boolean {
-		const levelValue &#x3D; this.loggingViewerFilterService.level;
-		return LogLevelConverter.levelFromString(message.level) &gt;&#x3D; LogLevelConverter.levelFromString(levelValue);
+	public filterLogMessagesByLevel(message: LogMessage, level: string): boolean {
+		return LogLevelConverter.levelFromString(message.level) &gt;&#x3D; LogLevelConverter.levelFromString(level);
 	}
 
 	/**
@@ -817,27 +767,11 @@ export class LoggingViewerComponent implements OnInit, OnDestroy {
 	 * @param message the log message to check
 	 * @returns true if check was successful
 	 */
-	public filterLogMessagesBySearch(message: LogMessage): boolean {
-		const searchValue &#x3D; new RegExp(this.loggingViewerFilterService.search, &quot;i&quot;);
-		return message.logger.search(searchValue) &gt;&#x3D; 0 ||
-			message.methodName.search(searchValue) &gt;&#x3D; 0 ||
-			message.message.join(&quot;|&quot;).search(searchValue) &gt;&#x3D; 0;
-	}
-
-	/**
-	 * Load the current log messages.
-	 * For unit test purposes mainly.
-	 */
-	public loadLogMessages(): void {
-		if (this.localStorageKeys) {
-			this.logMessages &#x3D; [];
-			for (const localStorageKey of this.localStorageKeys.split(&quot;,&quot;)) {
-				this.logMessages &#x3D; this.logMessages.concat(this.loggingService.getLogMessagesFromLocalStorage(localStorageKey));
-			}
-			this.logMessages &#x3D; this.logMessages.sort((a, b) &#x3D;&gt; a.timeStamp.getTime() - b.timeStamp.getTime());
-		} else {
-			this.logMessages &#x3D; this.loggingService.getLogMessages();
-		}
+	public filterLogMessagesBySearch(message: LogMessage, search: string): boolean {
+		const searchRegex &#x3D; new RegExp(search, &quot;i&quot;);
+		return message.logger.search(searchRegex) &gt;&#x3D; 0 ||
+			message.methodName.search(searchRegex) &gt;&#x3D; 0 ||
+			message.message.join(&quot;|&quot;).search(searchRegex) &gt;&#x3D; 0;
 	}
 }
 </code></pre>
@@ -845,16 +779,20 @@ export class LoggingViewerComponent implements OnInit, OnDestroy {
 
     <div class="tab-pane fade " id="templateData">
         <pre class="line-numbers"><code class="language-html">&lt;ion-list&gt;
-	&lt;ion-item *ngFor&#x3D;&quot;let logMessage of logMessagesForDisplay&quot;&gt;
-		&lt;ion-label&gt;
-			&lt;p&gt;{{ logMessage.timeStamp | date:&#x27;dd.MM.yyyy HH:mm:ss&#x27; }} {{ logMessage.level }}&lt;/p&gt;
-			&lt;p&gt;{{ logMessage.logger }}&lt;/p&gt;
-			&lt;p&gt;
-				{{ logMessage.methodName }}
-				&lt;span *ngFor&#x3D;&quot;let messagePart of logMessage.message&quot;&gt; {{ messagePart }} &lt;/span&gt;
-			&lt;/p&gt;
-		&lt;/ion-label&gt;
-	&lt;/ion-item&gt;
+  @for (logMessage of logMessagesForDisplay; track logMessage) {
+    &lt;ion-item&gt;
+      &lt;ion-label&gt;
+        &lt;p&gt;{{ logMessage.timeStamp | date:&#x27;dd.MM.yyyy HH:mm:ss&#x27; }} {{ logMessage.level }}&lt;/p&gt;
+        &lt;p&gt;{{ logMessage.logger }}&lt;/p&gt;
+        &lt;p&gt;
+          {{ logMessage.methodName }}
+          @for (messagePart of logMessage.message; track messagePart) {
+            &lt;span&gt; {{ messagePart }} &lt;/span&gt;
+          }
+        &lt;/p&gt;
+      &lt;/ion-label&gt;
+    &lt;/ion-item&gt;
+  }
 &lt;/ion-list&gt;</code></pre>
     </div>
 
@@ -886,11 +824,11 @@ export class LoggingViewerComponent implements OnInit, OnDestroy {
     
 </div>
 
-<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/vis-network.min.js"></script>
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><ion-list>	<ion-item *ngFor="let logMessage of logMessagesForDisplay">		<ion-label>			<p>{{ logMessage.timeStamp | date:\'dd.MM.yyyy HH:mm:ss\' }} {{ logMessage.level }}</p>			<p>{{ logMessage.logger }}</p>			<p>				{{ logMessage.methodName }}				<span *ngFor="let messagePart of logMessage.message"> {{ messagePart }} </span>			</p>		</ion-label>	</ion-item></ion-list></div>'
+        var COMPONENT_TEMPLATE = '<div><ion-list>  @for (logMessage of logMessagesForDisplay; track logMessage) {    <ion-item>      <ion-label>        <p>{{ logMessage.timeStamp | date:\'dd.MM.yyyy HH:mm:ss\' }} {{ logMessage.level }}</p>        <p>{{ logMessage.logger }}</p>        <p>          {{ logMessage.methodName }}          @for (messagePart of logMessage.message; track messagePart) {            <span> {{ messagePart }} </span>          }        </p>      </ion-label>    </ion-item>  }</ion-list></div>'
     var COMPONENTS = [{'name': 'LoggingViewerComponent', 'selector': 'ionic-logging-viewer'},{'name': 'LoggingViewerLevelsComponent', 'selector': 'ionic-logging-viewer-levels'},{'name': 'LoggingViewerModalComponent', 'selector': 'ionic-logging-viewer-modal'},{'name': 'LoggingViewerSearchComponent', 'selector': 'ionic-logging-viewer-search'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'LoggingViewerComponent'};
@@ -943,6 +881,19 @@ export class LoggingViewerComponent implements OnInit, OnDestroy {
             var MAX_SEARCH_RESULTS = 15;
        </script>
 
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
 
@@ -954,7 +905,6 @@ export class LoggingViewerComponent implements OnInit, OnDestroy {
        <script src="../js/libs/es6-shim.min.js"></script>
        <script src="../js/libs/EventDispatcher.js"></script>
        <script src="../js/libs/promise.min.js"></script>
-       <script src="../js/libs/zepto.min.js"></script>
 
        <script src="../js/compodoc.js"></script>
 

@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
 import { IonicModule } from "@ionic/angular";
 
@@ -18,14 +18,12 @@ describe("LoggingViewerSearchComponent", () => {
 		["getLogger"]);
 	loggingServiceStub.getLogger.and.returnValue(loggerStub);
 
-	beforeEach(waitForAsync(() => {
-		TestBed.configureTestingModule({
-			declarations: [
-				LoggingViewerSearchComponent
-			],
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
 			imports: [
 				FormsModule,
 				IonicModule,
+				LoggingViewerSearchComponent,
 			],
 			providers: [
 				{ provide: LoggingService, useValue: loggingServiceStub },
@@ -33,7 +31,7 @@ describe("LoggingViewerSearchComponent", () => {
 			]
 		})
 			.compileComponents();
-	}));
+	});
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(LoggingViewerSearchComponent);
@@ -53,15 +51,16 @@ describe("LoggingViewerSearchComponent", () => {
 		});
 	});
 
-	describe("filterChangedSubscription", () => {
+	describe("search updates", () => {
 
-		it("event updates search value", () => {
+		it("signal updates search value", (done) => {
 
-			fixture.detectChanges();
+			loggingViewerFilterService.search.set("X");
 
-			loggingViewerFilterService.search += "X";
-
-			expect(component.search).toBe(loggingViewerFilterService.search);
+			setTimeout(() => {
+				expect(component.search).toBe(loggingViewerFilterService.search());
+				done();
+			}, 0);
 		});
 	});
 
@@ -74,26 +73,18 @@ describe("LoggingViewerSearchComponent", () => {
 			component.search += "Y";
 			component.onSearchChanged();
 
-			expect(loggingViewerFilterService.search).toBe(component.search);
+			expect(loggingViewerFilterService.search()).toBe(component.search);
 		});
 	});
 
-	describe("ngOnInit", () => {
-
-		it("use default, if no value for placeholder", () => {
-
-			fixture.detectChanges();
-
-			expect(component.placeholder).toBe("Search");
-		});
+	describe("init", () => {
 
 		it("given value for placeholder", () => {
 
-			component.placeholder = "abc";
-
+			fixture.componentRef.setInput("placeholder", "abc");
 			fixture.detectChanges();
 
-			expect(component.placeholder).toBe("abc");
+			expect(component.placeholder()).toBe("abc");
 		});
 	});
 });

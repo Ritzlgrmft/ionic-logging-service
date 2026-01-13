@@ -1,5 +1,7 @@
 <ion-segment [(ngModel)]="selectedLevel" (ionChange)="onLevelChanged()">
-	<ion-segment-button *ngFor="let logLevel of logLevels" [value]="logLevel">
-		<ion-label>{{ logLevel }}</ion-label>
-	</ion-segment-button>
+  @for (logLevel of logLevels; track logLevel) {
+    <ion-segment-button [value]="logLevel">
+      <ion-label>{{ logLevel }}</ion-label>
+    </ion-segment-button>
+  }
 </ion-segment>

@@ -1,9 +1,11 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
-import { Subscription } from "rxjs";
+import { Component, effect, inject } from "@angular/core";
 
 import { Logger, LoggingService } from "ionic-logging-service";
 
 import { LoggingViewerFilterService } from "../logging-viewer-filter.service";
+import { IonicModule } from "@ionic/angular";
+import { FormsModule } from "@angular/forms";
+
 
 /**
  * Component for displaying the log levels for filtering the current logs.
@@ -15,9 +17,13 @@ import { LoggingViewerFilterService } from "../logging-viewer-filter.service";
 @Component({
 	selector: "ionic-logging-viewer-levels",
 	templateUrl: "./logging-viewer-levels.component.html",
-	styleUrls: ["./logging-viewer-levels.component.scss"]
+	styleUrls: ["./logging-viewer-levels.component.scss"],
+	imports: [IonicModule, FormsModule]
 })
-export class LoggingViewerLevelsComponent implements OnInit, OnDestroy {
+export class LoggingViewerLevelsComponent {
+
+	private loggingService = inject(LoggingService);
+	private loggingViewerFilterService = inject(LoggingViewerFilterService);
 
 	/**
 	 * Log levels used for filtering: DEBUG, INFO, WARN, ERROR
@@ -30,16 +36,12 @@ export class LoggingViewerLevelsComponent implements OnInit, OnDestroy {
 	public selectedLevel: string;
 
 	private logger: Logger;
-	private filterChangedSubscription: Subscription;
 
 	/**
 	 * Creates a new instance of the component.
 	 */
-	constructor(
-		loggingService: LoggingService,
-		private loggingViewerFilterService: LoggingViewerFilterService) {
-
-		this.logger = loggingService.getLogger("Ionic.Logging.Viewer.Levels.Component");
+	constructor() {
+		this.logger = this.loggingService.getLogger("Ionic.Logging.Viewer.Levels.Component");
 		const methodName = "ctor";
 		this.logger.entry(methodName);
 
@@ -51,37 +53,12 @@ export class LoggingViewerLevelsComponent implements OnInit, OnDestroy {
 			"ERROR",
 		);
 
-		this.logger.exit(methodName);
-	}
-
-	/**
-	 * Initialize the component.
-	 *
-	 * This is done by reading the filter data from [LoggingViewerFilterService](LoggingViewerFilterService.html).
-	 */
-	public ngOnInit(): void {
-		const methodName = "ngOnInit";
-		this.logger.entry(methodName);
-
-		this.selectedLevel = this.loggingViewerFilterService.level;
-
-		// subscribe to loggingViewerFilterService.filterChanged event, to refresh,
+		// handle signals of loggingViewerFilterService, to refresh,
 		// when someone else modifies the level
-		this.filterChangedSubscription = this.loggingViewerFilterService.filterChanged.subscribe(() => {
-			this.selectedLevel = this.loggingViewerFilterService.level;
+		effect(() => {
+			const level = this.loggingViewerFilterService.level();
+			this.selectedLevel = level;
 		});
-
-		this.logger.exit(methodName);
-	}
-
-	/**
-	 * Clean up.
-	 */
-	public ngOnDestroy(): void {
-		const methodName = "ngOnDestroy";
-		this.logger.entry(methodName);
-
-		this.filterChangedSubscription.unsubscribe();
 
 		this.logger.exit(methodName);
 	}
@@ -93,7 +70,7 @@ export class LoggingViewerLevelsComponent implements OnInit, OnDestroy {
 		const methodName = "onLevelChanged";
 		this.logger.entry(methodName, this.selectedLevel);
 
-		this.loggingViewerFilterService.level = this.selectedLevel;
+		this.loggingViewerFilterService.level.set(this.selectedLevel);
 
 		this.logger.exit(methodName);
 	}

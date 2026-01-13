@@ -1,22 +1,18 @@
 {
-	"compileOnSave": false,
-	"compilerOptions": {
+  "compileOnSave": false,
+  "compilerOptions": {
     "baseUrl": "./",
-    "downlevelIteration": true,
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
+    "esModuleInterop": true,
     "declaration": false,
     "module": "es2020",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "target": "ES2022",
     "typeRoots": [
       "node_modules/@types"
-    ],
-    "lib": [
-      "es2017",
-      "dom"
     ],
     "paths": {
       "ionic-logging-service": [
@@ -26,6 +22,7 @@
         "dist/ionic-logging-viewer"
       ]
     },
-    "useDefineForClassFields": false
+    "useDefineForClassFields": false,
+    "skipLibCheck": true
   }
 }

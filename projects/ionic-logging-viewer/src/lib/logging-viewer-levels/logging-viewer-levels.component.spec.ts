@@ -1,5 +1,4 @@
-/* eslint-disable no-magic-numbers */
-import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
 import { IonicModule } from "@ionic/angular";
 
@@ -12,7 +11,6 @@ describe("LoggingViewerLevelsComponent", () => {
 
 	let component: LoggingViewerLevelsComponent;
 	let fixture: ComponentFixture<LoggingViewerLevelsComponent>;
-	let loggingService: LoggingService;
 	let loggingViewerFilterService: LoggingViewerFilterService;
 
 	const loggerStub = jasmine.createSpyObj("logger", ["entry", "exit"]);
@@ -21,30 +19,26 @@ describe("LoggingViewerLevelsComponent", () => {
 		["getLogger"]);
 	loggingServiceStub.getLogger.and.returnValue(loggerStub);
 
-	beforeEach(waitForAsync(() => {
-		TestBed
-			.configureTestingModule({
-				declarations: [
-					LoggingViewerLevelsComponent,
-				],
-				imports: [
-					FormsModule,
-					IonicModule,
-				],
-				providers: [
-					{ provide: LoggingService, useValue: loggingServiceStub },
-					LoggingViewerFilterService,
-				],
-			})
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
+			imports: [
+				FormsModule,
+				IonicModule,
+				LoggingViewerLevelsComponent,
+			],
+			providers: [
+				{ provide: LoggingService, useValue: loggingServiceStub },
+				LoggingViewerFilterService,
+			],
+		})
 			.compileComponents();
-	}));
+	});
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(LoggingViewerLevelsComponent);
 
 		component = fixture.componentInstance;
 
-		loggingService = TestBed.inject(LoggingService);
 		loggingViewerFilterService = TestBed.inject(LoggingViewerFilterService);
 	});
 
@@ -58,19 +52,19 @@ describe("LoggingViewerLevelsComponent", () => {
 		});
 	});
 
-	describe("filterChangedSubscription", () => {
+	describe("level updates", () => {
 
-		it("event updates selected level", () => {
+		it("signal updates selected level", () => {
+
+			if (loggingViewerFilterService.level() === "INFO") {
+				loggingViewerFilterService.level.set("DEBUG");
+			} else {
+				loggingViewerFilterService.level.set("INFO");
+			}
 
 			fixture.detectChanges();
 
-			if (loggingViewerFilterService.level === "INFO") {
-				loggingViewerFilterService.level = "DEBUG";
-			} else {
-				loggingViewerFilterService.level = "INFO";
-			}
-
-			expect(component.selectedLevel).toBe(loggingViewerFilterService.level);
+			expect(component.selectedLevel).toBe(loggingViewerFilterService.level());
 		});
 	});
 
@@ -87,7 +81,7 @@ describe("LoggingViewerLevelsComponent", () => {
 			}
 			component.onLevelChanged();
 
-			expect(loggingViewerFilterService.level).toBe(component.selectedLevel);
+			expect(loggingViewerFilterService.level()).toBe(component.selectedLevel);
 		});
 	});
 });

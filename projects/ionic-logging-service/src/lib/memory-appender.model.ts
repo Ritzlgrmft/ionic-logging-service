@@ -4,6 +4,7 @@ import { LogLevelConverter } from "./log-level.converter";
 import { LogLevel } from "./log-level.model";
 import { LogMessage } from "./log-message.model";
 import { MemoryAppenderConfiguration } from "./memory-appender.configuration";
+import { Signal, signal } from "@angular/core";
 
 /**
  * An appender which stores the log messages in the browser's memory.
@@ -28,8 +29,7 @@ export class MemoryAppender extends log4javascript.Appender {
 
 	private maxMessages: number;
 
-	private logMessages: LogMessage[];
-	private onLogMessagesChangedCallback: (message: LogMessage) => void;
+	private logMessages = signal<LogMessage[]>([]);
 
 	/**
 	 * Creates a new instance of the appender.
@@ -38,8 +38,6 @@ export class MemoryAppender extends log4javascript.Appender {
 	 */
 	constructor(configuration?: MemoryAppenderConfiguration) {
 		super();
-
-		this.logMessages = [];
 
 		// process configuration
 		configuration = configuration || {};
@@ -77,8 +75,8 @@ export class MemoryAppender extends log4javascript.Appender {
 	 */
 	public append(loggingEvent: log4javascript.LoggingEvent): void {
 		// if logMessages is already full, remove oldest element
-		while (this.logMessages.length >= this.maxMessages) {
-			this.logMessages.shift();
+		while (this.logMessages().length >= this.maxMessages) {
+			this.logMessages.update(messages => messages.slice(1));
 		}
 		// add event to logMessages
 		const message: LogMessage = {
@@ -88,12 +86,7 @@ export class MemoryAppender extends log4javascript.Appender {
 			methodName: loggingEvent.messages[0],
 			timeStamp: loggingEvent.timeStamp,
 		};
-		this.logMessages.push(message);
-
-		// inform about new message
-		if (typeof this.onLogMessagesChangedCallback === "function") {
-			this.onLogMessagesChangedCallback(message);
-		}
+		this.logMessages.update(messages => [...messages, message]);
 	}
 
 	/**
@@ -124,8 +117,8 @@ export class MemoryAppender extends log4javascript.Appender {
 		this.maxMessages = value;
 
 		// if there are too much logMessages for the new value, remove oldest messages
-		if (this.logMessages.length > this.maxMessages) {
-			this.logMessages.splice(0, this.logMessages.length - this.maxMessages);
+		if (this.logMessages().length > this.maxMessages) {
+			this.logMessages.update(messages => messages.slice(this.logMessages().length - this.maxMessages));
 		}
 	}
 
@@ -134,24 +127,14 @@ export class MemoryAppender extends log4javascript.Appender {
 	 *
 	 * @return stored messages
 	 */
-	public getLogMessages(): LogMessage[] {
-		return this.logMessages;
+	public getLogMessages(): Signal<LogMessage[]> {
+		return this.logMessages.asReadonly();
 	}
 
 	/**
 	 * Remove all messages stored in memory.
 	 */
 	public removeLogMessages(): void {
-		this.logMessages.splice(0);
-	}
-
-	/**
-	 * Registers a callback which will be called every time a new message is appended.
-	 * This could be useful if you want to show new messages in realtime.
-	 *
-	 * @param callback callback to be called
-	 */
-	public setOnLogMessagesChangedCallback(callback: (message: LogMessage) => void): void {
-		this.onLogMessagesChangedCallback = callback;
+		this.logMessages.set([]);
 	}
 }

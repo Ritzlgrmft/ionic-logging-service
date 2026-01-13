@@ -1,205 +1,236 @@
 <ion-header>
-	<ion-toolbar color="medium">
-		<ion-title>
-			Ionic Logging Viewer App
-		</ion-title>
-	</ion-toolbar>
+  <ion-toolbar color="medium">
+    <ion-title>
+      Ionic Logging Viewer App
+    </ion-title>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-	<ion-grid>
-		<ion-row>
-			<ion-col size="12" size-md="6">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="6">
 
-				<ion-card color="light">
-					<ion-card-header>
-						<ion-card-title>Logging Actions</ion-card-title>
-					</ion-card-header>
-					<ion-list>
-						<ion-item>
-							<ion-input type="text" label="Logger" label-placement="floating"
-								[(ngModel)]="testLoggerName" (ionChange)="onLogLevelOrLoggerChanged()"></ion-input>
-						</ion-item>
-						<ion-item>
-							<ion-input type="text" label="Method" label-placement="floating"
-								[(ngModel)]="testMethod"></ion-input>
-						</ion-item>
-						<ion-item>
-							<ion-select interface="popover" label="Log Level" label-placement="floating"
-								[(ngModel)]="testLogLevel" (ionChange)="onLogLevelOrLoggerChanged()">
-								<ion-select-option *ngFor="let logLevel of logLevels" [value]="logLevel">
-									{{ logLevel }}
-								</ion-select-option>
-							</ion-select>
-						</ion-item>
-						<ion-item>
-							<ion-input type="text" label="Message" label-placement="floating"
-								[(ngModel)]="message"></ion-input>
-						</ion-item>
-						<ion-item>
-							<ion-button expand="block" fill="outline" (click)="logTrace()">TRACE</ion-button>
-						</ion-item>
-						<ion-item>
-							<ion-button expand="block" fill="outline" (click)="logDebug()">DEBUG</ion-button>
-						</ion-item>
-						<ion-item>
-							<ion-button expand="block" color="success" (click)="logInfo()">INFO</ion-button>
-						</ion-item>
-						<ion-item>
-							<ion-button expand="block" color="warning" (click)="logWarn()">WARN</ion-button>
-						</ion-item>
-						<ion-item>
-							<ion-button expand="block" color="danger" (click)="logError()">ERROR</ion-button>
-						</ion-item>
-						<ion-item>
-							<ion-button expand="block" color="danger" (click)="logFatal()">FATAL</ion-button>
-						</ion-item>
-						<ion-item>
-							<ion-button expand="block" color="medium" (click)="logEntry()">ENTRY</ion-button>
-						</ion-item>
-						<ion-item>
-							<ion-button expand="block" color="medium" (click)="logExit()">EXIT</ion-button>
-						</ion-item>
-					</ion-list>
-				</ion-card>
+        <ion-card color="light">
+          <ion-card-header>
+            <ion-card-title>Logging Actions</ion-card-title>
+          </ion-card-header>
+          <ion-list>
+            <ion-item>
+              <ion-input type="text" label="Logger" label-placement="floating"
+              [(ngModel)]="testLoggerName" (ionChange)="onLogLevelOrLoggerChanged()"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input type="text" label="Method" label-placement="floating"
+              [(ngModel)]="testMethod"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-select interface="popover" label="Log Level" label-placement="floating"
+                [(ngModel)]="testLogLevel" (ionChange)="onLogLevelOrLoggerChanged()">
+                @for (logLevel of logLevels; track logLevel) {
+                  <ion-select-option [value]="logLevel">
+                    {{ logLevel }}
+                  </ion-select-option>
+                }
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-input type="text" label="Message" label-placement="floating"
+              [(ngModel)]="message"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-button expand="block" fill="outline" (click)="logTrace()">TRACE</ion-button>
+            </ion-item>
+            <ion-item>
+              <ion-button expand="block" fill="outline" (click)="logDebug()">DEBUG</ion-button>
+            </ion-item>
+            <ion-item>
+              <ion-button expand="block" color="success" (click)="logInfo()">INFO</ion-button>
+            </ion-item>
+            <ion-item>
+              <ion-button expand="block" color="warning" (click)="logWarn()">WARN</ion-button>
+            </ion-item>
+            <ion-item>
+              <ion-button expand="block" color="danger" (click)="logError()">ERROR</ion-button>
+            </ion-item>
+            <ion-item>
+              <ion-button expand="block" color="danger" (click)="logFatal()">FATAL</ion-button>
+            </ion-item>
+            <ion-item>
+              <ion-button expand="block" color="medium" (click)="logEntry()">ENTRY</ion-button>
+            </ion-item>
+            <ion-item>
+              <ion-button expand="block" color="medium" (click)="logExit()">EXIT</ion-button>
+            </ion-item>
+          </ion-list>
+        </ion-card>
 
-				<ion-card color="light">
-					<ion-card-header>
-						<ion-card-title>AjaxAppender</ion-card-title>
-					</ion-card-header>
-					<ion-list>
-						<ion-item>
-							<ion-toggle [(ngModel)]="ajaxAppenderEnabled"
-								(ionChange)="onAjaxAppenderConfigChanged()">Enabled</ion-toggle>
-						</ion-item>
-						<ion-item *ngIf="ajaxAppenderEnabled">
-							<ion-input type="text" label="Url" label-placement="floating" [(ngModel)]="ajaxAppenderUrl"
-								(ionChange)="onAjaxAppenderConfigChanged()"></ion-input>
-						</ion-item>
-						<ion-item *ngIf="ajaxAppenderEnabled">
-							<ion-select interface="popover" label="Threshold" label-placement="floating"
-								[(ngModel)]="ajaxAppenderThreshold" (ionChange)="onAjaxAppenderConfigChanged()">
-								<ion-select-option *ngFor="let logLevel of logLevels" [value]="logLevel">
-									{{ logLevel }}
-								</ion-select-option>
-							</ion-select>
-						</ion-item>
-						<ion-item *ngIf="ajaxAppenderEnabled">
-							<ion-select interface="popover" label="Batch Size" label-placement="floating"
-								[(ngModel)]="ajaxAppenderBatchSize" (ionChange)="onAjaxAppenderConfigChanged()">
-								<ion-select-option *ngFor="let batchSize of batchSizes" [value]="batchSize">
-									{{ batchSize }}
-								</ion-select-option>
-							</ion-select>
-						</ion-item>
-					</ion-list>
-				</ion-card>
+        <ion-card color="light">
+          <ion-card-header>
+            <ion-card-title>AjaxAppender</ion-card-title>
+          </ion-card-header>
+          <ion-list>
+            <ion-item>
+              <ion-toggle [(ngModel)]="ajaxAppenderEnabled"
+              (ionChange)="onAjaxAppenderConfigChanged()">Enabled</ion-toggle>
+            </ion-item>
+            @if (ajaxAppenderEnabled) {
+              <ion-item>
+                <ion-input type="text" label="Url" label-placement="floating" [(ngModel)]="ajaxAppenderUrl"
+                (ionChange)="onAjaxAppenderConfigChanged()"></ion-input>
+              </ion-item>
+            }
+            @if (ajaxAppenderEnabled) {
+              <ion-item>
+                <ion-select interface="popover" label="Threshold" label-placement="floating"
+                  [(ngModel)]="ajaxAppenderThreshold" (ionChange)="onAjaxAppenderConfigChanged()">
+                  @for (logLevel of logLevels; track logLevel) {
+                    <ion-select-option [value]="logLevel">
+                      {{ logLevel }}
+                    </ion-select-option>
+                  }
+                </ion-select>
+              </ion-item>
+            }
+            @if (ajaxAppenderEnabled) {
+              <ion-item>
+                <ion-select interface="popover" label="Batch Size" label-placement="floating"
+                  [(ngModel)]="ajaxAppenderBatchSize" (ionChange)="onAjaxAppenderConfigChanged()">
+                  @for (batchSize of batchSizes; track batchSize) {
+                    <ion-select-option [value]="batchSize">
+                      {{ batchSize }}
+                    </ion-select-option>
+                  }
+                </ion-select>
+              </ion-item>
+            }
+          </ion-list>
+        </ion-card>
 
-				<ion-card color="light">
-					<ion-card-header>
-						<ion-card-title>LocalStorageAppender</ion-card-title>
-					</ion-card-header>
-					<ion-list>
-						<ion-item>
-							<ion-toggle [(ngModel)]="localStorageAppenderConfiguration.enabled"
-								(ionChange)="onLocalStorageConfigChanged()">Enabled</ion-toggle>
-						</ion-item>
-						<ion-item *ngIf="localStorageAppenderConfiguration.enabled">
-							<ion-input type="text" label="Key" label-placement="floating"
-								[(ngModel)]="localStorageAppenderConfiguration.localStorageKey"
-								(ionChange)="onLocalStorageConfigChanged()"></ion-input>
-						</ion-item>
-						<ion-item *ngIf="localStorageAppenderConfiguration.enabled">
-							<ion-select interface="popover" label="Threshold" label-placement="floating"
-								[(ngModel)]="localStorageAppenderConfiguration.threshold"
-								(ionChange)="onLocalStorageConfigChanged()">
-								<ion-select-option *ngFor="let logLevel of logLevels" [value]="logLevel">
-									{{ logLevel }}
-								</ion-select-option>
-							</ion-select>
-						</ion-item>
-						<ion-item *ngIf="localStorageAppenderConfiguration.enabled">
-							<ion-select interface="popover" label="Max Messages" label-placement="floating"
-								[(ngModel)]="localStorageAppenderConfiguration.maxMessages"
-								(ionChange)="onLocalStorageConfigChanged()">
-								<ion-select-option
-									*ngFor="let maxMessagesValue of localStorageAppenderConfiguration.maxMessagesValues"
-									[value]="maxMessagesValue">
-									{{ maxMessagesValue }}
-								</ion-select-option>
-							</ion-select>
-						</ion-item>
-					</ion-list>
-				</ion-card>
+        <ion-card color="light">
+          <ion-card-header>
+            <ion-card-title>LocalStorageAppender</ion-card-title>
+          </ion-card-header>
+          <ion-list>
+            <ion-item>
+              <ion-toggle [(ngModel)]="localStorageAppenderConfiguration.enabled"
+              (ionChange)="onLocalStorageConfigChanged()">Enabled</ion-toggle>
+            </ion-item>
+            @if (localStorageAppenderConfiguration.enabled) {
+              <ion-item>
+                <ion-input type="text" label="Key" label-placement="floating"
+                  [(ngModel)]="localStorageAppenderConfiguration.localStorageKey"
+                (ionChange)="onLocalStorageConfigChanged()"></ion-input>
+              </ion-item>
+            }
+            @if (localStorageAppenderConfiguration.enabled) {
+              <ion-item>
+                <ion-select interface="popover" label="Threshold" label-placement="floating"
+                  [(ngModel)]="localStorageAppenderConfiguration.threshold"
+                  (ionChange)="onLocalStorageConfigChanged()">
+                  @for (logLevel of logLevels; track logLevel) {
+                    <ion-select-option [value]="logLevel">
+                      {{ logLevel }}
+                    </ion-select-option>
+                  }
+                </ion-select>
+              </ion-item>
+            }
+            @if (localStorageAppenderConfiguration.enabled) {
+              <ion-item>
+                <ion-select interface="popover" label="Max Messages" label-placement="floating"
+                  [(ngModel)]="localStorageAppenderConfiguration.maxMessages"
+                  (ionChange)="onLocalStorageConfigChanged()">
+                  @for (maxMessagesValue of localStorageAppenderConfiguration.maxMessagesValues; track maxMessagesValue) {
+                    <ion-select-option
+                      [value]="maxMessagesValue">
+                      {{ maxMessagesValue }}
+                    </ion-select-option>
+                  }
+                </ion-select>
+              </ion-item>
+            }
+          </ion-list>
+        </ion-card>
 
-				<ion-card color="light">
-					<ion-card-header>
-						<ion-card-title>Logging Modal</ion-card-title>
-					</ion-card-header>
-					<ion-list>
-						<ion-item>
-							<ion-button expand="block" fill="outline" (click)="openModal()">Open modal</ion-button>
-						</ion-item>
-						<ion-item>
-							<ion-toggle [(ngModel)]="allowClearLogs">Allow Clear Logs</ion-toggle>
-						</ion-item>
-						<ion-item>
-							<ion-label position="floating">Local Storage Keys</ion-label>
-							<ion-input type="text" label="Local Storage Keys" label-placement="floating"
-								[(ngModel)]="localStorageKeys"></ion-input>
-						</ion-item>
-						<ion-radio-group [value]="selectedLanguage" (ionChange)="changeLanguage($event.detail.value)">
-							<ion-list-header>
-								<ion-label>Language</ion-label>
-							</ion-list-header>
-							<ion-item *ngFor="let language of languages">
-								<ion-label>{{language}}</ion-label>
-								<ion-radio value="{{language}}">{{language}}</ion-radio>
-							</ion-item>
-						</ion-radio-group>
-						<ion-item *ngIf="selectedLanguage === 'custom'">
-							<ion-input type="text" label="title" label-placement="floating"
-								[(ngModel)]="translation.title"></ion-input>
-						</ion-item>
-						<ion-item *ngIf="selectedLanguage === 'custom'">
-							<ion-input type="text" label="cancel" label-placement="floating"
-								[(ngModel)]="translation.cancel"></ion-input>
-						</ion-item>
-						<ion-item *ngIf="selectedLanguage === 'custom'">
-							<ion-input type="text" label="ok" label-placement="floating"
-								[(ngModel)]="translation.ok"></ion-input>
-						</ion-item>
-						<ion-item *ngIf="selectedLanguage === 'custom'">
-							<ion-input type="text" label="searchPlaceholder" label-placement="floating"
-								[(ngModel)]="translation.searchPlaceholder"></ion-input>
-						</ion-item>
-						<ion-item *ngIf="selectedLanguage === 'custom'">
-							<ion-input type="text" label="confirmDelete" label-placement="floating"
-								[(ngModel)]="translation.confirmDelete"></ion-input>
-						</ion-item>
-					</ion-list>
-				</ion-card>
+        <ion-card color="light">
+          <ion-card-header>
+            <ion-card-title>Logging Modal</ion-card-title>
+          </ion-card-header>
+          <ion-list>
+            <ion-item>
+              <ion-button expand="block" fill="outline" (click)="openModal()">Open modal</ion-button>
+            </ion-item>
+            <ion-item>
+              <ion-toggle [(ngModel)]="allowClearLogs">Allow Clear Logs</ion-toggle>
+            </ion-item>
+            <ion-item>
+              <ion-input type="text" label="Local Storage Keys" label-placement="floating"
+              [(ngModel)]="localStorageKeys"></ion-input>
+            </ion-item>
+            <ion-radio-group [value]="selectedLanguage" (ionChange)="changeLanguage($event.detail.value)">
+              <ion-list-header>
+                <ion-label>Language</ion-label>
+              </ion-list-header>
+              @for (language of languages; track language) {
+                <ion-item>
+                  <ion-radio value="{{language}}">{{language}}</ion-radio>
+                </ion-item>
+              }
+            </ion-radio-group>
+            @if (selectedLanguage === 'custom') {
+              <ion-item>
+                <ion-input type="text" label="title" label-placement="floating"
+                [(ngModel)]="translation.title"></ion-input>
+              </ion-item>
+            }
+            @if (selectedLanguage === 'custom') {
+              <ion-item>
+                <ion-input type="text" label="cancel" label-placement="floating"
+                [(ngModel)]="translation.cancel"></ion-input>
+              </ion-item>
+            }
+            @if (selectedLanguage === 'custom') {
+              <ion-item>
+                <ion-input type="text" label="ok" label-placement="floating"
+                [(ngModel)]="translation.ok"></ion-input>
+              </ion-item>
+            }
+            @if (selectedLanguage === 'custom') {
+              <ion-item>
+                <ion-input type="text" label="searchPlaceholder" label-placement="floating"
+                [(ngModel)]="translation.searchPlaceholder"></ion-input>
+              </ion-item>
+            }
+            @if (selectedLanguage === 'custom') {
+              <ion-item>
+                <ion-input type="text" label="confirmDelete" label-placement="floating"
+                [(ngModel)]="translation.confirmDelete"></ion-input>
+              </ion-item>
+            }
+          </ion-list>
+        </ion-card>
 
-			</ion-col>
+      </ion-col>
 
-			<ion-col size="12" size-md="6">
+      <ion-col size="12" size-md="6">
 
-				<ion-card color="light">
-					<ion-card-header>
-						<ion-card-title>Logging Viewer</ion-card-title>
-					</ion-card-header>
-					<ion-toolbar>
-						<ionic-logging-viewer-search></ionic-logging-viewer-search>
-					</ion-toolbar>
-					<ion-toolbar>
-						<ionic-logging-viewer-levels></ionic-logging-viewer-levels>
-					</ion-toolbar>
-					<ionic-logging-viewer></ionic-logging-viewer>
-				</ion-card>
+        <ion-card color="light">
+          <ion-card-header>
+            <ion-card-title>Logging Viewer</ion-card-title>
+          </ion-card-header>
+          <ion-toolbar>
+            <ionic-logging-viewer-search></ionic-logging-viewer-search>
+          </ion-toolbar>
+          <ion-toolbar>
+            <ionic-logging-viewer-levels></ionic-logging-viewer-levels>
+          </ion-toolbar>
+          <ionic-logging-viewer></ionic-logging-viewer>
+        </ion-card>
 
-			</ion-col>
-		</ion-row>
-	</ion-grid>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 </ion-content>

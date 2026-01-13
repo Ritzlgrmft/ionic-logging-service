@@ -51,7 +51,7 @@ export class Logger {
 			for (const param of params) {
 				args.push(this.formatArgument(param));
 			}
-			this.logger.trace.apply(this.logger, args);
+			this.logger.trace(...args);
 		}
 	}
 
@@ -67,7 +67,7 @@ export class Logger {
 			for (const param of params) {
 				args.push(this.formatArgument(param));
 			}
-			this.logger.debug.apply(this.logger, args);
+			this.logger.debug(...args);
 		}
 	}
 
@@ -83,7 +83,7 @@ export class Logger {
 			for (const param of params) {
 				args.push(this.formatArgument(param));
 			}
-			this.logger.info.apply(this.logger, args);
+			this.logger.info(...args);
 		}
 	}
 
@@ -99,7 +99,7 @@ export class Logger {
 			for (const param of params) {
 				args.push(this.formatArgument(param));
 			}
-			this.logger.warn.apply(this.logger, args);
+			this.logger.warn(...args);
 		}
 	}
 
@@ -115,7 +115,7 @@ export class Logger {
 			for (const param of params) {
 				args.push(this.formatArgument(param));
 			}
-			this.logger.error.apply(this.logger, args);
+			this.logger.error(...args);
 		}
 	}
 
@@ -131,7 +131,7 @@ export class Logger {
 			for (const param of params) {
 				args.push(this.formatArgument(param));
 			}
-			this.logger.fatal.apply(this.logger, args);
+			this.logger.fatal(...args);
 		}
 	}
 
@@ -150,7 +150,7 @@ export class Logger {
 					args.push(this.formatArgument(param));
 				}
 			}
-			this.logger.info.apply(this.logger, args);
+			this.logger.info(...args);
 		}
 	}
 
@@ -169,7 +169,7 @@ export class Logger {
 					args.push(this.formatArgument(param));
 				}
 			}
-			this.logger.info.apply(this.logger, args);
+			this.logger.info(...args);
 		}
 	}
 

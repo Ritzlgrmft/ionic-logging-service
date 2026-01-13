@@ -1,16 +1,15 @@
-﻿/* eslint-disable no-magic-numbers */
-import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
-import { getTestBed, TestBed } from "@angular/core/testing";
+﻿import { HttpTestingController, provideHttpClientTesting } from "@angular/common/http/testing";
+import { TestBed } from "@angular/core/testing";
 
 import * as log4javascript from "log4javascript";
 
 import { AjaxAppender } from "./ajax-appender.model";
 import { LocalStorageAppender } from "./local-storage-appender.model";
-import { LogMessage } from "./log-message.model";
 import { Logger } from "./logger.model";
 import { LoggingServiceConfiguration } from "./logging-service.configuration";
 import { LoggingService } from "./logging.service";
 import { MemoryAppender } from "./memory-appender.model";
+import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 
 describe("LoggingService", () => {
 
@@ -19,10 +18,12 @@ describe("LoggingService", () => {
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
-			imports: [HttpClientTestingModule],
+			imports: [],
 			providers: [
 				LoggingService,
-			],
+				provideHttpClient(withInterceptorsFromDi()),
+				provideHttpClientTesting(),
+			]
 		});
 		loggingService = TestBed.inject(LoggingService);
 		httpMock = TestBed.inject(HttpTestingController);
@@ -44,7 +45,7 @@ describe("LoggingService", () => {
 
 			loggingService.getRootLogger().info("test");
 			loggingService.getRootLogger().warn("test");
-			const messages = loggingService.getLogMessages();
+			const messages = loggingService.getLogMessages()();
 
 			expect(messages.length).toBe(1);
 		});
@@ -66,7 +67,7 @@ describe("LoggingService", () => {
 		describe("logLevels", () => {
 			it("throws no error if logLevels is empty", () => {
 
-				const logLevels: Array<{ loggerName: string; logLevel: string }> = [];
+				const logLevels: { loggerName: string; logLevel: string }[] = [];
 				const config: LoggingServiceConfiguration = {
 					logLevels,
 				};
@@ -457,7 +458,7 @@ describe("LoggingService", () => {
 
 		it("returns empty array if no log message is written", () => {
 
-			const messages = loggingService.getLogMessages();
+			const messages = loggingService.getLogMessages()();
 
 			expect(messages.length).toBe(0);
 		});
@@ -469,29 +470,13 @@ describe("LoggingService", () => {
 			browserConsoleAppender.setThreshold(log4javascript.Level.OFF);
 
 			loggingService.getRootLogger().warn("test");
-			const messages = loggingService.getLogMessages();
+			const messages = loggingService.getLogMessages()();
 
 			expect(messages.length).toBe(1);
 		});
 	});
 
-	describe("logMessagesChanged: EventEmitter<void>", () => {
-
-		it("logged messages are emitted", (done: () => void) => {
-			const appenders = new Logger().getInternalLogger().getEffectiveAppenders();
-			const browserConsoleAppender = appenders.find((a) => a.toString() === "BrowserConsoleAppender");
-			browserConsoleAppender.setThreshold(log4javascript.Level.OFF);
-
-			loggingService.logMessagesChanged.subscribe(() => {
-				expect(1).toBe(loggingService.getLogMessages().length);
-				done();
-			});
-
-			loggingService.getRootLogger().warn("test");
-		});
-	});
-
-	describe("ajaxAppenderFailed: EventEmitter<string>", () => {
+	describe("ajaxAppenderFailed: lastAjaxAppenderFailure set", () => {
 
 		it("error message emitted", (done: () => void) => {
 			const config: LoggingServiceConfiguration = {
@@ -504,12 +489,14 @@ describe("LoggingService", () => {
 			};
 			loggingService.configure(config);
 
-			loggingService.ajaxAppenderFailed.subscribe((message: string) => {
-				expect(message).toBe("AjaxAppender.append: XMLHttpRequest request to URL badUrl returned status code 404");
-				done();
-			});
-
 			loggingService.getRootLogger().warn("test");
+
+			// Wait for the asynchronous failure callback
+			setTimeout(() => {
+				const lastFailure = loggingService.getLastAjaxAppenderFailure()();
+				expect(lastFailure).toBe("AjaxAppender.append: XMLHttpRequest request to URL badUrl returned status code 404");
+				done();
+			}, 100);
 		});
 	});
 
@@ -543,22 +530,19 @@ describe("LoggingService", () => {
 
 	describe("removeLogMessages(): void", () => {
 
-		it("removes messages", (done: () => void) => {
+		it("removes messages", () => {
 
 			loggingService.getRootLogger().info("test");
 
-			loggingService.logMessagesChanged.subscribe(() => {
-				expect(loggingService.getLogMessages().length).toBe(0);
-				done();
-			});
-
 			loggingService.removeLogMessages();
+
+			expect(loggingService.getLogMessages().length).toBe(0);
 		});
 	});
 
 	describe("removeLogMessagesFromLocalStorage(localStorageKey: string): void", () => {
 
-		it("removes messages", (done: () => void) => {
+		it("removes messages", () => {
 
 			const messagesIn = [{
 				level: "DEBUG",
@@ -569,12 +553,9 @@ describe("LoggingService", () => {
 			}];
 			localStorage.setItem("xxx", JSON.stringify(messagesIn));
 
-			loggingService.logMessagesChanged.subscribe(() => {
-				expect(localStorage.getItem("xxx")).toBeNull();
-				done();
-			});
-
 			loggingService.removeLogMessagesFromLocalStorage("xxx");
+
+			expect(localStorage.getItem("xxx")).toBeNull();
 		});
 	});
 });

@@ -12,10 +12,75 @@
         <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
 
-        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
-            <a href="../" class="navbar-brand">ionic-logging-viewer</a>
-            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">ionic-logging-viewer</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
@@ -24,12 +89,16 @@
 
         <div class="container-fluid main">
            <div class="row main">
-               <div class="hidden-xs menu">
+               <div class="d-none d-md-block menu">
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
                <div class="content component">
                    <div class="content-data">
+
+
+
+
 
 
 
@@ -84,13 +153,6 @@
     </p>
 
 
-    <p class="comment">
-        <h3>Implements</h3>
-    </p>
-    <p class="comment">
-                <code>OnInit</code>
-                <code>OnDestroy</code>
-    </p>
 
 
 <section data-compodoc="block-metadata">
@@ -115,6 +177,13 @@
             </tr>
 
 
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>IonicModule</code>
+                                <code><a href="https://angular.io/api/forms/FormsModule" target="_blank" >FormsModule</a></code>
+                </td>
+            </tr>
 
             <tr>
                 <td class="col-md-3">styleUrls</td>
@@ -169,14 +238,6 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#ngOnDestroy" >ngOnDestroy</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#ngOnInit" >ngOnInit</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
                                 <a href="#onSearchChanged" >onSearchChanged</a>
                             </li>
                         </ul>
@@ -211,12 +272,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(loggingService: LoggingService, loggingViewerFilterService: <a href="../injectables/LoggingViewerFilterService.html" target="_self">LoggingViewerFilterService</a>)</code>
+<code>constructor()</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/lib/logging-viewer-search/logging-viewer-search.component.ts:35</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/lib/logging-viewer-search/logging-viewer-search.component.ts:37</a></div>
                             </td>
                         </tr>
 
@@ -224,44 +285,6 @@
                     <td class="col-md-4">
                             <div class="io-description"><p>Creates a new instance of the component.</p>
 </div>
-                            <div>
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>loggingService</td>
-                                                  
-                                                        <td>
-                                                                    <code>LoggingService</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>loggingViewerFilterService</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/LoggingViewerFilterService.html" target="_self" >LoggingViewerFilterService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
                     </td>
                 </tr>
             </tbody>
@@ -284,9 +307,14 @@
 
                     </td>
                 </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>undefined</code>
+                    </td>
+                </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/lib/logging-viewer-search/logging-viewer-search.component.ts:27</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/lib/logging-viewer-search/logging-viewer-search.component.ts:30</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -310,92 +338,9 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="ngOnDestroy"></a>
-                    <span class="name">
-                        <span class="modifier">Public</span>
-                        <span ><b>ngOnDestroy</b></span>
-                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>ngOnDestroy()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="77"
-                            class="link-to-prism">src/lib/logging-viewer-search/logging-viewer-search.component.ts:77</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Clean up.</p>
-</div>
-
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="ngOnInit"></a>
-                    <span class="name">
-                        <span class="modifier">Public</span>
-                        <span ><b>ngOnInit</b></span>
-                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>ngOnInit()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="56"
-                            class="link-to-prism">src/lib/logging-viewer-search/logging-viewer-search.component.ts:56</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Initialize the component.</p>
-<p>This is done by reading the filter data from <a href="LoggingViewerFilterService.html">LoggingViewerFilterService</a>.</p>
-</div>
-
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="onSearchChanged"></a>
                     <span class="name">
-                        <span class="modifier">Public</span>
+                            <span class="modifier">Public</span>
                         <span ><b>onSearchChanged</b></span>
                         <a href="#onSearchChanged"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -403,29 +348,29 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
                     <code>onSearchChanged()</code>
                 </td>
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="89"
-                            class="link-to-prism">src/lib/logging-viewer-search/logging-viewer-search.component.ts:89</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="60"
+                                    class="link-to-prism">src/lib/logging-viewer-search/logging-viewer-search.component.ts:60</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Callback when the search value was changed in the UI.</p>
+                        <div class="io-description"><p>Callback when the search value was changed in the UI.</p>
 </div>
 
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                    </div>
+                        </div>
                 </td>
             </tr>
         </tbody>
@@ -456,7 +401,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/lib/logging-viewer-search/logging-viewer-search.component.ts:32</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/lib/logging-viewer-search/logging-viewer-search.component.ts:35</a></div>
                         </td>
                     </tr>
 
@@ -475,13 +420,13 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, OnDestroy, Input } from &quot;@angular/core&quot;;
-
-import { Subscription } from &quot;rxjs&quot;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject, input, effect } from &quot;@angular/core&quot;;
 
 import { LoggingService, Logger } from &quot;ionic-logging-service&quot;;
 
 import { LoggingViewerFilterService } from &quot;../logging-viewer-filter.service&quot;;
+import { IonicModule } from &quot;@ionic/angular&quot;;
+import { FormsModule } from &quot;@angular/forms&quot;;
 
 /**
  * Component for displaying the search bar for filtering the current logs.
@@ -493,15 +438,18 @@ import { LoggingViewerFilterService } from &quot;../logging-viewer-filter.servic
 @Component({
 	selector: &quot;ionic-logging-viewer-search&quot;,
 	templateUrl: &quot;./logging-viewer-search.component.html&quot;,
-	styleUrls: [&quot;./logging-viewer-search.component.scss&quot;]
+	styleUrls: [&quot;./logging-viewer-search.component.scss&quot;],
+	imports: [IonicModule, FormsModule]
 })
-export class LoggingViewerSearchComponent implements OnInit, OnDestroy {
+export class LoggingViewerSearchComponent {
+
+	private loggingService &#x3D; inject(LoggingService);
+	private loggingViewerFilterService &#x3D; inject(LoggingViewerFilterService);
 
 	/**
 	 * Placeholder to be shown in the empty search bar.
 	 */
-	@Input()
-	public placeholder: string;
+	public readonly placeholder &#x3D; input&lt;string&gt;(undefined);
 
 	/**
 	 * Current search value.
@@ -509,53 +457,21 @@ export class LoggingViewerSearchComponent implements OnInit, OnDestroy {
 	public search: string;
 
 	private logger: Logger;
-	private filterChangedSubscription: Subscription;
 
 	/**
 	 * Creates a new instance of the component.
 	 */
-	constructor(
-		loggingService: LoggingService,
-		private loggingViewerFilterService: LoggingViewerFilterService) {
-
-		this.logger &#x3D; loggingService.getLogger(&quot;Ionic.Logging.Viewer.Search.Component&quot;);
+	constructor() {
+		this.logger &#x3D; this.loggingService.getLogger(&quot;Ionic.Logging.Viewer.Search.Component&quot;);
 		const methodName &#x3D; &quot;ctor&quot;;
 		this.logger.entry(methodName);
 
-		this.logger.exit(methodName);
-	}
-
-	/**
-	 * Initialize the component.
-	 *
-	 * This is done by reading the filter data from [LoggingViewerFilterService](LoggingViewerFilterService.html).
-	 */
-	public ngOnInit(): void {
-		const methodName &#x3D; &quot;ngOnInit&quot;;
-		this.logger.entry(methodName);
-
-		if (!this.placeholder) {
-			this.placeholder &#x3D; &quot;Search&quot;;
-		}
-		this.search &#x3D; this.loggingViewerFilterService.search;
-
-		// subscribe to loggingViewerFilterService.filterChanged event, to refresh,
+		// handle signals of loggingViewerFilterService, to refresh,
 		// when someone else modifies the search value
-		this.filterChangedSubscription &#x3D; this.loggingViewerFilterService.filterChanged.subscribe(() &#x3D;&gt; {
-			this.search &#x3D; this.loggingViewerFilterService.search;
+		effect(() &#x3D;&gt; {
+			const search &#x3D; this.loggingViewerFilterService.search();
+			this.search &#x3D; search;
 		});
-
-		this.logger.exit(methodName);
-	}
-
-	/**
-	 * Clean up.
-	 */
-	public ngOnDestroy(): void {
-		const methodName &#x3D; &quot;ngOnDestroy&quot;;
-		this.logger.entry(methodName);
-
-		this.filterChangedSubscription.unsubscribe();
 
 		this.logger.exit(methodName);
 	}
@@ -567,7 +483,7 @@ export class LoggingViewerSearchComponent implements OnInit, OnDestroy {
 		const methodName &#x3D; &quot;onSearchChanged&quot;;
 		this.logger.entry(methodName, this.search);
 
-		this.loggingViewerFilterService.search &#x3D; this.search;
+		this.loggingViewerFilterService.search.set(this.search);
 
 		this.logger.exit(methodName);
 	}
@@ -576,7 +492,8 @@ export class LoggingViewerSearchComponent implements OnInit, OnDestroy {
     </div>
 
     <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;ion-searchbar placeholder&#x3D;&quot;{{placeholder}}&quot; [(ngModel)]&#x3D;&quot;search&quot; (ionChange)&#x3D;&quot;onSearchChanged()&quot;&gt;&lt;/ion-searchbar&gt;</code></pre>
+        <pre class="line-numbers"><code class="language-html">&lt;ion-searchbar placeholder&#x3D;&quot;{{placeholder() || &#x27;Search&#x27;}}&quot; [(ngModel)]&#x3D;&quot;search&quot; [debounce]&#x3D;&quot;1000&quot;
+    (ionInput)&#x3D;&quot;onSearchChanged()&quot;&gt;&lt;/ion-searchbar&gt;</code></pre>
     </div>
 
     <div class="tab-pane fade " id="styleData">
@@ -611,11 +528,11 @@ export class LoggingViewerSearchComponent implements OnInit, OnDestroy {
     
 </div>
 
-<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/vis-network.min.js"></script>
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><ion-searchbar placeholder="{{placeholder}}" [(ngModel)]="search" (ionChange)="onSearchChanged()"></ion-searchbar></div>'
+        var COMPONENT_TEMPLATE = '<div><ion-searchbar placeholder="{{placeholder() || \'Search\'}}" [(ngModel)]="search" [debounce]="1000"    (ionInput)="onSearchChanged()"></ion-searchbar></div>'
     var COMPONENTS = [{'name': 'LoggingViewerComponent', 'selector': 'ionic-logging-viewer'},{'name': 'LoggingViewerLevelsComponent', 'selector': 'ionic-logging-viewer-levels'},{'name': 'LoggingViewerModalComponent', 'selector': 'ionic-logging-viewer-modal'},{'name': 'LoggingViewerSearchComponent', 'selector': 'ionic-logging-viewer-search'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'LoggingViewerSearchComponent'};
@@ -668,6 +585,19 @@ export class LoggingViewerSearchComponent implements OnInit, OnDestroy {
             var MAX_SEARCH_RESULTS = 15;
        </script>
 
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
 
@@ -679,7 +609,6 @@ export class LoggingViewerSearchComponent implements OnInit, OnDestroy {
        <script src="../js/libs/es6-shim.min.js"></script>
        <script src="../js/libs/EventDispatcher.js"></script>
        <script src="../js/libs/promise.min.js"></script>
-       <script src="../js/libs/zepto.min.js"></script>
 
        <script src="../js/compodoc.js"></script>
 

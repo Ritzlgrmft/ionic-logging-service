@@ -1,9 +1,10 @@
 # ionic-logging-service
 
-**The dependencies used by the latest version are the same as needed for [Ionic 7.0.0](https://github.com/ionic-team/ionic/blob/master/CHANGELOG.md). For older versions use:**
+**The dependencies used by the latest version are the same as needed for [Ionic 8.0.0](https://github.com/ionic-team/ionic/blob/master/CHANGELOG.md). For older versions use:**
 
 | ionic-logging-service | Ionic | Angular
 | ------ | -------- | ------
+| 21.0.0 | >= 8.0.0 | >=21.0.0
 | 18.0.0 | >= 7.0.0 | >=17.0.0
 | 17.0.0 | >= 6.1.9 | ^16.0.0
 | 16.0.0 | >= 6.1.9 | ^15.0.0
@@ -121,29 +122,18 @@ export const environment = {
 };
 ```
 
-Call `configure()` in your `app.module.ts`:
+Call `configure()` in your `app.config.ts`:
 
 ```TypeScript
-export function configureLogging(loggingService: LoggingService): () => void {
-  return () => loggingService.configure(environment.logging);
-}
-
-@NgModule({
-  ...
-  imports: [
-    ...
-    LoggingServiceModule
-  ],
+export const appConfig: ApplicationConfig = {
   providers: [
-    {
-      deps: [LoggingService],
-      multi: true,
-      provide: APP_INITIALIZER,
-      useFactory: configureLogging
-    }
+    ...
+    provideAppInitializer(() => {
+      const loggingService = inject(LoggingService);
+      loggingService.configure(environment.logging);
+    }),
   ]
-})
-export class AppModule { }
+};
 ```
 
 ### logLevels
@@ -185,4 +175,4 @@ With `memoryAppender`, it is possible to configure the `MemoryAppender`, which k
 
 ## API
 
-see [API documentation](https://ritzlgrmft.github.io/ionic-logging-service//service/index.html).
+see [API documentation](https://ritzlgrmft.github.io/ionic-logging-service/service/index.html).

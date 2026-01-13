@@ -12,10 +12,75 @@
         <link rel="stylesheet" href="./styles/dark.css">
     </head>
     <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
 
-        <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="./" class="navbar-brand">ionic-logging-service</a>
-            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="./" class="navbar-brand">ionic-logging-service</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
@@ -24,7 +89,7 @@
 
         <div class="container-fluid main">
            <div class="row main">
-               <div class="hidden-xs menu">
+               <div class="d-none d-md-block menu">
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
@@ -49,8 +114,12 @@
 
 
 
+
+
+
+
 <ol class="breadcrumb">
-    <li>Documentation coverage</li>
+    <li class="breadcrumb-item">Documentation coverage</li>
 </ol>
 
 <div>
@@ -70,7 +139,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/AjaxAppenderConfiguration.html">src/lib/ajax-appender.configuration.ts</a>
+                        <a href="./interfaces/AjaxAppenderConfiguration.html">src/lib/ajax-appender.configuration.ts</a>
             </td>
             <td>interface</td>
             <td>AjaxAppenderConfiguration</td>
@@ -82,7 +151,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./classes/AjaxAppender.html">src/lib/ajax-appender.model.ts</a>
+                        <a href="./classes/AjaxAppender.html">src/lib/ajax-appender.model.ts</a>
             </td>
             <td>class</td>
             <td>AjaxAppender</td>
@@ -94,7 +163,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/BrowserConsoleAppenderConfiguration.html">src/lib/browser-console-appender.configuration.ts</a>
+                        <a href="./interfaces/BrowserConsoleAppenderConfiguration.html">src/lib/browser-console-appender.configuration.ts</a>
             </td>
             <td>interface</td>
             <td>BrowserConsoleAppenderConfiguration</td>
@@ -106,7 +175,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./classes/JsonLayout.html">src/lib/json-layout.model.ts</a>
+                        <a href="./classes/JsonLayout.html">src/lib/json-layout.model.ts</a>
             </td>
             <td>class</td>
             <td>JsonLayout</td>
@@ -118,7 +187,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/LocalStorageAppenderConfiguration.html">src/lib/local-storage-appender.configuration.ts</a>
+                        <a href="./interfaces/LocalStorageAppenderConfiguration.html">src/lib/local-storage-appender.configuration.ts</a>
             </td>
             <td>interface</td>
             <td>LocalStorageAppenderConfiguration</td>
@@ -130,7 +199,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./classes/LocalStorageAppender.html">src/lib/local-storage-appender.model.ts</a>
+                        <a href="./classes/LocalStorageAppender.html">src/lib/local-storage-appender.model.ts</a>
             </td>
             <td>class</td>
             <td>LocalStorageAppender</td>
@@ -142,7 +211,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./classes/LogLevelConverter.html">src/lib/log-level.converter.ts</a>
+                        <a href="./classes/LogLevelConverter.html">src/lib/log-level.converter.ts</a>
             </td>
             <td>class</td>
             <td>LogLevelConverter</td>
@@ -154,7 +223,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/LogMessage.html">src/lib/log-message.model.ts</a>
+                        <a href="./interfaces/LogMessage.html">src/lib/log-message.model.ts</a>
             </td>
             <td>interface</td>
             <td>LogMessage</td>
@@ -166,7 +235,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./classes/Logger.html">src/lib/logger.model.ts</a>
+                        <a href="./classes/Logger.html">src/lib/logger.model.ts</a>
             </td>
             <td>class</td>
             <td>Logger</td>
@@ -178,7 +247,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/LoggingServiceConfiguration.html">src/lib/logging-service.configuration.ts</a>
+                        <a href="./interfaces/LoggingServiceConfiguration.html">src/lib/logging-service.configuration.ts</a>
             </td>
             <td>interface</td>
             <td>LoggingServiceConfiguration</td>
@@ -190,19 +259,19 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./injectables/LoggingService.html">src/lib/logging.service.ts</a>
+                        <a href="./injectables/LoggingService.html">src/lib/logging.service.ts</a>
             </td>
             <td>injectable</td>
             <td>LoggingService</td>
             <td align="right" data-sort="100">
                 <span class="coverage-percent">100 %</span>
-                <span class="coverage-count">(11/11)</span>
+                <span class="coverage-count">(10/10)</span>
             </td>
         </tr>
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/MemoryAppenderConfiguration.html">src/lib/memory-appender.configuration.ts</a>
+                        <a href="./interfaces/MemoryAppenderConfiguration.html">src/lib/memory-appender.configuration.ts</a>
             </td>
             <td>interface</td>
             <td>MemoryAppenderConfiguration</td>
@@ -214,13 +283,13 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./classes/MemoryAppender.html">src/lib/memory-appender.model.ts</a>
+                        <a href="./classes/MemoryAppender.html">src/lib/memory-appender.model.ts</a>
             </td>
             <td>class</td>
             <td>MemoryAppender</td>
             <td align="right" data-sort="100">
                 <span class="coverage-percent">100 %</span>
-                <span class="coverage-count">(10/10)</span>
+                <span class="coverage-count">(9/9)</span>
             </td>
         </tr>
     </tbody>
@@ -262,6 +331,19 @@
             var MAX_SEARCH_RESULTS = 15;
        </script>
 
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
        <script src="./js/libs/custom-elements.min.js"></script>
        <script src="./js/libs/lit-html.js"></script>
 
@@ -273,7 +355,6 @@
        <script src="./js/libs/es6-shim.min.js"></script>
        <script src="./js/libs/EventDispatcher.js"></script>
        <script src="./js/libs/promise.min.js"></script>
-       <script src="./js/libs/zepto.min.js"></script>
 
        <script src="./js/compodoc.js"></script>
 
