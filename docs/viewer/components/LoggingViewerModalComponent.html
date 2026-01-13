@@ -12,10 +12,75 @@
         <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
 
-        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
-            <a href="../" class="navbar-brand">ionic-logging-viewer</a>
-            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">ionic-logging-viewer</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
@@ -24,12 +89,16 @@
 
         <div class="container-fluid main">
            <div class="row main">
-               <div class="hidden-xs menu">
+               <div class="d-none d-md-block menu">
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
                <div class="content component">
                    <div class="content-data">
+
+
+
+
 
 
 
@@ -88,7 +157,7 @@
         <h3>Implements</h3>
     </p>
     <p class="comment">
-                <code>OnInit</code>
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
     </p>
 
 
@@ -114,6 +183,15 @@
             </tr>
 
 
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>IonicModule</code>
+                                <code><a href="../components/LoggingViewerSearchComponent.html" target="_self" >LoggingViewerSearchComponent</a></code>
+                                <code><a href="../components/LoggingViewerLevelsComponent.html" target="_self" >LoggingViewerLevelsComponent</a></code>
+                                <code><a href="../components/LoggingViewerComponent.html" target="_self" >LoggingViewerComponent</a></code>
+                </td>
+            </tr>
 
             <tr>
                 <td class="col-md-3">styleUrls</td>
@@ -233,12 +311,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(platform: Platform, alertController: AlertController, modalController: ModalController, loggingService: LoggingService)</code>
+<code>constructor()</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/lib/logging-viewer-modal/logging-viewer-modal.component.ts:57</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/lib/logging-viewer-modal/logging-viewer-modal.component.ts:66</a></div>
                             </td>
                         </tr>
 
@@ -246,68 +324,6 @@
                     <td class="col-md-4">
                             <div class="io-description"><p>Creates a new instance of the component.</p>
 </div>
-                            <div>
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>platform</td>
-                                                  
-                                                        <td>
-                                                                    <code>Platform</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>alertController</td>
-                                                  
-                                                        <td>
-                                                                    <code>AlertController</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>modalController</td>
-                                                  
-                                                        <td>
-                                                                    <code>ModalController</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>loggingService</td>
-                                                  
-                                                        <td>
-                                                                    <code>LoggingService</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
                     </td>
                 </tr>
             </tbody>
@@ -330,9 +346,14 @@
 
                     </td>
                 </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/lib/logging-viewer-modal/logging-viewer-modal.component.ts:48</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/lib/logging-viewer-modal/logging-viewer-modal.component.ts:57</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -357,9 +378,14 @@
 
                     </td>
                 </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>undefined</code>
+                    </td>
+                </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/lib/logging-viewer-modal/logging-viewer-modal.component.ts:29</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/lib/logging-viewer-modal/logging-viewer-modal.component.ts:41</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -385,9 +411,14 @@ Currently supported: en, de</p>
 
                     </td>
                 </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>undefined</code>
+                    </td>
+                </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/lib/logging-viewer-modal/logging-viewer-modal.component.ts:42</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/lib/logging-viewer-modal/logging-viewer-modal.component.ts:52</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -412,9 +443,14 @@ Currently supported: en, de</p>
 
                     </td>
                 </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>undefined</code>
+                    </td>
+                </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/lib/logging-viewer-modal/logging-viewer-modal.component.ts:36</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/lib/logging-viewer-modal/logging-viewer-modal.component.ts:47</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -441,7 +477,7 @@ If specified, the language is ignored.</p>
                 <td class="col-md-4">
                     <a name="clearLogs"></a>
                     <span class="name">
-                        <span class="modifier">Public</span>
+                            <span class="modifier">Public</span>
                         <span ><b>clearLogs</b></span>
                         <a href="#clearLogs"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -449,29 +485,29 @@ If specified, the language is ignored.</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
                     <code>clearLogs()</code>
                 </td>
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="153"
-                            class="link-to-prism">src/lib/logging-viewer-modal/logging-viewer-modal.component.ts:153</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="159"
+                                    class="link-to-prism">src/lib/logging-viewer-modal/logging-viewer-modal.component.ts:159</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Clear logs.</p>
+                        <div class="io-description"><p>Clear logs.</p>
 </div>
 
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                    </div>
+                        </div>
                 </td>
             </tr>
         </tbody>
@@ -482,7 +518,7 @@ If specified, the language is ignored.</p>
                 <td class="col-md-4">
                     <a name="getTranslation"></a>
                     <span class="name">
-                        <span class="modifier">Public</span>
+                            <span class="modifier">Public</span>
                         <span ><b>getTranslation</b></span>
                         <a href="#getTranslation"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -490,23 +526,23 @@ If specified, the language is ignored.</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
                     <code>getTranslation()</code>
                 </td>
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="169"
-                            class="link-to-prism">src/lib/logging-viewer-modal/logging-viewer-modal.component.ts:169</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="175"
+                                    class="link-to-prism">src/lib/logging-viewer-modal/logging-viewer-modal.component.ts:175</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Helper method returning the current translation:</p>
+                        <div class="io-description"><p>Helper method returning the current translation:</p>
 <ul>
 <li>the property translation if defined</li>
 <li>the translation according property language if valid</li>
@@ -514,10 +550,10 @@ If specified, the language is ignored.</p>
 </ul>
 </div>
 
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="../interfaces/LoggingViewerTranslation.html" target="_self" >LoggingViewerTranslation</a></code>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/LoggingViewerTranslation.html" target="_self" >LoggingViewerTranslation</a></code>
 
-                    </div>
+                        </div>
                 </td>
             </tr>
         </tbody>
@@ -528,7 +564,7 @@ If specified, the language is ignored.</p>
                 <td class="col-md-4">
                     <a name="ionViewDidEnter"></a>
                     <span class="name">
-                        <span class="modifier">Public</span>
+                            <span class="modifier">Public</span>
                         <span ><b>ionViewDidEnter</b></span>
                         <a href="#ionViewDidEnter"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -536,29 +572,29 @@ If specified, the language is ignored.</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
                     <code>ionViewDidEnter()</code>
                 </td>
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="103"
-                            class="link-to-prism">src/lib/logging-viewer-modal/logging-viewer-modal.component.ts:103</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="109"
+                                    class="link-to-prism">src/lib/logging-viewer-modal/logging-viewer-modal.component.ts:109</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Eventhandler called by Ionic when the modal is opened.</p>
+                        <div class="io-description"><p>Eventhandler called by Ionic when the modal is opened.</p>
 </div>
 
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                    </div>
+                        </div>
                 </td>
             </tr>
         </tbody>
@@ -569,7 +605,7 @@ If specified, the language is ignored.</p>
                 <td class="col-md-4">
                     <a name="ngOnInit"></a>
                     <span class="name">
-                        <span class="modifier">Public</span>
+                            <span class="modifier">Public</span>
                         <span ><b>ngOnInit</b></span>
                         <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -577,30 +613,30 @@ If specified, the language is ignored.</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
                     <code>ngOnInit()</code>
                 </td>
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="81"
-                            class="link-to-prism">src/lib/logging-viewer-modal/logging-viewer-modal.component.ts:81</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="87"
+                                    class="link-to-prism">src/lib/logging-viewer-modal/logging-viewer-modal.component.ts:87</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Initializes the LoggingViewerModalComponent.
+                        <div class="io-description"><p>Initializes the LoggingViewerModalComponent.
 It configures the supported translations.</p>
 </div>
 
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                    </div>
+                        </div>
                 </td>
             </tr>
         </tbody>
@@ -611,8 +647,8 @@ It configures the supported translations.</p>
                 <td class="col-md-4">
                     <a name="onClearLogs"></a>
                     <span class="name">
-                        <span class="modifier">Public</span>
-                        <span class="modifier">Async</span>
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
                         <span ><b>onClearLogs</b></span>
                         <a href="#onClearLogs"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -620,29 +656,29 @@ It configures the supported translations.</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
                     <code>onClearLogs()</code>
                 </td>
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="125"
-                            class="link-to-prism">src/lib/logging-viewer-modal/logging-viewer-modal.component.ts:125</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="131"
+                                    class="link-to-prism">src/lib/logging-viewer-modal/logging-viewer-modal.component.ts:131</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Eventhandler called when the clear button is clicked.</p>
+                        <div class="io-description"><p>Eventhandler called when the clear button is clicked.</p>
 </div>
 
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
 
-                    </div>
+                        </div>
                 </td>
             </tr>
         </tbody>
@@ -653,8 +689,8 @@ It configures the supported translations.</p>
                 <td class="col-md-4">
                     <a name="onClose"></a>
                     <span class="name">
-                        <span class="modifier">Public</span>
-                        <span class="modifier">Async</span>
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
                         <span ><b>onClose</b></span>
                         <a href="#onClose"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -662,29 +698,29 @@ It configures the supported translations.</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
                     <code>onClose()</code>
                 </td>
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="113"
-                            class="link-to-prism">src/lib/logging-viewer-modal/logging-viewer-modal.component.ts:113</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="119"
+                                    class="link-to-prism">src/lib/logging-viewer-modal/logging-viewer-modal.component.ts:119</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Eventhandler called when the cancel button is clicked.</p>
+                        <div class="io-description"><p>Eventhandler called when the cancel button is clicked.</p>
 </div>
 
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
 
-                    </div>
+                        </div>
                 </td>
             </tr>
         </tbody>
@@ -715,7 +751,7 @@ It configures the supported translations.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/lib/logging-viewer-modal/logging-viewer-modal.component.ts:53</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/lib/logging-viewer-modal/logging-viewer-modal.component.ts:62</a></div>
                         </td>
                     </tr>
 
@@ -734,13 +770,20 @@ It configures the supported translations.</p>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, Input } from &quot;@angular/core&quot;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, inject, input } from &quot;@angular/core&quot;;
 
-import { ModalController, Platform, AlertController } from &quot;@ionic/angular&quot;;
+import { ModalController, Platform, AlertController, IonicModule } from &quot;@ionic/angular&quot;;
 
 import { Logger, LoggingService } from &quot;ionic-logging-service&quot;;
 
 import { LoggingViewerTranslation } from &quot;../logging-viewer-translation.model&quot;;
+
+import { addIcons } from &quot;ionicons&quot;;
+import { closeCircle, trashOutline } from &quot;ionicons/icons&quot;;
+
+import { LoggingViewerSearchComponent } from &quot;../logging-viewer-search/logging-viewer-search.component&quot;;
+import { LoggingViewerLevelsComponent } from &quot;../logging-viewer-levels/logging-viewer-levels.component&quot;;
+import { LoggingViewerComponent } from &quot;../logging-viewer/logging-viewer.component&quot;;
 
 /**
  * Ionic modal containing [LoggingViewerComponent](LoggingViewerComponent.html),
@@ -750,9 +793,15 @@ import { LoggingViewerTranslation } from &quot;../logging-viewer-translation.mod
 @Component({
 	selector: &quot;ionic-logging-viewer-modal&quot;,
 	templateUrl: &quot;./logging-viewer-modal.component.html&quot;,
-	styleUrls: [&quot;./logging-viewer-modal.component.scss&quot;]
+	styleUrls: [&quot;./logging-viewer-modal.component.scss&quot;],
+	imports: [IonicModule, LoggingViewerSearchComponent, LoggingViewerLevelsComponent, LoggingViewerComponent]
 })
 export class LoggingViewerModalComponent implements OnInit {
+
+	private platform &#x3D; inject(Platform);
+	private alertController &#x3D; inject(AlertController);
+	private modalController &#x3D; inject(ModalController);
+	private loggingService &#x3D; inject(LoggingService);
 
 	private static languageEn &#x3D; &quot;en&quot;;
 	private static languageDe &#x3D; &quot;de&quot;;
@@ -761,27 +810,23 @@ export class LoggingViewerModalComponent implements OnInit {
 	 * Language to be used for the modal.
 	 * Currently supported: en, de
 	 */
-	@Input()
-	public language: string;
+	public readonly language &#x3D; input&lt;string&gt;(undefined);
 
 	/**
 	 * Translation to be used for the modal.
 	 * If specified, the language is ignored.
 	 */
-	@Input()
-	public translation: LoggingViewerTranslation;
+	public readonly translation &#x3D; input&lt;LoggingViewerTranslation&gt;(undefined);
 
 	/**
 	 * Comma-separated list of localStorageKeys. If set, the logs get loaded from localStorage instead of memory.
 	 */
-	@Input()
-	public localStorageKeys: string;
+	public readonly localStorageKeys &#x3D; input&lt;string&gt;(undefined);
 
 	/**
 	 * Flag showing a delete button, which removes all existing log messages.
 	 */
-	@Input()
-	public allowClearLogs: boolean;
+	public readonly allowClearLogs &#x3D; input&lt;boolean&gt;(true);
 
 	/**
 	 * Flag controlling which close button will be shown.
@@ -790,22 +835,19 @@ export class LoggingViewerModalComponent implements OnInit {
 
 	private logger: Logger;
 
-	private translations: { [language: string]: LoggingViewerTranslation };
+	private translations: Record&lt;string, LoggingViewerTranslation&gt;;
 
 	/**
 	 * Creates a new instance of the component.
 	 */
-	constructor(
-		platform: Platform,
-		private alertController: AlertController,
-		private modalController: ModalController,
-		private loggingService: LoggingService) {
-
-		this.logger &#x3D; loggingService.getLogger(&quot;Ionic.Logging.Viewer.Modal.Component&quot;);
+	constructor() {
+		this.logger &#x3D; this.
+			loggingService.getLogger(&quot;Ionic.Logging.Viewer.Modal.Component&quot;);
 		const methodName &#x3D; &quot;ctor&quot;;
 		this.logger.entry(methodName);
 
-		this.isAndroid &#x3D; platform.is(&quot;android&quot;);
+		this.isAndroid &#x3D; this.platform.is(&quot;android&quot;);
+		addIcons({ closeCircle, trashOutline });
 
 		this.logger.exit(methodName);
 	}
@@ -887,8 +929,8 @@ export class LoggingViewerModalComponent implements OnInit {
 	 * Clear logs.
 	 */
 	public clearLogs(): void {
-		if (this.localStorageKeys) {
-			for (const localStorageKey of this.localStorageKeys.split(&quot;,&quot;)) {
+		if (this.localStorageKeys()) {
+			for (const localStorageKey of this.localStorageKeys().split(&quot;,&quot;)) {
 				this.loggingService.removeLogMessagesFromLocalStorage(localStorageKey);
 			}
 		} else {
@@ -903,10 +945,12 @@ export class LoggingViewerModalComponent implements OnInit {
 	 * - English translation, otherwise
 	 */
 	public getTranslation(): LoggingViewerTranslation {
-		if (typeof this.translation !&#x3D;&#x3D; &quot;undefined&quot;) {
-			return this.translation;
-		} else if (typeof this.language !&#x3D;&#x3D; &quot;undefined&quot; &amp;&amp; typeof this.translations[this.language] &#x3D;&#x3D;&#x3D; &quot;object&quot;) {
-			return this.translations[this.language];
+		const language &#x3D; this.language();
+		const translation &#x3D; this.translation();
+		if (typeof translation !&#x3D;&#x3D; &quot;undefined&quot;) {
+			return translation;
+		} else if (typeof language !&#x3D;&#x3D; &quot;undefined&quot; &amp;&amp; typeof this.translations[language] &#x3D;&#x3D;&#x3D; &quot;object&quot;) {
+			return this.translations[language];
 		} else {
 			return this.translations[LoggingViewerModalComponent.languageEn];
 		}
@@ -917,31 +961,36 @@ export class LoggingViewerModalComponent implements OnInit {
 
     <div class="tab-pane fade " id="templateData">
         <pre class="line-numbers"><code class="language-html">&lt;ion-header&gt;
-	&lt;ion-toolbar color&#x3D;primary&gt;
-		&lt;ion-title&gt;{{ getTranslation().title }}&lt;/ion-title&gt;
-		&lt;ion-buttons slot&#x3D;&quot;start&quot;&gt;
-			&lt;ion-button *ngIf&#x3D;&quot;!isAndroid&quot; (click)&#x3D;&quot;onClose()&quot;&gt;
-				{{ getTranslation().cancel }}
-			&lt;/ion-button&gt;
-			&lt;ion-button *ngIf&#x3D;&quot;isAndroid&quot; icon-only (click)&#x3D;&quot;onClose()&quot;&gt;
-				&lt;ion-icon name&#x3D;&quot;md-close&quot;&gt;&lt;/ion-icon&gt;
-			&lt;/ion-button&gt;
-		&lt;/ion-buttons&gt;
-	&lt;/ion-toolbar&gt;
-	&lt;ion-toolbar&gt;
-		&lt;ionic-logging-viewer-search [placeholder]&#x3D;&quot;getTranslation().searchPlaceholder&quot;&gt;&lt;/ionic-logging-viewer-search&gt;
-		&lt;ion-buttons slot&#x3D;&quot;end&quot; *ngIf&#x3D;&quot;allowClearLogs !&#x3D;&#x3D; false&quot; class&#x3D;&quot;clearLogs&quot;&gt;
-			&lt;ion-button (click)&#x3D;&quot;onClearLogs()&quot;&gt;
-				&lt;ion-icon name&#x3D;&quot;trash-outline&quot;&gt;&lt;/ion-icon&gt;
-			&lt;/ion-button&gt;
-		&lt;/ion-buttons&gt;
-	&lt;/ion-toolbar&gt;
-	&lt;ion-toolbar&gt;
-		&lt;ionic-logging-viewer-levels&gt;&lt;/ionic-logging-viewer-levels&gt;
-	&lt;/ion-toolbar&gt;
+  &lt;ion-toolbar color&#x3D;primary&gt;
+    &lt;ion-title&gt;{{ getTranslation().title }}&lt;/ion-title&gt;
+    &lt;ion-buttons slot&#x3D;&quot;start&quot;&gt;
+      @if (!isAndroid) {
+      &lt;ion-button (click)&#x3D;&quot;onClose()&quot;&gt;
+        {{ getTranslation().cancel }}
+      &lt;/ion-button&gt;
+      } @else {
+      &lt;ion-button icon-only (click)&#x3D;&quot;onClose()&quot;&gt;
+        &lt;ion-icon name&#x3D;&quot;close-circle&quot;&gt;&lt;/ion-icon&gt;
+      &lt;/ion-button&gt;
+      }
+    &lt;/ion-buttons&gt;
+  &lt;/ion-toolbar&gt;
+  &lt;ion-toolbar&gt;
+    &lt;ionic-logging-viewer-search [placeholder]&#x3D;&quot;getTranslation().searchPlaceholder&quot;&gt;&lt;/ionic-logging-viewer-search&gt;
+    @if (allowClearLogs() !&#x3D;&#x3D; false) {
+    &lt;ion-buttons slot&#x3D;&quot;end&quot; class&#x3D;&quot;clearLogs&quot;&gt;
+      &lt;ion-button (click)&#x3D;&quot;onClearLogs()&quot;&gt;
+        &lt;ion-icon name&#x3D;&quot;trash-outline&quot;&gt;&lt;/ion-icon&gt;
+      &lt;/ion-button&gt;
+    &lt;/ion-buttons&gt;
+    }
+  &lt;/ion-toolbar&gt;
+  &lt;ion-toolbar&gt;
+    &lt;ionic-logging-viewer-levels&gt;&lt;/ionic-logging-viewer-levels&gt;
+  &lt;/ion-toolbar&gt;
 &lt;/ion-header&gt;
 &lt;ion-content&gt;
-	&lt;ionic-logging-viewer [localStorageKeys]&#x3D;&quot;localStorageKeys&quot;&gt;&lt;/ionic-logging-viewer&gt;
+  &lt;ionic-logging-viewer [localStorageKeys]&#x3D;&quot;localStorageKeys()&quot;&gt;&lt;/ionic-logging-viewer&gt;
 &lt;/ion-content&gt;</code></pre>
     </div>
 
@@ -982,11 +1031,11 @@ export class LoggingViewerModalComponent implements OnInit {
     
 </div>
 
-<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/vis-network.min.js"></script>
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><ion-header>	<ion-toolbar color=primary>		<ion-title>{{ getTranslation().title }}</ion-title>		<ion-buttons slot="start">			<ion-button *ngIf="!isAndroid" (click)="onClose()">				{{ getTranslation().cancel }}			</ion-button>			<ion-button *ngIf="isAndroid" icon-only (click)="onClose()">				<ion-icon name="md-close"></ion-icon>			</ion-button>		</ion-buttons>	</ion-toolbar>	<ion-toolbar>		<ionic-logging-viewer-search [placeholder]="getTranslation().searchPlaceholder"></ionic-logging-viewer-search>		<ion-buttons slot="end" *ngIf="allowClearLogs !== false" class="clearLogs">			<ion-button (click)="onClearLogs()">				<ion-icon name="trash-outline"></ion-icon>			</ion-button>		</ion-buttons>	</ion-toolbar>	<ion-toolbar>		<ionic-logging-viewer-levels></ionic-logging-viewer-levels>	</ion-toolbar></ion-header><ion-content>	<ionic-logging-viewer [localStorageKeys]="localStorageKeys"></ionic-logging-viewer></ion-content></div>'
+        var COMPONENT_TEMPLATE = '<div><ion-header>  <ion-toolbar color=primary>    <ion-title>{{ getTranslation().title }}</ion-title>    <ion-buttons slot="start">      @if (!isAndroid) {      <ion-button (click)="onClose()">        {{ getTranslation().cancel }}      </ion-button>      } @else {      <ion-button icon-only (click)="onClose()">        <ion-icon name="close-circle"></ion-icon>      </ion-button>      }    </ion-buttons>  </ion-toolbar>  <ion-toolbar>    <ionic-logging-viewer-search [placeholder]="getTranslation().searchPlaceholder"></ionic-logging-viewer-search>    @if (allowClearLogs() !== false) {    <ion-buttons slot="end" class="clearLogs">      <ion-button (click)="onClearLogs()">        <ion-icon name="trash-outline"></ion-icon>      </ion-button>    </ion-buttons>    }  </ion-toolbar>  <ion-toolbar>    <ionic-logging-viewer-levels></ionic-logging-viewer-levels>  </ion-toolbar></ion-header><ion-content>  <ionic-logging-viewer [localStorageKeys]="localStorageKeys()"></ionic-logging-viewer></ion-content></div>'
     var COMPONENTS = [{'name': 'LoggingViewerComponent', 'selector': 'ionic-logging-viewer'},{'name': 'LoggingViewerLevelsComponent', 'selector': 'ionic-logging-viewer-levels'},{'name': 'LoggingViewerModalComponent', 'selector': 'ionic-logging-viewer-modal'},{'name': 'LoggingViewerSearchComponent', 'selector': 'ionic-logging-viewer-search'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'LoggingViewerModalComponent'};
@@ -1039,6 +1088,19 @@ export class LoggingViewerModalComponent implements OnInit {
             var MAX_SEARCH_RESULTS = 15;
        </script>
 
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
 
@@ -1050,7 +1112,6 @@ export class LoggingViewerModalComponent implements OnInit {
        <script src="../js/libs/es6-shim.min.js"></script>
        <script src="../js/libs/EventDispatcher.js"></script>
        <script src="../js/libs/promise.min.js"></script>
-       <script src="../js/libs/zepto.min.js"></script>
 
        <script src="../js/compodoc.js"></script>
 

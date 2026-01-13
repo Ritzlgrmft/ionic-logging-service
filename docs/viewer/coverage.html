@@ -12,10 +12,75 @@
         <link rel="stylesheet" href="./styles/dark.css">
     </head>
     <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
 
-        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
-            <a href="./" class="navbar-brand">ionic-logging-viewer</a>
-            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="./" class="navbar-brand">ionic-logging-viewer</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
@@ -24,12 +89,16 @@
 
         <div class="container-fluid main">
            <div class="row main">
-               <div class="hidden-xs menu">
+               <div class="d-none d-md-block menu">
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
                <div class="content coverage">
                    <div class="content-data">
+
+
+
+
 
 
 
@@ -70,31 +139,31 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./injectables/LoggingViewerFilterService.html">src/lib/logging-viewer-filter.service.ts</a>
+                        <a href="./injectables/LoggingViewerFilterService.html">src/lib/logging-viewer-filter.service.ts</a>
             </td>
             <td>injectable</td>
             <td>LoggingViewerFilterService</td>
             <td align="right" data-sort="100">
                 <span class="coverage-percent">100 %</span>
-                <span class="coverage-count">(3/3)</span>
+                <span class="coverage-count">(4/4)</span>
             </td>
         </tr>
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/LoggingViewerLevelsComponent.html">src/lib/logging-viewer-levels/logging-viewer-levels.component.ts</a>
+                        <a href="./components/LoggingViewerLevelsComponent.html">src/lib/logging-viewer-levels/logging-viewer-levels.component.ts</a>
             </td>
             <td>component</td>
             <td>LoggingViewerLevelsComponent</td>
             <td align="right" data-sort="100">
                 <span class="coverage-percent">100 %</span>
-                <span class="coverage-count">(7/7)</span>
+                <span class="coverage-count">(5/5)</span>
             </td>
         </tr>
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/LoggingViewerModalProperties.html">src/lib/logging-viewer-modal/logging-viewer-modal-properties.model.ts</a>
+                        <a href="./interfaces/LoggingViewerModalProperties.html">src/lib/logging-viewer-modal/logging-viewer-modal-properties.model.ts</a>
             </td>
             <td>interface</td>
             <td>LoggingViewerModalProperties</td>
@@ -106,7 +175,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/LoggingViewerModalComponent.html">src/lib/logging-viewer-modal/logging-viewer-modal.component.ts</a>
+                        <a href="./components/LoggingViewerModalComponent.html">src/lib/logging-viewer-modal/logging-viewer-modal.component.ts</a>
             </td>
             <td>component</td>
             <td>LoggingViewerModalComponent</td>
@@ -118,19 +187,19 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/LoggingViewerSearchComponent.html">src/lib/logging-viewer-search/logging-viewer-search.component.ts</a>
+                        <a href="./components/LoggingViewerSearchComponent.html">src/lib/logging-viewer-search/logging-viewer-search.component.ts</a>
             </td>
             <td>component</td>
             <td>LoggingViewerSearchComponent</td>
             <td align="right" data-sort="100">
                 <span class="coverage-percent">100 %</span>
-                <span class="coverage-count">(7/7)</span>
+                <span class="coverage-count">(5/5)</span>
             </td>
         </tr>
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/LoggingViewerTranslation.html">src/lib/logging-viewer-translation.model.ts</a>
+                        <a href="./interfaces/LoggingViewerTranslation.html">src/lib/logging-viewer-translation.model.ts</a>
             </td>
             <td>interface</td>
             <td>LoggingViewerTranslation</td>
@@ -142,13 +211,13 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/LoggingViewerComponent.html">src/lib/logging-viewer/logging-viewer.component.ts</a>
+                        <a href="./components/LoggingViewerComponent.html">src/lib/logging-viewer/logging-viewer.component.ts</a>
             </td>
             <td>component</td>
             <td>LoggingViewerComponent</td>
             <td align="right" data-sort="100">
                 <span class="coverage-percent">100 %</span>
-                <span class="coverage-count">(10/10)</span>
+                <span class="coverage-count">(7/7)</span>
             </td>
         </tr>
     </tbody>
@@ -190,6 +259,19 @@
             var MAX_SEARCH_RESULTS = 15;
        </script>
 
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
        <script src="./js/libs/custom-elements.min.js"></script>
        <script src="./js/libs/lit-html.js"></script>
 
@@ -201,7 +283,6 @@
        <script src="./js/libs/es6-shim.min.js"></script>
        <script src="./js/libs/EventDispatcher.js"></script>
        <script src="./js/libs/promise.min.js"></script>
-       <script src="./js/libs/zepto.min.js"></script>
 
        <script src="./js/compodoc.js"></script>
 
