@@ -1,3 +1,5 @@
+import { afterEach, describe, it, expect, beforeEach, vi } from "vitest";
+
 import { signal, NO_ERRORS_SCHEMA } from "@angular/core";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
@@ -10,177 +12,194 @@ import { LoggingViewerModalComponent } from "./logging-viewer-modal.component";
 import { LoggingViewerFilterService } from "../logging-viewer-filter.service";
 
 describe("LoggingViewerModalComponent", () => {
-	let component: LoggingViewerModalComponent;
-	let fixture: ComponentFixture<LoggingViewerModalComponent>;
+    let component: LoggingViewerModalComponent;
+    let fixture: ComponentFixture<LoggingViewerModalComponent>;
 
-	const loggerStub = jasmine.createSpyObj("logger", ["debug", "entry", "exit", "info"]);
+    const loggerStub = {
+        debug: vi.fn().mockName("logger.debug"),
+        entry: vi.fn().mockName("logger.entry"),
+        exit: vi.fn().mockName("logger.exit"),
+        info: vi.fn().mockName("logger.info")
+    };
 
-	const loggingServiceStub = jasmine.createSpyObj("loggingServiceStub",
-		["getLogger", "getLogMessages", "removeLogMessages", "removeLogMessagesFromLocalStorage"]);
-	loggingServiceStub.getLogger.and.returnValue(loggerStub);
-	loggingServiceStub.getLogMessages.and.returnValue([]);
+    const loggingServiceStub = {
+        getLogger: vi.fn().mockName("loggingServiceStub.getLogger"),
+        getLogMessages: vi.fn().mockName("loggingServiceStub.getLogMessages"),
+        removeLogMessages: vi.fn().mockName("loggingServiceStub.removeLogMessages"),
+        removeLogMessagesFromLocalStorage: vi.fn().mockName("loggingServiceStub.removeLogMessagesFromLocalStorage")
+    };
+    loggingServiceStub.getLogger.mockReturnValue(loggerStub);
+    loggingServiceStub.getLogMessages.mockReturnValue([]);
 
-	const alertStub = jasmine.createSpyObj("alert", ["present"]);
-	const alertControllerStub = jasmine.createSpyObj("alertControllerStub", ["create"]);
-	alertControllerStub.create.and.returnValue(Promise.resolve(alertStub));
+    const alertStub = {
+        present: vi.fn().mockName("alert.present")
+    };
+    const alertControllerStub = {
+        create: vi.fn().mockName("alertControllerStub.create")
+    };
+    alertControllerStub.create.mockReturnValue(Promise.resolve(alertStub));
 
-	const navParamsStub = jasmine.createSpyObj("navParams", ["get"]);
-	navParamsStub.get.and.returnValue(undefined);
+    const navParamsStub = {
+        get: vi.fn().mockName("navParams.get")
+    };
+    navParamsStub.get.mockReturnValue(undefined);
 
-	const angularDelegateStub = jasmine.createSpyObj("angularDelegateStub", ["create"]);
+    const angularDelegateStub = {
+        create: vi.fn().mockName("angularDelegateStub.create")
+    };
 
-	beforeEach(async () => {
-		await TestBed.configureTestingModule({
-			imports: [
-				FormsModule,
-				IonicModule,
-				LoggingViewerModalComponent,
-			],
-			schemas: [NO_ERRORS_SCHEMA],
-			providers: [
-				{ provide: LoggingService, useValue: loggingServiceStub },
-				{ provide: AlertController, useValue: alertControllerStub },
-				{ provide: NavParams, useValue: navParamsStub },
-				{ provide: AngularDelegate, useValue: angularDelegateStub },
-				LoggingViewerFilterService
-			]
-		})
-			.compileComponents();
-	});
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            imports: [
+                FormsModule,
+                IonicModule,
+                LoggingViewerModalComponent,
+            ],
+            schemas: [NO_ERRORS_SCHEMA],
+            providers: [
+                { provide: LoggingService, useValue: loggingServiceStub },
+                { provide: AlertController, useValue: alertControllerStub },
+                { provide: NavParams, useValue: navParamsStub },
+                { provide: AngularDelegate, useValue: angularDelegateStub },
+                LoggingViewerFilterService
+            ]
+        })
+            .compileComponents();
+    });
 
-	beforeEach(() => {
-		fixture = TestBed.createComponent(LoggingViewerModalComponent);
-		component = fixture.componentInstance;
-	});
+    beforeEach(() => {
+        fixture = TestBed.createComponent(LoggingViewerModalComponent);
+        component = fixture.componentInstance;
+    });
 
-	afterEach(() => {
-		fixture.destroy();
-	});
+    afterEach(() => {
+        fixture.destroy();
+    });
 
-	describe("constructor", () => {
+    describe("constructor", () => {
 
-		it("gets correct named logger", () => {
+        it("gets correct named logger", () => {
 
-			expect(loggingServiceStub.getLogger).toHaveBeenCalledWith("Ionic.Logging.Viewer.Modal.Component");
-		});
+            expect(loggingServiceStub.getLogger).toHaveBeenCalledWith("Ionic.Logging.Viewer.Modal.Component");
+        });
 
-		it("logs entry and exit", () => {
+        it("logs entry and exit", () => {
 
-			expect(loggerStub.entry).toHaveBeenCalledWith("ctor");
-			expect(loggerStub.exit).toHaveBeenCalledWith("ctor");
-		});
-	});
+            expect(loggerStub.entry).toHaveBeenCalledWith("ctor");
+            expect(loggerStub.exit).toHaveBeenCalledWith("ctor");
+        });
+    });
 
-	describe("ionViewDidEnter", () => {
+    describe("ionViewDidEnter", () => {
 
-		it("logs entry and exit", () => {
+        it("logs entry and exit", () => {
 
-			component.ionViewDidEnter();
+            component.ionViewDidEnter();
 
-			expect(loggerStub.entry).toHaveBeenCalledWith("ionViewDidEnter");
-			expect(loggerStub.exit).toHaveBeenCalledWith("ionViewDidEnter");
-		});
-	});
+            expect(loggerStub.entry).toHaveBeenCalledWith("ionViewDidEnter");
+            expect(loggerStub.exit).toHaveBeenCalledWith("ionViewDidEnter");
+        });
+    });
 
-	describe("onClose(): void", () => {
+    describe("onClose(): void", () => {
 
-		it("calls modalController.dismiss()", async () => {
-			const dismissSpy = spyOn((component as any).modalController, 'dismiss').and.returnValue(Promise.resolve());
+        it("calls modalController.dismiss()", async () => {
+            const dismissSpy = vi.spyOn((component as any).modalController, 'dismiss').mockReturnValue(Promise.resolve());
 
-			await component.onClose();
+            await component.onClose();
 
-			expect(dismissSpy).toHaveBeenCalled();
-		});
-	});
+            expect(dismissSpy).toHaveBeenCalled();
+        });
+    });
 
-	describe("getTranslation(): LoggingViewerTranslation", () => {
+    describe("getTranslation(): LoggingViewerTranslation", () => {
 
-		it("known language, no translation: title is translated", () => {
+        it("known language, no translation: title is translated", () => {
 
-			fixture.componentRef.setInput("language", "de");
-			fixture.componentRef.setInput("translation", undefined);
+            fixture.componentRef.setInput("language", "de");
+            fixture.componentRef.setInput("translation", undefined);
 
-			component.ngOnInit();
+            component.ngOnInit();
 
-			const translation = component.getTranslation();
+            const translation = component.getTranslation();
 
-			expect(translation.title).toBe("Logging");
-		});
+            expect(translation.title).toBe("Logging");
+        });
 
-		it("unknown language, no translation: english translation is used", () => {
+        it("unknown language, no translation: english translation is used", () => {
 
-			fixture.componentRef.setInput("language", "fr");
-			fixture.componentRef.setInput("translation", undefined);
+            fixture.componentRef.setInput("language", "fr");
+            fixture.componentRef.setInput("translation", undefined);
 
-			component.ngOnInit();
+            component.ngOnInit();
 
-			const translation = component.getTranslation();
+            const translation = component.getTranslation();
 
-			expect(translation.title).toBe("Logging");
-		});
+            expect(translation.title).toBe("Logging");
+        });
 
-		it("no language, no translation: english translation is used", () => {
+        it("no language, no translation: english translation is used", () => {
 
-			fixture.componentRef.setInput("language", undefined);
-			fixture.componentRef.setInput("translation", undefined);
+            fixture.componentRef.setInput("language", undefined);
+            fixture.componentRef.setInput("translation", undefined);
 
-			component.ngOnInit();
+            component.ngOnInit();
 
-			const translation = component.getTranslation();
+            const translation = component.getTranslation();
 
-			expect(translation.title).toBe("Logging");
-		});
+            expect(translation.title).toBe("Logging");
+        });
 
-		it("no language, but translation: translation is used", () => {
+        it("no language, but translation: translation is used", () => {
 
-			fixture.componentRef.setInput("language", undefined);
-			fixture.componentRef.setInput("translation", { title: "ttt", cancel: "bc", searchPlaceholder: "sp", ok: "oo", confirmDelete: "cd" });
+            fixture.componentRef.setInput("language", undefined);
+            fixture.componentRef.setInput("translation", { title: "ttt", cancel: "bc", searchPlaceholder: "sp", ok: "oo", confirmDelete: "cd" });
 
-			component.ngOnInit();
+            component.ngOnInit();
 
-			const translation = component.getTranslation();
+            const translation = component.getTranslation();
 
-			expect(translation.title).toBe("ttt");
-		});
+            expect(translation.title).toBe("ttt");
+        });
 
-		it("language and translation: translation is used", () => {
+        it("language and translation: translation is used", () => {
 
-			fixture.componentRef.setInput("language", "en");
-			fixture.componentRef.setInput("translation", { title: "ttt", cancel: "bc", searchPlaceholder: "sp", ok: "oo", confirmDelete: "cd" });
+            fixture.componentRef.setInput("language", "en");
+            fixture.componentRef.setInput("translation", { title: "ttt", cancel: "bc", searchPlaceholder: "sp", ok: "oo", confirmDelete: "cd" });
 
-			component.ngOnInit();
+            component.ngOnInit();
 
-			const translation = component.getTranslation();
+            const translation = component.getTranslation();
 
-			expect(translation.title).toBe("ttt");
-		});
-	});
+            expect(translation.title).toBe("ttt");
+        });
+    });
 
-	describe("onClearLogs(): void", () => {
+    describe("onClearLogs(): void", () => {
 
-		it("alert called", async () => {
+        it("alert called", async () => {
 
-			component.ngOnInit();
-			await component.onClearLogs();
-			expect(alertStub.present).toHaveBeenCalled();
-		});
-	});
+            component.ngOnInit();
+            await component.onClearLogs();
+            expect(alertStub.present).toHaveBeenCalled();
+        });
+    });
 
-	describe("clearLogs(): void", () => {
+    describe("clearLogs(): void", () => {
 
-		it("removes messages in memory", () => {
+        it("removes messages in memory", () => {
 
-			component.clearLogs();
-			expect(loggingServiceStub.removeLogMessages).toHaveBeenCalled();
-		});
+            component.clearLogs();
+            expect(loggingServiceStub.removeLogMessages).toHaveBeenCalled();
+        });
 
-		it("removes messages from local storage", () => {
+        it("removes messages from local storage", () => {
 
-			(component as any).localStorageKeys = signal("abc");
+            (component as any).localStorageKeys = signal("abc");
 
-			component.clearLogs();
+            component.clearLogs();
 
-			expect(loggingServiceStub.removeLogMessagesFromLocalStorage).toHaveBeenCalledWith("abc");
-		});
-	});
+            expect(loggingServiceStub.removeLogMessagesFromLocalStorage).toHaveBeenCalledWith("abc");
+        });
+    });
 });

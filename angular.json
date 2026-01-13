@@ -63,13 +63,21 @@
             "production": {
               "project": "projects/ionic-logging-viewer/ng-package.prod.json",
               "tsConfig": "projects/ionic-logging-viewer/tsconfig.lib.prod.json"
-            }
+            },
+            "development": {}
           }
         },
         "test": {
           "builder": "@angular/build:unit-test",
           "options": {
-            "tsConfig": "projects/ionic-logging-viewer/tsconfig.spec.json"
+            "tsConfig": "projects/ionic-logging-viewer/tsconfig.spec.json",
+            "coverage": true,
+            "coverageThresholds": {
+              "statements": 95,
+              "branches": 95,
+              "functions": 95,
+              "lines": 95
+            }
           }
         },
         "lint": {

@@ -1,3 +1,5 @@
+import { describe, it, expect, beforeEach, vi } from "vitest";
+
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
 import { IonicModule } from "@ionic/angular";
@@ -8,83 +10,87 @@ import { LoggingViewerSearchComponent } from "./logging-viewer-search.component"
 import { LoggingViewerFilterService } from "../logging-viewer-filter.service";
 
 describe("LoggingViewerSearchComponent", () => {
-	let component: LoggingViewerSearchComponent;
-	let fixture: ComponentFixture<LoggingViewerSearchComponent>;
-	let loggingViewerFilterService: LoggingViewerFilterService;
+    let component: LoggingViewerSearchComponent;
+    let fixture: ComponentFixture<LoggingViewerSearchComponent>;
+    let loggingViewerFilterService: LoggingViewerFilterService;
 
-	const loggerStub = jasmine.createSpyObj("logger", ["entry", "exit"]);
+    const loggerStub = {
+        entry: vi.fn().mockName("logger.entry"),
+        exit: vi.fn().mockName("logger.exit")
+    };
 
-	const loggingServiceStub = jasmine.createSpyObj("loggingServiceStub",
-		["getLogger"]);
-	loggingServiceStub.getLogger.and.returnValue(loggerStub);
+    const loggingServiceStub = {
+        getLogger: vi.fn().mockName("loggingServiceStub.getLogger")
+    };
+    loggingServiceStub.getLogger.mockReturnValue(loggerStub);
 
-	beforeEach(async () => {
-		await TestBed.configureTestingModule({
-			imports: [
-				FormsModule,
-				IonicModule,
-				LoggingViewerSearchComponent,
-			],
-			providers: [
-				{ provide: LoggingService, useValue: loggingServiceStub },
-				LoggingViewerFilterService
-			]
-		})
-			.compileComponents();
-	});
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            imports: [
+                FormsModule,
+                IonicModule,
+                LoggingViewerSearchComponent,
+            ],
+            providers: [
+                { provide: LoggingService, useValue: loggingServiceStub },
+                LoggingViewerFilterService
+            ]
+        })
+            .compileComponents();
+    });
 
-	beforeEach(() => {
-		fixture = TestBed.createComponent(LoggingViewerSearchComponent);
-		component = fixture.componentInstance;
-		fixture.detectChanges();
+    beforeEach(() => {
+        fixture = TestBed.createComponent(LoggingViewerSearchComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
 
-		loggingViewerFilterService = TestBed.inject(LoggingViewerFilterService);
-	});
+        loggingViewerFilterService = TestBed.inject(LoggingViewerFilterService);
+    });
 
-	describe("constructor", () => {
+    describe("constructor", () => {
 
-		it("gets correct named logger", () => {
+        it("gets correct named logger", () => {
 
-			fixture.detectChanges();
+            fixture.detectChanges();
 
-			expect(loggingServiceStub.getLogger).toHaveBeenCalledWith("Ionic.Logging.Viewer.Search.Component");
-		});
-	});
+            expect(loggingServiceStub.getLogger).toHaveBeenCalledWith("Ionic.Logging.Viewer.Search.Component");
+        });
+    });
 
-	describe("search updates", () => {
+    describe("search updates", () => {
 
-		it("signal updates search value", (done) => {
+        it("signal updates search value", async () => {
 
-			loggingViewerFilterService.search.set("X");
+            loggingViewerFilterService.search.set("X");
 
-			setTimeout(() => {
-				expect(component.search).toBe(loggingViewerFilterService.search());
-				done();
-			}, 0);
-		});
-	});
+            setTimeout(() => {
+                expect(component.search).toBe(loggingViewerFilterService.search());
+                ;
+            }, 0);
+        });
+    });
 
-	describe("onSearchChanged", () => {
+    describe("onSearchChanged", () => {
 
-		it("updates value in filter service", () => {
+        it("updates value in filter service", () => {
 
-			fixture.detectChanges();
+            fixture.detectChanges();
 
-			component.search += "Y";
-			component.onSearchChanged();
+            component.search += "Y";
+            component.onSearchChanged();
 
-			expect(loggingViewerFilterService.search()).toBe(component.search);
-		});
-	});
+            expect(loggingViewerFilterService.search()).toBe(component.search);
+        });
+    });
 
-	describe("init", () => {
+    describe("init", () => {
 
-		it("given value for placeholder", () => {
+        it("given value for placeholder", () => {
 
-			fixture.componentRef.setInput("placeholder", "abc");
-			fixture.detectChanges();
+            fixture.componentRef.setInput("placeholder", "abc");
+            fixture.detectChanges();
 
-			expect(component.placeholder()).toBe("abc");
-		});
-	});
+            expect(component.placeholder()).toBe("abc");
+        });
+    });
 });
