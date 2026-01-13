@@ -6,7 +6,10 @@
     "name": "Markus Wagner",
     "email": "markus.wagner02@web.de"
   },
-  "repository": "https://github.com/Ritzlgrmft/ionic-logging-service.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ritzlgrmft/ionic-logging-service.git"
+  },
   "license": "MIT",
   "private": false,
   "keywords": [
