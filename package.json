@@ -89,7 +89,7 @@
     "eslint-plugin-prefer-arrow": "1.2.3",
     "fsevents": "2.3.3",
     "ionicons": "8.0.13",
-    "jasmine-core": "^5.13.0",
+    "jasmine-core": "^6.0.0",
     "jasmine-reporters": "2.5.2",
     "jasmine-spec-reporter": "~7.0.0",
     "karma": "~6.4.4",
