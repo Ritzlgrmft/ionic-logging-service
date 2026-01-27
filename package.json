@@ -28,12 +28,12 @@
     "test": "npm run test-service && npm run test-viewer && ng lint && npm run e2e",
     "test-service": "npm run test-coverage-service && npm run test-compodoc-service",
     "test-viewer": "npm run test-coverage-viewer && npm run test-compodoc-viewer",
-    "test-coverage-service": "ng test ionic-logging-service --code-coverage --watch false",
-    "test-coverage-viewer": "ng test ionic-logging-viewer --code-coverage --watch false",
+    "test-coverage-service": "ng test ionic-logging-service --coverage --watch false",
+    "test-coverage-viewer": "ng test ionic-logging-viewer --coverage --watch false",
     "test-compodoc-service": "cd projects/ionic-logging-service && compodoc --coverageTest 100 && cd ../..",
     "test-compodoc-viewer": "cd projects/ionic-logging-viewer && compodoc --coverageTest 100 && cd ../..",
-    "test-watch-service": "ng test ionic-logging-service --code-coverage",
-    "test-watch-viewer": "ng test ionic-logging-viewer --code-coverage",
+    "test-watch-service": "ng test ionic-logging-service --coverage",
+    "test-watch-viewer": "ng test ionic-logging-viewer --coverage",
     "lint": "ng lint",
     "e2e": "npm run cypress:run",
     "compodoc": "npm run compodoc-service && npm run compodoc-viewer",
@@ -82,7 +82,7 @@
     "@types/node": "25.0.10",
     "@typescript-eslint/eslint-plugin": "8.54.0",
     "@typescript-eslint/parser": "8.54.0",
-    "@vitest/coverage-v8": "^4.0.17",
+    "@vitest/coverage-v8": "^4.0.18",
     "angular-eslint": "^21.1.0",
     "cypress": "15.9.0",
     "eslint": "^9.39.2",
@@ -95,7 +95,7 @@
     "ng-packagr": "^21.1.0",
     "ts-node": "10.9.2",
     "typescript": "5.9.3",
-    "vitest": "^4.0.17"
+    "vitest": "^4.0.18"
   },
   "config": {
     "commitizen": {
