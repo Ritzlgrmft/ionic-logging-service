@@ -12,10 +12,75 @@
         <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
 
-        <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">ionic-logging-service</a>
-            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">ionic-logging-service</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
@@ -24,7 +89,7 @@
 
         <div class="container-fluid main">
            <div class="row main">
-               <div class="hidden-xs menu">
+               <div class="d-none d-md-block menu">
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
@@ -42,22 +107,32 @@
 
 
 
+
+
+
+
 <ol class="breadcrumb">
-  <li>Classes</li>
-  <li >LocalStorageAppender</li>
+  <li class="breadcrumb-item">Classes</li>
+  <li class="breadcrumb-item" >LocalStorageAppender</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
-        <li class="active">
-            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
         </li>
-        <li >
-            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
         </li>
 </ul>
 
 <div class="tab-content">
-    <div class="tab-pane fade active in" id="c-info">
+    <div class="tab-pane fade active in" id="info">
         <p class="comment">
             <h3>File</h3>
         </p>
@@ -74,17 +149,23 @@
 <p>The messages are saved JSON-serialized.
 You have to configure which key is used for storing the messages.</p>
 <p>A typical configuration could be:</p>
-<div><pre class="line-numbers"><code class="language-json">{
+<b>Example :</b><div><pre class="line-numbers"><code class="language-json">{
   &quot;localStorageKey&quot;: &quot;myLogs&quot;,
   &quot;maxMessages&quot;: 500,
   &quot;threshold&quot;: &quot;INFO&quot;
 }</code></pre></div>
             </p>
 
+            <p class="comment">
+                <h3>Extends</h3>
+            </p>
+            <p class="comment">
+                        <code>log4javascript.Appender</code>
+            </p>
 
 
 
-            <section>
+            <section data-compodoc="block-index">
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
@@ -149,7 +230,7 @@ You have to configure which key is used for storing the messages.</p>
     </table>
 </section>
 
-            <section>
+            <section data-compodoc="block-constructor">
     <h3 id="constructor">Constructor</h3>
         <table class="table table-sm table-bordered">
             <tbody>
@@ -206,7 +287,7 @@ You have to configure which key is used for storing the messages.</p>
 </section>
 
 
-            <section>
+            <section data-compodoc="block-methods">
     
     <h3 id="methods">
         Methods
@@ -217,7 +298,7 @@ You have to configure which key is used for storing the messages.</p>
                 <td class="col-md-4">
                     <a name="append"></a>
                     <span class="name">
-                        <span class="modifier">Public</span>
+                            <span class="modifier">Public</span>
                         <span ><b>append</b></span>
                         <a href="#append"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -225,66 +306,64 @@ You have to configure which key is used for storing the messages.</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
                     <code>append(loggingEvent: log4javascript.LoggingEvent)</code>
                 </td>
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="121"
-                            class="link-to-prism">src/lib/local-storage-appender.model.ts:121</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="121"
+                                    class="link-to-prism">src/lib/local-storage-appender.model.ts:121</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Appender-specific method to append a log message.</p>
+                        <div class="io-description"><p>Appender-specific method to append a log message.</p>
 </div>
 
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                    <td>Description</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>loggingEvent</td>
-                                    <td>
-                                            <code>log4javascript.LoggingEvent</code>
-                                    </td>
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>loggingEvent</td>
+                                            <td>
+                                                        <code>log4javascript.LoggingEvent</code>
+                                            </td>
 
-                                    <td>
-                                        No
-                                    </td>
+                                            <td>
+                                                    No
+                                            </td>
 
 
-                                    <td>
-                                        <p>event to be appended.</p>
+                                            <td>
+                                                    <p>event to be appended.</p>
 
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -295,7 +374,7 @@ You have to configure which key is used for storing the messages.</p>
                 <td class="col-md-4">
                     <a name="clearLog"></a>
                     <span class="name">
-                        <span class="modifier">Public</span>
+                            <span class="modifier">Public</span>
                         <span ><b>clearLog</b></span>
                         <a href="#clearLog"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -303,30 +382,30 @@ You have to configure which key is used for storing the messages.</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
                     <code>clearLog()</code>
                 </td>
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="201"
-                            class="link-to-prism">src/lib/local-storage-appender.model.ts:201</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="201"
+                                    class="link-to-prism">src/lib/local-storage-appender.model.ts:201</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Removes all messages from local storage.
+                        <div class="io-description"><p>Removes all messages from local storage.
 Mainly for unit testing purposes.</p>
 </div>
 
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                    </div>
+                        </div>
                 </td>
             </tr>
         </tbody>
@@ -337,7 +416,7 @@ Mainly for unit testing purposes.</p>
                 <td class="col-md-4">
                     <a name="configure"></a>
                     <span class="name">
-                        <span class="modifier">Public</span>
+                            <span class="modifier">Public</span>
                         <span ><b>configure</b></span>
                         <a href="#configure"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -345,68 +424,66 @@ Mainly for unit testing purposes.</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
                     <code>configure(configuration: <a href="../interfaces/LocalStorageAppenderConfiguration.html" target="_self">LocalStorageAppenderConfiguration</a>)</code>
                 </td>
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="100"
-                            class="link-to-prism">src/lib/local-storage-appender.model.ts:100</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="100"
+                                    class="link-to-prism">src/lib/local-storage-appender.model.ts:100</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Configures the logging depending on the given configuration.</p>
+                        <div class="io-description"><p>Configures the logging depending on the given configuration.</p>
 <p>Only the defined properties get overwritten.
 The localStorageKey cannot be modified.</p>
 </div>
 
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                    <td>Description</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>configuration</td>
-                                    <td>
-                                                <code><a href="../interfaces/LocalStorageAppenderConfiguration.html" target="_self" >LocalStorageAppenderConfiguration</a></code>
-                                    </td>
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>configuration</td>
+                                            <td>
+                                                            <code><a href="../interfaces/LocalStorageAppenderConfiguration.html" target="_self" >LocalStorageAppenderConfiguration</a></code>
+                                            </td>
 
-                                    <td>
-                                        No
-                                    </td>
+                                            <td>
+                                                    No
+                                            </td>
 
 
-                                    <td>
-                                        <p>configuration data.</p>
+                                            <td>
+                                                    <p>configuration data.</p>
 
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -417,7 +494,7 @@ The localStorageKey cannot be modified.</p>
                 <td class="col-md-4">
                     <a name="getLocalStorageKey"></a>
                     <span class="name">
-                        <span class="modifier">Public</span>
+                            <span class="modifier">Public</span>
                         <span ><b>getLocalStorageKey</b></span>
                         <a href="#getLocalStorageKey"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -425,29 +502,29 @@ The localStorageKey cannot be modified.</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
                     <code>getLocalStorageKey()</code>
                 </td>
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="153"
-                            class="link-to-prism">src/lib/local-storage-appender.model.ts:153</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="153"
+                                    class="link-to-prism">src/lib/local-storage-appender.model.ts:153</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Get the key which is used to store the messages in the local storage.</p>
+                        <div class="io-description"><p>Get the key which is used to store the messages in the local storage.</p>
 </div>
 
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
-                    </div>
+                        </div>
                 </td>
             </tr>
         </tbody>
@@ -458,7 +535,7 @@ The localStorageKey cannot be modified.</p>
                 <td class="col-md-4">
                     <a name="getLogMessages"></a>
                     <span class="name">
-                        <span class="modifier">Public</span>
+                            <span class="modifier">Public</span>
                         <span ><b>getLogMessages</b></span>
                         <a href="#getLogMessages"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -466,36 +543,34 @@ The localStorageKey cannot be modified.</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
                     <code>getLogMessages()</code>
                 </td>
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="193"
-                            class="link-to-prism">src/lib/local-storage-appender.model.ts:193</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="193"
+                                    class="link-to-prism">src/lib/local-storage-appender.model.ts:193</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Gets all messages stored in local storage.
+                        <div class="io-description"><p>Gets all messages stored in local storage.
 Mainly for unit testing purposes.</p>
 </div>
 
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="../interfaces/LogMessage.html" target="_self" >LogMessage[]</a></code>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/LogMessage.html" target="_self" >LogMessage[]</a></code>
 
-                    </div>
-                    <div class="io-description">
-                        <p>stored messages</p>
+                        </div>
+                            <div class="io-description">
+                                <p>stored messages</p>
 
-                    </div>
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -506,7 +581,7 @@ Mainly for unit testing purposes.</p>
                 <td class="col-md-4">
                     <a name="getMaxMessages"></a>
                     <span class="name">
-                        <span class="modifier">Public</span>
+                            <span class="modifier">Public</span>
                         <span ><b>getMaxMessages</b></span>
                         <a href="#getMaxMessages"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -514,29 +589,29 @@ Mainly for unit testing purposes.</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
                     <code>getMaxMessages()</code>
                 </td>
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="160"
-                            class="link-to-prism">src/lib/local-storage-appender.model.ts:160</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="160"
+                                    class="link-to-prism">src/lib/local-storage-appender.model.ts:160</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Get the maximum number of messages which will be stored in local storage.</p>
+                        <div class="io-description"><p>Get the maximum number of messages which will be stored in local storage.</p>
 </div>
 
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 
-                    </div>
+                        </div>
                 </td>
             </tr>
         </tbody>
@@ -547,7 +622,7 @@ Mainly for unit testing purposes.</p>
                 <td class="col-md-4">
                     <a name="loadLogMessages"></a>
                     <span class="name">
-                        <span class="modifier">Static</span>
+                            <span class="modifier">Static</span>
                         <span ><b>loadLogMessages</b></span>
                         <a href="#loadLogMessages"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -555,67 +630,65 @@ Mainly for unit testing purposes.</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
                     <code>loadLogMessages(localStorageKey: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="67"
-                            class="link-to-prism">src/lib/local-storage-appender.model.ts:67</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="67"
+                                    class="link-to-prism">src/lib/local-storage-appender.model.ts:67</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Load log messages from local storage which are stored there under the given key.</p>
+                        <div class="io-description"><p>Load log messages from local storage which are stored there under the given key.</p>
 </div>
 
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                    <td>Description</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>localStorageKey</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                    </td>
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>localStorageKey</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
 
-                                    <td>
-                                        No
-                                    </td>
+                                            <td>
+                                                    No
+                                            </td>
 
 
-                                    <td>
-                                        <p>local storage key</p>
+                                            <td>
+                                                    <p>local storage key</p>
 
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="../interfaces/LogMessage.html" target="_self" >LogMessage[]</a></code>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/LogMessage.html" target="_self" >LogMessage[]</a></code>
 
-                    </div>
-                    <div class="io-description">
-                        <p>stored messages</p>
+                        </div>
+                            <div class="io-description">
+                                <p>stored messages</p>
 
-                    </div>
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -626,7 +699,7 @@ Mainly for unit testing purposes.</p>
                 <td class="col-md-4">
                     <a name="removeLogMessages"></a>
                     <span class="name">
-                        <span class="modifier">Static</span>
+                            <span class="modifier">Static</span>
                         <span ><b>removeLogMessages</b></span>
                         <a href="#removeLogMessages"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -634,66 +707,64 @@ Mainly for unit testing purposes.</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
                     <code>removeLogMessages(localStorageKey: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="88"
-                            class="link-to-prism">src/lib/local-storage-appender.model.ts:88</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="88"
+                                    class="link-to-prism">src/lib/local-storage-appender.model.ts:88</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Remove log messages from local storage which are stored there under the given key.</p>
+                        <div class="io-description"><p>Remove log messages from local storage which are stored there under the given key.</p>
 </div>
 
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                    <td>Description</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>localStorageKey</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                    </td>
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>localStorageKey</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
 
-                                    <td>
-                                        No
-                                    </td>
+                                            <td>
+                                                    No
+                                            </td>
 
 
-                                    <td>
-                                        <p>local storage key</p>
+                                            <td>
+                                                    <p>local storage key</p>
 
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -704,7 +775,7 @@ Mainly for unit testing purposes.</p>
                 <td class="col-md-4">
                     <a name="setMaxMessages"></a>
                     <span class="name">
-                        <span class="modifier">Public</span>
+                            <span class="modifier">Public</span>
                         <span ><b>setMaxMessages</b></span>
                         <a href="#setMaxMessages"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -712,67 +783,65 @@ Mainly for unit testing purposes.</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
                     <code>setMaxMessages(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
                 </td>
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="171"
-                            class="link-to-prism">src/lib/local-storage-appender.model.ts:171</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="171"
+                                    class="link-to-prism">src/lib/local-storage-appender.model.ts:171</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Set the maximum number of messages which will be stored in local storage.</p>
+                        <div class="io-description"><p>Set the maximum number of messages which will be stored in local storage.</p>
 <p>If the appender stores currently more messages than the new value allows, the oldest messages get removed.</p>
 </div>
 
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                    <td>Description</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>value</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-                                    </td>
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>value</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
 
-                                    <td>
-                                        No
-                                    </td>
+                                            <td>
+                                                    No
+                                            </td>
 
 
-                                    <td>
-                                        <p>new maximum number</p>
+                                            <td>
+                                                    <p>new maximum number</p>
 
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -783,7 +852,7 @@ Mainly for unit testing purposes.</p>
                 <td class="col-md-4">
                     <a name="toString"></a>
                     <span class="name">
-                        <span class="modifier">Public</span>
+                            <span class="modifier">Public</span>
                         <span ><b>toString</b></span>
                         <a href="#toString"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -791,36 +860,34 @@ Mainly for unit testing purposes.</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
                     <code>toString()</code>
                 </td>
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="146"
-                            class="link-to-prism">src/lib/local-storage-appender.model.ts:146</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="146"
+                                    class="link-to-prism">src/lib/local-storage-appender.model.ts:146</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Gets the appender&#39;s name.
+                        <div class="io-description"><p>Gets the appender&#39;s name.
 Mainly for unit testing purposes.</p>
 </div>
 
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
-                    </div>
-                    <div class="io-description">
-                        <p>appender&#39;s name</p>
+                        </div>
+                            <div class="io-description">
+                                <p>appender&#39;s name</p>
 
-                    </div>
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -834,7 +901,7 @@ Mainly for unit testing purposes.</p>
     </div>
 
 
-    <div class="tab-pane fade  tab-source-code" id="c-source">
+    <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import * as log4javascript from &quot;log4javascript&quot;;
 
 import { LocalStorageAppenderConfiguration } from &quot;./local-storage-appender.configuration&quot;;
@@ -1082,6 +1149,19 @@ export class LocalStorageAppender extends log4javascript.Appender {
             var MAX_SEARCH_RESULTS = 15;
        </script>
 
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
 
@@ -1093,7 +1173,6 @@ export class LocalStorageAppender extends log4javascript.Appender {
        <script src="../js/libs/es6-shim.min.js"></script>
        <script src="../js/libs/EventDispatcher.js"></script>
        <script src="../js/libs/promise.min.js"></script>
-       <script src="../js/libs/zepto.min.js"></script>
 
        <script src="../js/compodoc.js"></script>
 

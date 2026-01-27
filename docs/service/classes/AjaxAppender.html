@@ -12,10 +12,75 @@
         <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
 
-        <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">ionic-logging-service</a>
-            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">ionic-logging-service</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
@@ -24,7 +89,7 @@
 
         <div class="container-fluid main">
            <div class="row main">
-               <div class="hidden-xs menu">
+               <div class="d-none d-md-block menu">
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
@@ -42,22 +107,32 @@
 
 
 
+
+
+
+
 <ol class="breadcrumb">
-  <li>Classes</li>
-  <li >AjaxAppender</li>
+  <li class="breadcrumb-item">Classes</li>
+  <li class="breadcrumb-item" >AjaxAppender</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
-        <li class="active">
-            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
         </li>
-        <li >
-            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
         </li>
 </ul>
 
 <div class="tab-content">
-    <div class="tab-pane fade active in" id="c-info">
+    <div class="tab-pane fade active in" id="info">
         <p class="comment">
             <h3>File</h3>
         </p>
@@ -72,7 +147,7 @@
             <p class="comment">
                 <p>An appender which sends the log messages to a server via HTTP.</p>
 <p>A typical configuration could be:</p>
-<div><pre class="line-numbers"><code class="language-json">{
+<b>Example :</b><div><pre class="line-numbers"><code class="language-json">{
   &quot;url&quot;: &quot;https://my.backend.xy/LoggingBackend&quot;,
   &quot;batchSize&quot;: 10,
   &quot;timerInterval&quot;: 60000,
@@ -80,28 +155,19 @@
 }</code></pre></div>
             </p>
 
+            <p class="comment">
+                <h3>Extends</h3>
+            </p>
+            <p class="comment">
+                        <code>log4javascript.Appender</code>
+            </p>
 
 
 
-            <section>
+            <section data-compodoc="block-index">
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Properties</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#appenderFailed" >appenderFailed</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -126,6 +192,10 @@
                             <li>
                                     <span class="modifier">Public</span>
                                 <a href="#getInternalAppender" >getInternalAppender</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getLastFailure" >getLastFailure</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
@@ -163,7 +233,7 @@
     </table>
 </section>
 
-            <section>
+            <section data-compodoc="block-constructor">
     <h3 id="constructor">Constructor</h3>
         <table class="table table-sm table-bordered">
             <tbody>
@@ -174,7 +244,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/lib/ajax-appender.model.ts:38</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/lib/ajax-appender.model.ts:33</a></div>
                             </td>
                         </tr>
 
@@ -219,71 +289,8 @@
         </table>
 </section>
 
-            <section>
-    
-    <h3 id="inputs">
-        Properties
-    </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="appenderFailed"></a>
-                    <span class="name">
-                            <span class="modifier">Public</span>
-                        <span ><b>appenderFailed</b></span>
-                        <a href="#appenderFailed"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>    <code>EventEmitter&lt;string&gt;</code>
 
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/lib/ajax-appender.model.ts:34</a></div>
-                        </td>
-                    </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Event triggered when the appender could not send log messages to the server.</p>
-</div>
-                </td>
-            </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description">
-                                <b>Parameters :</b>
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                            <tr>
-                                                    <td>message</td>
-                                                    <td>
-                                                            <code><p>error message</p>
-</code>
-                                                    </td>
-                                            </tr>
-                                    </tbody>
-                                </table>
-                        </div>
-                    </td>
-                </tr>
-        </tbody>
-    </table>
-</section>
-
-            <section>
+            <section data-compodoc="block-methods">
     
     <h3 id="methods">
         Methods
@@ -294,7 +301,7 @@
                 <td class="col-md-4">
                     <a name="append"></a>
                     <span class="name">
-                        <span class="modifier">Public</span>
+                            <span class="modifier">Public</span>
                         <span ><b>append</b></span>
                         <a href="#append"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -302,66 +309,64 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
                     <code>append(loggingEvent: log4javascript.LoggingEvent)</code>
                 </td>
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="113"
-                            class="link-to-prism">src/lib/ajax-appender.model.ts:113</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="107"
+                                    class="link-to-prism">src/lib/ajax-appender.model.ts:107</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Appender-specific method to append a log message.</p>
+                        <div class="io-description"><p>Appender-specific method to append a log message.</p>
 </div>
 
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                    <td>Description</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>loggingEvent</td>
-                                    <td>
-                                            <code>log4javascript.LoggingEvent</code>
-                                    </td>
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>loggingEvent</td>
+                                            <td>
+                                                        <code>log4javascript.LoggingEvent</code>
+                                            </td>
 
-                                    <td>
-                                        No
-                                    </td>
+                                            <td>
+                                                    No
+                                            </td>
 
 
-                                    <td>
-                                        <p>event to be appended.</p>
+                                            <td>
+                                                    <p>event to be appended.</p>
 
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -372,7 +377,7 @@
                 <td class="col-md-4">
                     <a name="configure"></a>
                     <span class="name">
-                        <span class="modifier">Public</span>
+                            <span class="modifier">Public</span>
                         <span ><b>configure</b></span>
                         <a href="#configure"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -380,68 +385,66 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
                     <code>configure(configuration: <a href="../interfaces/AjaxAppenderConfiguration.html" target="_self">AjaxAppenderConfiguration</a>)</code>
                 </td>
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="86"
-                            class="link-to-prism">src/lib/ajax-appender.model.ts:86</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="80"
+                                    class="link-to-prism">src/lib/ajax-appender.model.ts:80</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Configures the logging depending on the given configuration.</p>
+                        <div class="io-description"><p>Configures the logging depending on the given configuration.</p>
 <p>Only the defined properties get overwritten.
 Neither url nor withCredentials can be modified.</p>
 </div>
 
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                    <td>Description</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>configuration</td>
-                                    <td>
-                                                <code><a href="../interfaces/AjaxAppenderConfiguration.html" target="_self" >AjaxAppenderConfiguration</a></code>
-                                    </td>
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>configuration</td>
+                                            <td>
+                                                            <code><a href="../interfaces/AjaxAppenderConfiguration.html" target="_self" >AjaxAppenderConfiguration</a></code>
+                                            </td>
 
-                                    <td>
-                                        No
-                                    </td>
+                                            <td>
+                                                    No
+                                            </td>
 
 
-                                    <td>
-                                        <p>configuration data.</p>
+                                            <td>
+                                                    <p>configuration data.</p>
 
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -452,7 +455,7 @@ Neither url nor withCredentials can be modified.</p>
                 <td class="col-md-4">
                     <a name="getBatchSize"></a>
                     <span class="name">
-                        <span class="modifier">Public</span>
+                            <span class="modifier">Public</span>
                         <span ><b>getBatchSize</b></span>
                         <a href="#getBatchSize"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -460,29 +463,29 @@ Neither url nor withCredentials can be modified.</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
                     <code>getBatchSize()</code>
                 </td>
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="138"
-                            class="link-to-prism">src/lib/ajax-appender.model.ts:138</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="132"
+                                    class="link-to-prism">src/lib/ajax-appender.model.ts:132</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Returns the number of log messages sent in each request.</p>
+                        <div class="io-description"><p>Returns the number of log messages sent in each request.</p>
 </div>
 
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 
-                    </div>
+                        </div>
                 </td>
             </tr>
         </tbody>
@@ -493,7 +496,7 @@ Neither url nor withCredentials can be modified.</p>
                 <td class="col-md-4">
                     <a name="getInternalAppender"></a>
                     <span class="name">
-                        <span class="modifier">Public</span>
+                            <span class="modifier">Public</span>
                         <span ><b>getInternalAppender</b></span>
                         <a href="#getInternalAppender"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -501,30 +504,75 @@ Neither url nor withCredentials can be modified.</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
                     <code>getInternalAppender()</code>
                 </td>
             </tr>
 
 
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="125"
+                                    class="link-to-prism">src/lib/ajax-appender.model.ts:125</a></div>
+                        </td>
+                    </tr>
+
+
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="131"
-                            class="link-to-prism">src/lib/ajax-appender.model.ts:131</a></div>
+                        <div class="io-description"><p>Get the internally used appender.
+Mainly for unit testing purposes.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../classes/AjaxAppender.html" target="_self" >log4javascript.AjaxAppender</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getLastFailure"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>getLastFailure</b></span>
+                        <a href="#getLastFailure"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getLastFailure()</code>
                 </td>
             </tr>
 
 
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="180"
+                                    class="link-to-prism">src/lib/ajax-appender.model.ts:180</a></div>
+                        </td>
+                    </tr>
+
+
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Get the internally used appender.
-Mainly for unit testing purposes.</p>
+                        <div class="io-description"><p>Last error message when the appender could not send log messages to the server.</p>
 </div>
 
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="../classes/AjaxAppender.html" target="_self" >log4javascript.AjaxAppender</a></code>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Signal&lt;string&gt;</code>
 
-                    </div>
+                        </div>
+                            <div class="io-description">
+                                <p>error message</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -535,7 +583,7 @@ Mainly for unit testing purposes.</p>
                 <td class="col-md-4">
                     <a name="getLayout"></a>
                     <span class="name">
-                        <span class="modifier">Public</span>
+                            <span class="modifier">Public</span>
                         <span ><b>getLayout</b></span>
                         <a href="#getLayout"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -543,29 +591,29 @@ Mainly for unit testing purposes.</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
                     <code>getLayout()</code>
                 </td>
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="154"
-                            class="link-to-prism">src/lib/ajax-appender.model.ts:154</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="148"
+                                    class="link-to-prism">src/lib/ajax-appender.model.ts:148</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Returns the appender&#39;s layout.</p>
+                        <div class="io-description"><p>Returns the appender&#39;s layout.</p>
 </div>
 
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>log4javascript.Layout</code>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>log4javascript.Layout</code>
 
-                    </div>
+                        </div>
                 </td>
             </tr>
         </tbody>
@@ -576,7 +624,7 @@ Mainly for unit testing purposes.</p>
                 <td class="col-md-4">
                     <a name="getTimerInterval"></a>
                     <span class="name">
-                        <span class="modifier">Public</span>
+                            <span class="modifier">Public</span>
                         <span ><b>getTimerInterval</b></span>
                         <a href="#getTimerInterval"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -584,29 +632,29 @@ Mainly for unit testing purposes.</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
                     <code>getTimerInterval()</code>
                 </td>
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="168"
-                            class="link-to-prism">src/lib/ajax-appender.model.ts:168</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="162"
+                                    class="link-to-prism">src/lib/ajax-appender.model.ts:162</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Returns the length of time in milliseconds between each sending of queued log messages.</p>
+                        <div class="io-description"><p>Returns the length of time in milliseconds between each sending of queued log messages.</p>
 </div>
 
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 
-                    </div>
+                        </div>
                 </td>
             </tr>
         </tbody>
@@ -617,7 +665,7 @@ Mainly for unit testing purposes.</p>
                 <td class="col-md-4">
                     <a name="setBatchSize"></a>
                     <span class="name">
-                        <span class="modifier">Public</span>
+                            <span class="modifier">Public</span>
                         <span ><b>setBatchSize</b></span>
                         <a href="#setBatchSize"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -625,66 +673,64 @@ Mainly for unit testing purposes.</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
                     <code>setBatchSize(batchSize: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
                 </td>
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="147"
-                            class="link-to-prism">src/lib/ajax-appender.model.ts:147</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="141"
+                                    class="link-to-prism">src/lib/ajax-appender.model.ts:141</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Sets the number of log messages to send in each request.</p>
+                        <div class="io-description"><p>Sets the number of log messages to send in each request.</p>
 </div>
 
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                    <td>Description</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>batchSize</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-                                    </td>
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>batchSize</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
 
-                                    <td>
-                                        No
-                                    </td>
+                                            <td>
+                                                    No
+                                            </td>
 
 
-                                    <td>
-                                        <p>new batch size</p>
+                                            <td>
+                                                    <p>new batch size</p>
 
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -695,7 +741,7 @@ Mainly for unit testing purposes.</p>
                 <td class="col-md-4">
                     <a name="setLayout"></a>
                     <span class="name">
-                        <span class="modifier">Public</span>
+                            <span class="modifier">Public</span>
                         <span ><b>setLayout</b></span>
                         <a href="#setLayout"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -703,61 +749,59 @@ Mainly for unit testing purposes.</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
                     <code>setLayout(layout: log4javascript.Layout)</code>
                 </td>
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="161"
-                            class="link-to-prism">src/lib/ajax-appender.model.ts:161</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="155"
+                                    class="link-to-prism">src/lib/ajax-appender.model.ts:155</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Sets the appender&#39;s layout.</p>
+                        <div class="io-description"><p>Sets the appender&#39;s layout.</p>
 </div>
 
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>layout</td>
-                                    <td>
-                                            <code>log4javascript.Layout</code>
-                                    </td>
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>layout</td>
+                                            <td>
+                                                        <code>log4javascript.Layout</code>
+                                            </td>
 
-                                    <td>
-                                        No
-                                    </td>
+                                            <td>
+                                                    No
+                                            </td>
 
 
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -768,7 +812,7 @@ Mainly for unit testing purposes.</p>
                 <td class="col-md-4">
                     <a name="setTimerInterval"></a>
                     <span class="name">
-                        <span class="modifier">Public</span>
+                            <span class="modifier">Public</span>
                         <span ><b>setTimerInterval</b></span>
                         <a href="#setTimerInterval"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -776,66 +820,64 @@ Mainly for unit testing purposes.</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
                     <code>setTimerInterval(timerInterval: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
                 </td>
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="177"
-                            class="link-to-prism">src/lib/ajax-appender.model.ts:177</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="171"
+                                    class="link-to-prism">src/lib/ajax-appender.model.ts:171</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Sets the length of time in milliseconds between each sending of queued log messages.</p>
+                        <div class="io-description"><p>Sets the length of time in milliseconds between each sending of queued log messages.</p>
 </div>
 
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                    <td>Description</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>timerInterval</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-                                    </td>
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>timerInterval</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
 
-                                    <td>
-                                        No
-                                    </td>
+                                            <td>
+                                                    No
+                                            </td>
 
 
-                                    <td>
-                                        <p>new timer interval</p>
+                                            <td>
+                                                    <p>new timer interval</p>
 
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -846,7 +888,7 @@ Mainly for unit testing purposes.</p>
                 <td class="col-md-4">
                     <a name="toString"></a>
                     <span class="name">
-                        <span class="modifier">Public</span>
+                            <span class="modifier">Public</span>
                         <span ><b>toString</b></span>
                         <a href="#toString"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -854,36 +896,34 @@ Mainly for unit testing purposes.</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
                     <code>toString()</code>
                 </td>
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="123"
-                            class="link-to-prism">src/lib/ajax-appender.model.ts:123</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="117"
+                                    class="link-to-prism">src/lib/ajax-appender.model.ts:117</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Gets the appender&#39;s name.
+                        <div class="io-description"><p>Gets the appender&#39;s name.
 Mainly for unit testing purposes.</p>
 </div>
 
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
-                    </div>
-                    <div class="io-description">
-                        <p>appender&#39;s name</p>
+                        </div>
+                            <div class="io-description">
+                                <p>appender&#39;s name</p>
 
-                    </div>
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -897,8 +937,8 @@ Mainly for unit testing purposes.</p>
     </div>
 
 
-    <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { EventEmitter } from &quot;@angular/core&quot;;
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Signal, signal } from &quot;@angular/core&quot;;
 
 import * as log4javascript from &quot;log4javascript&quot;;
 
@@ -926,16 +966,11 @@ export class AjaxAppender extends log4javascript.Appender {
 	private static timerIntervalDefault &#x3D; 0;
 	private static thresholdDefault &#x3D; &quot;WARN&quot;;
 
-	/**
-	 * Event triggered when the appender could not send log messages to the server.
-	 *
-	 * @param message error message
-	 */
-	public appenderFailed: EventEmitter&lt;string&gt;;
-
 	private ajaxAppender: log4javascript.AjaxAppender;
 	private url: string;
 	private withCredentials: boolean;
+
+	private lastFailure &#x3D; signal&lt;string&gt;(undefined);
 
 	/**
 	 * Creates a new instance of the appender.
@@ -959,9 +994,8 @@ export class AjaxAppender extends log4javascript.Appender {
 		this.ajaxAppender.addHeader(&quot;Content-Type&quot;, &quot;application/json; charset&#x3D;utf-8&quot;);
 		this.ajaxAppender.setSendAllOnUnload(true);
 
-		this.appenderFailed &#x3D; new EventEmitter&lt;string&gt;();
 		this.ajaxAppender.setFailCallback((message: any) &#x3D;&gt; {
-			this.appenderFailed.emit(message);
+			this.lastFailure.set(message);
 		});
 
 		// process remaining configuration
@@ -1078,6 +1112,14 @@ export class AjaxAppender extends log4javascript.Appender {
 		this.ajaxAppender.setTimed(timerInterval &gt; 0);
 		this.ajaxAppender.setTimerInterval(timerInterval);
 	}
+
+	/**
+	 * Last error message when the appender could not send log messages to the server.
+	 * @returns error message
+	 */
+	public getLastFailure(): Signal&lt;string&gt; {
+		return this.lastFailure.asReadonly();
+	}
 }
 </code></pre>
     </div>
@@ -1121,6 +1163,19 @@ export class AjaxAppender extends log4javascript.Appender {
             var MAX_SEARCH_RESULTS = 15;
        </script>
 
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
 
@@ -1132,7 +1187,6 @@ export class AjaxAppender extends log4javascript.Appender {
        <script src="../js/libs/es6-shim.min.js"></script>
        <script src="../js/libs/EventDispatcher.js"></script>
        <script src="../js/libs/promise.min.js"></script>
-       <script src="../js/libs/zepto.min.js"></script>
 
        <script src="../js/compodoc.js"></script>
 

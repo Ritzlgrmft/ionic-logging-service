@@ -12,10 +12,75 @@
         <link rel="stylesheet" href="./styles/dark.css">
     </head>
     <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
 
-        <div class="navbar navbar-default navbar-fixed-top d-block d-sm-none">
-            <a href="./" class="navbar-brand">ionic-logging-viewer</a>
-            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="./" class="navbar-brand">ionic-logging-viewer</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
@@ -24,15 +89,16 @@
 
         <div class="container-fluid main">
            <div class="row main">
-               <div class="hidden-xs menu">
+               <div class="d-none d-md-block menu">
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content getting-started">
+               <div class="content readme">
                    <div class="content-data">
 
+
 <h1>ionic-logging-viewer</h1>
-<p><strong>The dependencies used by the latest version are the same as needed for <a href="https://github.com/ionic-team/ionic/blob/master/CHANGELOG.md">Ionic 6.1.9</a>. For older versions use:</strong></p>
+<p><strong>The dependencies used by the latest version are the same as needed for <a href="https://github.com/ionic-team/ionic/blob/master/CHANGELOG.md">Ionic 8.0.0</a>. For older versions use:</strong></p>
 <table class="table table-bordered compodoc-table">
 <thead>
 <tr>
@@ -42,6 +108,16 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>21.0.0</td>
+<td>&gt;= 8.0.0</td>
+<td>&gt;=21.0.0</td>
+</tr>
+<tr>
+<td>18.0.0</td>
+<td>&gt;= 7.0.0</td>
+<td>&gt;=17.0.0</td>
+</tr>
 <tr>
 <td>17.0.0</td>
 <td>&gt;= 6.1.9</td>
@@ -119,28 +195,28 @@ allows filtering by an arbitrary expression</li>
 <p><img src="https://raw.githubusercontent.com/Ritzlgrmft/ionic-logging-service/master/images/logging-modal.png" alt="Logging Modal" class="img-responsive"></p>
 <h2>Usage</h2>
 <h3>npm package</h3>
-<div><pre class="line-numbers"><code class="language-bash">npm install ionic-logging-viewer --save</code></pre></div><h3>import module</h3>
-<p>Import the <code>LoggingViewerModule</code> in to your <code>app.module.ts</code>:</p>
-<div><pre class="line-numbers"><code class="language-typescript">import { LoggingViewerModule } from &quot;ionic-logging-viewer&quot;;
-...
-&#64;NgModule({
-  imports: [
-    IonicModule.forRoot(AppComponent),
-    LoggingViewerModule
-  ],
-  ...
-})</code></pre></div><h3>LoggingViewerComponent directive</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">npm install ionic-logging-viewer --save</code></pre></div><h3>import module</h3>
+<p>Call <code>configure()</code> in your <code>app.config.ts</code>:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-TypeScript">export const appConfig: ApplicationConfig = {
+  providers: [
+    ...
+    provideAppInitializer(() =&gt; {
+      const loggingService = inject(LoggingService);
+      loggingService.configure(environment.logging);
+    }),
+  ]
+};</code></pre></div><h3>LoggingViewerComponent directive</h3>
 <p>If you want to use the directive in one of your pages, just add</p>
-<div><pre class="line-numbers"><code class="language-html">&lt;ionic-logging-viewer&gt;&lt;/ionic-logging-viewer&gt;</code></pre></div><h3>LoggingViewerLevelsComponent and LoggingViewerSearchComponent directives</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;ionic-logging-viewer&gt;&lt;/ionic-logging-viewer&gt;</code></pre></div><h3>LoggingViewerLevelsComponent and LoggingViewerSearchComponent directives</h3>
 <p>For filtering the log messages, you can add also these directives to your page.
 It is recommended to include them in <code>ion-toolbar</code>, but it is not necessary:</p>
-<div><pre class="line-numbers"><code class="language-html">&lt;ion-toolbar&gt;
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;ion-toolbar&gt;
   &lt;ionic-logging-viewer-search&gt;&lt;/ionic-logging-viewer-search&gt;
 &lt;/ion-toolbar&gt;
 &lt;ion-toolbar&gt;
   &lt;ionic-logging-viewer-levels&gt;&lt;/ionic-logging-viewer-levels&gt;
 &lt;/ion-toolbar&gt;</code></pre></div><h3>LoggingViewerModalComponent modal</h3>
-<div><pre class="line-numbers"><code class="language-typescript">public async openModal(): Promise&lt;void&gt; {
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">public async openModal(): Promise&lt;void&gt; {
   let componentProps: LoggingViewerModalProperties = { language: this.selectedLanguage };
   const modal = await this.modalController.create({
     component: LoggingViewerModalComponent,
@@ -159,7 +235,10 @@ use to select the language. Currently <code>en</code> and <code>de</code> are su
 This parameter you can use to pass your completely own texts.
 Just fill the <code>LoggingViewerTranslation</code> object.</p>
 <h2>API</h2>
-<p>see <a href="https://ritzlgrmft.github.io/ionic-logging-service//viewer/index.html">API documentation</a>.</p>
+<p>see <a href="https://ritzlgrmft.github.io/ionic-logging-service/viewer/index.html">API documentation</a>.</p>
+
+
+
 
 
 
@@ -206,10 +285,23 @@ Just fill the <code>LoggingViewerTranslation</code> object.</p>
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 0;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'getting-started';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'readme';
             var COMPODOC_CURRENT_PAGE_URL = 'index.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
 
        <script src="./js/libs/custom-elements.min.js"></script>
        <script src="./js/libs/lit-html.js"></script>
@@ -222,7 +314,6 @@ Just fill the <code>LoggingViewerTranslation</code> object.</p>
        <script src="./js/libs/es6-shim.min.js"></script>
        <script src="./js/libs/EventDispatcher.js"></script>
        <script src="./js/libs/promise.min.js"></script>
-       <script src="./js/libs/zepto.min.js"></script>
 
        <script src="./js/compodoc.js"></script>
 
