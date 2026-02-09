@@ -82,7 +82,7 @@
     "@typescript-eslint/eslint-plugin": "8.54.0",
     "@typescript-eslint/parser": "8.54.0",
     "angular-eslint": "^21.2.0",
-    "cypress": "15.9.0",
+    "cypress": "15.10.0",
     "eslint": "^9.39.2",
     "eslint-plugin-import": "2.32.0",
     "eslint-plugin-jsdoc": "62.5.0",
