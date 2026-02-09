@@ -85,7 +85,7 @@
     "cypress": "15.9.0",
     "eslint": "^9.39.2",
     "eslint-plugin-import": "2.32.0",
-    "eslint-plugin-jsdoc": "62.5.0",
+    "eslint-plugin-jsdoc": "62.5.4",
     "eslint-plugin-prefer-arrow": "1.2.3",
     "fsevents": "2.3.3",
     "ionicons": "8.0.13",
