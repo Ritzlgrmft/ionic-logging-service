@@ -7,7 +7,7 @@
 		"DavidAnson.vscode-markdownlint",
 		"ms-vscode.vscode-typescript-tslint-plugin",
 		"KnisterPeter.vscode-commitizen",
-		"pflannery.vscode-versionlens"
+		"legalfina.npm-version-lens"
 	],
 	// List of extensions recommended by VS Code that should not be recommended for users of this workspace.
 	"unwantedRecommendations": []
