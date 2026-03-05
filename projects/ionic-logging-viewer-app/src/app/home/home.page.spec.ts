@@ -1,19 +1,24 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { HomePage } from "./home.page";
+import { IonicModule } from "@ionic/angular";
 
 describe("HomePage", () => {
 	let component: HomePage;
 	let fixture: ComponentFixture<HomePage>;
 
-	beforeEach(waitForAsync(() => {
-		TestBed.configureTestingModule({
-    imports: [HomePage],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
-})
-			.compileComponents();
-	}));
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
+			imports: [
+				HomePage,
+				IonicModule.forRoot()
+			],
+			schemas: [
+				CUSTOM_ELEMENTS_SCHEMA
+			],
+		}).compileComponents();
+	});
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(HomePage);
