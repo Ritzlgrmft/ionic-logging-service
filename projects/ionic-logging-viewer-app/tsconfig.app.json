@@ -13,8 +13,7 @@
     }
   },
   "files": [
-    "src/main.ts",
-    "src/polyfills.ts"
+    "src/main.ts"
   ],
   "include": [
     "projects/ionic-logging-viewer-app/src/**/*.d.ts"

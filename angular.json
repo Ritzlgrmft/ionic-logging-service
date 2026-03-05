@@ -94,9 +94,6 @@
               "base": "dist/ionic-logging-viewer-app"
             },
             "index": "projects/ionic-logging-viewer-app/src/index.html",
-            "polyfills": [
-              "projects/ionic-logging-viewer-app/src/polyfills.ts"
-            ],
             "tsConfig": "projects/ionic-logging-viewer-app/tsconfig.app.json",
             "assets": [
               "projects/ionic-logging-viewer-app/src/favicon.ico",
@@ -178,7 +175,6 @@
           "builder": "@angular/build:karma",
           "options": {
             "main": "projects/ionic-logging-viewer-app/src/test.ts",
-            "polyfills": "projects/ionic-logging-viewer-app/src/polyfills.ts",
             "tsConfig": "projects/ionic-logging-viewer-app/tsconfig.spec.json",
             "karmaConfig": "projects/ionic-logging-viewer-app/karma.conf.js",
             "styles": [
