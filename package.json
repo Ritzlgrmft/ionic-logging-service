@@ -74,17 +74,16 @@
     "@compodoc/compodoc": "1.2.1",
     "@cypress/schematic": "^5.0.0",
     "@eslint/eslintrc": "^3.3.5",
-    "@eslint/js": "^9.39.4",
+    "@eslint/js": "^10.0.1",
     "@ionic/angular": "^8.8.1",
     "@types/jasmine": "~6.0.0",
     "@types/jasminewd2": "2.0.13",
-    "@types/node": "25.3.5",
+    "@types/node": "25.4.0",
     "@typescript-eslint/eslint-plugin": "8.57.0",
     "@typescript-eslint/parser": "8.57.0",
     "angular-eslint": "^21.3.0",
     "cypress": "15.11.0",
-    "eslint": "^9.39.4",
-    "eslint-plugin-import": "2.32.0",
+    "eslint": "^10.0.3",
     "eslint-plugin-jsdoc": "62.7.1",
     "eslint-plugin-prefer-arrow": "1.2.3",
     "fsevents": "2.3.3",
@@ -100,7 +99,8 @@
     "karma-junit-reporter": "2.0.1",
     "ng-packagr": "^21.2.0",
     "ts-node": "10.9.2",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.57.0"
   },
   "config": {
     "commitizen": {

@@ -172,7 +172,6 @@ export class HomePage {
 		let localStorageAppender = appenders.find((a) => a.toString() === "Ionic.Logging.LocalStorageAppender") as LocalStorageAppender;
 		if (localStorageAppender !== undefined) {
 			this.loggingService.getRootLogger().getInternalLogger().removeAppender(localStorageAppender);
-			localStorageAppender = undefined;
 		}
 
 		if (this.localStorageAppenderConfiguration.enabled) {
