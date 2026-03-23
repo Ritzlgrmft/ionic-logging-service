@@ -57,7 +57,7 @@
     "tslib": "^2.3.1"
   },
   "devDependencies": {
-    "@angular-devkit/architect": "^0.2102.2",
+    "@angular-devkit/architect": "^0.2102.3",
     "@angular-devkit/schematics": "^21.2.2",
     "@angular-eslint/eslint-plugin": "^21.3.0",
     "@angular/build": "^21.2.2",
