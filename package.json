@@ -75,7 +75,7 @@
     "@cypress/schematic": "^5.0.0",
     "@eslint/eslintrc": "^3.3.5",
     "@eslint/js": "^10.0.1",
-    "@ionic/angular": "^8.8.1",
+    "@ionic/angular": "^8.8.2",
     "@types/jasmine": "~6.0.0",
     "@types/jasminewd2": "2.0.13",
     "@types/node": "25.5.0",
