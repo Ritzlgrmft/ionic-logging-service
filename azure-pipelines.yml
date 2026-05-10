@@ -87,15 +87,3 @@ steps:
     testRunTitle: Unit Tests ionic-logging-viewer
     testResultsFormat: JUnit
     testResultsFiles: "**/TESTS*.xml"
-
-- task: PublishCodeCoverageResults@2
-  displayName: 'Publish code coverage (ionic-logging-service)'
-  inputs:
-    codeCoverageTool: 'Clover'
-    summaryFileLocation: 'coverage/ionic-logging-service/clover.xml'
-
-- task: PublishCodeCoverageResults@2
-  displayName: 'Publish code coverage (ionic-logging-viewer)'
-  inputs:
-    codeCoverageTool: 'Clover'
-    summaryFileLocation: 'coverage/ionic-logging-viewer/clover.xml'
