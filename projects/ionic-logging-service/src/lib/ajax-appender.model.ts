@@ -48,7 +48,7 @@ export class AjaxAppender extends log4javascript.Appender {
 		}
 		this.ajaxAppender = new log4javascript.AjaxAppender(configuration.url, configuration.withCredentials);
 		this.url = configuration.url;
-		this.withCredentials = configuration.withCredentials;
+		this.withCredentials = configuration.withCredentials ?? false;
 
 		this.ajaxAppender.setLayout(new JsonLayout(false, false));
 		this.ajaxAppender.addHeader("Content-Type", "application/json; charset=utf-8");
