@@ -10,7 +10,7 @@ module.exports = function (config) {
 			require('karma-chrome-launcher'),
 			require('karma-jasmine-html-reporter'),
 			require('karma-coverage'),
-			
+
 			require('karma-junit-reporter')
 		],
 		client: {
@@ -18,12 +18,12 @@ module.exports = function (config) {
 		},
 		coverageReporter: {
 			dir: require('path').join(__dirname, '../../coverage/ionic-logging-service'),
-			reports: ['html', 'lcovonly'],
+			reports: ['html', 'lcovonly', 'clover'],
 			fixWebpackSourcePaths: true
 		},
-		reporters: ['progress', 'kjhtml', 'junit'],
+		reporters: ['progress', 'junit'],
 		junitReporter: {
-			outputDir: './junit'
+			outputDir: './projects/ionic-logging-service/junit'
 		},
 		port: 9876,
 		colors: true,
