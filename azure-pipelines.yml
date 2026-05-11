@@ -87,3 +87,21 @@ steps:
     testRunTitle: Unit Tests ionic-logging-viewer
     testResultsFormat: JUnit
     testResultsFiles: "**/TESTS*.xml"
+
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish code coverage results (ionic-logging-service)'
+  condition: succeededOrFailed()
+  inputs:
+    codeCoverageTool: Cobertura
+    summaryFileLocation: $(System.DefaultWorkingDirectory)/projects/ionic-logging-service/coverage/cobertura-coverage.xml
+    reportDirectory: $(System.DefaultWorkingDirectory)/projects/ionic-logging-service/coverage/html
+    failIfCoverageEmpty: true
+
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish code coverage results (ionic-logging-viewer)'
+  condition: succeededOrFailed()
+  inputs:
+    codeCoverageTool: Cobertura
+    summaryFileLocation: $(System.DefaultWorkingDirectory)/projects/ionic-logging-viewer/coverage/cobertura-coverage.xml
+    reportDirectory: $(System.DefaultWorkingDirectory)/projects/ionic-logging-viewer/coverage/html
+    failIfCoverageEmpty: true

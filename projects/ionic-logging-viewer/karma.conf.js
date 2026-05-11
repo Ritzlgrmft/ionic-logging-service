@@ -10,18 +10,20 @@ module.exports = function (config) {
 			require('karma-chrome-launcher'),
 			require('karma-jasmine-html-reporter'),
 			require('karma-coverage'),
-
 			require('karma-junit-reporter')
 		],
 		client: {
 			clearContext: false // leave Jasmine Spec Runner output visible in browser
 		},
 		coverageReporter: {
-			dir: require('path').join(__dirname, '../../coverage/ionic-logging-viewer'),
-			reports: ['html', 'lcovonly', 'clover'],
-			fixWebpackSourcePaths: true
+			reporters: [
+				{ type: 'html', subdir: 'html' },
+				{ type: 'lcovonly', subdir: '.', file: 'lcov.info' },
+				{ type: 'cobertura', subdir: '.', file: 'cobertura-coverage.xml' }
+			],
+			dir: require('path').join(__dirname, 'coverage')
 		},
-		reporters: ['progress', 'junit'],
+		reporters: ['progress', 'junit', 'coverage'],
 		junitReporter: {
 			outputDir: './projects/ionic-logging-viewer/junit'
 		},

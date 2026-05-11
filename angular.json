@@ -27,7 +27,8 @@
           "options": {
             "main": "projects/ionic-logging-service/src/test.ts",
             "tsConfig": "projects/ionic-logging-service/tsconfig.spec.json",
-            "karmaConfig": "projects/ionic-logging-service/karma.conf.js"
+            "karmaConfig": "projects/ionic-logging-service/karma.conf.js",
+            "codeCoverage": true
           }
         },
         "lint": {
@@ -66,7 +67,8 @@
             "main": "projects/ionic-logging-viewer/src/test.ts",
             "tsConfig": "projects/ionic-logging-viewer/tsconfig.spec.json",
             "karmaConfig": "projects/ionic-logging-viewer/karma.conf.js",
-            "sourceMap": true
+            "sourceMap": true,
+            "codeCoverage": true
           }
         },
         "lint": {
