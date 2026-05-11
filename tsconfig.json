@@ -1,7 +1,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "esModuleInterop": true,
@@ -16,10 +15,10 @@
     ],
     "paths": {
       "ionic-logging-service": [
-        "dist/ionic-logging-service"
+        "./dist/ionic-logging-service"
       ],
       "ionic-logging-viewer": [
-        "dist/ionic-logging-viewer"
+        "./dist/ionic-logging-viewer"
       ]
     },
     "useDefineForClassFields": false,

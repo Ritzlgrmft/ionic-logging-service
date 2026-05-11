@@ -2,15 +2,7 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "../../out-tsc/app",
-    "types": [],
-    "paths": {
-      "ionic-logging-service": [
-        "dist/ionic-logging-service"
-      ],
-      "ionic-logging-viewer": [
-        "dist/ionic-logging-viewer"
-      ]
-    }
+    "types": []
   },
   "files": [
     "src/main.ts"
