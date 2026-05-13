@@ -57,11 +57,11 @@
     "tslib": "^2.3.1"
   },
   "devDependencies": {
-    "@angular-devkit/architect": "^0.2102.10",
-    "@angular-devkit/schematics": "^21.2.10",
-    "@angular-eslint/eslint-plugin": "^21.3.1",
-    "@angular/build": "^21.2.10",
-    "@angular/cli": "^21.2.10",
+    "@angular-devkit/architect": "^0.2102.11",
+    "@angular-devkit/schematics": "^21.2.11",
+    "@angular-eslint/eslint-plugin": "^21.4.0",
+    "@angular/build": "^21.2.11",
+    "@angular/cli": "^21.2.11",
     "@angular/common": "^21.2.12",
     "@angular/compiler": "^21.2.12",
     "@angular/compiler-cli": "^21.2.12",
@@ -78,11 +78,11 @@
     "@ionic/angular": "^8.8.6",
     "@types/jasmine": "~6.0.0",
     "@types/jasminewd2": "2.0.13",
-    "@types/node": "^25.6.2",
-    "@typescript-eslint/eslint-plugin": "^8.59.2",
-    "@typescript-eslint/parser": "^8.59.2",
-    "angular-eslint": "^21.3.1",
-    "cypress": "15.14.2",
+    "@types/node": "^25.7.0",
+    "@typescript-eslint/eslint-plugin": "^8.59.3",
+    "@typescript-eslint/parser": "^8.59.3",
+    "angular-eslint": "^21.4.0",
+    "cypress": "15.15.0",
     "eslint": "^10.3.0",
     "eslint-plugin-jsdoc": "62.9.0",
     "eslint-plugin-prefer-arrow": "1.2.3",
@@ -100,7 +100,7 @@
     "ng-packagr": "^21.2.3",
     "ts-node": "10.9.2",
     "typescript": "5.9.3",
-    "typescript-eslint": "^8.59.2"
+    "typescript-eslint": "^8.59.3"
   },
   "config": {
     "commitizen": {
