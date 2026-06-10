@@ -1,6 +1,13 @@
 # Changelog
 
-## Upcoming
+## 22.0.0
+
+### general
+
+- update to Angular 22 (including `strictTemplates=true`)
+- update to ESLint 10
+
+## 21.0.0
 
 ### general
 

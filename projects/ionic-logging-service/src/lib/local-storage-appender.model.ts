@@ -26,7 +26,7 @@ export class LocalStorageAppender extends log4javascript.Appender {
 	private static maxMessagesDefault = 250;
 	private static thresholdDefault = "WARN";
 
-	private maxMessages: number;
+	private maxMessages: number = LocalStorageAppender.maxMessagesDefault;
 
 	private localStorageKey: string;
 	private logMessages: LogMessage[];
@@ -70,7 +70,7 @@ export class LocalStorageAppender extends log4javascript.Appender {
 		if (!localStorageKey || localStorage.getItem(localStorageKey) === null) {
 			logMessages = [];
 		} else {
-			logMessages = JSON.parse(localStorage.getItem(localStorageKey));
+			logMessages = JSON.parse(localStorage.getItem(localStorageKey) ?? "");
 			for (const logMessage of logMessages) {
 				// timestamps are serialized as strings
 				logMessage.timeStamp = new Date(logMessage.timeStamp);

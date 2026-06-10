@@ -1,5 +1,5 @@
 <ion-list>
-  @for (logMessage of logMessagesForDisplay; track logMessage) {
+  @for (logMessage of logMessagesForDisplay(); track logMessage) {
     <ion-item>
       <ion-label>
         <p>{{ logMessage.timeStamp | date:'dd.MM.yyyy HH:mm:ss' }} {{ logMessage.level }}</p>

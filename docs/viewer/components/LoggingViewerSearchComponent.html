@@ -303,7 +303,7 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                        <i>Type : </i>    <code>string | undefined</code>
 
                     </td>
                 </tr>
@@ -399,6 +399,11 @@
 
                     </td>
                 </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;&quot;</code>
+                    </td>
+                </tr>
                     <tr>
                         <td class="col-md-4">
                                 <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/lib/logging-viewer-search/logging-viewer-search.component.ts:35</a></div>
@@ -449,12 +454,12 @@ export class LoggingViewerSearchComponent {
 	/**
 	 * Placeholder to be shown in the empty search bar.
 	 */
-	public readonly placeholder &#x3D; input&lt;string&gt;(undefined);
+	public readonly placeholder &#x3D; input&lt;string | undefined&gt;(undefined);
 
 	/**
 	 * Current search value.
 	 */
-	public search: string;
+	public search &#x3D; &quot;&quot;;
 
 	private logger: Logger;
 

@@ -566,7 +566,7 @@ Mainly for unit testing purposes.</p>
 </div>
 
                         <div class="io-description">
-                            <b>Returns : </b>    <code>Signal&lt;string&gt;</code>
+                            <b>Returns : </b>    <code>Signal&lt;string | undefined&gt;</code>
 
                         </div>
                             <div class="io-description">
@@ -970,7 +970,7 @@ export class AjaxAppender extends log4javascript.Appender {
 	private url: string;
 	private withCredentials: boolean;
 
-	private lastFailure &#x3D; signal&lt;string&gt;(undefined);
+	private lastFailure &#x3D; signal&lt;string | undefined&gt;(undefined);
 
 	/**
 	 * Creates a new instance of the appender.
@@ -988,7 +988,7 @@ export class AjaxAppender extends log4javascript.Appender {
 		}
 		this.ajaxAppender &#x3D; new log4javascript.AjaxAppender(configuration.url, configuration.withCredentials);
 		this.url &#x3D; configuration.url;
-		this.withCredentials &#x3D; configuration.withCredentials;
+		this.withCredentials &#x3D; configuration.withCredentials ?? false;
 
 		this.ajaxAppender.setLayout(new JsonLayout(false, false));
 		this.ajaxAppender.addHeader(&quot;Content-Type&quot;, &quot;application/json; charset&#x3D;utf-8&quot;);
@@ -1117,7 +1117,7 @@ export class AjaxAppender extends log4javascript.Appender {
 	 * Last error message when the appender could not send log messages to the server.
 	 * @returns error message
 	 */
-	public getLastFailure(): Signal&lt;string&gt; {
+	public getLastFailure(): Signal&lt;string | undefined&gt; {
 		return this.lastFailure.asReadonly();
 	}
 }

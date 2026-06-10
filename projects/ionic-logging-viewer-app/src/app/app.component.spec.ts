@@ -1,12 +1,22 @@
-import { TestBed, waitForAsync } from "@angular/core/testing";
+import { TestBed } from "@angular/core/testing";
 import { AppComponent } from "./app.component";
+import { provideZonelessChangeDetection } from "@angular/core";
+import { IonicModule } from "@ionic/angular";
+import { provideRouter } from "@angular/router";
 
 describe("AppComponent", () => {
-	beforeEach(waitForAsync(async () => {
+	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-    imports: [AppComponent],
-}).compileComponents();
-	}));
+			imports: [
+				AppComponent,
+				IonicModule.forRoot(),
+			],
+			providers: [
+				provideZonelessChangeDetection(),
+				provideRouter([])
+			]
+		}).compileComponents();
+	});
 
 	it("should create the app", () => {
 		const fixture = TestBed.createComponent(AppComponent);
@@ -14,16 +24,10 @@ describe("AppComponent", () => {
 		expect(app).toBeTruthy();
 	});
 
-	it(`should have as title 'ionic-logging-viewer-app'`, () => {
-		const fixture = TestBed.createComponent(AppComponent);
-		const app = fixture.debugElement.componentInstance;
-		expect(app.title).toEqual("ionic-logging-viewer-app");
-	});
-
-	it("should render title in a h1 tag", () => {
+	it("should render router outlet", () => {
 		const fixture = TestBed.createComponent(AppComponent);
 		fixture.detectChanges();
 		const compiled = fixture.debugElement.nativeElement;
-		expect(compiled.querySelector("h1").textContent).toContain("Welcome to ionic-logging-viewer-app!");
+		expect(compiled.querySelector("ion-router-outlet")).toBeTruthy();
 	});
 });

@@ -1,4 +1,4 @@
-import { Component, inject, input, effect, computed } from "@angular/core";
+import { Component, inject, input, effect, computed, signal } from "@angular/core";
 
 import { Logger, LoggingService, LogLevelConverter, LogMessage } from "ionic-logging-service";
 
@@ -27,18 +27,19 @@ export class LoggingViewerComponent {
 	/**
 	 * Comma-separated list of localStorageKeys. If set, the logs get loaded from localStorage instead of memory.
 	 */
-	public readonly localStorageKeys = input<string>(undefined);
+	public readonly localStorageKeys = input<string | undefined>(undefined);
 
 	/**
 	 * Log messages which fulfill the filter condition.
 	 */
-	public logMessagesForDisplay: LogMessage[];
+	public logMessagesForDisplay = signal<LogMessage[]>([]);
 
 	private logger: Logger;
 	private logMessages = computed(() => {
-		if (this.localStorageKeys()) {
+		const localStorageKeys = this.localStorageKeys();
+		if (localStorageKeys) {
 			let messages: LogMessage[] = [];
-			for (const localStorageKey of this.localStorageKeys().split(",")) {
+			for (const localStorageKey of localStorageKeys.split(",")) {
 				messages = messages.concat(this.loggingService.getLogMessagesFromLocalStorage(localStorageKey));
 			}
 			return messages.sort((a, b) => a.timeStamp.getTime() - b.timeStamp.getTime());
@@ -70,8 +71,8 @@ export class LoggingViewerComponent {
 	 * Filter the log messages.
 	 */
 	public filterLogMessages(logMessages: LogMessage[], level: string, search: string): void {
-		this.logMessagesForDisplay = logMessages.filter(
-			(message) => this.filterLogMessagesByLevel(message, level) && this.filterLogMessagesBySearch(message, search));
+		this.logMessagesForDisplay.set(logMessages.filter(
+			(message) => this.filterLogMessagesByLevel(message, level) && this.filterLogMessagesBySearch(message, search)));
 	}
 
 	/**
@@ -96,6 +97,10 @@ export class LoggingViewerComponent {
 	 * @returns true if check was successful
 	 */
 	public filterLogMessagesBySearch(message: LogMessage, search: string): boolean {
+		if (!message.logger || !message.methodName || !message.message) {
+			return false;
+		}
+
 		const searchRegex = new RegExp(search, "i");
 		return message.logger.search(searchRegex) >= 0 ||
 			message.methodName.search(searchRegex) >= 0 ||

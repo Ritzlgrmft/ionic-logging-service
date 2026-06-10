@@ -1,5 +1,9 @@
 # Breaking Changes
 
+## Version 22
+
+- update to Angular 22 (including `strictTemplates=true`, which made it necessary to declare some types e.g. as `string | undefined` instead of `string`)
+
 ## Version 21
 
 - update to Angular 21+

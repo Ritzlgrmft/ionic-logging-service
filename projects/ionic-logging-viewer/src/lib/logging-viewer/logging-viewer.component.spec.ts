@@ -15,19 +15,13 @@ describe("LoggingViewerComponent", () => {
     const logMessages = signal<LogMessage[]>([]);
     const logMessagesFromLocalStorage: LogMessage[] = [];
 
-    const loggerStub = {
-        entry: vi.fn().mockName("logger.entry"),
-        exit: vi.fn().mockName("logger.exit")
-    };
+    const loggerStub = jasmine.createSpyObj("logger", ["entry", "exit"]);
 
-    const loggingServiceStub = {
-        getLogger: vi.fn().mockName("loggingServiceStub.getLogger"),
-        getLogMessages: vi.fn().mockName("loggingServiceStub.getLogMessages"),
-        getLogMessagesFromLocalStorage: vi.fn().mockName("loggingServiceStub.getLogMessagesFromLocalStorage")
-    };
-    loggingServiceStub.getLogger.mockReturnValue(loggerStub);
-    loggingServiceStub.getLogMessages.mockReturnValue(logMessages);
-    loggingServiceStub.getLogMessagesFromLocalStorage.mockReturnValue(logMessagesFromLocalStorage);
+    const loggingServiceStub = jasmine.createSpyObj("loggingServiceStub",
+        ["getLogger", "getLogMessages", "getLogMessagesFromLocalStorage"]);
+    loggingServiceStub.getLogger.and.returnValue(loggerStub);
+    loggingServiceStub.getLogMessages.and.returnValue(logMessages);
+    loggingServiceStub.getLogMessagesFromLocalStorage.and.returnValue(logMessagesFromLocalStorage);
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
@@ -81,48 +75,17 @@ describe("LoggingViewerComponent", () => {
                     message: ["myMessage"],
                     methodName: "myMethod",
                     timeStamp: new Date(),
-                }
-            ];
+                }];
 
             component.filterLogMessages(messages, "INFO", "");
 
-            expect(component.logMessagesForDisplay.length).toBe(2);
+            expect(component.logMessagesForDisplay().length).toBe(2);
         });
     });
 
     describe("filterLogMessagesByLevel", () => {
 
         it("message with same level returns true", () => {
-
-            const logMessage = {
-                level: "DEBUG",
-                logger: "myLogger",
-                message: ["myMessage"],
-                methodName: "myMethod",
-                timeStamp: new Date(),
-            };
-
-            const result = component.filterLogMessagesByLevel(logMessage, "DEBUG");
-
-            expect(result).toBeTruthy();
-        });
-
-        it("message with higher level returns true", () => {
-
-            const logMessage = {
-                level: "INFO",
-                logger: "myLogger",
-                message: ["myMessage"],
-                methodName: "myMethod",
-                timeStamp: new Date(),
-            };
-
-            const result = component.filterLogMessagesByLevel(logMessage, "DEBUG");
-
-            expect(result).toBeTruthy();
-        });
-
-        it("message with lower level returns true", () => {
 
             const logMessage = {
                 level: "DEBUG",
@@ -265,45 +228,95 @@ describe("LoggingViewerComponent", () => {
 
         it("local storage empty no log messages", () => {
 
-            fixture.componentRef.setInput("localStorageKeys", "xxx");
-            fixture.detectChanges();
+            it("message contains search value returns true", () => {
 
-            logMessagesFromLocalStorage.splice(0, logMessagesFromLocalStorage.length);
-            logMessages.set([{
-                level: "DEBUG",
-                logger: "myLogger",
-                message: ["myMessage"],
-                methodName: "myMethod",
-                timeStamp: new Date(),
-            }]);
-            component.filterLogMessages(logMessagesFromLocalStorage, "DEBUG", "");
+                const logMessage = {
+                    level: "DEBUG",
+                    logger: "myLogger",
+                    message: ["myMessage"],
+                    methodName: "myMethod",
+                    timeStamp: new Date(),
+                };
 
-            expect(component.logMessagesForDisplay.length).toBe(0);
+                const result = component.filterLogMessagesBySearch(logMessage, "yMes");
+
+                expect(result).toBeTruthy();
+            });
+
+            it("message contains search value with different casing returns true", () => {
+
+                const logMessage = {
+                    level: "DEBUG",
+                    logger: "myLogger",
+                    message: ["myMessage"],
+                    methodName: "myMethod",
+                    timeStamp: new Date(),
+                };
+
+                const result = component.filterLogMessagesBySearch(logMessage, "ymes");
+
+                expect(result).toBeTruthy();
+            });
+
+            it("nothing contains search value returns false", () => {
+
+                const logMessage = {
+                    level: "DEBUG",
+                    logger: "myLogger",
+                    message: ["myMessage"],
+                    methodName: "myMethod",
+                    timeStamp: new Date(),
+                };
+
+                const result = component.filterLogMessagesBySearch(logMessage, "xxx");
+
+                expect(result).toBeFalsy();
+            });
         });
 
-        it("local storage with log messages", () => {
+        describe("localStorageKeys", () => {
 
-            fixture.componentRef.setInput("localStorageKeys", "xxx");
-            fixture.detectChanges();
+            it("local storage empty no log messages", () => {
 
-            logMessagesFromLocalStorage.splice(0, logMessagesFromLocalStorage.length);
-            logMessagesFromLocalStorage.push({
-                level: "DEBUG",
-                logger: "myLogger",
-                message: ["myMessage"],
-                methodName: "myMethod",
-                timeStamp: new Date(),
+                fixture.componentRef.setInput("localStorageKeys", "xxx");
+                fixture.detectChanges();
+
+                logMessagesFromLocalStorage.splice(0, logMessagesFromLocalStorage.length);
+                logMessages.set([{
+                    level: "DEBUG",
+                    logger: "myLogger",
+                    message: ["myMessage"],
+                    methodName: "myMethod",
+                    timeStamp: new Date(),
+                }]);
+                component.filterLogMessages(logMessagesFromLocalStorage, "DEBUG", "");
+
+                expect(component.logMessagesForDisplay().length).toBe(0);
             });
-            logMessagesFromLocalStorage.push({
-                level: "DEBUG",
-                logger: "myLogger",
-                message: ["myMessage2"],
-                methodName: "myMethod",
-                timeStamp: new Date(),
-            });
-            component.filterLogMessages(logMessagesFromLocalStorage, "DEBUG", "");
 
-            expect(component.logMessagesForDisplay.length).toBe(2);
+            it("local storage with log messages", () => {
+
+                fixture.componentRef.setInput("localStorageKeys", "xxx");
+                fixture.detectChanges();
+
+                logMessagesFromLocalStorage.splice(0, logMessagesFromLocalStorage.length);
+                logMessagesFromLocalStorage.push({
+                    level: "DEBUG",
+                    logger: "myLogger",
+                    message: ["myMessage"],
+                    methodName: "myMethod",
+                    timeStamp: new Date(),
+                });
+                logMessagesFromLocalStorage.push({
+                    level: "DEBUG",
+                    logger: "myLogger",
+                    message: ["myMessage2"],
+                    methodName: "myMethod",
+                    timeStamp: new Date(),
+                });
+                component.filterLogMessages(logMessagesFromLocalStorage, "DEBUG", "");
+
+                expect(component.logMessagesForDisplay().length).toBe(2);
+            });
         });
     });
-});

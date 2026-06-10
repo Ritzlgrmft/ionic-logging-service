@@ -6,10 +6,10 @@ pool:
 
 steps:
 
-- task: NodeTool@0
+- task: UseNode@1
   displayName: 'Use Node 24.x'
   inputs:
-    versionSpec: 24.x
+    version: 24.x
 
 - task: Npm@1
   displayName: 'npm install'
@@ -87,3 +87,17 @@ steps:
     testRunTitle: Unit Tests ionic-logging-viewer
     testResultsFormat: JUnit
     testResultsFiles: "**/TESTS*.xml"
+
+- task: PublishCodeCoverageResults@2
+  displayName: 'Publish code coverage results (ionic-logging-service)'
+  condition: succeededOrFailed()
+  inputs:
+    summaryFileLocation: $(System.DefaultWorkingDirectory)/projects/ionic-logging-service/coverage/cobertura-coverage.xml
+    failIfCoverageEmpty: true
+
+- task: PublishCodeCoverageResults@2
+  displayName: 'Publish code coverage results (ionic-logging-viewer)'
+  condition: succeededOrFailed()
+  inputs:
+    summaryFileLocation: $(System.DefaultWorkingDirectory)/projects/ionic-logging-viewer/coverage/cobertura-coverage.xml
+    failIfCoverageEmpty: true

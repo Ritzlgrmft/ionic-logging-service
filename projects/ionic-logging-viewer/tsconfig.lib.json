@@ -14,17 +14,22 @@
     "types": []
   },
   "angularCompilerOptions": {
-    "skipTemplateCodegen": true,
-    "strictMetadataEmit": true,
-    "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true,
-    "enableResourceInlining": true
+    "extendedDiagnostics": {
+      "checks": {
+        "nullishCoalescingNotNullable": "suppress",
+        "optionalChainNotNullable": "suppress"
+      }
+    },
+    "strictTemplates": true,
+    "strictInjectionParameters": true
   },
   "exclude": [
     "src/test.ts",
     "**/*.spec.ts"
   ],
-  "paths":{
-    "ionic-logging-service": ["../dist/ionic-logging-service"]
+  "paths": {
+    "ionic-logging-service": [
+      "../dist/ionic-logging-service"
+    ]
   }
 }

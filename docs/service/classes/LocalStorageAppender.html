@@ -930,7 +930,7 @@ export class LocalStorageAppender extends log4javascript.Appender {
 	private static maxMessagesDefault &#x3D; 250;
 	private static thresholdDefault &#x3D; &quot;WARN&quot;;
 
-	private maxMessages: number;
+	private maxMessages: number &#x3D; LocalStorageAppender.maxMessagesDefault;
 
 	private localStorageKey: string;
 	private logMessages: LogMessage[];
@@ -974,7 +974,7 @@ export class LocalStorageAppender extends log4javascript.Appender {
 		if (!localStorageKey || localStorage.getItem(localStorageKey) &#x3D;&#x3D;&#x3D; null) {
 			logMessages &#x3D; [];
 		} else {
-			logMessages &#x3D; JSON.parse(localStorage.getItem(localStorageKey));
+			logMessages &#x3D; JSON.parse(localStorage.getItem(localStorageKey) ?? &quot;&quot;);
 			for (const logMessage of logMessages) {
 				// timestamps are serialized as strings
 				logMessage.timeStamp &#x3D; new Date(logMessage.timeStamp);

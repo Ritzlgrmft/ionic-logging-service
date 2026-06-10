@@ -26,7 +26,7 @@ export class LoggingService {
 
 	private memoryAppender: MemoryAppender;
 	private browserConsoleAppender: log4javascript.BrowserConsoleAppender;
-	private ajaxAppender: AjaxAppender;
+	private ajaxAppender: AjaxAppender | undefined;
 
 	/**
 	 * Creates a new instance of the service.
@@ -180,9 +180,9 @@ export class LoggingService {
 	 * Error messages when the ajax appender could not send log messages to the server.
 	 * @returns error messages
 	 */
-	public getLastAjaxAppenderFailure(): Signal<string> {
+	public getLastAjaxAppenderFailure(): Signal<string | undefined> {
 		return this.ajaxAppender
 			? this.ajaxAppender.getLastFailure()
-			: signal<string>(undefined).asReadonly();
+			: signal<string | undefined>(undefined).asReadonly();
 	}
 }

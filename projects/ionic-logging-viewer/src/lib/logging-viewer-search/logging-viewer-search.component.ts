@@ -27,12 +27,12 @@ export class LoggingViewerSearchComponent {
 	/**
 	 * Placeholder to be shown in the empty search bar.
 	 */
-	public readonly placeholder = input<string>(undefined);
+	public readonly placeholder = input<string | undefined>(undefined);
 
 	/**
 	 * Current search value.
 	 */
-	public search: string;
+	public search = "";
 
 	private logger: Logger;
 

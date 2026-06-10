@@ -188,7 +188,7 @@ export class Logger {
 			try {
 				return JSON.stringify(arg);
 			} catch (e) {
-				return e.message;
+				return (e as Error).message;
 			}
 		}
 	}

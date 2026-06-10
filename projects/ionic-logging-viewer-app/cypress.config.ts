@@ -15,6 +15,6 @@ export default defineConfig({
     specPattern: '**/*.cy.ts'
   },
 
-  includeShadowDom: true
-
+  includeShadowDom: true,
+  allowCypressEnv: false
 })
