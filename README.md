@@ -38,11 +38,4 @@ A test app for the `ionic-logging-viewer` as well as a sample app for `ionic-log
 Useful commands:
 
 * `ionic serve --project ionic-logging-viewer-app`
-
-## ionic-logging-viewer-app-e2e
-
-E2E tests for `ionic-logging-viewer-app`.
-
-Useful commands:
-
-* `ng e2e --project ionic-logging-viewer-app-e2e`
+* `npm run e2e`
