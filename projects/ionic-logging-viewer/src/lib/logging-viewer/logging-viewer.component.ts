@@ -1,4 +1,4 @@
-import { Component, inject, input, effect, computed, } from "@angular/core";
+import { Component, inject, input, effect, computed, signal } from "@angular/core";
 
 import { Logger, LoggingService, LogLevelConverter, LogMessage } from "ionic-logging-service";
 
@@ -32,7 +32,7 @@ export class LoggingViewerComponent {
 	/**
 	 * Log messages which fulfill the filter condition.
 	 */
-	public logMessagesForDisplay: LogMessage[] = [];
+	public logMessagesForDisplay = signal<LogMessage[]>([]);
 
 	private logger: Logger;
 	private logMessages = computed(() => {
@@ -71,8 +71,8 @@ export class LoggingViewerComponent {
 	 * Filter the log messages.
 	 */
 	public filterLogMessages(logMessages: LogMessage[], level: string, search: string): void {
-		this.logMessagesForDisplay = logMessages.filter(
-			(message) => this.filterLogMessagesByLevel(message, level) && this.filterLogMessagesBySearch(message, search));
+		this.logMessagesForDisplay.set(logMessages.filter(
+			(message) => this.filterLogMessagesByLevel(message, level) && this.filterLogMessagesBySearch(message, search)));
 	}
 
 	/**
