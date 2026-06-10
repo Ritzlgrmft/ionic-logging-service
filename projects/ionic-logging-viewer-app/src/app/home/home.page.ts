@@ -4,7 +4,7 @@ import { ToastController, ModalController } from "@ionic/angular";
 import { AjaxAppender, LocalStorageAppender, Logger, LoggingService, LogLevel } from "ionic-logging-service";
 import { LoggingViewerModalComponent, LoggingViewerTranslation, LoggingViewerModalProperties, LoggingViewerComponent, LoggingViewerLevelsComponent, LoggingViewerSearchComponent } from "ionic-logging-viewer";
 import { environment } from "../../environments/environment";
-import { IonButton, IonCard, IonCardHeader, IonCardTitle, IonCol, IonContent, IonGrid, IonHeader, IonInput, IonItem, IonLabel, IonList, IonListHeader, IonRadioGroup, IonRow, IonSelect, IonTitle, IonToggle, IonToolbar } from "@ionic/angular/standalone";
+import { IonButton, IonCard, IonCardHeader, IonCardTitle, IonCol, IonContent, IonGrid, IonHeader, IonInput, IonItem, IonLabel, IonList, IonListHeader, IonRadio, IonRadioGroup, IonRow, IonSelect, IonSelectOption, IonTitle, IonToggle, IonToolbar } from "@ionic/angular/standalone";
 import { FormsModule } from "@angular/forms";
 
 
@@ -25,9 +25,11 @@ import { FormsModule } from "@angular/forms";
 		IonLabel,
 		IonList,
 		IonListHeader,
+		IonRadio,
 		IonRadioGroup,
 		IonRow,
 		IonSelect,
+		IonSelectOption,
 		IonTitle,
 		IonToggle,
 		IonToolbar,
@@ -36,7 +38,8 @@ import { FormsModule } from "@angular/forms";
 		LoggingViewerSearchComponent
 	],
 	templateUrl: "home.page.html",
-	styleUrls: ["home.page.scss"], standalone: true
+	styleUrls: ["home.page.scss"],
+	standalone: true
 })
 export class HomePage {
 
@@ -55,7 +58,7 @@ export class HomePage {
 	public ajaxAppenderUrl: string;
 	public ajaxAppenderThreshold: string;
 	public ajaxAppenderBatchSize: number;
-	private ajaxAppender: AjaxAppender;
+	private ajaxAppender: AjaxAppender | undefined;
 
 	public localStorageAppenderConfiguration = {
 		enabled: false,
@@ -69,7 +72,7 @@ export class HomePage {
 	public selectedLanguage: string;
 	public translation: LoggingViewerTranslation;
 	public allowClearLogs: boolean;
-	public localStorageKeys: string;
+	public localStorageKeys: string | undefined;
 
 	private logger: Logger;
 
@@ -81,7 +84,8 @@ export class HomePage {
 		this.testLoggerName = "TestLogger";
 		this.testMethod = "TestMethod";
 		this.testLogLevel = "INFO";
-		this.logLevels = Object.keys(LogLevel).filter(key => typeof LogLevel[key] === "number");
+		this.logLevels = Object.keys(LogLevel).filter(key => typeof LogLevel[key as keyof typeof LogLevel] === "number");
+
 		this.batchSizes = [1, 5, 10];
 		this.message = "message";
 		this.onLogLevelOrLoggerChanged();
@@ -99,7 +103,7 @@ export class HomePage {
 			this.localStorageAppenderConfiguration.localStorageKey = localStorageAppender.getLocalStorageKey();
 			window.setTimeout(() => {
 				this.localStorageAppenderConfiguration.threshold = localStorageAppender.getThreshold().toString();
-				this.localStorageAppenderConfiguration.maxMessages = localStorageAppender.getMaxMessages();
+				this.localStorageAppenderConfiguration.maxMessages = localStorageAppender.getMaxMessages() ?? 0;
 			}, 1000);
 		} else {
 			this.localStorageAppenderConfiguration.localStorageKey = environment.logging.localStorageAppender.localStorageKey;
@@ -119,7 +123,7 @@ export class HomePage {
 		this.allowClearLogs = true;
 
 		effect(() => {
-			if (this.ajaxAppenderEnabled()) {
+			if (this.ajaxAppenderEnabled() && this.ajaxAppender) {
 				const lastFailure = this.ajaxAppender.getLastFailure()();
 				if (lastFailure) {
 					this.onAjaxAppenderFailed(lastFailure);
@@ -136,14 +140,15 @@ export class HomePage {
 
 		if (this.testLogLevel) {
 			const logger = this.loggingService.getLogger(this.testLoggerName);
-			logger.setLogLevel(LogLevel[this.testLogLevel]);
+			const level = LogLevel[this.testLogLevel as keyof typeof LogLevel];
+			logger.setLogLevel(level);
 		}
 
 		this.logger.exit(methodName);
 	}
 
 	public onAjaxAppenderConfigChanged(): void {
-		const methodName = "onLogLevelOrLoggerChanged";
+		const methodName = "onAjaxAppenderConfigChanged";
 		this.logger.entry(methodName);
 
 		if (this.ajaxAppender !== undefined) {

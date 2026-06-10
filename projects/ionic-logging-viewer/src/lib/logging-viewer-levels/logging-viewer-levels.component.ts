@@ -33,7 +33,7 @@ export class LoggingViewerLevelsComponent {
 	/**
 	 * Selected level.
 	 */
-	public selectedLevel: string;
+	public selectedLevel = "";
 
 	private logger: Logger;
 

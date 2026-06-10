@@ -12,14 +12,15 @@ describe("AjaxAppender", () => {
 	});
 
 	afterEach(() => {
-		appender = undefined;
+		/* empty */
 	});
 
 	describe("ctor", () => {
 
 		it("throws error if no configuration is passed", () => {
 
-			expect(() => new AjaxAppender(undefined)).
+			const config = undefined;
+			expect(() => new AjaxAppender(config as unknown as AjaxAppenderConfiguration)).
 				toThrowError("configuration must be not empty");
 		});
 
@@ -77,8 +78,8 @@ describe("AjaxAppender", () => {
 
 		it("throws no error if no configuration is provided", () => {
 
-			const config: AjaxAppenderConfiguration = undefined;
-			expect(() => appender.configure(config)).not.toThrow();
+			const config = undefined;
+			expect(() => appender.configure(config as unknown as AjaxAppenderConfiguration)).not.toThrow();
 		});
 
 		describe("url", () => {

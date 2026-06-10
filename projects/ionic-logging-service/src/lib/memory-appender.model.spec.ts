@@ -15,8 +15,8 @@ describe("MemoryAppender", () => {
 
 		it("throws no error if no configuration is provided", () => {
 
-			const config: MemoryAppenderConfiguration = undefined;
-			expect(() => appender.configure(config)).not.toThrow();
+			const config = undefined;
+			expect(() => appender.configure(config as unknown as MemoryAppenderConfiguration)).not.toThrow();
 		});
 
 		it("throws no error if configuration is empty", () => {
@@ -83,7 +83,7 @@ describe("MemoryAppender", () => {
 
 		it("writes message to messages array", () => {
 
-			const event = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, []);
+			const event = new log4javascript.LoggingEvent(log4javascript.getLogger(), new Date(), log4javascript.Level.INFO, []);
 
 			appender.append(event);
 
@@ -95,8 +95,8 @@ describe("MemoryAppender", () => {
 
 		it("writes message to end of messages array", () => {
 
-			const event = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["1"]);
-			const event2 = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["2"]);
+			const event = new log4javascript.LoggingEvent(log4javascript.getLogger(), new Date(), log4javascript.Level.INFO, ["1"]);
+			const event2 = new log4javascript.LoggingEvent(log4javascript.getLogger(), new Date(), log4javascript.Level.INFO, ["2"]);
 
 			appender.append(event);
 			appender.append(event2);
@@ -109,9 +109,9 @@ describe("MemoryAppender", () => {
 
 		it("removes first message if array contains already maxMessages messages", () => {
 
-			const event = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["1"]);
-			const event2 = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["2"]);
-			const event3 = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["3"]);
+			const event = new log4javascript.LoggingEvent(log4javascript.getLogger(), new Date(), log4javascript.Level.INFO, ["1"]);
+			const event2 = new log4javascript.LoggingEvent(log4javascript.getLogger(), new Date(), log4javascript.Level.INFO, ["2"]);
+			const event3 = new log4javascript.LoggingEvent(log4javascript.getLogger(), new Date(), log4javascript.Level.INFO, ["3"]);
 
 			appender.setMaxMessages(2);
 			appender.append(event);
@@ -135,14 +135,14 @@ describe("MemoryAppender", () => {
 			expect(messages[0].logger).toBe("MyLogger");
 		});
 
-		it("uses undefined as logger name if not defined in event", () => {
+		it("uses [anonymous] as logger name if not defined in event", () => {
 
-			const event = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["1"]);
+			const event = new log4javascript.LoggingEvent(log4javascript.getLogger(), new Date(), log4javascript.Level.INFO, ["1"]);
 
 			appender.append(event);
 
 			const messages = appender.getLogMessages()();
-			expect(messages[0].logger).toBeUndefined();
+			expect(messages[0].logger).toBe("[anonymous]");
 		});
 	});
 
@@ -178,9 +178,9 @@ describe("MemoryAppender", () => {
 
 		it("remove spare messages", () => {
 
-			const event = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["1"]);
-			const event2 = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["2"]);
-			const event3 = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["3"]);
+			const event = new log4javascript.LoggingEvent(log4javascript.getLogger(), new Date(), log4javascript.Level.INFO, ["1"]);
+			const event2 = new log4javascript.LoggingEvent(log4javascript.getLogger(), new Date(), log4javascript.Level.INFO, ["2"]);
+			const event3 = new log4javascript.LoggingEvent(log4javascript.getLogger(), new Date(), log4javascript.Level.INFO, ["3"]);
 
 			appender.append(event);
 			appender.append(event2);
@@ -211,9 +211,9 @@ describe("MemoryAppender", () => {
 
 		it("log only messages with appropriate level", () => {
 
-			const event = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["1"]);
-			const event2 = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.DEBUG, ["2"]);
-			const event3 = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.WARN, ["3"]);
+			const event = new log4javascript.LoggingEvent(log4javascript.getLogger(), new Date(), log4javascript.Level.INFO, ["1"]);
+			const event2 = new log4javascript.LoggingEvent(log4javascript.getLogger(), new Date(), log4javascript.Level.DEBUG, ["2"]);
+			const event3 = new log4javascript.LoggingEvent(log4javascript.getLogger(), new Date(), log4javascript.Level.WARN, ["3"]);
 
 			appender.setThreshold(log4javascript.Level.INFO);
 			appender.doAppend(event);
@@ -232,7 +232,7 @@ describe("MemoryAppender", () => {
 
 		it("messages removed", async () => {
 
-			const event = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["1"]);
+			const event = new log4javascript.LoggingEvent(log4javascript.getLogger(), new Date(), log4javascript.Level.INFO, ["1"]);
 			appender.append(event);
 			await expect(appender.getLogMessages()().length).toBe(1);
 

@@ -14,14 +14,13 @@ describe("LocalStorageAppender", () => {
 
 	afterEach(() => {
 		appender.clearLog();
-		appender = undefined;
 	});
 
 	describe("ctor", () => {
 
 		it("reads already stored messages", () => {
 
-			const event = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, []);
+			const event = new log4javascript.LoggingEvent(log4javascript.getLogger(), new Date(), log4javascript.Level.INFO, []);
 			appender.append(event);
 
 			const appender2 = new LocalStorageAppender({ localStorageKey: "MyLocalStorage" });
@@ -33,7 +32,8 @@ describe("LocalStorageAppender", () => {
 
 		it("throws error if no configuration is passed", () => {
 
-			expect(() => new LocalStorageAppender(undefined)).
+			const config = undefined;
+			expect(() => new LocalStorageAppender(config as unknown as LocalStorageAppenderConfiguration)).
 				toThrowError("configuration must be not empty");
 		});
 
@@ -126,8 +126,8 @@ describe("LocalStorageAppender", () => {
 
 		it("throws no error if no configuration is provided", () => {
 
-			const config: LocalStorageAppenderConfiguration = undefined;
-			expect(() => appender.configure(config)).not.toThrow();
+			const config = undefined;
+			expect(() => appender.configure(config as unknown as LocalStorageAppenderConfiguration)).not.toThrow();
 		});
 
 		describe("localStorageKey", () => {
@@ -206,7 +206,7 @@ describe("LocalStorageAppender", () => {
 
 		it("writes message to messages array", () => {
 
-			const event = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, []);
+			const event = new log4javascript.LoggingEvent(log4javascript.getLogger(), new Date(), log4javascript.Level.INFO, []);
 
 			appender.append(event);
 
@@ -218,8 +218,8 @@ describe("LocalStorageAppender", () => {
 
 		it("writes message to end of messages array", () => {
 
-			const event = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["1"]);
-			const event2 = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["2"]);
+			const event = new log4javascript.LoggingEvent(log4javascript.getLogger(), new Date(), log4javascript.Level.INFO, ["1"]);
+			const event2 = new log4javascript.LoggingEvent(log4javascript.getLogger(), new Date(), log4javascript.Level.INFO, ["2"]);
 
 			appender.append(event);
 			appender.append(event2);
@@ -232,9 +232,9 @@ describe("LocalStorageAppender", () => {
 
 		it("removes first message if array contains already maxMessages messages", () => {
 
-			const event = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["1"]);
-			const event2 = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["2"]);
-			const event3 = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["3"]);
+			const event = new log4javascript.LoggingEvent(log4javascript.getLogger(), new Date(), log4javascript.Level.INFO, ["1"]);
+			const event2 = new log4javascript.LoggingEvent(log4javascript.getLogger(), new Date(), log4javascript.Level.INFO, ["2"]);
+			const event3 = new log4javascript.LoggingEvent(log4javascript.getLogger(), new Date(), log4javascript.Level.INFO, ["3"]);
 
 			appender.setMaxMessages(2);
 			appender.append(event);
@@ -258,19 +258,19 @@ describe("LocalStorageAppender", () => {
 			expect(messages[0].logger).toBe("MyLogger");
 		});
 
-		it("uses undefined as logger name if not defined in event", () => {
+		it("uses [anonymous] as logger name if not defined in event", () => {
 
-			const event = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["1"]);
+			const event = new log4javascript.LoggingEvent(log4javascript.getLogger(), new Date(), log4javascript.Level.INFO, ["1"]);
 
 			appender.append(event);
 
 			const messages = appender.getLogMessages();
-			expect(messages[0].logger).toBeUndefined();
+			expect(messages[0].logger).toBe("[anonymous]");
 		});
 
 		it("method not called if threshold is higher than log level", () => {
 
-			const event = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["1"]);
+			const event = new log4javascript.LoggingEvent(log4javascript.getLogger(), new Date(), log4javascript.Level.INFO, ["1"]);
 
 			appender.setThreshold(log4javascript.Level.WARN);
 			appender.doAppend(event);
@@ -278,7 +278,7 @@ describe("LocalStorageAppender", () => {
 			let messages = appender.getLogMessages();
 			expect(messages.length).toBe(0);
 
-			const event2 = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.WARN, ["1"]);
+			const event2 = new log4javascript.LoggingEvent(log4javascript.getLogger(), new Date(), log4javascript.Level.WARN, ["1"]);
 			appender.doAppend(event2);
 
 			messages = appender.getLogMessages();
@@ -321,9 +321,9 @@ describe("LocalStorageAppender", () => {
 
 		it("remove spare messages", () => {
 
-			const event = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["1"]);
-			const event2 = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["2"]);
-			const event3 = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["3"]);
+			const event = new log4javascript.LoggingEvent(log4javascript.getLogger(), new Date(), log4javascript.Level.INFO, ["1"]);
+			const event2 = new log4javascript.LoggingEvent(log4javascript.getLogger(), new Date(), log4javascript.Level.INFO, ["2"]);
+			const event3 = new log4javascript.LoggingEvent(log4javascript.getLogger(), new Date(), log4javascript.Level.INFO, ["3"]);
 
 			appender.append(event);
 			appender.append(event2);
@@ -341,9 +341,9 @@ describe("LocalStorageAppender", () => {
 
 		it("same value does not change anything", () => {
 
-			const event = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["1"]);
-			const event2 = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["2"]);
-			const event3 = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["3"]);
+			const event = new log4javascript.LoggingEvent(log4javascript.getLogger(), new Date(), log4javascript.Level.INFO, ["1"]);
+			const event2 = new log4javascript.LoggingEvent(log4javascript.getLogger(), new Date(), log4javascript.Level.INFO, ["2"]);
+			const event3 = new log4javascript.LoggingEvent(log4javascript.getLogger(), new Date(), log4javascript.Level.INFO, ["3"]);
 
 			appender.append(event);
 			appender.append(event2);
@@ -364,7 +364,7 @@ describe("LocalStorageAppender", () => {
 
 		it("messages from localStorage removed", async () => {
 
-			const event = new log4javascript.LoggingEvent(undefined, new Date(), log4javascript.Level.INFO, ["1"]);
+			const event = new log4javascript.LoggingEvent(log4javascript.getLogger(), new Date(), log4javascript.Level.INFO, ["1"]);
 			appender.append(event);
 			await expect(localStorage.getItem(appender.getLocalStorageKey())).toBeDefined();
 

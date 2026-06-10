@@ -15,7 +15,7 @@ export interface LogMessage {
 	/**
 	 * Name of the logger.
 	 */
-	logger: string;
+	logger: string | undefined;
 
 	/**
 	 * Method, in which the message was written.

@@ -38,18 +38,18 @@ export class LoggingViewerModalComponent implements OnInit {
 	 * Language to be used for the modal.
 	 * Currently supported: en, de
 	 */
-	public readonly language = input<string>(undefined);
+	public readonly language = input<string | undefined>(undefined);
 
 	/**
 	 * Translation to be used for the modal.
 	 * If specified, the language is ignored.
 	 */
-	public readonly translation = input<LoggingViewerTranslation>(undefined);
+	public readonly translation = input<LoggingViewerTranslation | undefined>(undefined);
 
 	/**
 	 * Comma-separated list of localStorageKeys. If set, the logs get loaded from localStorage instead of memory.
 	 */
-	public readonly localStorageKeys = input<string>(undefined);
+	public readonly localStorageKeys = input<string | undefined>(undefined);
 
 	/**
 	 * Flag showing a delete button, which removes all existing log messages.
@@ -63,7 +63,7 @@ export class LoggingViewerModalComponent implements OnInit {
 
 	private logger: Logger;
 
-	private translations: Record<string, LoggingViewerTranslation>;
+	private translations: Record<string, LoggingViewerTranslation> = {};
 
 	/**
 	 * Creates a new instance of the component.
@@ -157,8 +157,9 @@ export class LoggingViewerModalComponent implements OnInit {
 	 * Clear logs.
 	 */
 	public clearLogs(): void {
-		if (this.localStorageKeys()) {
-			for (const localStorageKey of this.localStorageKeys().split(",")) {
+		const localStorageKeys = this.localStorageKeys();
+		if (localStorageKeys) {
+			for (const localStorageKey of localStorageKeys.split(",")) {
 				this.loggingService.removeLogMessagesFromLocalStorage(localStorageKey);
 			}
 		} else {

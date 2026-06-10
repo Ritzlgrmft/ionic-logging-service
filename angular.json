@@ -153,6 +153,16 @@
                   "maximumWarning": "6kb"
                 }
               ]
+            },
+            "testing": {
+              "aot": false,
+              "assets": [
+                "projects/ionic-logging-viewer-app/src/favicon.ico",
+                "projects/ionic-logging-viewer-app/src/assets"
+              ],
+              "styles": [
+                "projects/ionic-logging-viewer-app/src/styles.css"
+              ]
             }
           }
         },
@@ -174,19 +184,17 @@
           }
         },
         "test": {
-          "builder": "@angular/build:karma",
+          "builder": "@angular/build:unit-test",
           "options": {
-            "main": "projects/ionic-logging-viewer-app/src/test.ts",
             "tsConfig": "projects/ionic-logging-viewer-app/tsconfig.spec.json",
-            "karmaConfig": "projects/ionic-logging-viewer-app/karma.conf.js",
-            "styles": [
-              "projects/ionic-logging-viewer-app/src/styles.css"
+            "reporters": [
+              "default"
             ],
-            "scripts": [],
-            "assets": [
-              "projects/ionic-logging-viewer-app/src/favicon.ico",
-              "projects/ionic-logging-viewer-app/src/assets"
-            ]
+            "setupFiles": [
+              "projects/ionic-logging-viewer-app/src/test.ts"
+            ],
+            "buildTarget": ":build:testing",
+            "runner": "vitest"
           }
         },
         "lint": {

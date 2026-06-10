@@ -30,7 +30,7 @@ export class AjaxAppender extends log4javascript.Appender {
 	private url: string;
 	private withCredentials: boolean;
 
-	private lastFailure = signal<string>(undefined);
+	private lastFailure = signal<string | undefined>(undefined);
 
 	/**
 	 * Creates a new instance of the appender.
@@ -177,7 +177,7 @@ export class AjaxAppender extends log4javascript.Appender {
 	 * Last error message when the appender could not send log messages to the server.
 	 * @returns error message
 	 */
-	public getLastFailure(): Signal<string> {
+	public getLastFailure(): Signal<string | undefined> {
 		return this.lastFailure.asReadonly();
 	}
 }
