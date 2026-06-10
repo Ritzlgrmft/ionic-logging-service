@@ -13,6 +13,12 @@ Did you mean to import "@ionic/core/components/index.js"?
 
 -----------
 
+- location of vitest.config.ts
+- mock xmlhttp
+- junit report
+
+-----------
+
 - backend sample
 - make additivity configurable
 - ajaxAppender: add device info (#8)

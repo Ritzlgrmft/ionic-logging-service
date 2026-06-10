@@ -14,9 +14,6 @@
     "types": []
   },
   "angularCompilerOptions": {
-    "skipTemplateCodegen": true,
-    "strictMetadataEmit": true,
-    "fullTemplateTypeCheck": true,
     "extendedDiagnostics": {
       "checks": {
         "nullishCoalescingNotNullable": "suppress",

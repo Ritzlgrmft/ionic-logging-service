@@ -492,7 +492,6 @@ describe("LoggingService", () => {
             setTimeout(() => {
                 const lastFailure = loggingService.getLastAjaxAppenderFailure()();
                 expect(lastFailure).toBe("AjaxAppender.append: XMLHttpRequest request to URL badUrl returned status code 404");
-                ;
             }, 100);
         });
     });

@@ -27,8 +27,9 @@
           "builder": "@angular/build:unit-test",
           "options": {
             "tsConfig": "projects/ionic-logging-service/tsconfig.spec.json",
-            "karmaConfig": "projects/ionic-logging-service/karma.conf.js",
-            "codeCoverage": true
+            "browsers": [
+              "chromium"
+            ]
           }
         },
         "lint": {
@@ -65,10 +66,7 @@
         "test": {
           "builder": "@angular/build:unit-test",
           "options": {
-            "tsConfig": "projects/ionic-logging-viewer/tsconfig.spec.json",
-            "karmaConfig": "projects/ionic-logging-viewer/karma.conf.js",
-            "sourceMap": true,
-            "codeCoverage": true
+            "tsConfig": "projects/ionic-logging-viewer/tsconfig.spec.json"
           }
         },
         "lint": {

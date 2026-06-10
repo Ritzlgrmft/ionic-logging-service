@@ -1,2 +1,1 @@
-/// <reference types="jasmine" />
-/// <reference types="node" />
+/// <reference types="vitest" />
