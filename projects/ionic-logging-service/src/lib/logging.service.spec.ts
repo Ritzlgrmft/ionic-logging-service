@@ -1,6 +1,5 @@
 import { afterEach, describe, it, expect, beforeEach } from "vitest";
 
-import { HttpTestingController, provideHttpClientTesting } from "@angular/common/http/testing";
 import { TestBed } from "@angular/core/testing";
 
 import * as log4javascript from "log4javascript";
@@ -11,28 +10,23 @@ import { Logger } from "./logger.model";
 import { LoggingServiceConfiguration } from "./logging-service.configuration";
 import { LoggingService } from "./logging.service";
 import { MemoryAppender } from "./memory-appender.model";
-import { provideHttpClient, withInterceptorsFromDi, withXhr } from "@angular/common/http";
+import { BatchInterceptor } from "@mswjs/interceptors";
+import { XMLHttpRequestInterceptor } from "@mswjs/interceptors/XMLHttpRequest";
 
 describe("LoggingService", () => {
 
     let loggingService: LoggingService;
-    let httpMock: HttpTestingController;
-
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [],
             providers: [
                 LoggingService,
-                provideHttpClient(withXhr(), withInterceptorsFromDi()),
-                provideHttpClientTesting(),
             ]
         });
         loggingService = TestBed.inject(LoggingService);
-        httpMock = TestBed.inject(HttpTestingController);
     });
 
     afterEach(() => {
-        httpMock.verify();
         log4javascript.resetConfiguration();
         log4javascript.getRootLogger().removeAllAppenders();
     });
@@ -486,13 +480,22 @@ describe("LoggingService", () => {
             };
             loggingService.configure(config);
 
+            const interceptor = new BatchInterceptor({
+                name: 'my-interceptor',
+                interceptors: [new XMLHttpRequestInterceptor()],
+            });
+            interceptor.on("request", ({ controller }) => {
+                controller.respondWith(new Response(null, { status: 404 }));
+            });
+            interceptor.apply();
+
             loggingService.getRootLogger().warn("test");
 
-            // Wait for the asynchronous failure callback
-            setTimeout(() => {
-                const lastFailure = loggingService.getLastAjaxAppenderFailure()();
-                expect(lastFailure).toBe("AjaxAppender.append: XMLHttpRequest request to URL badUrl returned status code 404");
-            }, 100);
+            await new Promise(resolve => setTimeout(resolve, 100));
+            const lastFailure = loggingService.getLastAjaxAppenderFailure()();
+            expect(lastFailure).toBe("AjaxAppender.append: XMLHttpRequest request to URL badUrl returned status code 404");
+
+            interceptor.dispose();
         });
     });
 

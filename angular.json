@@ -29,6 +29,15 @@
             "tsConfig": "projects/ionic-logging-service/tsconfig.spec.json",
             "browsers": [
               "chromium"
+            ],
+            "reporters": [
+              "default",
+              [
+                "junit",
+                {
+                  "outputFile": "junit/ionic-logging-service/test-results.xml"
+                }
+              ]
             ]
           }
         },

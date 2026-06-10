@@ -1,17 +1,9 @@
-import { defineConfig } from "vitest/config"
-export default defineConfig({
+import { defineProject } from "vitest/config";
+
+export default defineProject({
     test: {
-        // browser: {
-        //     enabled: true,
-        //     provider: playwright(),
-        //     instances: [
-        //         { browser: "chromium" },
-        //     ],
-        // },
-        // reporters: ["default", "junit"],
-        // outputFile: {
-        //     junit: "test-results.xml",
-        // }
+        projects: [
+            "projects/*"
+        ]
     },
 });
-

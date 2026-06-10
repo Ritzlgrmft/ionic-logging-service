@@ -4,6 +4,8 @@ import * as log4javascript from "log4javascript";
 
 import { AjaxAppenderConfiguration } from "./ajax-appender.configuration";
 import { AjaxAppender } from "./ajax-appender.model";
+import { BatchInterceptor } from "@mswjs/interceptors";
+import { XMLHttpRequestInterceptor } from "@mswjs/interceptors/XMLHttpRequest";
 
 describe("AjaxAppender", () => {
 
@@ -145,23 +147,27 @@ describe("AjaxAppender", () => {
 
     describe("appenderFailed: lastFailure set", () => {
 
-        // XmlHttp is not reliable testable in Node.js environment.
-        // Therefore, this test is skipped.
-        it.skip("event gets triggered with invalid url", async () => {
+        it("event gets triggered with invalid url", async () => {
             log4javascript.logLog.setQuietMode(true);
             const logger = log4javascript.getLogger("test");
             const event = new log4javascript.LoggingEvent(logger, new Date(), log4javascript.Level.INFO, ["1"]);
 
+            const interceptor = new BatchInterceptor({
+                name: 'my-interceptor',
+                interceptors: [new XMLHttpRequestInterceptor()],
+            });
+            interceptor.on("request", ({ controller }) => {
+                controller.respondWith(new Response(null, { status: 404 }));
+            });
+            interceptor.apply();
+
             appender.append(event);
 
-            // Wait for the asynchronous failure callback
-            await new Promise<void>((resolve) => {
-                setTimeout(() => {
-                    const lastFailure = appender.getLastFailure()();
-                    expect(lastFailure).toBe("AjaxAppender.append: XMLHttpRequest request to URL MyUrl returned status code 404");
-                    resolve();
-                }, 100)
-            });
+            await new Promise(resolve => setTimeout(resolve, 100));
+            const lastFailure = appender.getLastFailure()();
+            expect(lastFailure).toBe("AjaxAppender.append: XMLHttpRequest request to URL MyUrl returned status code 404");
+
+            interceptor.dispose();
         });
     });
 
