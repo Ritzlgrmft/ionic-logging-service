@@ -77,7 +77,7 @@ describe("LoggingViewerComponent", () => {
 
 			component.filterLogMessages(messages, "INFO", "");
 
-			expect(component.logMessagesForDisplay.length).toBe(2);
+			expect(component.logMessagesForDisplay().length).toBe(2);
 		});
 	});
 
@@ -269,7 +269,7 @@ describe("LoggingViewerComponent", () => {
 			}]);
 			component.filterLogMessages(logMessagesFromLocalStorage, "DEBUG", "");
 
-			expect(component.logMessagesForDisplay.length).toBe(0);
+			expect(component.logMessagesForDisplay().length).toBe(0);
 		});
 
 		it("local storage with log messages", () => {
@@ -294,7 +294,7 @@ describe("LoggingViewerComponent", () => {
 			});
 			component.filterLogMessages(logMessagesFromLocalStorage, "DEBUG", "");
 
-			expect(component.logMessagesForDisplay.length).toBe(2);
+			expect(component.logMessagesForDisplay().length).toBe(2);
 		});
 	});
 });
