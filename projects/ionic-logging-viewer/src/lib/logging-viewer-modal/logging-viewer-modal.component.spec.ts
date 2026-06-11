@@ -183,6 +183,24 @@ describe("LoggingViewerModalComponent", () => {
             await component.onClearLogs();
             expect(alertStub.present).toHaveBeenCalled();
         });
+
+        it("calls clearLogs when ok button is clicked", async () => {
+            const mockAlert = { present: vi.fn() };
+            const alertController = TestBed.inject(AlertController);
+            let capturedButtons: any[] = [];
+
+            vi.spyOn(alertController, "create").mockImplementation(async (opts: any) => {
+                capturedButtons = opts.buttons;
+                return mockAlert as any;
+            });
+            vi.spyOn(component, "clearLogs");
+
+            component.ngOnInit();
+            await component.onClearLogs();
+            capturedButtons[1].handler(); // index 1 = ok button
+
+            expect(component.clearLogs).toHaveBeenCalled();
+        });
     });
 
     describe("clearLogs(): void", () => {

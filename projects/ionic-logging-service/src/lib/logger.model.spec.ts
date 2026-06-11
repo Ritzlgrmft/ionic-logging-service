@@ -1,4 +1,4 @@
-import { afterEach, describe, it, expect, beforeEach, vi } from "vitest";
+import { afterEach, describe, it, expect, vi } from "vitest";
 
 import * as log4javascript from "log4javascript";
 

@@ -52,6 +52,41 @@ describe("LoggingViewerComponent", () => {
             expect(loggingService.getLogger).toHaveBeenCalledWith("Ionic.Logging.Viewer.Component");
         });
 
+        describe("effect", () => {
+
+            describe("refreshes log messages for display when log messages change", () => {
+
+                it("no localStorageKeys set", () => {
+                    const logMessage = {
+                        level: "DEBUG",
+                        logger: "myLogger",
+                        message: ["myMessage"],
+                        methodName: "myMethod",
+                        timeStamp: new Date(),
+                    };
+                    logMessages.set([logMessage]);
+                    TestBed.tick();
+
+                    expect(loggingService.getLogMessages).toHaveBeenCalled();
+                });
+
+                it("localStorageKeys set", () => {
+                    fixture.componentRef.setInput("localStorageKeys", "key1,key2");
+
+                    const logMessage = {
+                        level: "DEBUG",
+                        logger: "myLogger",
+                        message: ["myMessage"],
+                        methodName: "myMethod",
+                        timeStamp: new Date(),
+                    };
+                    logMessages.set([logMessage]);
+                    TestBed.tick();
+
+                    expect(loggingService.getLogMessagesFromLocalStorage).toHaveBeenCalled();
+                });
+            });
+        });
     });
 
     describe("filterLogMessages", () => {
@@ -215,6 +250,21 @@ describe("LoggingViewerComponent", () => {
             const logMessage = {
                 level: "DEBUG",
                 logger: "myLogger",
+                message: ["myMessage"],
+                methodName: "myMethod",
+                timeStamp: new Date(),
+            };
+
+            const result = component.filterLogMessagesBySearch(logMessage, "xxx");
+
+            expect(result).toBeFalsy();
+        });
+
+        it("no logger returns false", () => {
+
+            const logMessage = {
+                level: "DEBUG",
+                logger: undefined,
                 message: ["myMessage"],
                 methodName: "myMethod",
                 timeStamp: new Date(),

@@ -4,5 +4,8 @@
 	"tsconfig": "tsconfig.lib.json",
 	"output": "../../docs/viewer",
 	"disablePrivate": true,
-	"disableGraph": true
+	"disableGraph": true,
+	"exclude": [
+		"vitest.config.ts"
+	]
 }
