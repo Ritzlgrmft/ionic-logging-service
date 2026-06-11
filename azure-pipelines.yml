@@ -80,30 +80,32 @@ steps:
   displayName: 'Publish unit test results (ionic-logging-service)'
   condition: succeededOrFailed()
   inputs:
-    searchFolder: $(System.DefaultWorkingDirectory)/projects/junit/ionic-logging-service
+    searchFolder: $(System.DefaultWorkingDirectory)/junit/ionic-logging-service
     testRunTitle: Unit Tests ionic-logging-service
     testResultsFormat: JUnit
     testResultsFiles: "test-results.xml"
+    failTaskOnMissingResultsFile: true
 
 - task: PublishTestResults@2
   displayName: 'Publish unit test results (ionic-logging-viewer)'
   condition: succeededOrFailed()
   inputs:
-    searchFolder: $(System.DefaultWorkingDirectory)/projects/junit/ionic-logging-viewer
+    searchFolder: $(System.DefaultWorkingDirectory)/junit/ionic-logging-viewer
     testRunTitle: Unit Tests ionic-logging-viewer
     testResultsFormat: JUnit
     testResultsFiles: "test-results.xml"
+    failTaskOnMissingResultsFile: true
 
 - task: PublishCodeCoverageResults@2
   displayName: 'Publish code coverage results (ionic-logging-service)'
   condition: succeededOrFailed()
   inputs:
-    summaryFileLocation: $(System.DefaultWorkingDirectory)/projects/coverage/ionic-logging-service/cobertura-coverage.xml
+    summaryFileLocation: $(System.DefaultWorkingDirectory)/coverage/ionic-logging-service/cobertura-coverage.xml
     failIfCoverageEmpty: true
 
 - task: PublishCodeCoverageResults@2
   displayName: 'Publish code coverage results (ionic-logging-viewer)'
   condition: succeededOrFailed()
   inputs:
-    summaryFileLocation: $(System.DefaultWorkingDirectory)/projects/coverage/ionic-logging-viewer/cobertura-coverage.xml
+    summaryFileLocation: $(System.DefaultWorkingDirectory)/coverage/ionic-logging-viewer/cobertura-coverage.xml
     failIfCoverageEmpty: true
