@@ -1,4 +1,4 @@
-import { afterEach, describe, it, expect, beforeEach } from "vitest";
+import { afterEach, describe, it, expect, beforeEach, vi } from "vitest";
 
 import { TestBed } from "@angular/core/testing";
 
@@ -491,9 +491,10 @@ describe("LoggingService", () => {
 
             loggingService.getRootLogger().warn("test");
 
-            await new Promise(resolve => setTimeout(resolve, 100));
-            const lastFailure = loggingService.getLastAjaxAppenderFailure()();
-            expect(lastFailure).toBe("AjaxAppender.append: XMLHttpRequest request to URL badUrl returned status code 404");
+            await vi.waitFor(() => {
+                expect(loggingService.getLastAjaxAppenderFailure()()).toBe(
+                    "AjaxAppender.append: XMLHttpRequest request to URL badUrl returned status code 404");
+            }, { timeout: 2000 });
 
             interceptor.dispose();
         });

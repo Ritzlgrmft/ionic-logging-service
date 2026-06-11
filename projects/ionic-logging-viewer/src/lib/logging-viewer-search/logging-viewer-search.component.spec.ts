@@ -63,10 +63,9 @@ describe("LoggingViewerSearchComponent", () => {
 
             loggingViewerFilterService.search.set("X");
 
-            setTimeout(() => {
+            await vi.waitFor(() => {
                 expect(component.search).toBe(loggingViewerFilterService.search());
-                ;
-            }, 0);
+            }, { timeout: 2000 });
         });
     });
 

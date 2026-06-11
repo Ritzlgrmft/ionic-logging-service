@@ -1,4 +1,4 @@
-import { afterEach, describe, it, expect, beforeEach } from "vitest";
+import { afterEach, describe, it, expect, beforeEach, vi } from "vitest";
 
 import * as log4javascript from "log4javascript";
 
@@ -163,9 +163,10 @@ describe("AjaxAppender", () => {
 
             appender.append(event);
 
-            await new Promise(resolve => setTimeout(resolve, 100));
-            const lastFailure = appender.getLastFailure()();
-            expect(lastFailure).toBe("AjaxAppender.append: XMLHttpRequest request to URL MyUrl returned status code 404");
+            await vi.waitFor(() => {
+                expect(appender.getLastFailure()()).toBe(
+                    "AjaxAppender.append: XMLHttpRequest request to URL MyUrl returned status code 404");
+            }, { timeout: 2000 });
 
             interceptor.dispose();
         });
