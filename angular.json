@@ -38,6 +38,11 @@
                   "outputFile": "junit/ionic-logging-service/test-results.xml"
                 }
               ]
+            ],
+            "coverageReporters": [
+              "cobertura",
+              "html",
+              "text"
             ]
           }
         },
@@ -93,6 +98,11 @@
             ],
             "coverageExclude": [
               "projects/ionic-logging-viewer/src/test-setup.ts"
+            ],
+            "coverageReporters": [
+              "cobertura",
+              "html",
+              "text"
             ],
             "runnerConfig": true
           }

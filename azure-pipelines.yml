@@ -95,12 +95,12 @@ steps:
   displayName: 'Publish code coverage results (ionic-logging-service)'
   condition: succeededOrFailed()
   inputs:
-    summaryFileLocation: $(System.DefaultWorkingDirectory)/projects/ionic-logging-service/coverage/cobertura-coverage.xml
+    summaryFileLocation: $(System.DefaultWorkingDirectory)/projects/coverage/ionic-logging-service/cobertura-coverage.xml
     failIfCoverageEmpty: true
 
 - task: PublishCodeCoverageResults@2
   displayName: 'Publish code coverage results (ionic-logging-viewer)'
   condition: succeededOrFailed()
   inputs:
-    summaryFileLocation: $(System.DefaultWorkingDirectory)/projects/ionic-logging-viewer/coverage/cobertura-coverage.xml
+    summaryFileLocation: $(System.DefaultWorkingDirectory)/projects/coverage/ionic-logging-viewer/cobertura-coverage.xml
     failIfCoverageEmpty: true
