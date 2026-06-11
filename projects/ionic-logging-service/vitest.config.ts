@@ -4,9 +4,6 @@ export default defineConfig({
     test: {
         environment: "jsdom",
         setupFiles: ["./src/test-setup.ts"],
-        reporters: ["default", "junit"],
-        outputFile: {
-            junit: "./test-results.xml",
-        },
+        reporters: ["default"],
     },
 });

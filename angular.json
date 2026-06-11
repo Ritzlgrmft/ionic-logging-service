@@ -75,7 +75,26 @@
         "test": {
           "builder": "@angular/build:unit-test",
           "options": {
-            "tsConfig": "projects/ionic-logging-viewer/tsconfig.spec.json"
+            "tsConfig": "projects/ionic-logging-viewer/tsconfig.spec.json",
+            "browsers": [
+              "chromium"
+            ],
+            "reporters": [
+              "default",
+              [
+                "junit",
+                {
+                  "outputFile": "junit/ionic-logging-viewer/test-results.xml"
+                }
+              ]
+            ],
+            "coverageInclude": [
+              "projects/ionic-logging-viewer/src/**/*.ts"
+            ],
+            "coverageExclude": [
+              "projects/ionic-logging-viewer/src/test-setup.ts"
+            ],
+            "runnerConfig": true
           }
         },
         "lint": {

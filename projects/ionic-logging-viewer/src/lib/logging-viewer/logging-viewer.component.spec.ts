@@ -228,7 +228,7 @@ describe("LoggingViewerComponent", () => {
 
     describe("localStorageKeys", () => {
 
-        it("local storage empty no log messages", () => {
+        describe("local storage empty no log messages", () => {
 
             it("message contains search value returns true", () => {
 
