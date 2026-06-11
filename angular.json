@@ -180,6 +180,7 @@
                 }
               ]
             },
+            "development": {},
             "testing": {
               "aot": false,
               "assets": [
@@ -213,14 +214,18 @@
           "builder": "@angular/build:unit-test",
           "options": {
             "tsConfig": "projects/ionic-logging-viewer-app/tsconfig.spec.json",
+            "browsers": [
+              "chromium"
+            ],
             "reporters": [
               "default"
             ],
-            "setupFiles": [
-              "projects/ionic-logging-viewer-app/src/test.ts"
+            "coverageInclude": [
+              "projects/ionic-logging-viewer/src/**/*.ts"
             ],
-            "buildTarget": ":build:testing",
-            "runner": "vitest"
+            "coverageExclude": [
+              "projects/ionic-logging-viewer/src/test-setup.ts"
+            ]
           }
         },
         "lint": {
