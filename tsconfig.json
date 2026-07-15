@@ -23,5 +23,9 @@
     },
     "useDefineForClassFields": false,
     "skipLibCheck": true
+  },
+  "angularCompilerOptions": {
+    "strictTemplates": true,
+    "strictInjectionParameters": true
   }
 }
