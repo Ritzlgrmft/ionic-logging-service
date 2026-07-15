@@ -84,7 +84,14 @@
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
@@ -101,103 +108,27 @@
 <p><strong>The dependencies used by the latest version are the same as needed for <a href="https://github.com/ionic-team/ionic/blob/master/CHANGELOG.md">Ionic 8.0.0</a>. For older versions use:</strong></p>
 <table class="table table-bordered compodoc-table">
 <thead>
-<tr>
-<th>ionic-logging-service</th>
-<th>Ionic</th>
-<th>Angular</th>
-</tr>
+<tr><th>ionic-logging-service</th><th>Ionic</th><th>Angular</th></tr>
 </thead>
 <tbody>
-<tr>
-<td>22.0.0</td>
-<td>&gt;= 8.0.0</td>
-<td>&gt;=22.0.0</td>
-</tr>
-<tr>
-<td>21.0.0</td>
-<td>&gt;= 8.0.0</td>
-<td>&gt;=21.0.0</td>
-</tr>
-<tr>
-<td>18.0.0</td>
-<td>&gt;= 7.0.0</td>
-<td>&gt;=17.0.0</td>
-</tr>
-<tr>
-<td>17.0.0</td>
-<td>&gt;= 6.1.9</td>
-<td>^16.0.0</td>
-</tr>
-<tr>
-<td>16.0.0</td>
-<td>&gt;= 6.1.9</td>
-<td>^15.0.0</td>
-</tr>
-<tr>
-<td>15.0.0</td>
-<td>&gt;= 6.1.9</td>
-<td>^14.0.0</td>
-</tr>
-<tr>
-<td>14.0.0</td>
-<td>&gt;= 6.0.0</td>
-<td>^13.0.0</td>
-</tr>
-<tr>
-<td>13.0.0</td>
-<td>&gt;= 5.0.0</td>
-<td>^12.0.0</td>
-</tr>
-<tr>
-<td>12.0.0</td>
-<td>&gt;= 5.0.0</td>
-<td>^11.0.0</td>
-</tr>
-<tr>
-<td>11.0.0</td>
-<td>&gt;= 5.0.0</td>
-<td>^10.0.0</td>
-</tr>
-<tr>
-<td>9.0.0</td>
-<td>&gt;= 5.0.0</td>
-<td>^9.0.0</td>
-</tr>
-<tr>
-<td>8.0.0</td>
-<td>&gt;= 4.7.0</td>
-<td>^8.0.0</td>
-</tr>
-<tr>
-<td>7.0.0</td>
-<td>&gt;= 4.0.0-rc</td>
-<td>^7.0.0</td>
-</tr>
-<tr>
-<td>6.0.0</td>
-<td>&gt;= 4.0.0-beta</td>
-<td>^6.0.0</td>
-</tr>
-<tr>
-<td>5.1.0</td>
-<td>&gt;= 3.9.0</td>
-<td>^5.0.0</td>
-</tr>
-<tr>
-<td>3.1.0</td>
-<td>&gt;= 3.0.0</td>
-<td>^4.0.0</td>
-</tr>
-<tr>
-<td>2.0.0</td>
-<td>&gt;= 2.2.0</td>
-<td>^2.4.8</td>
-</tr>
-<tr>
-<td>1.2.1</td>
-<td>&gt;= 2.0.0</td>
-<td>^2.2.1</td>
-</tr>
+<tr><td>22.0.0</td><td>&gt;= 8.0.0</td><td>&gt;=22.0.0</td></tr>
+<tr><td>21.0.0</td><td>&gt;= 8.0.0</td><td>&gt;=21.0.0</td></tr>
+<tr><td>18.0.0</td><td>&gt;= 7.0.0</td><td>&gt;=17.0.0</td></tr>
+<tr><td>17.0.0</td><td>&gt;= 6.1.9</td><td>^16.0.0</td></tr>
+<tr><td>16.0.0</td><td>&gt;= 6.1.9</td><td>^15.0.0</td></tr>
+<tr><td>15.0.0</td><td>&gt;= 6.1.9</td><td>^14.0.0</td></tr>
+<tr><td>14.0.0</td><td>&gt;= 6.0.0</td><td>^13.0.0</td></tr>
+<tr><td>13.0.0</td><td>&gt;= 5.0.0</td><td>^12.0.0</td></tr>
+<tr><td>12.0.0</td><td>&gt;= 5.0.0</td><td>^11.0.0</td></tr>
+<tr><td>11.0.0</td><td>&gt;= 5.0.0</td><td>^10.0.0</td></tr>
+<tr><td>9.0.0</td><td>&gt;= 5.0.0</td><td>^9.0.0</td></tr>
+<tr><td>8.0.0</td><td>&gt;= 4.7.0</td><td>^8.0.0</td></tr>
+<tr><td>7.0.0</td><td>&gt;= 4.0.0-rc</td><td>^7.0.0</td></tr>
+<tr><td>6.0.0</td><td>&gt;= 4.0.0-beta</td><td>^6.0.0</td></tr>
+<tr><td>5.1.0</td><td>&gt;= 3.9.0</td><td>^5.0.0</td></tr>
+<tr><td>3.1.0</td><td>&gt;= 3.0.0</td><td>^4.0.0</td></tr>
+<tr><td>2.0.0</td><td>&gt;= 2.2.0</td><td>^2.4.8</td></tr>
+<tr><td>1.2.1</td><td>&gt;= 2.0.0</td><td>^2.2.1</td></tr>
 </tbody>
 </table>
 <p>This service encapsulates <a href="http://log4javascript.org/">log4javascript</a>&#39;s functionalities for apps built with <a href="http://ionicframework.com">Ionic framework</a>.</p>
@@ -365,6 +296,24 @@ I  18:49:43.801  MyApp.MyComponent  myMethod  exit  [2, 5, 99]</code></pre></div
 
        <script>
                $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
                checkToggle(darkModeState);
                if ($darkModeToggleSwitchers.length > 0) {
                     for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
@@ -380,7 +329,6 @@ I  18:49:43.801  MyApp.MyComponent  myMethod  exit  [2, 5, 99]</code></pre></div
        <script src="./js/libs/lit-html.js"></script>
 
        <script src="./js/menu-wc.js" defer></script>
-       <script nomodule src="./js/menu-wc_es5.js" defer></script>
 
        <script src="./js/libs/bootstrap-native.js"></script>
 
