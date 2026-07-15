@@ -59,13 +59,12 @@ describe("LoggingViewerSearchComponent", () => {
 
     describe("search updates", () => {
 
-        it("signal updates search value", async () => {
+        it("signal updates search value", () => {
 
             loggingViewerFilterService.search.set("X");
+            TestBed.tick();
 
-            await vi.waitFor(() => {
-                expect(component.search).toBe(loggingViewerFilterService.search());
-            }, { timeout: 2000 });
+            expect(component.search).toBe(loggingViewerFilterService.search());
         });
     });
 
