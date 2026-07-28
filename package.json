@@ -76,7 +76,7 @@
     "@eslint/js": "^10.0.1",
     "@ionic/angular": "^8.8.15",
     "@mswjs/interceptors": "^0.42.3",
-    "@types/node": "^26.1.1",
+    "@types/node": "^26.1.2",
     "@typescript-eslint/eslint-plugin": "^8.65.0",
     "@typescript-eslint/parser": "^8.65.0",
     "@vitest/browser-playwright": "^4.1.10",
