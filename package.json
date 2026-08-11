@@ -77,14 +77,14 @@
     "@ionic/angular": "^8.8.17",
     "@mswjs/interceptors": "^0.42.3",
     "@types/node": "^26.2.0",
-    "@typescript-eslint/eslint-plugin": "^8.66.0",
-    "@typescript-eslint/parser": "^8.66.0",
+    "@typescript-eslint/eslint-plugin": "^8.67.0",
+    "@typescript-eslint/parser": "^8.67.0",
     "@vitest/browser-playwright": "^4.1.10",
     "@vitest/coverage-v8": "^4.1.10",
     "angular-eslint": "^22.1.0",
-    "cypress": "^15.20.0",
+    "cypress": "^15.20.1",
     "eslint": "^10.8.1",
-    "eslint-plugin-jsdoc": "^64.0.1",
+    "eslint-plugin-jsdoc": "^64.1.0",
     "eslint-plugin-prefer-arrow": "1.2.3",
     "fsevents": "2.3.3",
     "ionicons": "8.1.0",
@@ -93,7 +93,7 @@
     "ng-packagr": "^22.1.1",
     "ts-node": "10.9.2",
     "typescript": "6.0.3",
-    "typescript-eslint": "^8.66.0",
+    "typescript-eslint": "^8.67.0",
     "vitest": "^4.1.10"
   }
 }
