@@ -3,7 +3,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { HomePage } from "./home.page";
-import { IonicModule } from "@ionic/angular";
+import { provideIonicAngular } from "@ionic/angular";
 
 describe("HomePage", () => {
 	let component: HomePage;
@@ -12,8 +12,10 @@ describe("HomePage", () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			imports: [
-				HomePage,
-				IonicModule.forRoot()
+				HomePage
+			],
+			providers: [
+				provideIonicAngular()
 			],
 			schemas: [
 				CUSTOM_ELEMENTS_SCHEMA

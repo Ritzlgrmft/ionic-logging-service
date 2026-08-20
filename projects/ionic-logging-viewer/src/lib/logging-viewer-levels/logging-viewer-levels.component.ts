@@ -3,8 +3,8 @@ import { Component, effect, inject } from "@angular/core";
 import { Logger, LoggingService } from "ionic-logging-service";
 
 import { LoggingViewerFilterService } from "../logging-viewer-filter.service";
-import { IonicModule } from "@ionic/angular";
 import { FormsModule } from "@angular/forms";
+import { IonSegment, IonSegmentButton, IonLabel } from "@ionic/angular";
 
 
 /**
@@ -18,7 +18,7 @@ import { FormsModule } from "@angular/forms";
 	selector: "ionic-logging-viewer-levels",
 	templateUrl: "./logging-viewer-levels.component.html",
 	styleUrls: ["./logging-viewer-levels.component.scss"],
-	imports: [IonicModule, FormsModule]
+	imports: [FormsModule, IonSegment, IonSegmentButton, IonLabel]
 })
 export class LoggingViewerLevelsComponent {
 

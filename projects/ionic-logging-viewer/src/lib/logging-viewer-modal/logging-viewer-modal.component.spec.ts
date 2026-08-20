@@ -4,7 +4,8 @@ import { signal, NO_ERRORS_SCHEMA } from "@angular/core";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
 
-import { IonicModule, NavParams, AlertController, AngularDelegate } from "@ionic/angular";
+import { NavParams, AlertController, ModalController } from "@ionic/angular";
+import { AngularDelegate } from "@ionic/angular/common";
 
 import { LoggingService } from "ionic-logging-service";
 
@@ -48,11 +49,14 @@ describe("LoggingViewerModalComponent", () => {
         create: vi.fn().mockName("angularDelegateStub.create")
     };
 
+    const modalControllerStub = {
+        dismiss: vi.fn().mockName("modalControllerStub.dismiss")
+    };
+
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [
                 FormsModule,
-                IonicModule,
                 LoggingViewerModalComponent,
             ],
             schemas: [NO_ERRORS_SCHEMA],
@@ -61,6 +65,7 @@ describe("LoggingViewerModalComponent", () => {
                 { provide: AlertController, useValue: alertControllerStub },
                 { provide: NavParams, useValue: navParamsStub },
                 { provide: AngularDelegate, useValue: angularDelegateStub },
+                { provide: ModalController, useValue: modalControllerStub },
                 LoggingViewerFilterService
             ]
         })

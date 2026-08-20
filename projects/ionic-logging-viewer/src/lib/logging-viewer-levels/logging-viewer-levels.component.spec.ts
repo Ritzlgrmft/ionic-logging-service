@@ -2,7 +2,6 @@ import { describe, it, expect, beforeEach, vi } from "vitest";
 
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
-import { IonicModule } from "@ionic/angular";
 
 import { LoggingService } from "ionic-logging-service";
 
@@ -29,7 +28,6 @@ describe("LoggingViewerLevelsComponent", () => {
         await TestBed.configureTestingModule({
             imports: [
                 FormsModule,
-                IonicModule,
                 LoggingViewerLevelsComponent,
             ],
             providers: [

@@ -1,6 +1,6 @@
 import { Component, OnInit, inject, input } from "@angular/core";
 
-import { ModalController, Platform, AlertController, IonicModule } from "@ionic/angular";
+import { ModalController, Platform, AlertController, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonIcon, IonContent } from "@ionic/angular";
 
 import { Logger, LoggingService } from "ionic-logging-service";
 
@@ -22,7 +22,10 @@ import { LoggingViewerComponent } from "../logging-viewer/logging-viewer.compone
 	selector: "ionic-logging-viewer-modal",
 	templateUrl: "./logging-viewer-modal.component.html",
 	styleUrls: ["./logging-viewer-modal.component.scss"],
-	imports: [IonicModule, LoggingViewerSearchComponent, LoggingViewerLevelsComponent, LoggingViewerComponent]
+	imports: [
+		IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonIcon, IonContent,
+		LoggingViewerSearchComponent, LoggingViewerLevelsComponent, LoggingViewerComponent
+	]
 })
 export class LoggingViewerModalComponent implements OnInit {
 

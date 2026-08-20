@@ -4,7 +4,7 @@ import { ToastController, ModalController } from "@ionic/angular";
 import { AjaxAppender, LocalStorageAppender, Logger, LoggingService, LogLevel } from "ionic-logging-service";
 import { LoggingViewerModalComponent, LoggingViewerTranslation, LoggingViewerModalProperties, LoggingViewerComponent, LoggingViewerLevelsComponent, LoggingViewerSearchComponent } from "ionic-logging-viewer";
 import { environment } from "../../environments/environment";
-import { IonButton, IonCard, IonCardHeader, IonCardTitle, IonCol, IonContent, IonGrid, IonHeader, IonInput, IonItem, IonLabel, IonList, IonListHeader, IonRadio, IonRadioGroup, IonRow, IonSelect, IonSelectOption, IonTitle, IonToggle, IonToolbar } from "@ionic/angular/standalone";
+import { IonButton, IonCard, IonCardHeader, IonCardTitle, IonCol, IonContent, IonGrid, IonHeader, IonInput, IonItem, IonLabel, IonList, IonListHeader, IonRadio, IonRadioGroup, IonRow, IonSelect, IonSelectOption, IonTitle, IonToggle, IonToolbar } from "@ionic/angular";
 import { FormsModule } from "@angular/forms";
 
 

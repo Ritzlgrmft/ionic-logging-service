@@ -3,8 +3,8 @@ import { Component, inject, input, effect } from "@angular/core";
 import { LoggingService, Logger } from "ionic-logging-service";
 
 import { LoggingViewerFilterService } from "../logging-viewer-filter.service";
-import { IonicModule } from "@ionic/angular";
 import { FormsModule } from "@angular/forms";
+import { IonSearchbar } from "@ionic/angular";
 
 /**
  * Component for displaying the search bar for filtering the current logs.
@@ -17,7 +17,7 @@ import { FormsModule } from "@angular/forms";
 	selector: "ionic-logging-viewer-search",
 	templateUrl: "./logging-viewer-search.component.html",
 	styleUrls: ["./logging-viewer-search.component.scss"],
-	imports: [IonicModule, FormsModule]
+	imports: [FormsModule, IonSearchbar]
 })
 export class LoggingViewerSearchComponent {
 

@@ -2,7 +2,7 @@ import { ApplicationConfig, inject, provideAppInitializer, provideZonelessChange
 import { provideRouter, RouteReuseStrategy } from "@angular/router";
 
 import { routes } from "./app.routes";
-import { IonicRouteStrategy, provideIonicAngular } from "@ionic/angular/standalone";
+import { IonicRouteStrategy, provideIonicAngular } from "@ionic/angular";
 import { LoggingService } from "ionic-logging-service";
 import { environment } from "../environments/environment";
 

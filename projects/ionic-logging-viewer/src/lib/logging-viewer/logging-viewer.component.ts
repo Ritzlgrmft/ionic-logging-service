@@ -3,8 +3,8 @@ import { Component, inject, input, effect, computed, signal } from "@angular/cor
 import { Logger, LoggingService, LogLevelConverter, LogMessage } from "ionic-logging-service";
 
 import { LoggingViewerFilterService } from "../logging-viewer-filter.service";
-import { IonicModule } from "@ionic/angular";
 import { DatePipe } from "@angular/common";
+import { IonList, IonItem, IonLabel } from "@ionic/angular";
 
 /**
  * Component for displaying the current logs.
@@ -17,7 +17,7 @@ import { DatePipe } from "@angular/common";
 	selector: "ionic-logging-viewer",
 	templateUrl: "./logging-viewer.component.html",
 	styleUrls: ["./logging-viewer.component.scss"],
-	imports: [IonicModule, DatePipe]
+	imports: [DatePipe, IonList, IonItem, IonLabel]
 })
 export class LoggingViewerComponent {
 

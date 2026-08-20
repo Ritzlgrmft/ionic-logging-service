@@ -2,19 +2,19 @@ import { describe, it, expect, beforeEach } from "vitest";
 import { TestBed } from "@angular/core/testing";
 import { AppComponent } from "./app.component";
 import { provideZonelessChangeDetection } from "@angular/core";
-import { IonicModule } from "@ionic/angular";
 import { provideRouter } from "@angular/router";
+import { provideIonicAngular } from "@ionic/angular";
 
 describe("AppComponent", () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			imports: [
-				AppComponent,
-				IonicModule.forRoot(),
+				AppComponent
 			],
 			providers: [
 				provideZonelessChangeDetection(),
-				provideRouter([])
+				provideRouter([]),
+				provideIonicAngular()
 			]
 		}).compileComponents();
 	});
