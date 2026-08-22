@@ -1,9 +1,10 @@
 # ionic-logging-viewer
 
-**The dependencies used by the latest version are the same as needed for [Ionic 8.0.0](https://github.com/ionic-team/ionic/blob/master/CHANGELOG.md). For older versions use:**
+**The dependencies used by the latest version are the same as needed for [Ionic 9.0.0](https://github.com/ionic-team/ionic/blob/master/CHANGELOG.md). For older versions use:**
 
 | ionic-logging-viewer | Ionic | Angular
 | ------ | -------- | ------
+| 23.0.0 | >= 9.0.0 | >=22.0.0
 | 22.0.0 | >= 8.0.0 | >=22.0.0
 | 21.0.0 | >= 8.0.0 | >=21.0.0
 | 18.0.0 | >= 7.0.0 | >=17.0.0
@@ -14,10 +15,10 @@
 | 13.0.0 | >= 5.0.0 | ^12.0.0
 | 12.0.0 | >= 5.0.0 | ^11.0.0
 | 11.0.0 | >= 5.0.0 | ^10.0.0
-|  9.0.0 | >= 5.0.0 | ^9.0.0
-|  8.0.0 | >= 4.7.0 | ^8.0.0
-|  2.0.0 | >= 4.0.0 | ^7.0.0
-|  1.0.1 | >= 3.9.0 | ^5.0.0
+| 9.0.0 | >= 5.0.0 | ^9.0.0
+| 8.0.0 | >= 4.7.0 | ^8.0.0
+| 2.0.0 | >= 4.0.0 | ^7.0.0
+| 1.0.1 | >= 3.9.0 | ^5.0.0
 
 The logging viewer is a small component which can be used in your [Ionic app](http://ionicframework.com)
 for displaying the current logs, written by [ionic-logging-service](https://github.com/Ritzlgrmft/ionic-logging-service).

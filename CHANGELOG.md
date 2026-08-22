@@ -1,5 +1,11 @@
 # Changelog
 
+## 23.0.0
+
+### general
+
+- update to Ionic 9
+
 ## 22.0.0
 
 ### general
