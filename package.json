@@ -40,7 +40,7 @@
     "compodoc-service": "cd projects/ionic-logging-service && compodoc && cd ../..",
     "compodoc-viewer": "cd projects/ionic-logging-viewer && compodoc && cd ../..",
     "cypress:open": "ng run ionic-logging-viewer-app:cypress-open",
-    "cypress:run": "ng run ionic-logging-viewer-app:cypress-run",
+    "cypress:run": "ng run ionic-logging-viewer-app:cypress-run --browser chrome",
     "serve-viewer-app": "ionic serve --project ionic-logging-viewer-app"
   },
   "dependencies": {
@@ -71,7 +71,7 @@
     "@angular/router": "^22.1.5",
     "@babel/plugin-proposal-private-methods": "^7.18.6",
     "@compodoc/compodoc": "2.0.0",
-    "@cypress/schematic": "^5.0.0",
+    "@cypress/schematic": "^6.0.0",
     "@eslint/eslintrc": "^3.3.7",
     "@eslint/js": "^10.0.1",
     "@ionic/angular": "^9.0.2",
@@ -82,7 +82,7 @@
     "@vitest/browser-playwright": "^4.1.11",
     "@vitest/coverage-v8": "^4.1.11",
     "angular-eslint": "^22.4.0",
-    "cypress": "^15.21.1",
+    "cypress": "^16.0.0",
     "eslint": "^10.10.0",
     "eslint-plugin-jsdoc": "^64.3.6",
     "eslint-plugin-prefer-arrow": "1.2.3",
