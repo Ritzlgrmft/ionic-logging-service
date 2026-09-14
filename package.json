@@ -78,7 +78,7 @@
     "@mswjs/interceptors": "^0.42.3",
     "@types/node": "^26.5.0",
     "@typescript-eslint/eslint-plugin": "^8.69.0",
-    "@typescript-eslint/parser": "^8.69.0",
+    "@typescript-eslint/parser": "^8.70.0",
     "@vitest/browser-playwright": "^4.1.11",
     "@vitest/coverage-v8": "^4.1.11",
     "angular-eslint": "^22.4.0",
